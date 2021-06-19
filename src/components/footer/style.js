@@ -7,6 +7,9 @@ hr{
     width: 900px;
     border: 0.5px solid #D3D3D3;
 }
+a:hover{
+        color: #ee4d2d;
+    }
 `
 export const FooterTop = styled.div`
     display: flex;
@@ -64,6 +67,7 @@ ul{
         text-decoration:none;
         color: #606060 ;
     }
+   
 }
  `
  export const Footer_bottom = styled.div`
@@ -72,7 +76,5 @@ ul{
  p{
  color: #808080;
  font-size: 12px;
-
  }
-
  `
