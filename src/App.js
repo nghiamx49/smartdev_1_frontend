@@ -1,9 +1,15 @@
-import AppRouter from "./routers"
-
+import Footer from "./components/footer";
+import "./App.css";
+import Admin from "./containers/admin"
+import Login from "./components/login";
+import Register from "./components/register"
 function App() {
   return (
-   <AppRouter>
-   </AppRouter>
+    <div className="App">
+      <Admin></Admin> *
+      <Login></Login>
+      <Register></Register>
+    </div>
   );
 }
 
