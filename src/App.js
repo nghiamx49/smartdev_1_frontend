@@ -1,9 +1,11 @@
-import Footer from './components/footer'
-import './App.css';
+// import Footer from './components/footer'
+import Admin from './containers/admin';
+
 function App() {
   return (
     <div className="App">
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
+      <Admin/>
     </div>
   );
 }
