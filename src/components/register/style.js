@@ -20,7 +20,8 @@ export const RegisterForm = styled.form`
   border-radius: 5px;
   padding: 15px;
   right: 10%;
-  top: 10%;
+  top: 5%;
+  bottom: 5%;
   input[type="text"],
   input[type="password"] {
     width: 100%;
