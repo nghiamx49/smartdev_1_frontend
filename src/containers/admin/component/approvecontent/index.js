@@ -7,6 +7,26 @@ import {MainAdminContainer,
 import TbodyApprove from './tbodyApprove'
 
 function Approve() {
+    const Providers = [
+        {
+        Username : "hoang cute",
+        Address : "82 Pham Nhu Xuong",
+        Name : "Đoàn Văn Hoàng",
+        Email : "H@gmail.com",
+        Phone_Number : "0339905697",
+        Owner : "Đvh",
+        date : "21-6-2021"
+        },
+        {
+            Username : "hoang cute",
+            Address : "82 Pham Nhu Xuong",
+            Name : "Đoàn Văn Hoàng",
+            Email : "H@gmail.com",
+            Phone_Number : "0339905697",
+            Owner : "Đvh",
+            date : "21-6-2021"
+            }
+    ]
     return (
         <MainAdminContainer>
             <MainAdminHeader>
@@ -42,11 +62,12 @@ function Approve() {
                         </tr>
                    </thead>
                    <tbody>
-                        <TbodyApprove></TbodyApprove>
-                        <TbodyApprove></TbodyApprove>
-                        <TbodyApprove></TbodyApprove>
+                        {
+                            Providers.map((provider) => (
+                                <TbodyApprove Provider = {provider}/>
+                            ))
+                        }
                    </tbody>
-                    
                 </MainAdminTable>
             </MainAdminContent>
         </MainAdminContainer>
