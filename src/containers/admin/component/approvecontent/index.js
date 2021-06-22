@@ -9,21 +9,21 @@ import TbodyApprove from './tbodyApprove'
 function Approve() {
     const Providers = [
         {
-        Username : "hoang cute",
-        Address : "82 Pham Nhu Xuong",
-        Name : "Đoàn Văn Hoàng",
-        Email : "H@gmail.com",
-        Phone_Number : "0339905697",
-        Owner : "Đvh",
+        username : "hoang cute",
+        address : "82 Pham Nhu Xuong",
+        name : "Đoàn Văn Hoàng",
+        email : "H@gmail.com",
+        phone_Number : "0339905697",
+        owner : "Đvh",
         date : "21-6-2021"
         },
         {
-            Username : "hoang cute",
-            Address : "82 Pham Nhu Xuong",
-            Name : "Đoàn Văn Hoàng",
-            Email : "H@gmail.com",
-            Phone_Number : "0339905697",
-            Owner : "Đvh",
+            username : "hoang cute",
+            address : "82 Pham Nhu Xuong",
+            name : "Đoàn Văn Hoàng",
+            email : "H@gmail.com",
+            phone_Number : "0339905697",
+            owner : "Đvh",
             date : "21-6-2021"
             }
     ]
@@ -64,7 +64,7 @@ function Approve() {
                    <tbody>
                         {
                             Providers.map((provider) => (
-                                <TbodyApprove Provider = {provider}/>
+                                <TbodyApprove provider = {provider}/>
                             ))
                         }
                    </tbody>

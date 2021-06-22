@@ -5,19 +5,19 @@ import {MainAdminStrong,MainAdminSpan,MainAdminText,MainAdminFlex, ButtonApprove
 
 
 TbodyApprove.propTypes = {
-    Provider :  PropTypes.shape({
-        Username : PropTypes.string,
-        Address : PropTypes.string,
-        Name : PropTypes.string,
-        Email : PropTypes.string,
-        Phone_Number : PropTypes.string,
-        Owner : PropTypes.string,
+    provider :  PropTypes.shape({
+        username : PropTypes.string,
+        address : PropTypes.string,
+        name : PropTypes.string,
+        email : PropTypes.string,
+        phone_Number : PropTypes.string,
+        owner : PropTypes.string,
         date : PropTypes.string,
     })
 }
 
 export default function TbodyApprove(props) {
-    const {Provider} = props ;
+    const {provider} = props ;
     console.log(props);
     return (
         <>
@@ -26,39 +26,39 @@ export default function TbodyApprove(props) {
                     <MainAdminFlex>
                         <img height="30" width="30" src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"  alt="dfkjghdfg"/>
                         <MainAdminText>
-                        <MainAdminStrong>{Provider.Username}</MainAdminStrong>
-                        <MainAdminSpan>create {Provider.date}</MainAdminSpan>
+                        <MainAdminStrong>{provider.username}</MainAdminStrong>
+                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
                         </MainAdminText>
                     </MainAdminFlex>
                 </td>
                 <td>
                         <MainAdminText>
-                        <MainAdminStrong>{Provider.Address}</MainAdminStrong>
-                        <MainAdminSpan>create {Provider.date}</MainAdminSpan>
+                        <MainAdminStrong>{provider.address}</MainAdminStrong>
+                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
                         </MainAdminText>
                 </td>
                 <td>
                         <MainAdminText>
-                        <MainAdminStrong>{Provider.Name}</MainAdminStrong>
-                        <MainAdminSpan>create {Provider.date}</MainAdminSpan>
+                        <MainAdminStrong>{provider.name}</MainAdminStrong>
+                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
                         </MainAdminText>
                 </td>
                 <td>
                         <MainAdminText>
-                        <MainAdminStrong>{Provider.Email}</MainAdminStrong>
-                        <MainAdminSpan>create {Provider.date}</MainAdminSpan>
+                        <MainAdminStrong>{provider.email}</MainAdminStrong>
+                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
                         </MainAdminText>
                 </td>
                 <td>
                         <MainAdminText>
-                        <MainAdminStrong>{Provider.Phone_Number}</MainAdminStrong>
-                        <MainAdminSpan>create {Provider.date}</MainAdminSpan>
+                        <MainAdminStrong>{provider.phone_Number}</MainAdminStrong>
+                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
                         </MainAdminText>
                 </td>
                 <td>
                         <MainAdminText>
-                        <MainAdminStrong>{Provider.Owner}</MainAdminStrong>
-                        <MainAdminSpan>create {Provider.date}</MainAdminSpan>
+                        <MainAdminStrong>{provider.owner}</MainAdminStrong>
+                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
                         </MainAdminText>
                 </td>
                 <td>
