@@ -30,7 +30,7 @@ export default function OrderHistoryTag(props) {
             <OrderHistoryTagTop>
                 <MiddleLeft>
                     <div>
-                        <img src={orderHistory.linkimage}></img>
+                        <img src={orderHistory.linkimage} alt=""></img>
                     </div>
                     <div>
                         <ul>
