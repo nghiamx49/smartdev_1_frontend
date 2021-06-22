@@ -1,4 +1,5 @@
 import React from 'react'
+import { MdAccessibility , MdReorder , MdNotificationsNone , MdLocalMall , MdAttachMoney} from "react-icons/md";
 
 import {SlidebarOfProfileTop, SlidebarProfile , SlidebarOfProfileBottom} from './style'
 
@@ -19,14 +20,13 @@ function SlidebarOfProfile() {
             </SlidebarOfProfileTop>
             <SlidebarOfProfileBottom>
                 <ul>
-                    <li><span> icon </span>Tai Khoan Cua Toi</li>
-                    <li><span> icon </span>Don Mua</li>
-                    <li><span> icon </span>Thong Bao</li>
-                    <li><span> icon </span>Kho Voucher</li>
-                    <li><span> icon </span>Easiest Xu</li>
+                    <li><MdAccessibility/> Tai Khoan Cua Toi</li>
+                    <li><MdReorder/> Don Mua</li>
+                    <li><MdNotificationsNone/> Thông Báo</li>
+                    <li><MdLocalMall /> Kho Voucher</li>
+                    <li><MdAttachMoney/> Easiest Xu</li>
                 </ul>
             </SlidebarOfProfileBottom>
-
         </SlidebarProfile>
     )
 }

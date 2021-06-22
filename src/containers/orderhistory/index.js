@@ -6,21 +6,21 @@ import OrderHistoryTag from './orderHistoryTag'
 
 export default function OrderHistory() {
   const orderHistorys = [{
-    Shop_Name : "Shop thời trang hover",
+    shop_Name : "Shop thời trang hover",
     productName : "Áo hai Dây tay dài cổ rộng",
     linkimage : "https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_cay-1595747664059.jpg",
     num : 2,
     price : 100,
     total : 200,
   },{
-    Shop_Name : "abc",
+    shop_Name : "abc",
     productName : "Áo hai Dây",
     linkimage : "https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_cay-1595747664059.jpg",
     num : 2,
     price : 100,
     total : 200,
   },{
-    Shop_Name : "abc",
+    shop_Name : "abc",
     productName : "Áo hai Dây",
     linkimage : "https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_cay-1595747664059.jpg",
     num : 2,

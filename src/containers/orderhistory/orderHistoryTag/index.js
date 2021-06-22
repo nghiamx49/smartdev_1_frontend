@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 OrderHistoryTag.propTypes = {
     orderHistory :  PropTypes.shape({
-        Shop_Name : PropTypes.string,
+        shop_Name : PropTypes.string,
         productName : PropTypes.string,
         linkimage :PropTypes.string,
         num : PropTypes.number,
@@ -20,7 +20,7 @@ export default function OrderHistoryTag(props) {
         <Container>
             <OrderHistoryTagTop>
                 <TopLeft>
-                    <span>{orderHistory.Shop_Name}</span>
+                    <span>{orderHistory.shop_Name}</span>
                     <button>Đi Đến Shop</button>
                 </TopLeft>
                 <TopRight>
