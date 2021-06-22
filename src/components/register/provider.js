@@ -1,11 +1,10 @@
 import React from "react";
 
-import { RegisterButton, RegisterForm } from "./style";
+import { RegisterButton } from "./style";
 
 const ProviderRegister = () => {
   return (
-    <RegisterForm>
-      <h2>Đăng kí</h2>
+    <>
       <label htmlFor="owner">Họ tên:</label>
       <input type="text" name="owner" placeholder="Họ và tên" />
       <label htmlFor="username">Tên đăng nhập:</label>
@@ -27,7 +26,7 @@ const ProviderRegister = () => {
       <label htmlFor="name">Tên Cửa Hàng:</label>
       <input type="text" name="name" placeholder="tên cửa hàng" />
       <RegisterButton>Đăng kí</RegisterButton>
-    </RegisterForm>
+    </>
   );
 };
 
