@@ -57,7 +57,7 @@ function Approve() {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone number</th>
-                            <th>Owner</th>
+                            <th>Date</th>
                             <th>Status</th>
                         </tr>
                    </thead>

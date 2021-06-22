@@ -27,38 +27,38 @@ export default function TbodyApprove(props) {
                         <img height="30" width="30" src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"  alt="dfkjghdfg"/>
                         <MainAdminText>
                         <MainAdminStrong>{provider.username}</MainAdminStrong>
-                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
+                       
                         </MainAdminText>
                     </MainAdminFlex>
                 </td>
                 <td>
                         <MainAdminText>
                         <MainAdminStrong>{provider.address}</MainAdminStrong>
-                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
+                      
                         </MainAdminText>
                 </td>
                 <td>
                         <MainAdminText>
                         <MainAdminStrong>{provider.name}</MainAdminStrong>
-                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
+                       
                         </MainAdminText>
                 </td>
                 <td>
                         <MainAdminText>
                         <MainAdminStrong>{provider.email}</MainAdminStrong>
-                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
+                       
                         </MainAdminText>
                 </td>
                 <td>
                         <MainAdminText>
                         <MainAdminStrong>{provider.phone_Number}</MainAdminStrong>
-                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
+                      
                         </MainAdminText>
                 </td>
                 <td>
                         <MainAdminText>
-                        <MainAdminStrong>{provider.owner}</MainAdminStrong>
-                        <MainAdminSpan>create {provider.date}</MainAdminSpan>
+                        <MainAdminStrong>{provider.date}</MainAdminStrong>
+                      
                         </MainAdminText>
                 </td>
                 <td>
