@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {SlidebarOfProfileTop, SlidebarProfile , SlidebarOfProfileBottom} from './style'
 
 function SlidebarOfProfile() {
