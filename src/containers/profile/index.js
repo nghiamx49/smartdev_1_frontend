@@ -4,7 +4,6 @@ import HeaderComponent from '../../components/header'
 import imgUserDefault from '../../assests/img/user-default.png'
 import SlidebarOfProfile from '../../components/slidebarOfProfile'
 import * as UP from './style'
-import styled from 'styled-components'
 const UserProfile = () => {
     return (
         <div>

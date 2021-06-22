@@ -1,12 +1,9 @@
-
 import "./App.css";
-import Register from "./components/register";
-import UserProfile from './containers/profile'
+import AppRouter from './routers'
 function App() {
   return (
     <div className="App">
-      <UserProfile/>
-
+      <AppRouter/>
     </div>
   );
 }
