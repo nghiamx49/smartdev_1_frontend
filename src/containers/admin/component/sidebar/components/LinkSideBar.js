@@ -4,19 +4,19 @@ import PropTypes from 'prop-types'
 
 
 function LinkSideBar(props) {
-    const { icons,text} = props 
+    const { Icons,text} = props 
     return (
         <SideBarLi>
-            {icons} <span>{text}</span>
+            {Icons && <Icons/>} <span>{text}</span>
         </SideBarLi>
     )
 }
 LinkSideBar.propTypes = {
-    icons: PropTypes.object,
+    icons: PropTypes.any,
     text: PropTypes.string
 };
 LinkSideBar.defaultProps = {
-    icons: {},
+    icons: null,
     text:'text'
   };
 
