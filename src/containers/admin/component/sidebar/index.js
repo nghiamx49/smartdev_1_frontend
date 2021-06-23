@@ -10,15 +10,15 @@ import {MdViewAgenda,MdSubscriptions} from "react-icons/md"
 const listLi = [
     {
         icons:GrStackOverflow,
-        text:"overview"
+        text:"Users"
     },
     {
         icons:GiTicket,
-        text:"Tickets"
+        text:"Providers"
     },
     {
         icons:GiTeamIdea,
-        text:"Ideas"
+        text:"ApproveProviders"
     },
     {
         icons:RiContactsBook2Fill,
@@ -38,7 +38,8 @@ const listLi = [
     },
 ];
 // sidebar cho admin
-function SideBar() {
+function SideBar(props) {
+    const {handleMenu} = props
     return (
         <SideBarContainer>
             <SideBarLogo>
@@ -48,7 +49,7 @@ function SideBar() {
                 <SideBarUl>
                     {
                         listLi.map((item,index) => 
-                        <LinkSideBar key={index} Icons={item.icons} text={item.text}/>
+                        <LinkSideBar handleMenu={handleMenu}  key={index} Icons={item.icons} text={item.text}/>
                         )
                     }
                 

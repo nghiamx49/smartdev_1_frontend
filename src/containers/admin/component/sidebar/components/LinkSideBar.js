@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 
 
 function LinkSideBar(props) {
-    const { Icons,text} = props 
+    const { Icons,text,handleMenu} = props 
     return (
-        <SideBarLi>
+        <SideBarLi onClick={()=>handleMenu(text)}>
             {Icons && <Icons/>} <span>{text}</span>
         </SideBarLi>
     )

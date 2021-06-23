@@ -34,7 +34,9 @@ export const MainAdminHeaderSearch = styled.div`
     }
 `;
 export const MainAdminContent = styled.div`
-   padding: 20px;
+   border:1.5px solid #DFE0EB;
+   margin:20px;
+   border-radius: 10px;
 `;
 export const MainAdminTable = styled.table`
     width: 100%;
@@ -49,15 +51,29 @@ export const MainAdminTable = styled.table`
         line-height: 18px;
         padding: 10px;
         color:#9FA2B4;
+        padding: 10px 20px;
     }
     tbody tr{
-        border: 1.5px solid #DFE0EB;
+        border-top: 1.5px solid #DFE0EB;
         &:hover{
             background-color:  #E5E5E5;
         }
     }
     td{
-        padding:15px 10px;  
+        padding:15px 20px; 
+        button{
+            background-color: #FEC400;
+            border: none;
+            outline: none;
+            padding: 5px 10px;
+            margin-right: 5px;
+            text-transform: capitalize;
+            color:#fff;
+            cursor: pointer;
+            &:first-child{
+                background-color: #29CC97;
+            }
+        } 
     }
 `;
 
@@ -74,6 +90,7 @@ export const MainAdminFlex = styled.div`
 export const MainAdminAllUser = styled.div`
     display: flex;
     justify-content: space-between;
+    padding: 20px;
 `;
 export const MainAdminStrong = styled.strong`
     font-style: normal;
@@ -100,5 +117,18 @@ span{
 `;
 
 export const MainAdminPage =styled.div`
-
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    border-top: 1.5px solid #DFE0EB;
+    div{
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        span{
+            margin-top: 5px;
+            margin-left: 7px;
+        }
+    }
 `;
