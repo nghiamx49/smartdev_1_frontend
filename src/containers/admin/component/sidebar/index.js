@@ -2,34 +2,38 @@ import React from 'react'
 import logo from "../../../../assests/img/logo.png";
 import {SideBarContainer,SideBarLogo,SideBarUl} from "./style"
 import LinkSideBar from './components/LinkSideBar';
+import {GrStackOverflow} from "react-icons/gr"
+import {GiTicket,GiTeamIdea} from "react-icons/gi"
+import {RiContactsBook2Fill} from "react-icons/ri"
+import {MdViewAgenda,MdSubscriptions} from "react-icons/md"
 
 const listLi = [
     {
-        icons:"icon",
+        icons:GrStackOverflow,
         text:"overview"
     },
     {
-        icons:"icon",
+        icons:GiTicket,
         text:"Tickets"
     },
     {
-        icons:"icon",
+        icons:GiTeamIdea,
         text:"Ideas"
     },
     {
-        icons:"icon",
+        icons:RiContactsBook2Fill,
         text:"Contacts"
     },
     {
-        icons:"icon",
+        icons:MdViewAgenda,
         text:"Agents"
     },
     {
-        icons:"icon",
+        icons:MdViewAgenda,
         text:"Settings"
     },
     {
-        icons:"icon",
+        icons:MdSubscriptions,
         text:"Subscriptions"
     },
 ];
@@ -44,7 +48,7 @@ function SideBar() {
                 <SideBarUl>
                     {
                         listLi.map((item,index) => 
-                        <LinkSideBar icons={item.icons} text={item.text}/>
+                        <LinkSideBar key={index} Icons={item.icons} text={item.text}/>
                         )
                     }
                 
