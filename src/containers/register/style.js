@@ -18,7 +18,8 @@ export const RegisterForm = styled.form`
   width: 360px;
   position: absolute;
   border-radius: 5px;
-  padding: 15px;
+  padding: 20px;
+  height: 90%;
   right: 10%;
   top: 5%;
   bottom: 5%;
