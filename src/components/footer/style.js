@@ -1,80 +1,69 @@
 import styled from 'styled-components'
-export const Container = styled.div`
-    max-width: 100%;
-    margin:0 auto;
-    /* background-color:lightgreen; */
-hr{
-    width: 900px;
-    border: 0.5px solid #D3D3D3;
-}
-a:hover{
-        color: #ee4d2d;
-    }
-`
+
+
+export const FooterContainer = styled.footer`
+    background-color: #fbfbfb;
+    border-top: 4px solid #ee4d2d;
+    padding:50px 0 0;
+`;
 export const FooterTop = styled.div`
     display: flex;
-    justify-content:center;
-    
-    `
-export const FooterHr = styled.hr`
-  
-    width: 1000px;
-    `
-export const FooterBoder_image = styled.li`
-  flex-wrap: wrap;
-  width: 150px;
-  height: 90px;
-  display: flex;
-  flex-wrap: wrap;
-        img{
-      width: 40px;
-      height: 30px;
-      margin:0px 1px 0px 1px ;
-  }
-`
-export const FooterUI = styled.div`
-margin-right: 10px;
-color: #606060;
-h6 {
-    margin: 20px 15px -10px 0
-}
-ul{
-    margin-left: -30px;
-li {
-    list-style-type:none;
-    text-align:left;
-    a{
-        text-decoration:none;
-        font-size: 12px;
-        color: #808080;
+    justify-content: space-between;
+    h3{
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(0,0,0,.54);
+        margin-bottom: 1.25rem;
+        margin-top: 2.5rem;
     }
-}
-}
-`
-//Footer bottom
-export const FooterBottom = styled.div`
-display:flex;
-justify-content:center;
-font-size: 12px;
-color: #606060;
-ul{
-    display:flex;
+    ul{
+        margin:0;
+        padding:0;
+        list-style: none;
+    }
     li{
-        list-style-type:none;
-        margin-right: 5px;
-    } 
-    a{
-        text-decoration:none;
-        color: #606060 ;
+        margin-bottom: 10px;
+        a{
+            text-decoration: none;
+            color: rgba(0,0,0,.54);
+            font-size: 12px;
+        }
+
     }
-   
-}
- `
- export const Footer_bottom = styled.div`
- background-color: #f5f5f5;
- padding: 10px 0px 10px 0px;
- p{
- color: #808080;
- font-size: 12px;
- }
- `
+`;
+export const FooterCenter = styled.div`
+   border-top: 1px solid rgba(0,0,0,.1);
+   display: flex;
+   justify-content: space-between;
+   padding: 20px 0;
+   font-size: 14px;
+   color: rgba(0,0,0,.54);
+`;
+export const FooterBottom = styled.div`
+     background: #f5f5f5;
+     padding: 50px;
+     text-align: center;
+     p{
+         margin:0 auto;
+         font-size: 14px;
+         color: rgba(0,0,0,.54);
+         line-height: 20px;
+     }
+     img{
+         margin:20px 0;
+
+     }
+`;
+export const FooterBottomHead = styled.div`
+    display: flex;
+    justify-content: center;
+    div{
+        padding: 5px 20px;
+        border-right: 1px solid rgba(0,0,0,.09);
+        font-size: 14px;
+         color: rgba(0,0,0,.54);
+        &:last-child{
+            border-right:none;
+        }
+    }
+`;
