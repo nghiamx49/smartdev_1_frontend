@@ -1,12 +1,12 @@
 import Footer from "./components/footer";
 import "./App.css";
 import Register from "./components/register";
+import OdderDetail from "./order_detail/index";
 
 function App() {
   return (
     <div className="App">
-      <Register />
-      <Footer></Footer>
+      <OdderDetail></OdderDetail>
     </div>
   );
 }
