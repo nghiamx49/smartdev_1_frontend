@@ -56,6 +56,7 @@ export const SocialButtonContainer = styled.div`
 `;
 
 export const SocialButton = styled.button`
+  width: 150px;
   color: #ffffff;
   padding: 12px 20px;
   margin: 8px 0;
