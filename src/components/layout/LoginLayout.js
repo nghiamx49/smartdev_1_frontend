@@ -1,11 +1,14 @@
 import React from 'react'
-
-function WellComeLayout({ children }) {
+import HeaderLogin from "../headerlogin"
+import Footer from "../footer"
+function LoginLayout({ children }) {
   return (
     <>
+      <HeaderLogin/>
       {children}
+      <Footer/>
     </>
   )
 }
 
-export default WellComeLayout
+export default LoginLayout

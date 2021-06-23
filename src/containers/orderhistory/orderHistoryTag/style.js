@@ -15,16 +15,19 @@ export const OrderHistoryTagTop = styled.div`
 export const TopLeft = styled.div`
     flex-basis: 40%;
     button {
-        margin: 1rem 3rem ;
-        padding: 0.5em;
-        background-color: #fd5d32 ;
-        border : 0;
+        margin-left: 50px;
+        margin-bottom :1rem;
+        margin-top: 1rem;
+        border-top: 0.5px solid #ff0000;
         background-color: #f3836c;
-        border-radius: 5px;
-        padding: 5px;
+        padding: 3px 10px;
+        border : none;
         color: white;
+        border-radius: 4px;
+        font-size: 12px;
         &:hover{
-            background-color: #346abe;
+            background: #fd5d32;
+            cursor: pointer;
         }
     }
 `
@@ -67,16 +70,16 @@ export const OrderHistoryTagBottom = styled.div`
         margin-right : 2rem;
         margin-bottom :1rem;
         margin-top: 1rem;
-        background-color: white;
-        height: 3rem;
         border-top: 0.5px solid #ff0000;
         background-color: #f3836c;
-        border-radius: 5px;
-        padding: 5px;
+        padding: 3px 10px;
         border : none;
         color: white;
+        border-radius: 4px;
+        font-size: 12px;
         &:hover{
             background: #fd5d32;
+            cursor: pointer;
         }
     }
 
@@ -87,4 +90,5 @@ export const BottomLeft = styled.div`
     div {
         flex-basis: 40%;
     }
+    
 `

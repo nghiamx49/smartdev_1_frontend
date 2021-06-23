@@ -36,15 +36,19 @@ export const  Search = styled.div`
         border: 0rem;
         height: 100%;
         padding: 0rem;
+        padding-left: 20px;
+        outline: none;
+        box-sizing: border-box;
     }
     button {
         width: 10%;
         height: 100%;
         border: 0rem;
         padding: 0rem;
-        background-color: #1da1f2;
+        color:#fff;
+        background-color:  #fa5230;
         &:hover{
-            background-color: #fa5230;
+            cursor: pointer;
         }
     }
 `

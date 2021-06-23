@@ -1,5 +1,4 @@
 import React from 'react'
-import HeaderComponent from '../../components/header'
 import { LayoutOrderHistory, Container, MainHistory, OrderHistoryTop, OrderHistoryTopLink, Search } from './style'
 import SlidebarOfProfile from '../../components/slidebarOfProfile'
 import OrderHistoryTag from './orderHistoryTag'
@@ -28,9 +27,6 @@ export default function OrderHistory() {
     total: 200,
   }]
   return (
-    <div>
-      <HeaderComponent>
-      </HeaderComponent>
       <LayoutOrderHistory>
         <Container>
           <SlidebarOfProfile>
@@ -57,6 +53,5 @@ export default function OrderHistory() {
           </MainHistory>
         </Container>
       </LayoutOrderHistory>
-    </div>
   )
 }

@@ -1,14 +1,9 @@
 import React from 'react'
-
-import HeaderComponent from '../../components/header'
 import imgUserDefault from '../../assests/img/user-default.png'
 import SlidebarOfProfile from '../../components/slidebarOfProfile'
 import * as UP from './style'
 const UserProfile = () => {
     return (
-        <div>
-            <HeaderComponent>
-            </HeaderComponent>
             <UP.Layout>
                 <UP.Container>
                     <SlidebarOfProfile />
@@ -66,7 +61,6 @@ const UserProfile = () => {
                     </UP.Main>
                 </UP.Container>
             </UP.Layout>
-        </div>
     )
 }
 
