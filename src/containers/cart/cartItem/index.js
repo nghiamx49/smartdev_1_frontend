@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FcShipped } from 'react-icons/fc'
 import {MdAccountBalanceWallet} from'react-icons/md'
 import PropTypes from 'prop-types';
 
 import { BtnDelete, BtnPlus, CartItemLayout, ColumnDiv, Left, Magess, Right, ShopName } from './style'
-import { number } from 'yup';
 
 CartItem.prototype = {
     product : PropTypes.shape({
@@ -14,22 +13,26 @@ CartItem.prototype = {
         name : PropTypes.string,
         price : PropTypes.number,
         number : PropTypes.number,
+        status : PropTypes.bool,
     })
 }
 
 export default function CartItem(props) {
-    
-    const {product,handleNumberProduct} = props;
-    // setProduct(productprop)
-    // function HandlerNumber (e) {
-    //     setProduct({...product, number: product.number++})
-    // }
-    console.log(product)
+    const {product,handleNumberProduct,HandlerStatusProductElement , DeleteProduct} = props;
+    useEffect(() => {
+        const checkbox = document.getElementById(product.id)
+        checkbox.checked = product.status
+    }, [product.status])
+
+    const HandlerCheckBox = () => {
+        const checkbox = document.getElementById(product.id)
+        HandlerStatusProductElement(product.id , checkbox.checked)        
+    }
     return (
         < CartItemLayout>
             <ShopName>
                 <Left>
-                    <input type="checkbox"></input><span>Yêu Thích</span><p>{product.shopName}</p>
+                    <input type="checkbox" id={product.id}  onClick={HandlerCheckBox}></input><span>Yêu Thích</span><p>{product.shopName}</p>
                 </Left>
                 <Right>
                     
@@ -37,17 +40,16 @@ export default function CartItem(props) {
             </ShopName>
             <ShopName>
                 <Left>
-                    <input type="checkbox"></input>
+                   
                     <img src={product.linkImage}></img>
                     <p>{product.name}</p>
                 </Left>
-               
                 <Right>
                     <ColumnDiv>{product.price}</ColumnDiv>
                     <ColumnDiv> <BtnPlus onClick={handleNumberProduct.bind(product,1,product.id)} >+</BtnPlus><input value={product.number}></input>
                                 <BtnPlus onClick={handleNumberProduct.bind(product,-1,product.id)}>-</BtnPlus></ColumnDiv>
                     <ColumnDiv>{product.price*product.number}</ColumnDiv>
-                    <ColumnDiv><BtnDelete>Xóa</BtnDelete></ColumnDiv>
+                    <ColumnDiv><BtnDelete  onClick={DeleteProduct.bind(product,product.id)}>Xóa</BtnDelete></ColumnDiv>
                 </Right>
             </ShopName>
             <Magess>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Total = styled.div`
-    max-width: 1150px;
+    min-width: 1150px;
     margin: 0 auto;
     background-color: white;
     margin-top: 2rem ;
