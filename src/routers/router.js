@@ -6,6 +6,7 @@ import ProductDetail from '../containers/product-detail'
 import Orderhistory from "../containers/orderhistory"
 import LoginLayout from "../components/layout/LoginLayout"
 import Layout from "../components/layout/Layout"
+import Home from "../containers/home"
 const routes = [
   {
     path: '/login',
@@ -39,6 +40,12 @@ const routes = [
   {
     path: '/product-detail',
     component: ProductDetail,
+    exact: true,
+    layout:Layout,
+  },
+  {
+    path: '',
+    component:Home,
     exact: true,
     layout:Layout,
   },
