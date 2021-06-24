@@ -2,6 +2,7 @@ import Login from "../containers/login"
 import Register from "../containers/register"
 import Admin from "../containers/admin"
 import Profile from "../containers/profile"
+import ProductDetail from '../containers/product-detail'
 import Orderhistory from "../containers/orderhistory"
 import OrderDetail from "../containers/order_detail"
 import Cart from "../containers/cart"
@@ -47,6 +48,9 @@ const routes = [
   {
     path: '/cart',
     component: Cart,
+  },
+    path: '/product-detail',
+    component: ProductDetail,
     exact: true,
     layout:Layout,
   },
