@@ -125,15 +125,6 @@ export default function Cart() {
     }
     const DeleteProductOnBottom = ()=> {
         let newListProducts = [...listProduct];
-        // for (const p of newListProducts) {
-        //     if(p.status !== false){
-              
-        //         const index = newListProducts.indexOf(p)
-        //         console.log(index);
-        //         newListProducts.splice(index, 1);
-
-        //     }
-        // }
         for( let i =0 ; i < newListProducts.length ; i++) {
             if(newListProducts[i].status === true){
                     newListProducts.splice(i, 1);
