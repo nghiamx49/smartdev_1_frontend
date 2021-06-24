@@ -7,6 +7,7 @@ import {Header,
     HeaderBottom,HeaderBottomCenterTop,HeaderBottomCenter,HeaderBottomRight,HeaderBottomLeft} from './style'
 import imgLogo from "../../assests/img/logo.png"
 import {Container} from "../../assests/common/stylecomon" 
+import HeaderCart from "./HeaderCart"
 
 const listTextHeaderBottom = [
     'Guốc xỏ ngón',
@@ -17,6 +18,8 @@ const listTextHeaderBottom = [
     'giày kiểu',
     'Khăn đa năng'
 ]
+
+
 const HeaderComponent = props => {
     return (
         <Header>
@@ -41,6 +44,7 @@ const HeaderComponent = props => {
                         </HeaderUser>
                     </div>
                 </HeaderTop>
+               
                 <HeaderBottom>
                     <HeaderBottomLeft>
                         <img src={imgLogo} alt=""/>
@@ -62,7 +66,6 @@ const HeaderComponent = props => {
                     </HeaderBottomCenter>
                     <HeaderBottomRight>
                         <span>cart</span>
-                        
                     </HeaderBottomRight>
                 </HeaderBottom>
             </Container>
