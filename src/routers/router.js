@@ -5,6 +5,7 @@ import Profile from "../containers/profile"
 import Orderhistory from "../containers/orderhistory"
 import LoginLayout from "../components/layout/LoginLayout"
 import Layout from "../components/layout/Layout"
+import Home from "../containers/home"
 const routes = [
   {
     path: '/login',
@@ -32,6 +33,12 @@ const routes = [
   {
     path: '/orderhistory',
     component: Orderhistory,
+    exact: true,
+    layout:Layout,
+  },
+  {
+    path: '',
+    component:Home,
     exact: true,
     layout:Layout,
   },
