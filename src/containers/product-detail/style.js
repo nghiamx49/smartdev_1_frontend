@@ -302,8 +302,7 @@ export const ProductDetailContainer03Left = styled.div`
 label{
     padding-left: .875rem;
     color: rgba(0,0,0,.4);
-    font-size: 1.5rem;
-    width: 6.25rem;
+    font-size: 18px;
     margin-right: 2.5rem;
     cursor: default;
 }
@@ -316,7 +315,7 @@ export const ProductDescriteContainer03Left = styled.div`
 pre{
     white-space: pre-wrap;
     color: rgba(0,0,0,.8);
-    font-size: 1.4rem;
+    font-size: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.875rem;
@@ -326,7 +325,7 @@ pre{
 export const TextDescriceProduct = styled.div`
     background: rgba(0,0,0,.02);
     color: rgba(0,0,0,.87);
-    font-size: 1.8rem;
+    font-size: 20px;
     padding: .875rem;
     text-transform: uppercase;
     margin-bottom: 25px;
@@ -335,7 +334,58 @@ export const TextDescriceProduct = styled.div`
 export const Container03LeftBottom = styled.div`
     background-color: #ffffff;
     border-radius: 3px;
+    padding-left: 25px;
+    padding-bottom: 25px;
+
 `;
 
+export const TitleComment = styled.div`
+    font-size: 20px;
+    color: rgba(0,0,0,.87);
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+    padding-top: 25px;
+`;
 
+export const HeaderComment = styled.div`
+    background-color: #fffbf8;
+    min-height: 5rem;
+    border: 1px solid #f9ede5;
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 30px;
+    margin-right: 35px;
+    display: flex;
+    align-items: center;
+`;
+
+export const Star = styled.div`
+    text-align: center;
+    color: #ee4d2d;
+    font-size: 18px;
+    margin-right: 20px;
+`;
+
+export const NumberStar = styled.span`
+    font-size: 25px;
+`;
+
+export const CoverButtonStar = styled.div`
+    font-size: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-basis: 80%;
+`;
+
+export const ButtonStar = styled.div`
+    height: 30px;
+    line-height: 30px;
+    min-width: 70px;
+    text-align: center;
+    padding: 0 .625rem;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.09);
+    margin: 5px;
+`;
 

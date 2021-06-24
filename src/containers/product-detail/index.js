@@ -10,7 +10,7 @@ import imgProduct2 from '../../assests/img/san-pham-2.jpeg'
 import imgProduct3 from '../../assests/img/san-pham-3.jpeg'
 import imgProduct4 from '../../assests/img/san-pham-4.jpeg'
 import imgProvider from '../../assests/img/user-default.png'
-
+import Feedback from './feeback';
 import * as PD from './style';
 
 const ProductDetail = () => {
@@ -139,7 +139,27 @@ const ProductDetail = () => {
                         </PD.ProductDescriteContainer03Left>
                     </PD.Container03LeftTop>
                     <PD.Container03LeftBottom>
-                        <div>Đánh giá sản phẩm</div>
+                        <PD.TitleComment>Đánh giá sản phẩm</PD.TitleComment>
+                        <PD.HeaderComment>
+                            <PD.Star>
+                                <div><PD.NumberStar>5</PD.NumberStar> trên 5</div>
+                                <div>
+                                    <RiStarFill /> <RiStarFill /> <RiStarFill /> <RiStarFill /> <RiStarFill />
+                                </div>
+                            </PD.Star>
+                            <PD.CoverButtonStar>
+                                <PD.ButtonStar type="button">Tất cả</PD.ButtonStar>
+                                <PD.ButtonStar type="button">5 sao()</PD.ButtonStar>
+                                <PD.ButtonStar type="button">4 sao()</PD.ButtonStar>
+                                <PD.ButtonStar type="button">3 sao()</PD.ButtonStar>
+                                <PD.ButtonStar type="button">2 sao()</PD.ButtonStar>
+                                <PD.ButtonStar type="button">1 sao()</PD.ButtonStar>
+                            </PD.CoverButtonStar>
+                        </PD.HeaderComment>
+                        <div>
+                            <Feedback />
+
+                        </div>
                     </PD.Container03LeftBottom>
                 </PD.Container03Left>
                 <PD.Container03Right>
