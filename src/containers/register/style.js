@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const RegisterContainer = styled.div`
   width: 100%;
+  height: 200px;
   background-color: #ee4d2d;
   position: relative;
   padding: 400px 0;
@@ -19,7 +20,6 @@ export const RegisterForm = styled.form`
   position: absolute;
   border-radius: 5px;
   padding: 20px;
-  height: 90%;
   right: 10%;
   top: 5%;
   bottom: 5%;
@@ -28,7 +28,6 @@ export const RegisterForm = styled.form`
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
@@ -41,7 +40,6 @@ export const RegisterButton = styled.button`
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
-  display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
   background-color: #f3836c;
