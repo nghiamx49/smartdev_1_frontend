@@ -3,6 +3,8 @@ import Register from "../containers/register"
 import Admin from "../containers/admin"
 import Profile from "../containers/profile"
 import Orderhistory from "../containers/orderhistory"
+import OrderDetail from "../containers/order_detail"
+import Cart from "../containers/cart"
 import LoginLayout from "../components/layout/LoginLayout"
 import Layout from "../components/layout/Layout"
 import Home from "../containers/home"
@@ -33,6 +35,18 @@ const routes = [
   {
     path: '/orderhistory',
     component: Orderhistory,
+    exact: true,
+    layout:Layout,
+  },
+  {
+    path: '/orderdetail',
+    component: OrderDetail,
+    exact: true,
+    layout:Layout,
+  },
+  {
+    path: '/cart',
+    component: Cart,
     exact: true,
     layout:Layout,
   },

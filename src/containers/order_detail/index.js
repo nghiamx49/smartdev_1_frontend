@@ -1,15 +1,15 @@
 import React from 'react';
 import IdOderDetail from './idOrderDetail';
-import Provider_store from './provider_store';
+import Providerstore from './provider_store';
 import { Container } from './style'
-export default function index() {
+export default function OrderDetail() {
     return (
         <Container>
             <div>
 
                 <div>
                     <div> <IdOderDetail></IdOderDetail> </div>
-                    <div> <Provider_store></Provider_store> </div>
+                    <div> <Providerstore></Providerstore> </div>
                     <table>
                     </table>
                 </div>
