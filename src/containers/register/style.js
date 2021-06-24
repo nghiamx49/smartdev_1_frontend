@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-export const LoginContainer = styled.div`
+export const RegisterContainer = styled.div`
   width: 100%;
+  height: 200px;
   background-color: #ee4d2d;
   position: relative;
-  padding: 300px 0;
+  padding: 400px 0;
 `;
 
 export const Logo = styled.img`
@@ -13,33 +14,32 @@ export const Logo = styled.img`
   bottom: 40%;
 `;
 
-export const LoginForm = styled.form`
+export const RegisterForm = styled.form`
   background-color: #ffffff;
   width: 360px;
   position: absolute;
   border-radius: 5px;
-  padding: 15px;
+  padding: 20px;
   right: 10%;
-  bottom: 20%;
+  top: 5%;
+  bottom: 5%;
   input[type="text"],
   input[type="password"] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
-  a {
-    text-decoration: none;
+  label {
+    font-weight: bold;
   }
 `;
 
-export const LoginButton = styled.button`
+export const RegisterButton = styled.button`
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
-  display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
   background-color: #f3836c;
@@ -47,24 +47,5 @@ export const LoginButton = styled.button`
   :hover {
     cursor: pointer;
     background-color: #ff522e;
-  }
-`;
-
-export const SocialButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`;
-
-export const SocialButton = styled.button`
-  color: #ffffff;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  background-color: #5693f9;
-  box-sizing: border-box;
-  :hover {
-    cursor: pointer;
-    background-color: #136bfd;
   }
 `;

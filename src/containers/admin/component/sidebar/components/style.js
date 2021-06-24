@@ -10,6 +10,7 @@ export const SideBarLi = styled.li`
         font-size: 16px;
         font-weight: 400;
         text-transform: capitalize;
+        margin-left:10px;
         
     }
     &:hover{

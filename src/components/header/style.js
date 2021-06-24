@@ -83,6 +83,10 @@ export const HeaderBottomLeft = styled.div`
 `;
 export const HeaderBottomRight = styled.div`
   flex-basis: 15%;
-  background-color: blue;
+  color:#fff;
   text-align: center;
+  svg{
+    font-size: 40px;
+    margin-top: -25px;
+  }
 `;
