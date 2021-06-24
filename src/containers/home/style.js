@@ -312,6 +312,8 @@ export const HomeProduct = styled.div`
 `;
 export const HomeProductList = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 `;
 
 

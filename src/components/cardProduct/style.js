@@ -1,15 +1,21 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Product = styled.div`
+export const Product = styled(Link)`
     height: 300px;
-    width: 200px;
-
+    width: 180px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 10px;
     img{
         width: 100%;
     }
     position: relative;
     box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
     z-index: 20;
+    &:hover{
+        z-index: 40;
+    }
     &:hover .similar{
         display: block;
     }

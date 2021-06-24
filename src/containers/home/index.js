@@ -9,7 +9,7 @@ import home_search_top_3 from "../../assests/img/searchtop-3.JPG"
 import * as HOME from "./style"
 import * as LIST from "./contants"
 import {FcSynchronize,FcStumbleupon,FcShipped,FcNext} from "react-icons/fc"
-
+import CartProduct from "../../components/cardProduct"
 
 function Home() {
     return (
@@ -178,7 +178,11 @@ function Home() {
                                 </HOME.HomeShoppeSmallTopRight>
                         </HOME.HomeShoppeSmallTop>
                         <HOME.HomeProductList>
-                            
+                            {
+                                LIST.listProducts.map(item => (
+                                    <CartProduct img={item.img} name={item.name} price={item.price}/>
+                                ))
+                            }
                         </HOME.HomeProductList>
                     </HOME.HomeProduct>
                 </HOME.Container>

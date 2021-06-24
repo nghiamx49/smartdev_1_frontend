@@ -218,3 +218,66 @@ export const listSearch = [
         img:"https://cf.shopee.vn/file/876e49c18eba6835df035907446afa53"
     },
 ]
+
+export const listProducts = [
+    {
+        img:"https://cf.shopee.vn/file/44f55bc81ef7401dd88379a2b0fe123d_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/f428cd592ffa0bff428d758bce2b661f_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/8e9f3e7f4457cbfc31d78ab8db2a9f68_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/d666d8574e000a7e0dea4e9d16e71868_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/2beaea80a69842427e56a1e9e06cc181_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/70aba6309fd7ac457f692e2419aa5e7c_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/ea5a0229f1f366bb93ab4bc44b1823b5_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/d615de64cb8b741437cc1dbfc1874514_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/0a58fd517c137a90c245cc1704190f8f_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/0a58fd517c137a90c245cc1704190f8f_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/305d0a4a7daa71f9c78fb1bab61ea89c_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+    {
+        img:"https://cf.shopee.vn/file/305d0a4a7daa71f9c78fb1bab61ea89c_tn",
+        name:"áo sơ mi nam",
+        price:"140.000"
+    },
+]
