@@ -1,11 +1,11 @@
-// import Footer from './components/footer'
-import Admin from './containers/admin';
 
+import AppRouter from './routers'
 function App() {
   return (
     <div className="App">
-      {/* <Footer></Footer> */}
-      <Admin/>
+
+      <AppRouter/>
+
     </div>
   );
 }

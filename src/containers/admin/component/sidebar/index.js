@@ -40,7 +40,8 @@ const listLi = [
     
 ];
 // sidebar cho admin
-function SideBar() {
+function SideBar(props) {
+    const {handleMenu} = props
     return (
         <SideBarContainer>
             <SideBarLogo>

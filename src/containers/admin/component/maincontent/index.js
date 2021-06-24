@@ -21,6 +21,7 @@ function MainAdmin() {
         <h3>Tickets</h3>
         <MainAdminHeaderRight>
           <MainAdminHeaderSearch>
+
             <p><AiOutlineSearch/> <span>search</span></p>
           </MainAdminHeaderSearch>
           <MainAdminHeaderUser>
