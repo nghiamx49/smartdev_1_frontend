@@ -3,7 +3,8 @@ import {HiOutlineBookmark} from 'react-icons/hi'
 
 import { LeftBottom, Right, RightBottom, RightMid, Total, TotalCartBottom, TotalCartMid, TotalCartTop } from './style'
 
-export default function TotalCart() {
+export default function TotalCart(props) {
+    const{ HandlerCheckboxTotalBottom , total,count, totalMoney ,deleteProductOnBottom} = props
     return (
         <Total>
            <TotalCartTop>
@@ -20,17 +21,16 @@ export default function TotalCart() {
            </TotalCartMid>
            <TotalCartBottom>
                 <LeftBottom>
-                    <label><input type="checkbox" checked="true"/>Chọn Tất Cả (3)</label>
-                    <button>Xóa</button>
+                    <label><input type="checkbox" id="checkboxCartTotalOnBottom" onClick ={HandlerCheckboxTotalBottom}/>Chọn Tất Cả ({total})</label>
+                    <button onClick={deleteProductOnBottom}>Xóa</button>
                     <span>Lưu vào abc xyz</span>
                 </LeftBottom>
                 <RightBottom>
-                    <div><span>Tổng thanh toán (0 Sản phẩm):</span> </div>
-                    <h3>₫0</h3>
+                    <div><span>Tổng thanh toán ({count} Sản phẩm):</span> </div>
+                    <h3>₫{totalMoney}</h3>
                     <div><button>Mua Hàng</button></div>
                 </RightBottom>
            </TotalCartBottom>
-
         </Total>
     )
 }
