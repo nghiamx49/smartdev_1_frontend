@@ -8,6 +8,7 @@ import {Header,
 import imgLogo from "../../assests/img/logo.png"
 import {Container} from "../../assests/common/stylecomon" 
 import HeaderCart from "./HeaderCart"
+import {BiCart} from "react-icons/bi"
 
 const listTextHeaderBottom = [
     'Guốc xỏ ngón',
@@ -66,6 +67,7 @@ const HeaderComponent = props => {
                     </HeaderBottomCenter>
                     <HeaderBottomRight>
                         <span>cart</span>
+                        <BiCart/>
                     </HeaderBottomRight>
                 </HeaderBottom>
             </Container>
