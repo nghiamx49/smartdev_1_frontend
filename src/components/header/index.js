@@ -76,5 +76,4 @@ const HeaderComponent = props => {
         </Header>
     );
 };
-
 export default HeaderComponent;
