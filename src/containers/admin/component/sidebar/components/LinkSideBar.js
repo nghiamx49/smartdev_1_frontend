@@ -3,16 +3,17 @@ import {SideBarLi} from "./style"
 import PropTypes from 'prop-types'
 
 
+
 function LinkSideBar(props) {
-    const { Icons,text,handleMenu} = props 
+    const { Icons, text} = props 
     return (
-        <SideBarLi onClick={()=>handleMenu(text)}>
-            {Icons && <Icons/>} <span>{text}</span>
+        <SideBarLi>
+             {Icons && <Icons/>}<span>{text}</span>
         </SideBarLi>
     )
 }
 LinkSideBar.propTypes = {
-    icons: PropTypes.any,
+    icons: PropTypes.oneOfType([PropTypes.any]),
     text: PropTypes.string
 };
 LinkSideBar.defaultProps = {

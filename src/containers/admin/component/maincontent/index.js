@@ -5,33 +5,24 @@ import {
   MainAdminHeaderRight,
   MainAdminHeaderUser,
   MainAdminHeaderSearch,
+  MainAdminContent,
+  MainAdminAllUser,
+  MainAdmintextfunction,
+  MainAdminFlex,
+  MainAdminPage
 } from "./style";
-import {
-  AiOutlineSearch
-} from "react-icons/ai";
-import UserAmin from "./components/User";
-import ProviderAdmin from "./components/Provider";
-import ApproveProvider from "./components/approveproviders";
-function MainAdmin(props) {
-    const {menu} = props
-    const handleShowTable = (menu) =>{
-        if(menu === "Users")
-            return <UserAmin/>
-        if(menu === "Providers")
-            return <ProviderAdmin/>
-        if(menu === "ApproveProviders")
-          return <ApproveProvider/>
-        return <h3>ko co ui </h3>
-    }
+import { AiOutlineSortAscending, AiFillFilter,AiOutlineSearch,AiFillCaretDown } from "react-icons/ai";
+import {GrPrevious,GrNext} from 'react-icons/gr'
+import UserTable from "./components";
+function MainAdmin() {
   return (
     <MainAdminContainer>
       <MainAdminHeader>
         <h3>Tickets</h3>
         <MainAdminHeaderRight>
           <MainAdminHeaderSearch>
-            <p>
-              <AiOutlineSearch />
-            </p>
+
+            <p><AiOutlineSearch/> <span>search</span></p>
           </MainAdminHeaderSearch>
           <MainAdminHeaderUser>
             <p>admin name</p>
@@ -42,9 +33,28 @@ function MainAdmin(props) {
           </MainAdminHeaderUser>
         </MainAdminHeaderRight>
       </MainAdminHeader>
-        {
-           handleShowTable(menu)
-        }
+      <MainAdminContent>
+        <MainAdminAllUser>
+          <h3>ALL USERS</h3>
+          <MainAdminFlex>
+            <MainAdmintextfunction>
+              <AiOutlineSortAscending /> <span>sort</span>
+            </MainAdmintextfunction>
+            <MainAdmintextfunction>
+              <AiFillFilter /> <span>filter</span>
+            </MainAdmintextfunction>
+          </MainAdminFlex>
+        </MainAdminAllUser>
+        <UserTable/>
+        <MainAdminPage>
+            <p>
+                <span>Rows per page : 8 </span> <AiFillCaretDown/>
+            </p>
+            <p>
+                <span>1-8 of 1240</span><GrPrevious/><GrNext/>
+            </p>
+        </MainAdminPage>
+      </MainAdminContent>
     </MainAdminContainer>
   );
 }
