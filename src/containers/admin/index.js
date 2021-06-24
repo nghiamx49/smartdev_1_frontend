@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {LayoutAdmin} from "./style"
 import SideBar from './component/sidebar'
 import MainAdmin from './component/maincontent/' 
 
 function Admin() {
+    const [menu,setMenu] =  useState("User")
+    const handleMenu = (value) =>{
+        setMenu(value)
+    }
     return (
         <LayoutAdmin>
-            <SideBar/>
-            <MainAdmin/>
+            <SideBar handleMenu={handleMenu}/>
+            <MainAdmin menu={menu}/>
         </LayoutAdmin>
     )
 }

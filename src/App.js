@@ -1,12 +1,11 @@
-import Footer from "./components/footer";
-import "./App.css";
-import Register from "./components/register";
-import OdderDetail from "./order_detail/index";
 
+import AppRouter from './routers'
 function App() {
   return (
     <div className="App">
-      <OdderDetail></OdderDetail>
+
+      <AppRouter/>
+
     </div>
   );
 }
