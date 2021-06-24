@@ -307,7 +307,12 @@ padding: 20px;
        text-transform: capitalize;
    }
 `;
+export const HomeProduct = styled.div`
 
+`;
+export const HomeProductList = styled.div`
+    display: flex;
+`;
 
 
 export const Container = styled.div`

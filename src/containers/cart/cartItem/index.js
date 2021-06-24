@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { FcShipped } from 'react-icons/fc'
 import {MdAccountBalanceWallet} from'react-icons/md'
 import PropTypes from 'prop-types';
@@ -22,7 +22,7 @@ export default function CartItem(props) {
     useEffect(() => {
         const checkbox = document.getElementById(product.id)
         checkbox.checked = product.status
-    }, [product.status])
+    }, [product.id,product.status])
 
     const HandlerCheckBox = () => {
         const checkbox = document.getElementById(product.id)
@@ -41,7 +41,7 @@ export default function CartItem(props) {
             <ShopName>
                 <Left>
                    
-                    <img src={product.linkImage}></img>
+                    <img src={product.linkImage} alt=""/>
                     <p>{product.name}</p>
                 </Left>
                 <Right>

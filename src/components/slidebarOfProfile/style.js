@@ -5,6 +5,8 @@ export const SlidebarProfile = styled.div`
 `
 export const SlidebarOfProfileTop = styled.div`
     display: flex;
+    flex-direction: column;
+    padding-left:30px;
     margin-top: 2rem;
     font-size: 15px;
     h3{
@@ -16,6 +18,7 @@ export const SlidebarOfProfileTop = styled.div`
         margin-bottom: 0px;
         color: #333;
         font-size: 16px;
+        margin-top: 0;
     }
     a{
         color: #888;
