@@ -1,6 +1,6 @@
 import React from 'react'
-import { Bottom, ContainerBottom, ContainerTop, Header, HeaderBottomLeft, HeaderBottomRight, HeaderLink, HeaderLinkBoder, HeaderTop, HeaderUser } from './style'
-import imgLogo from "../../../assests/img/logo.png"
+import { Bottom, ContainerBottom, ContainerTop, Header, HeaderBottomLeft, HeaderBottomRight, HeaderLink, HeaderLinkBoder, HeaderUser } from './style'
+import imgLogo from "../../assests/img/logo.png"
 
 export default function HeaderCart() {
     return (
