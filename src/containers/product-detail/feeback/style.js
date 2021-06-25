@@ -15,7 +15,7 @@ export const ImgUserFeedback = styled.img`
 export const StarDetail = styled.div`
     margin-right: 10px;
     color: #ee4d2d;
-    display: inline-block;
+    display: inline;
     width: 10px;
     height: 10px;
     fill: currentColor;

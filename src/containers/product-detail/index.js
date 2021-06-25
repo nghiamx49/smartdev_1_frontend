@@ -11,12 +11,14 @@ import imgProduct3 from '../../assests/img/san-pham-3.jpeg'
 import imgProduct4 from '../../assests/img/san-pham-4.jpeg'
 import imgProvider from '../../assests/img/user-default.png'
 import Feedback from './feeback';
+import TopProductSale from '../../components/cardProduct'
 import * as PD from './style';
 
 const ProductDetail = () => {
 
     const [imgShow, setImgShow] = useState(imgProduct1)
     const [amount, setAmount] = useState(1)
+    const numberComment = 1;
 
     const listImg = [
         imgProduct1,
@@ -149,7 +151,7 @@ const ProductDetail = () => {
                             </PD.Star>
                             <PD.CoverButtonStar>
                                 <PD.ButtonStar type="button">Tất cả</PD.ButtonStar>
-                                <PD.ButtonStar type="button">5 sao()</PD.ButtonStar>
+                                <PD.ButtonStar type="button">5 sao({numberComment})</PD.ButtonStar>
                                 <PD.ButtonStar type="button">4 sao()</PD.ButtonStar>
                                 <PD.ButtonStar type="button">3 sao()</PD.ButtonStar>
                                 <PD.ButtonStar type="button">2 sao()</PD.ButtonStar>
@@ -163,9 +165,18 @@ const ProductDetail = () => {
                     </PD.Container03LeftBottom>
                 </PD.Container03Left>
                 <PD.Container03Right>
-                    <p>aa</p>
-
-
+                    <PD.TitleProductTopSale>Top sản phẩm bán chạy</PD.TitleProductTopSale>
+                    <PD.ProductTopSaleDetailCover>
+                        <PD.ProductTopSaleDetail>
+                            <TopProductSale />
+                        </PD.ProductTopSaleDetail>
+                        <PD.ProductTopSaleDetail>
+                            <TopProductSale />
+                        </PD.ProductTopSaleDetail>
+                        <PD.ProductTopSaleDetail>
+                            <TopProductSale />
+                        </PD.ProductTopSaleDetail>
+                    </PD.ProductTopSaleDetailCover>
                 </PD.Container03Right>
             </PD.Container03>
         </PD.Layout>

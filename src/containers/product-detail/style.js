@@ -389,3 +389,22 @@ export const ButtonStar = styled.div`
     margin: 5px;
 `;
 
+export const TitleProductTopSale = styled.div`
+    color: rgba(0,0,0,.4);
+    margin: 10px 0 0;
+    text-transform: capitalize;
+    padding: 20px 20px;
+    font-size: 15px;
+`;
+
+export const ProductTopSaleDetailCover = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const ProductTopSaleDetail = styled.div`
+    border-top: 1px solid rgba(0,0,0,.09);
+    margin-bottom:40px;
+`;
