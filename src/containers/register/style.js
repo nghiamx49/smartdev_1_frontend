@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { theme } from "../../assests/common/color";
 
 export const RegisterContainer = styled.div`
   width: 100%;
   height: 200px;
-  background-color: #ee4d2d;
+  background-color: ${theme.textRed};
   position: relative;
   padding: 400px 0;
 `;
@@ -15,7 +16,7 @@ export const Logo = styled.img`
 `;
 
 export const RegisterForm = styled.form`
-  background-color: #ffffff;
+  background-color: ${theme.white};
   width: 360px;
   position: absolute;
   border-radius: 5px;
@@ -28,7 +29,7 @@ export const RegisterForm = styled.form`
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    border: 1px solid #ccc;
+    border: 1px solid ${theme.gray};
     box-sizing: border-box;
   }
   label {
@@ -40,12 +41,12 @@ export const RegisterButton = styled.button`
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
-  border: 1px solid #ccc;
+  border: 1px solid ${theme.gray} ;
   box-sizing: border-box;
-  background-color: #f3836c;
-  color: #ffffff;
+  background-color: ${theme.btnRedNoHover};
+  color: ${theme.white};
   :hover {
     cursor: pointer;
-    background-color: #ff522e;
+    background-color: ${theme.textRed};
   }
 `;

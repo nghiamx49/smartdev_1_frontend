@@ -1,7 +1,7 @@
 import styled from "styled-components";
-
+import {theme} from "../../../../assests/common/color"
 export const SideBarContainer = styled.div`
-    background-color: #363740;
+    background-color: ${theme.bgSideBarAdmin};
     flex-basis: 20%;
     position: sticky;
     height: 100vh;
@@ -18,7 +18,7 @@ export const SideBarLogo  = styled.div`
         margin-right:10px;
     }
     p{
-        color:#A4A6B3;
+        color:${theme.textLogoAdmin};
         font-weight: 700;
         font-size: 20px;
         line-height: 20px;
@@ -30,7 +30,7 @@ export const SideBarUl  = styled.ul`
    margin: 0;
    li:nth-child(5){
         
-        border-bottom:1px solid gray;
+        border-bottom:1px solid ${theme.gray};
    }
  
 `;

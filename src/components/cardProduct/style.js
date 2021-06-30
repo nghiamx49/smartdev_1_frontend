@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../assests/common/color";
 
 export const Product = styled.div`
     height: 300px;
@@ -34,18 +35,18 @@ export const ProductDiscount = styled.div`
     height: 15%;
     position: absolute;
     text-align: center;
-    color: #f94b2f;
+    color: ${theme.textRed};
 `
 export const ProductFavourite = styled.div`
     top: 5%;
     left: -1%;
     clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
-    background-color: #f94b2f;
+    background-color: ${theme.textRed};
     width: 30%;
     height: 5%;
     position: absolute;
     text-align: center;
-    color: white;
+    color: ${theme.white};
     font-size: 10px;
 `
 export const DivProductName = styled.div`
@@ -56,14 +57,14 @@ export const NameProduct = styled.span`
     font-size: .75rem;
 `
 export const ProductPrice = styled.span`
-    color: #f94b2f;
+    color:${theme.textRed};
 `
 export const ProductSold = styled.span`
-    color: #929292;
+    color: ${theme.gray};
     font-size: .75rem;
 `
 export const ProductSimilar = styled.div`
-    background-color:  #f94b2f;
+    background-color: ${theme.textRed};
     font-size: 20px;
     text-align: center;
     position: absolute;

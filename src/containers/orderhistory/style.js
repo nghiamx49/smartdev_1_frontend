@@ -1,7 +1,8 @@
 import  styled from "styled-components"
+import { theme } from "../../assests/common/color"
 
 export const LayoutOrderHistory = styled.div`
-    background-color: #f5f5f5;
+    background-color: ${theme.bgE5};
     padding-bottom : 10rem;
 `
 export const Container = styled.div`
@@ -18,14 +19,14 @@ export const MainHistory = styled.div`
 export const OrderHistoryTop = styled.div`
     margin-top : 0px;
     min-height: 5rem;
-    background-color: white;
+    background-color: ${theme.white};
     display: flex;
     justify-content: space-between;
 `
 export const  OrderHistoryTopLink = styled.div`
     margin : auto;
     &:hover {
-        color: #fa4f30;
+        color: ${theme.textRed};
     }
 `
 export const  Search = styled.div`
@@ -45,8 +46,8 @@ export const  Search = styled.div`
         height: 100%;
         border: 0rem;
         padding: 0rem;
-        color:#fff;
-        background-color:  #fa5230;
+        color:${theme.white};
+        background-color:  ${theme.textRed};
         &:hover{
             cursor: pointer;
         }
