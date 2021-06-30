@@ -1,6 +1,5 @@
 import styled from "styled-components"
-
-
+import {theme} from "../../assests/common/color"
 export const HomeSlider = styled.div`
     margin:30px 0 10px;
     box-sizing: border-box;
@@ -44,7 +43,7 @@ export const HomeEndow = styled.div`
 `;
 
 export const HomeBgF5F5F5 = styled.div`
-    background-color: #F5F5F5;
+    background-color: ${theme.grayF5};
     padding: 30px 0;
 `;
 export const HomeDonateImg = styled.div`
@@ -53,7 +52,7 @@ export const HomeDonateImg = styled.div`
     }
 `;
 export const HomeCategory = styled.div`
-    background-color: #fff;
+    background-color: ${theme.white};
     margin: 20px 0;
 
 `;
@@ -78,7 +77,7 @@ export const HomeCategoryItem = styled.div`
     border-right: 1px solid rgba(0,0,0,.05);
     border-bottom: 1px solid rgba(0,0,0,.05);
     text-align: center;
-    background-color: #fff;
+    background-color: ${theme.white};
     height: 130px;
     width: 114px;
     img{
@@ -93,7 +92,7 @@ export const HomeCategoryItem = styled.div`
 `;
 
 export const HomeFaleSale = styled.div`
-    background-color: #fff;
+    background-color: ${theme.white};
 `;
 export const HomeFaleSaleTitle = styled.div`
     height: 60px;
@@ -115,7 +114,7 @@ export const HomeFaleSaleItem = styled.div`
     width: 180px;
     }
     p{
-        color: #ee4d2d;
+        color: ${theme.textRed};
         font-weight: 600;
         font-size: 24px;
         margin:0;
@@ -142,7 +141,7 @@ export const HomeFaleSaleItemDiscount = styled.div`
             font-size: 16px;
             display: block;
             &:last-child{
-                color:#fff;
+                color:${theme.white};
                 font-size: 15px;
                 text-transform: uppercase;
                 text-align: center;
@@ -157,7 +156,7 @@ export const HomeFaleSaleItemSaled = styled.div`
         text-align: center;
         position: relative;
         overflow: hidden;
-        background-color: RGB(255, 189, 166);
+        background-color: ${theme.itemHomeSale};
         div{
             position: absolute;
             top: 0;
@@ -165,14 +164,14 @@ export const HomeFaleSaleItemSaled = styled.div`
             content: "";
             height: 20px;
             width: 100px;
-            background-color: red;
+            background-color: ${theme.red};
         }
         span{
             line-height: 20px;
             text-align: center;
             font-size: 12px;
             text-transform: uppercase;
-            color: #fff;
+            color: ${theme.white};
             position: relative;
             z-index: 10;
         }
@@ -196,13 +195,13 @@ export const HomeShoppeSmallTop = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff;
+    background-color: ${theme.white};
 `;
 export const HomeShoppeSmallTopLeft = styled.div`
    display: flex;
    align-items: center;
    h3{
-    color: #d0011b;
+    color: ${theme.titleHomeSmall};
     text-transform: uppercase;
     font-size: 20px;
     margin-right: 10px;
@@ -223,7 +222,7 @@ export const HomeShoppeSmallTopRight = styled.div`
        align-items: center;
         font-size: 16px;
         margin-right: 10px;
-        color: #d0011b;
+        color: ${theme.titleHomeSmall};
         svg{
             margin-top: 5px;
         }
@@ -231,7 +230,7 @@ export const HomeShoppeSmallTopRight = styled.div`
 `;
 export const HomeShoppeSmallBottom = styled.div`
     display: flex;
-    background-color: #fff;
+    background-color: ${theme.white};
     padding: 10px;
 `;
 export const HomeShoppeSmallList = styled.div`
@@ -249,7 +248,7 @@ export const HomeShoppeSmallItem = styled.div`
         font-size: 16px;
         text-transform: capitalize;
         margin: 0;
-        color: #d0011b;
+        color: ${theme.titleHomeSmall};
     }
     img{
         width: 100%;
@@ -266,7 +265,7 @@ export const HomeSearchList = styled.div`
 `;
 export const HomeSearchItem = styled.div`
    display: flex;
-   background-color: #fff;
+   background-color: ${theme.white};
    border-right: 1px solid rgba(0,0,0,.05);
    width: 230px;
    p {
@@ -274,14 +273,14 @@ export const HomeSearchItem = styled.div`
     span{
         display: block;
         &:first-child{
-            color: #222;
+            color: ${theme.black};
             font-weight: 500;
             text-transform: capitalize;
             font-size: 13px;
         }
         &:last-child{
             margin-top: .3125rem;
-            color: #757575;
+            color: ${theme.gray};
             font-size: 11px;
         }
    }
@@ -296,7 +295,7 @@ export const HomeSearchTopList = styled.div`
     
 `;
 export const HomeSearchTopItem = styled.div`
-background-color: #fff;
+background-color: ${theme.white};
 padding: 20px;
     img{
         width: 100%;

@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { theme } from "../../assests/common/color";
 
 export const Layout = styled.div`
-    background-color: #f5f5f5;
+    background-color: ${theme.bgE5};
     padding-bottom : 10rem;
 `;
 
@@ -13,7 +14,7 @@ export const Container = styled.div`
 
 export const Main = styled.div`
     font-size: 15px;
-    background-color: #fff;
+    background-color: ${theme.white};
     flex-basis: 80%;
     margin-top: 2rem;
     padding: 30px;
@@ -26,7 +27,7 @@ export const ProfileTilte = styled.h2`
     font-weight: 500;
     line-height: 1.5rem;
     text-transform: capitalize;
-    color: #333;
+    color: ${theme.black};
 `;
 
 export const ProfileDescribe = styled.p`
@@ -38,7 +39,7 @@ export const ProfileDescribe = styled.p`
 `;
 
 export const ProfileTop = styled.div`
-  border-bottom : 1px solid #efefef ;
+  border-bottom : 1px solid ${theme.bgE5} ;
 `;
 
 export const ProfileBottom = styled.div`
@@ -67,7 +68,7 @@ export const ProfileInput = styled.input`
     border-radius: 2px;
     border: 1px solid rgba(0,0,0,.14);
     &:focus{
-        outline: 1px solid #000;
+        outline: 1px solid ${theme.black};
     }
 `;
 
@@ -80,8 +81,8 @@ export const ProfileRadio = styled.div`
 `;
 
 export const ProfileButton = styled.input`
-    color: #fff;
-    background: #ee4d2d;
+    color: ${theme.white};
+    background: ${theme.textRed};
     height: 40px;
     padding: 0 20px;
     min-width: 70px;
@@ -91,7 +92,7 @@ export const ProfileButton = styled.input`
 `;
 
 export const ProfileBottomRight = styled.div`
-    border-left: 1px solid #efefef;
+    border-left: 1px solid ${theme.bgE5};
     margin-left: 50px;
     height: 250px;
     display:flex;
@@ -100,7 +101,7 @@ export const ProfileBottomRight = styled.div`
     padding-left: 30px;
     label{
         margin:20px 0;
-        background: #fff;
+        background: ${theme.white};
         color: #555;
         border: 1px solid rgba(0,0,0,.09);
         box-shadow: 0 1px 1px 0 rgb(0 0 0 / 3%);

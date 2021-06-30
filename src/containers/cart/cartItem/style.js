@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import {theme} from "../../../assests/common/color"
 export const CartItemLayout = styled.div`
     margin-top: 1.5rem;
     input[type = "checkbox"]{
@@ -22,11 +22,11 @@ export const CartItemLayout = styled.div`
     `
     export const ShopName = styled.div`
         display: flex;
-        background-color: white;
+        background-color: ${theme.white};
         min-height: 5rem;
         flex-direction: row;
         justify-content: space-between;
-        border-bottom:1px solid #e8e8e8 ;
+        border-bottom:1px solid ${theme.gray} ;
 `
 export const Left = styled.div`
     margin: auto;
@@ -42,8 +42,8 @@ export const Left = styled.div`
     
     span {
         margin-left: 2rem;
-        background-color: #ee4d2d;
-        color: white;
+        background-color: ${theme.textRed};
+        color: ${theme.white};
         padding: 0px 8px;
         border-radius: 2px;
         font-size: 12px;
@@ -77,7 +77,7 @@ export const BtnPlus = styled.button`
     width: 32px;
     height: 32px;
     &:hover{
-        background-color: #ee4d2d ;
+        background-color: ${theme.textRed} ;
     }
 `
 export const BtnDelete = styled.button`
@@ -89,7 +89,7 @@ export const BtnDelete = styled.button`
     width: 64px;
     height: 32px;
     &:hover{
-        background-color: #ee4d2d ;
+        background-color:${theme.textRed} ;
         cursor: pointer;
     }
 `;
@@ -100,7 +100,7 @@ export const Magess =styled.div`
     flex-direction: column;
     justify-content: center;
     align-items:flex-start;
-    border-bottom : 1px solid #e8e8e8;
+    border-bottom : 1px solid ${theme.gray};
     div{
         padding-left: 5rem;
     };

@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import { theme } from "../../assests/common/color";
 export const Header = styled.header`
-  background: #fa4f30;
+  background: ${theme.textRed};
   position: relative;
   a{
-    color:#fff;
+    color:${theme.white};
   }
 `;
 
 export const HeaderLink = styled.span`
-  color: white;
+  color: ${theme.white};
   font-size: 14px;
   margin-bottom: 20px;
   margin-top: 10px;
@@ -20,7 +21,7 @@ export const HeaderLink = styled.span`
   }
 `;
 export const HeaderLinkBoder = styled.span`
-  color: white;
+  color: ${theme.white};
   font-size: 14px;
   margin-bottom: 20px;
   margin-top: 10px;
@@ -42,7 +43,7 @@ export const HeaderUser = styled.div`
   p{
     font-size: 14px;
     font-weight: 700;
-    color: #fff;
+    color: ${theme.white};
     display: inline;
   }
   div {
@@ -53,7 +54,7 @@ export const HeaderUser = styled.div`
     right: 10px;
     height: 90px;
     width: 200px;
-    background-color: #fff;
+    background-color: ${theme.white};
     z-index: 10;
     visibility: hidden;
     &::after{
@@ -65,14 +66,14 @@ export const HeaderUser = styled.div`
       right: 27px;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 10px solid #fff;
+      border-bottom: 10px solid ${theme.white};
     }
     a{
       text-decoration: none;
       padding: 5px 15px;
-      background-color: #f5f5f5;
+      background-color: ${theme.bgE5};
       text-transform: capitalize;
-      color:#000;
+      color:${theme.black};
       &:hover{
         color:green;
       }
@@ -97,7 +98,7 @@ export const HeaderUl = styled.ul`
   li {
     font-size: 13px;
     font-weight: 500;
-    color: #fff;
+    color: ${theme.white};
     text-transform: capitalize;
     margin-right: 10px;
   }
@@ -106,7 +107,7 @@ export const HeaderUl = styled.ul`
 export const HeaderInput = styled.input`
   width: 100%;
   padding: 5px;
-  background-color: #fff;
+  background-color: ${theme.white};
   outline: none;
   height: 20px;
   border: none;
@@ -115,7 +116,7 @@ export const HeaderSearch = styled.button`
   position: absolute;
   top: 5px;
   right: 0;
-  background-color: #fb5533;
+  background-color: ${theme.textRed};
   border: none;
   outline: none;
   border-radius: 3px;
@@ -139,13 +140,13 @@ export const HeaderBottomLeft = styled.div`
     margin-right: 10px;
   }
   span{
-    color:#fff;
+    color:${theme.white};
     font-size: 20px;
   }
 `;
 export const HeaderBottomRight = styled.div`
   flex-basis: 40px;
-  color:#fff;
+  color:${theme.white};
   height: 30px;
   position: relative;
   top: -4px;
@@ -154,7 +155,7 @@ export const HeaderBottomRight = styled.div`
     font-size: 40px;
   }
   div{
-    background-color: #fff;
+    background-color: ${theme.white};
     position: absolute;
     top: 60px;
     right: 0px;
@@ -175,7 +176,7 @@ export const HeaderBottomRight = styled.div`
       right: 27px;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 15px solid #fff;
+      border-bottom: 15px solid ${theme.white};
     }
     img{
       height: 70px;
@@ -183,7 +184,7 @@ export const HeaderBottomRight = styled.div`
       margin-top:50px;
     }
     p{
-      color:#000;
+      color:${theme.black};
     }
   }
   &:hover div{

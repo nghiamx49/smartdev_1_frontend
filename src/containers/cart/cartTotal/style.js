@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { theme } from "../../../assests/common/color";
 
 export const Total = styled.div`
     min-width: 1150px;
     margin: 0 auto;
-    background-color: white;
+    background-color: ${theme.white};
     margin-top: 2rem ;
 `
 export const TotalCartTop = styled.div`
@@ -25,7 +26,7 @@ export const RightMid = styled.div`
     justify-content: space-around;
     display: flex;
     align-items: center;
-    color: #ae92a0;
+    color: ${theme.gray};
     span {
        margin-right: 20px;
     }
@@ -50,14 +51,14 @@ export const RightBottom = styled.div`
     align-items: center;
     color: #ae92a0;
     button{
-        background-color: #f05d40;
+        background-color: ${theme.textRed};
         height: 40px;
         width: 150px;
         font-size: 15px;
-        color: white;
+        color: ${theme.white};
         border : 0;
         &:hover{
-            background-color: #2081d4;
+            background-color: ${theme.red};
         }
     }
 `

@@ -1,9 +1,10 @@
 import styled from 'styled-components'
+import { theme } from '../../assests/common/color';
 
 
 export const FooterContainer = styled.footer`
     background-color: #fbfbfb;
-    border-top: 4px solid #ee4d2d;
+    border-top: 4px solid ${theme.textRed};
     padding:50px 0 0;
 `;
 export const FooterTop = styled.div`
@@ -40,7 +41,7 @@ export const FooterCenter = styled.div`
    color: rgba(0,0,0,.54);
 `;
 export const FooterBottom = styled.div`
-     background: #f5f5f5;
+     background: ${theme.bgE5};
      padding: 50px;
      text-align: center;
      p{

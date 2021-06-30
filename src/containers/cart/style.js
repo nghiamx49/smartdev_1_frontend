@@ -1,7 +1,7 @@
 import styled from "styled-components";
-
+import {theme} from "../../assests/common/color"
 export const LayoutCart = styled.div`
-    background-color: #f5f5f5;
+    background-color: ${theme.bgE5};
     
     input[type = "checkbox"]{
         -webkit-user-select: none;
@@ -30,8 +30,8 @@ export const Container = styled.div`
 `
 export const Message = styled.div`
     display: flex;
-    background-color: #fffefb;
-    border: 1px solid #d1b460;
+    background-color: ${theme.bgMessCart};
+    border: 1px solid ${theme.borderMessCart};
     min-height: 4rem;
     flex-direction: column;
     justify-content: center;
@@ -42,7 +42,7 @@ export const Message = styled.div`
 export const CartSlibar = styled.div`
     margin-top: 2rem;
     display: flex;
-    background-color: white;
+    background-color: ${theme.white};
     min-height: 5rem;
     flex-direction: row;
     justify-content: space-between;
