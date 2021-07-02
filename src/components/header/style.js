@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { theme } from "../../assests/common/color";
 export const Header = styled.header`
-  background: ${theme.textRed};
+ background: linear-gradient(
+-180deg
+,#f53d2d,#f63);
   position: relative;
   a{
     color:${theme.white};
