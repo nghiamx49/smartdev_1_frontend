@@ -218,3 +218,18 @@ export const listSearch = [
         img:"https://cf.shopee.vn/file/876e49c18eba6835df035907446afa53"
     },
 ]
+
+export const listSearchTop = [
+    {
+        img:"",
+        text:"Kẹp tóc phụ kiện tóc"
+    },
+    {
+        img:"",
+        text:"áo thun nam"
+    },
+    {
+        img:"",
+        text:"quần short thể thao"
+    },
+]
