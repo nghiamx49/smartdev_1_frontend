@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {theme} from "../../assests/common/color"
 export const LayoutCart = styled.div`
     background-color: ${theme.bgE5};
-    
+    padding:30px;
     input[type = "checkbox"]{
         -webkit-user-select: none;
         -moz-user-select: none;
