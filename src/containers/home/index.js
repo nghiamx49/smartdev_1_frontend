@@ -15,7 +15,7 @@ function Home() {
     return (
         <div>
             <HOME.Container>
-                <HOME.HomeSlider>
+                <HOME.HomeSlider>/VBTHJYTTA
                     <HOME.HomeSliderLeft>
                         <img src={home_img_1} alt="" />
                     </HOME.HomeSliderLeft>
