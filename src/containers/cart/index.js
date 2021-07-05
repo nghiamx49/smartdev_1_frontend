@@ -34,23 +34,23 @@ const products =[{
     status : false,
     },
     {
-        id : 3 ,
-        shopName : "shop Hoang 3",
-        linkImage : "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
-        name : "tai nghe 0 day",
-        price : 100,
-        number : 1,
-        status : false,
-        },
-        {
-            id : 4 ,
-            shopName : "shop Hoang 4",
-            linkImage : "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
-            name : "tai nghe 0 day",
-            price : 100,
-            number : 1,
-            status : false,
-            }
+    id : 3 ,
+    shopName : "shop Hoang 3",
+    linkImage : "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
+    name : "tai nghe 0 day",
+    price : 100,
+    number : 1,
+    status : false,
+    },
+    {
+    id : 4 ,
+    shopName : "shop Hoang 4",
+    linkImage : "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
+    name : "tai nghe 0 day",
+    price : 100,
+    number : 1,
+    status : false,
+    }
     
 ]
 export default function Cart() {
@@ -136,7 +136,7 @@ export default function Cart() {
     useEffect(() => {
         let checkboxTotalTop = document.getElementById("checkboxCartTotalOnTop");
         let checkboxTotalBottom = document.getElementById("checkboxCartTotalOnBottom");
-        if(count === listProduct.length){
+        if(count === listProduct.length && listProduct.length !==0){
             checkboxTotalTop.checked = true
             checkboxTotalBottom.checked = true
         }else{
