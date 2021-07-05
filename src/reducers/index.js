@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import adminReducer from "./admin";
 import authenticateReducer from "./authenticate";
@@ -15,5 +17,10 @@ const rootReducer = combineReducers({
   providerReducer,
   userReducer,
 });
+
+const persistsConfg = {
+  key: "root",
+  storage,
+};
 
 export default rootReducer;
