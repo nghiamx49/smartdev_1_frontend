@@ -58,7 +58,7 @@ const routes = [
     layout: Layout,
   },
   {
-    path: "/product-detail",
+    path: '/product-detail',
     component: ProductDetail,
     exact: true,
     layout: Layout,
