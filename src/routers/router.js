@@ -10,6 +10,7 @@ import LoginLayout from "../components/layout/LoginLayout";
 import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
 import Provider from "../containers/provider";
+import Page404 from "../containers/page404";
 const routes = [
   {
     path: "/login",
@@ -60,6 +61,12 @@ const routes = [
   {
     path: "/product-detail",
     component: ProductDetail,
+    exact: true,
+    layout: Layout,
+  },
+  {
+    path: "/page404",
+    component: Page404,
     exact: true,
     layout: Layout,
   },
