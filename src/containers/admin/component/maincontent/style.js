@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import {theme} from "../../../../assests/common/color"
 export const MainAdminContainer = styled.div`
   flex-basis: 80%;
 `;
@@ -26,7 +26,7 @@ export const MainAdminHeaderUser = styled.div`
   }
 `;
 export const MainAdminHeaderSearch = styled.div`
-  border-right: 1px solid gray;
+  border-right: 1px solid ${theme.gray};
   margin-right: 15px;
   padding-right: 15px;
   p {
@@ -45,7 +45,7 @@ export const MainAdminContent = styled.div`
 `;
 export const MainAdminTable = styled.table`
   width: 100%;
-  background: #ffffff;
+  background: ${theme.white};
   box-sizing: border-box;
   border-collapse: collapse;
   th {
@@ -55,12 +55,12 @@ export const MainAdminTable = styled.table`
     font-size: 14px;
     line-height: 18px;
     padding: 10px 20px;
-    color: #9fa2b4;
+    color: ${theme.textTitleTable};
   }
   tbody tr {
     border-top: 1.5px solid #dfe0eb;
     &:hover {
-      background-color: #e5e5e5;
+      background-color: ${theme.bgE5};
     }
   }
   td {
@@ -85,7 +85,7 @@ export const MainAdminStrong = styled.strong`
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  color: #000;
+  color: ${theme.black};
 `;
 export const MainAdmintextfunction = styled.p`
   display: flex;
@@ -100,7 +100,7 @@ export const MainAdmintextfunction = styled.p`
     line-height: 20px;
     letter-spacing: 0.2px;
     text-transform: capitalize;
-    color: #4b506d;
+    color: ${theme.textAdminFunction};
     margin-left: 10px;
   }
 `;

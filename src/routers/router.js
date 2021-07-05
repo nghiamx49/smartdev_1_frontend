@@ -48,6 +48,8 @@ const routes = [
   {
     path: "/cart",
     component: Cart,
+    exact: true,
+    layout: Layout,
   },
   {
     path: "/product-detail",
