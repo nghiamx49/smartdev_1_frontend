@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { theme } from "../../assests/common/color";
 
 export const Header = styled.div`
-  background: #fa4f30;
+  background: ${theme.textRed};
 
 `;
 export const ContainerTop = styled.div`
@@ -18,14 +19,14 @@ export const LeftTop = styled.div`
     display: flex;
 `;
 export const HeaderLink = styled.span`
-  color: white;
+  color: ${theme.white};
   font-size: 14px;
   margin-bottom: 20px;
   margin-top: 10px;
   margin-right: 10px;
 `;
 export const HeaderLinkBoder = styled.span`
-  color: white;
+  color: ${theme.white};
   font-size: 14px;
   margin-bottom: 20px;
   margin-top: 10px;
@@ -37,10 +38,10 @@ export const HeaderLinkBoder = styled.span`
 export const HeaderUser = styled.span`
   font-size: 14px;
   font-weight: 700;
-  color: #fff;
+  color:${theme.white};
 `;
 export const Bottom = styled.div`
-  background: white;
+  background: ${theme.white};
 `;
 export const ContainerBottom = styled.div`
     max-width:1150px;
@@ -61,7 +62,7 @@ export const HeaderBottomLeft = styled.div`
     span {
         margin-left: 2rem;
         font-size: 30px;
-        color: #f05d40;
+        color:${theme.textRed};
     }
 `;
 export const HeaderBottomRight = styled.div`
@@ -69,18 +70,18 @@ export const HeaderBottomRight = styled.div`
     input {
         width: 85%;
         height: 30px;
-        border: 2px solid #f05d40;
+        border: 2px solid ${theme.textRed};
         outline: none;       
 
     }
     button{
         width: 13%;
         height: 36px;
-        background-color: #f05d40;
-        border: 2px solid #f05d40;
-        color: white;
+        background-color: ${theme.textRed};
+        border: 2px solid ${theme.textRed};
+        color: ${theme.white};
         &:hover{
-            background-color:#f05d50 ;
+            background-color:${theme.textRed};
         }
     }
 `

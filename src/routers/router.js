@@ -1,66 +1,74 @@
-import Login from "../containers/login"
-import Register from "../containers/register"
-import Admin from "../containers/admin"
-import Profile from "../containers/profile"
-import ProductDetail from '../containers/product-detail'
-import Orderhistory from "../containers/orderhistory"
-import OrderDetail from "../containers/order_detail"
-import Cart from "../containers/cart"
-import LoginLayout from "../components/layout/LoginLayout"
-import Layout from "../components/layout/Layout"
-import Home from "../containers/home"
+import Login from "../containers/login";
+import Register from "../containers/register";
+import Admin from "../containers/admin";
+import Profile from "../containers/profile";
+import ProductDetail from "../containers/product-detail";
+import Orderhistory from "../containers/orderhistory";
+import OrderDetail from "../containers/order_detail";
+import Cart from "../containers/cart";
+import LoginLayout from "../components/layout/LoginLayout";
+import Layout from "../components/layout/Layout";
+import Home from "../containers/home";
+import Provider from "../containers/provider";
 const routes = [
   {
-    path: '/login',
+    path: "/login",
     component: Login,
     exact: true,
-    layout:LoginLayout,
+    layout: LoginLayout,
   },
   {
-    path: '/register',
+    path: "/register",
     component: Register,
     exact: true,
-    layout:LoginLayout,
+    layout: LoginLayout,
   },
   {
-    path: '/admin',
+    path: "/admin",
     component: Admin,
     exact: true,
   },
   {
-    path: '/profile',
+    path: "/provider",
+    component: Provider,
+    exact: true,
+  },
+  {
+    path: "/profile",
     component: Profile,
     exact: true,
-    layout:Layout,
+    layout: Layout,
   },
   {
-    path: '/orderhistory',
+    path: "/orderhistory",
     component: Orderhistory,
     exact: true,
-    layout:Layout,
+    layout: Layout,
   },
   {
-    path: '/orderdetail',
+    path: "/orderdetail",
     component: OrderDetail,
     exact: true,
-    layout:Layout,
+    layout: Layout,
   },
   {
-    path: '/cart',
+    path: "/cart",
     component: Cart,
+    exact: true,
+    layout: Layout,
   },
   {
     path: '/product-detail',
     component: ProductDetail,
     exact: true,
-    layout:Layout,
+    layout: Layout,
   },
   {
-    path: '',
-    component:Home,
+    path: "",
+    component: Home,
     exact: true,
-    layout:Layout,
+    layout: Layout,
   },
-]
+];
 
-export default routes
+export default routes;

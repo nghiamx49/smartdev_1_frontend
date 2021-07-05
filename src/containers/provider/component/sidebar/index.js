@@ -11,15 +11,15 @@ import {MdContacts,MdSettingsApplications,MdSubscriptions} from 'react-icons/md'
 const listLi = [
     {
         icons:GrOverview,
-        text:"overview"
+        text:"Products"
     },
     {
         icons:ImUsers,
-        text:"Users"
+        text:"Products sold"
     },
     {
         icons:FaUsers,
-        text:"Providers"
+        text:"Products waiting request"
     },
     {
         icons:MdContacts,
@@ -44,7 +44,7 @@ function SideBar(props) {
     return (
         <SideBarContainer>
             <SideBarLogo>
-               <img src={logo} alt="" /> <p>Dashborad Admin</p>
+               <img src={logo} alt="" /> <p>Dashborad Provider</p>
             </SideBarLogo>
             <div>
                 <SideBarUl>

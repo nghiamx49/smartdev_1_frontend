@@ -1,13 +1,14 @@
 import styled from "styled-components";
+import { theme } from "../../../assests/common/color";
 
 export const Container = styled.div`
-    background-color: white;
+    background-color: ${theme.white};
     margin-top: 2rem;
 `
 export const OrderHistoryTagTop = styled.div`
     display: flex;
     justify-content: space-between;
-    color: #fd5d32;
+    color: ${theme.textRed};
     max-width: 95%;
     margin: auto;
   
@@ -18,7 +19,7 @@ export const TopLeft = styled.div`
         margin-left: 50px;
         margin-bottom :1rem;
         margin-top: 1rem;
-        border-top: 0.5px solid #ff0000;
+        border-top: 0.5px solid ${theme.red};
         background-color: #f3836c;
         padding: 3px 10px;
         border : none;
@@ -26,7 +27,7 @@ export const TopLeft = styled.div`
         border-radius: 4px;
         font-size: 12px;
         &:hover{
-            background: #fd5d32;
+            background: ${theme.red};
             cursor: pointer;
         }
     }
@@ -62,7 +63,7 @@ export const MiddleRight = styled.div`
 `
 export const OrderHistoryTagBottom = styled.div`
     justify-content: space-between;
-    color: #fd5d32;
+    color: ${theme.textRed};
     max-width: 95%;
     margin: auto;
     align-items: flex-end;
@@ -70,7 +71,7 @@ export const OrderHistoryTagBottom = styled.div`
         margin-right : 2rem;
         margin-bottom :1rem;
         margin-top: 1rem;
-        border-top: 0.5px solid #ff0000;
+        border-top: 0.5px solid ${theme.red};
         background-color: #f3836c;
         padding: 3px 10px;
         border : none;
@@ -78,7 +79,7 @@ export const OrderHistoryTagBottom = styled.div`
         border-radius: 4px;
         font-size: 12px;
         &:hover{
-            background: #fd5d32;
+            background: ${theme.textRed};
             cursor: pointer;
         }
     }

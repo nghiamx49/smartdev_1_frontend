@@ -6,15 +6,21 @@ import home_img_4 from "../../assests/img/home-img-3.png"
 import home_search_top_1 from "../../assests/img/searchtop-1.JPG"
 import home_search_top_2 from "../../assests/img/searchtop-2.JPG"
 import home_search_top_3 from "../../assests/img/searchtop-3.JPG"
+import {Container,DisplayFlex,DisplayFlexWrap} from "../../assests/common/stylecomon"
 import * as HOME from "./style"
 import * as LIST from "./contants"
 import {FcSynchronize,FcStumbleupon,FcShipped,FcNext} from "react-icons/fc"
-
+import Endow from './endown'
+import CategoryItem from './categoryItem'
+import FlashSale from './flashsale'
+import ShopSmallItem from './shopsmall'
+import HomeSearch from './search'
+import Product from '../../components/cardProduct'
 
 function Home() {
     return (
         <div>
-            <HOME.Container>
+            <Container>
                 <HOME.HomeSlider>
                     <HOME.HomeSliderLeft>
                         <img src={home_img_1} alt="" />
@@ -24,54 +30,37 @@ function Home() {
                         <img src={home_img_3} alt="" />
                     </HOME.HomeSliderRight>
                 </HOME.HomeSlider>
-                <HOME.HomeEndow>
+                <DisplayFlex>
                     {
-                        LIST.listEndow.map((item) => (<div>
-                            <img src={item.img} alt="" />
-                            <p>{item.text}</p>
-                        </div>))
+                        LIST.listEndow.map((item) => (<Endow item={item}/>))
                     }
-                </HOME.HomeEndow>
-            </HOME.Container>
+                </DisplayFlex>
+            </Container>
             <HOME.HomeBgF5F5F5>
-                <HOME.Container>
+                <Container>
                     <HOME.HomeDonateImg>
                         <img src={home_img_4} alt="" />
                     </HOME.HomeDonateImg>
                     <HOME.HomeCategory>
-                        <HOME.HomeCategoryTitle>
+                        <HOME.HomeTitle>
                             <p>DANH MỤC</p>
-                        </HOME.HomeCategoryTitle>
-                        <HOME.HomeCategoryList>
+                        </HOME.HomeTitle>
+                        <DisplayFlexWrap>
                            {
                                LIST.listCategory.map(item => (
-                                <HOME.HomeCategoryItem>
-                                    <img src={item.img} alt="" />
-                                    <p>{item.text}</p>
-                                </HOME.HomeCategoryItem>
+                                <CategoryItem item={item}/>
                                ))
                            }
-                        </HOME.HomeCategoryList>
+                        </DisplayFlexWrap>
                     </HOME.HomeCategory>
                     <HOME.HomeFaleSale>
-                        <HOME.HomeFaleSaleTitle>
+                        <HOME.HomeTitle>
                             <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/fb1088de81e42c4e538967ec12cb5caa.png" alt="" />
-                        </HOME.HomeFaleSaleTitle>
+                        </HOME.HomeTitle>
                         <HOME.HomeFaleSaleList>
                            {
                                LIST.listFlashSale.map(item => (
-                                <HOME.HomeFaleSaleItem>
-                                    <HOME.HomeFaleSaleItemDiscount>
-                                        <span>27%</span>
-                                        <span>giảm</span>
-                                    </HOME.HomeFaleSaleItemDiscount>
-                                    <img src={item.img} alt="" />
-                                    <p><span>₫</span>{item.text}</p>
-                                    <HOME.HomeFaleSaleItemSaled>
-                                        <div></div>
-                                        <span>đã bán 240</span>
-                                    </HOME.HomeFaleSaleItemSaled>
-                                </HOME.HomeFaleSaleItem>
+                                <FlashSale item={item}/>
                                ))
                            }
                         </HOME.HomeFaleSaleList>
@@ -81,8 +70,8 @@ function Home() {
                         <img src="https://cf.shopee.vn/file/8781d862e458d0c573013a43d307793c" alt="" />
                         <img src="https://cf.shopee.vn/file/20109bbe686faeb80e6d4639b620767d" alt="" />
                     </HOME.HomeImgSale>
-                    <HOME.HomeShoppeSmall>
-                         <HOME.HomeShoppeSmallTop>
+                    <div>
+                         <HOME.HomeTitle>
                                 <HOME.HomeShoppeSmallTopLeft>
                                     <h3>shopee small</h3>
                                     <p>
@@ -103,57 +92,48 @@ function Home() {
                                 <HOME.HomeShoppeSmallTopRight>
                                     <span>xem tất cả <FcNext/></span>
                                 </HOME.HomeShoppeSmallTopRight>
-                        </HOME.HomeShoppeSmallTop>
+                        </HOME.HomeTitle>
                         <HOME.HomeShoppeSmallBottom>
                             <div>
                                 <img src="https://cf.shopee.vn/file/3d3c2c1e0331fb9ce7535090cd41a3e0" alt="" />
                             </div>
-                           <HOME.HomeShoppeSmallList>
+                           <DisplayFlexWrap>
                               {
                                   LIST.listShpeeSmall.map(item=>(
-                                    <HOME.HomeShoppeSmallItem>
-                                        <img src={item.img}alt="" />
-                                        <p>{item.text}</p>
-                                    </HOME.HomeShoppeSmallItem>
+                                    <ShopSmallItem item={item}/>
                                   ))
                               }
-                           </HOME.HomeShoppeSmallList>
+                           </DisplayFlexWrap>
                         </HOME.HomeShoppeSmallBottom>
-                    </HOME.HomeShoppeSmall>
-                    <HOME.HomeSearch>
-                        <HOME.HomeShoppeSmallTop>
+                    </div>
+                    <HOME.HomeMargin20>
+                        <HOME.HomeTitle>
                                 <HOME.HomeShoppeSmallTopLeft>
                                     <h3>XU HƯỚNG TÌM KIẾM</h3>
                                 </HOME.HomeShoppeSmallTopLeft>
                                 <HOME.HomeShoppeSmallTopRight>
                                     <span>xem tất cả <FcNext/></span>
                                 </HOME.HomeShoppeSmallTopRight>
-                        </HOME.HomeShoppeSmallTop>
-                        <HOME.HomeSearchList>
+                        </HOME.HomeTitle>
+                        <DisplayFlex>
                            {
                                LIST.listSearch.map(item=>(
-                                <HOME.HomeSearchItem>
-                                    <p>
-                                        <span>{item.textTop}</span>
-                                        <span>{item.textBottom}</span>
-                                    </p>
-                                    <img src={item.img} alt="" />
-                                </HOME.HomeSearchItem>
+                                    <HomeSearch item={item}/>
                                ))
                            }
-                        </HOME.HomeSearchList>
+                        </DisplayFlex>
                         
-                    </HOME.HomeSearch>
-                    <HOME.HomeSearchTop>
-                        <HOME.HomeShoppeSmallTop>
+                    </HOME.HomeMargin20>
+                    <HOME.HomeMargin20>
+                        <HOME.HomeTitle>
                                 <HOME.HomeShoppeSmallTopLeft>
                                     <h3>TÌM KIẾM HÀNG ĐẦU</h3>
                                 </HOME.HomeShoppeSmallTopLeft>
                                 <HOME.HomeShoppeSmallTopRight>
                                     <span>xem tất cả <FcNext/></span>
                                 </HOME.HomeShoppeSmallTopRight>
-                        </HOME.HomeShoppeSmallTop>
-                        <HOME.HomeSearchList>
+                        </HOME.HomeTitle>
+                        <DisplayFlex>
                                 <HOME.HomeSearchTopItem>
                                     <img src={home_search_top_1} alt="" />
                                     <p>Kẹp tóc phụ kiện tóc</p>
@@ -166,22 +146,22 @@ function Home() {
                                     <img src={home_search_top_3} alt="" />
                                     <p>quần short thể thao</p>
                                 </HOME.HomeSearchTopItem>
-                        </HOME.HomeSearchList>
-                    </HOME.HomeSearchTop>
-                    <HOME.HomeProduct>
-                        <HOME.HomeShoppeSmallTop>
+                        </DisplayFlex>
+                    </HOME.HomeMargin20>
+                    <div>
+                        <HOME.HomeTitle>
                                 <HOME.HomeShoppeSmallTopLeft>
                                     <h3>Gợi ý hôm nay</h3>
                                 </HOME.HomeShoppeSmallTopLeft>
                                 <HOME.HomeShoppeSmallTopRight>
                                     <span>xem tất cả <FcNext/></span>
                                 </HOME.HomeShoppeSmallTopRight>
-                        </HOME.HomeShoppeSmallTop>
+                        </HOME.HomeTitle>
                         <HOME.HomeProductList>
-                            
+                            <Product/>
                         </HOME.HomeProductList>
-                    </HOME.HomeProduct>
-                </HOME.Container>
+                    </div>
+                </Container>
             </HOME.HomeBgF5F5F5>
          </div>
     )

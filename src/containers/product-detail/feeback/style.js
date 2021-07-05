@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../../assests/common/color";
 
 export const FeedbackDetail = styled.div`
     display: flex;
