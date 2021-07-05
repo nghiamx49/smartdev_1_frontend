@@ -9,6 +9,7 @@ import Cart from "../containers/cart";
 import LoginLayout from "../components/layout/LoginLayout";
 import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
+import Provider from "../containers/provider";
 const routes = [
   {
     path: "/login",
@@ -25,6 +26,11 @@ const routes = [
   {
     path: "/admin",
     component: Admin,
+    exact: true,
+  },
+  {
+    path: "/provider",
+    component: Provider,
     exact: true,
   },
   {
