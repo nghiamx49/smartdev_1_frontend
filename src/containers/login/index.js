@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { submitLogin } from "../../actions/authenticateAction";
+
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import {
   LoginContainer,
@@ -15,20 +17,21 @@ import {
   SocialButton,
 } from "./style";
 import logo from "../../assests/img/logo.png";
+import { connect } from "react-redux";
 
 const loginSchema = yup.object().shape({
   username: yup.string().required("username is required"),
   password: yup.string().required("password is requrired"),
 });
 
-const Login = () => {
+const Login = ({ login }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => login(data);
 
   return (
     <LoginContainer>
@@ -66,4 +69,10 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (data) => dispatch(submitLogin(data)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);
