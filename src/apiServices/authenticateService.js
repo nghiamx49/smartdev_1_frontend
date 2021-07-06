@@ -1,22 +1,23 @@
 import axios from "axios";
 
+const config = {
+  validateStatus: function (status) {
+    return status <= 500;
+  },
+};
+
 const authenticateService = {
   login: async ({ username, password }) => {
-    try {
-      console.log(`${process.env.REACT_APP_API}/authenticate/login`);
-      let request = await axios.post(
-        `${process.env.REACT_APP_API}/authenticate/login`,
-        {
-          username,
-          password,
-        },
-      );
-      let response = request.data;
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
+    let request = await axios.post(
+      `${process.env.REACT_APP_API}/authenticate/login`,
+      {
+        username,
+        password,
+      },
+      config,
+    );
+    let response = await request.data;
+    return response;
   },
   getUserDetail: async () => {},
   logout: async () => {},
