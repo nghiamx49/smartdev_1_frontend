@@ -7,15 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { loginSuccess } from "../../actions/authenticateAction";
 
-import { FaFacebook, FaGoogle } from "react-icons/fa";
-import {
-  LoginContainer,
-  Logo,
-  LoginForm,
-  LoginButton,
-  SocialButtonContainer,
-  SocialButton,
-} from "./style";
+import { LoginContainer, Logo, LoginForm, LoginButton } from "./style";
 import logo from "../../assests/img/logo.png";
 import { connect } from "react-redux";
 
@@ -81,18 +73,10 @@ const Login = ({ loginSuccess }) => {
             {...register("password")}
             placeholder="mật khẩu"
           />
-          <span>{errors.passsword?.message}</span>
+          <span>{errors.password?.message}</span>
           <LoginButton>Đăng nhập</LoginButton>
           <a href="#forgotpassword">Quên Mật Khẩu</a>
           <hr />
-          <SocialButtonContainer>
-            <SocialButton>
-              <FaFacebook /> Facebook
-            </SocialButton>
-            <SocialButton>
-              <FaGoogle /> Gmail
-            </SocialButton>
-          </SocialButtonContainer>
           <p style={{ textAlign: "center" }}>
             Chưa có tài khoản? <Link to="/register">Đăng ký</Link> ngay!
           </p>

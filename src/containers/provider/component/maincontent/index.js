@@ -1,4 +1,7 @@
 import React from "react";
+
+import { submitLogout } from "../../../../actions/authenticateAction";
+import defaultAvt from "../../../../assests/img/user-default.png";
 import {
   MainAdminContainer,
   MainAdminHeader,
@@ -9,27 +12,36 @@ import {
   MainAdminAllUser,
   MainAdmintextfunction,
   MainAdminFlex,
-  MainAdminPage
+  MainAdminPage,
+  LogoutButton,
 } from "./style";
-import { AiOutlineSortAscending, AiFillFilter,AiOutlineSearch,AiFillCaretDown } from "react-icons/ai";
-import {GrPrevious,GrNext} from 'react-icons/gr'
+import {
+  AiOutlineSortAscending,
+  AiFillFilter,
+  AiOutlineSearch,
+  AiFillCaretDown,
+} from "react-icons/ai";
+import { GrPrevious, GrNext } from "react-icons/gr";
 import UserTable from "./components";
-function MainAdmin() {
+import { connect } from "react-redux";
+function MainAdmin({ authenticateReducer, logout }) {
   return (
     <MainAdminContainer>
       <MainAdminHeader>
         <h3>Tickets</h3>
         <MainAdminHeaderRight>
           <MainAdminHeaderSearch>
-
-            <p><AiOutlineSearch/> <span>search</span></p>
+            <p>
+              <AiOutlineSearch /> <span>search</span>
+            </p>
           </MainAdminHeaderSearch>
           <MainAdminHeaderUser>
-            <p>admin name</p>
+            <p>{authenticateReducer.account.username}</p>
             <img
-              src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"
-              alt="dfkjghdfg"
+              src={authenticateReducer.account.avatar_source || defaultAvt}
+              alt="admin avatar"
             />
+            <LogoutButton onClick={() => logout()}>Logout</LogoutButton>
           </MainAdminHeaderUser>
         </MainAdminHeaderRight>
       </MainAdminHeader>
@@ -45,18 +57,29 @@ function MainAdmin() {
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
-        <UserTable/>
+        <UserTable />
         <MainAdminPage>
-            <p>
-                <span>Rows per page : 8 </span> <AiFillCaretDown/>
-            </p>
-            <p>
-                <span>1-8 of 1240</span><GrPrevious/><GrNext/>
-            </p>
+          <p>
+            <span>Rows per page : 8 </span> <AiFillCaretDown />
+          </p>
+          <p>
+            <span>1-8 of 1240</span>
+            <GrPrevious />
+            <GrNext />
+          </p>
         </MainAdminPage>
       </MainAdminContent>
     </MainAdminContainer>
   );
 }
+const mapStateToProps = (state) => {
+  return { authenticateReducer: state.authenticateReducer };
+};
 
-export default MainAdmin;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(submitLogout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainAdmin);
