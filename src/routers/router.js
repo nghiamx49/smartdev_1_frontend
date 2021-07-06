@@ -9,51 +9,79 @@ import Cart from "../containers/cart";
 import LoginLayout from "../components/layout/LoginLayout";
 import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
+import Provider from "../containers/provider";
+import Page404 from "../containers/page404";
 const routes = [
   {
     path: "/login",
     component: Login,
     exact: true,
     layout: LoginLayout,
+    isAuthorize: "unauthorize",
   },
   {
     path: "/register",
     component: Register,
     exact: true,
     layout: LoginLayout,
+    isAuthorize: "unauthorize",
   },
   {
     path: "/admin",
     component: Admin,
     exact: true,
+    isAuthorize: "authorize",
+    role: "admin",
+  },
+  {
+    path: "/provider",
+    component: Provider,
+    exact: true,
+    isAuthorize: "authorize",
+    role: "provider",
   },
   {
     path: "/profile",
     component: Profile,
     exact: true,
     layout: Layout,
+    isAuthorize: "authorize",
+    role: "user",
   },
   {
     path: "/orderhistory",
     component: Orderhistory,
     exact: true,
     layout: Layout,
+    isAuthorize: "authorize",
+    role: "user",
   },
   {
     path: "/orderdetail",
     component: OrderDetail,
     exact: true,
     layout: Layout,
+    isAuthorize: "authorize",
+    role: "user",
   },
   {
     path: "/cart",
     component: Cart,
     exact: true,
     layout: Layout,
+    isAuthorize: "authorize",
+    role: "user",
   },
   {
     path: "/product-detail",
     component: ProductDetail,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "all",
+  },
+  {
+    path: "/page404",
+    component: Page404,
     exact: true,
     layout: Layout,
   },
@@ -62,6 +90,7 @@ const routes = [
     component: Home,
     exact: true,
     layout: Layout,
+    isAuthorize: "all",
   },
 ];
 
