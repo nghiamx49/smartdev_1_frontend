@@ -24,8 +24,8 @@ import "react-toastify/dist/ReactToastify.css";
 import authenticateService from "../../apiServices/authenticateService";
 
 const loginSchema = yup.object().shape({
-  username: yup.string().required("username is required"),
-  password: yup.string().required("password is requrired"),
+  username: yup.string().required("username không được để trống"),
+  password: yup.string().required("password không được để trống"),
 });
 
 const Login = ({ loginSuccess }) => {
@@ -55,14 +55,14 @@ const Login = ({ loginSuccess }) => {
     <>
       {message && toast.error(message)}
       <ToastContainer
-        position="top-center"
-        autoClose={false}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        pauseOnHover
+        // position="top-center"
+        // autoClose={false}
+        // hideProgressBar={false}
+        // newestOnTop={false}
+        // closeOnClick
+        // rtl={false}
+        // pauseOnFocusLoss={false}
+        // pauseOnHover
         limit={1}
         onClick={() => setMessage(null)}
       />
