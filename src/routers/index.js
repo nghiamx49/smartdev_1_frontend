@@ -1,6 +1,10 @@
-import React, { Fragment } from 'react'
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import routes from './router'
+import React, { Fragment } from "react";
+import { Switch, BrowserRouter, Route } from "react-router-dom";
+import routes from "./router";
+import AuthorizeHOC from "../HOCs/AuthorizeHOC";
+import UnauthorizeHOC from "../HOCs/UnauthorizeHOC";
+import Layout from "../components/layout/Layout";
+import Home from "../containers/home";
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -10,22 +14,33 @@ const AppRouter = () => (
           layout: Layout = Fragment,
           component: Component,
           path,
-          isAuthRoute,
+          isAuthorize,
+          role,
           exact,
           ...rest
-        } = routeItem
+        } = routeItem;
         // TODO Add Private routeRouteCustom = isAuthRoute ? PrivateRoute : Route
-        const RouteCustom = isAuthRoute ? Route : Route
+        const RouteCustom =
+          isAuthorize === "authorize"
+            ? AuthorizeHOC
+            : isAuthorize === "unauthorize"
+            ? UnauthorizeHOC
+            : Route;
         return (
-          <RouteCustom key={index.toString()} path={path} exact={exact}>
+          <RouteCustom
+            key={index.toString()}
+            path={path}
+            exact={exact}
+            role={role}
+          >
             <Layout>
               <Component {...rest} />
             </Layout>
           </RouteCustom>
-        )
+        );
       })}
     </Switch>
   </BrowserRouter>
-)
+);
 
-export default AppRouter
+export default AppRouter;
