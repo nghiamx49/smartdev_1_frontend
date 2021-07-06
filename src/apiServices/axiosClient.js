@@ -7,6 +7,9 @@ const apiClientGet = async (endpoint, token) => {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+      validateStatus: function (status) {
+        return status < 500;
+      },
     });
     const response = await request.data;
     return response;
