@@ -9,3 +9,7 @@ export const submitLogin = (loginForm) => {
 export const loginSuccess = (data) => {
   return { type: LOGIN_SUCCESS, payload: data };
 };
+
+export const loginFailed = (error) => {
+  return { type: LOGIN_SUCCESS, error: error };
+};

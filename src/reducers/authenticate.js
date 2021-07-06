@@ -1,5 +1,5 @@
 import { authenticateContants } from "../constants/index";
-const { LOGIN_SUCCESS } = authenticateContants;
+const { LOGIN_SUCCESS, LOGIN_FAILED } = authenticateContants;
 
 const initialState = {
   account: {
@@ -12,7 +12,8 @@ const initialState = {
   },
   token: "",
   isLoggedIn: false,
-  message: [],
+  message: "",
+  status: null,
 };
 
 const authenticateReducer = (state = initialState, action) => {
@@ -20,6 +21,9 @@ const authenticateReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       const { payload } = action;
       return { ...state, ...payload };
+    case LOGIN_FAILED:
+      const { error } = action;
+      return { ...state, ...error };
     default:
       return state;
   }
