@@ -24,7 +24,7 @@ function UserTable() {
       </thead>
       <tbody>
         {listLi.map((item, index) => (
-          <tr>
+          <tr key={index}>
             <td>
               <MainAdminStrong>{item.name}</MainAdminStrong>
             </td>
