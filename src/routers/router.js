@@ -1,5 +1,6 @@
 import Login from "../containers/login";
-import Register from "../containers/register";
+import ProviderRegister from "../containers/provider-register/";
+import UserRegister from "../containers/user-register/";
 import Admin from "../containers/admin";
 import Profile from "../containers/profile";
 import ProductDetail from "../containers/product-detail";
@@ -20,8 +21,15 @@ const routes = [
     isAuthorize: "unauthorize",
   },
   {
-    path: "/register",
-    component: Register,
+    path: "/register/provider",
+    component: ProviderRegister,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/register/user",
+    component: UserRegister,
     exact: true,
     layout: LoginLayout,
     isAuthorize: "unauthorize",

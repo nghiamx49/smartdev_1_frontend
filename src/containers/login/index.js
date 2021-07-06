@@ -11,7 +11,7 @@ import { LoginContainer, Logo, LoginForm, LoginButton } from "./style";
 import logo from "../../assests/img/logo.png";
 import { connect } from "react-redux";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import authenticateService from "../../apiServices/authenticateService";
 
@@ -29,35 +29,21 @@ const Login = ({ loginSuccess }) => {
 
   const { login } = authenticateService;
 
-  const [message, setMessage] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = async (data) => {
+    setSubmitting(true);
     const result = await login(data);
-    console.log(result);
-    if (result.status === 401) {
-      setMessage(result.message);
-    } else {
+    setSubmitting(false);
+    if (result.status === 200) {
       loginSuccess(result);
+      return toast.success(result.message);
     }
+    return toast.error(result.message);
   };
-
-  console.log(message);
 
   return (
     <>
-      {message && toast.error(message)}
-      <ToastContainer
-        // position="top-center"
-        // autoClose={false}
-        // hideProgressBar={false}
-        // newestOnTop={false}
-        // closeOnClick
-        // rtl={false}
-        // pauseOnFocusLoss={false}
-        // pauseOnHover
-        limit={1}
-        onClick={() => setMessage(null)}
-      />
       <LoginContainer>
         <Logo src={logo} />
         <LoginForm onSubmit={handleSubmit(onSubmit)}>
@@ -74,11 +60,13 @@ const Login = ({ loginSuccess }) => {
             placeholder="mật khẩu"
           />
           <span>{errors.password?.message}</span>
-          <LoginButton>Đăng nhập</LoginButton>
+          <LoginButton disabled={submitting}>
+            {submitting ? "Loading..." : "Đăng nhập"}
+          </LoginButton>
           <a href="#forgotpassword">Quên Mật Khẩu</a>
           <hr />
           <p style={{ textAlign: "center" }}>
-            Chưa có tài khoản? <Link to="/register">Đăng ký</Link> ngay!
+            Chưa có tài khoản? <Link to="/register/user">Đăng ký</Link> ngay!
           </p>
         </LoginForm>
       </LoginContainer>
