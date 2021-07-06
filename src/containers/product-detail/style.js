@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { theme } from "../../assests/common/color";
 
 export const Layout = styled.div`
-    background-color: #f5f5f5;
+    background-color: ${theme.bgE5};
     padding-bottom : 10rem;
     padding-top: 2rem;
 `;
@@ -9,7 +10,7 @@ export const Layout = styled.div`
 export const Container01 = styled.div`
     max-width: 1150px;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: ${theme.white};
     border-radius: 3px;
     font-size: 15px;
     display: flex;
@@ -30,7 +31,7 @@ export const ListImgProduct = styled.div`
         width: 100px;
         height: 100px;
         margin-right: 8px;
-        border: 1px solid #f5f5f5;
+        border: 1px solid ${theme.bgE5};
     }
 `;
 
@@ -58,15 +59,15 @@ export const StarCommetAmountDiv = styled.div`
 `;
 
 export const AverageStar = styled.span`
-    color: #ee4d2d;
-    border-bottom: 1px solid #ee4d2d;
+    color: ${theme.textRed};
+    border-bottom: 1px solid ${theme.textRed};
     margin-right: 5px;
     font-size: 18px;
     font-weight: 400;
 `;
 
 export const TotalComment = styled.span`
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid ${theme.black};
     margin-right: 5px;
     font-size: 18px;
     font-weight: 400;
@@ -90,7 +91,7 @@ export const Price = styled.div`
     background: #fafafa;
     font-size: 30px;
     font-weight: 700;
-    color: #ee4d2d;
+    color: ${theme.textRed};
 `;
 
 export const Delivery = styled.div`
@@ -169,8 +170,8 @@ export const AddCartButton = styled.button`
     padding: 0 .75rem;
     font-size: 14px;
     background: rgba(255,87,34,0.1);
-    color: #ee4d2d;
-    border: 1px solid #ee4d2d;
+    color: ${theme.textRed};
+    border: 1px solid ${theme.textRed};
     box-shadow: 0 1px 1px 0 rgb(0 0 0 / 3%);
     border-radius: 2px;
     display: flex;
@@ -184,8 +185,8 @@ export const BuyNowButton = styled.button`
     min-width: 11.25rem;
     padding: 0 .75rem;
     font-size: 14px;
-    color: #fff;
-    background: #ee4d2d;
+    color: ${theme.white};
+    background: ${theme.textRed};
     max-width: 250px;
     height: 48px;
     border: none;
@@ -199,7 +200,7 @@ export const BuyNowButton = styled.button`
 export const Container02 = styled.div`
     max-width: 1150px;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: ${theme.white};
     border-radius: 3px;
     font-size: 15px;
     display: flex;
@@ -242,8 +243,8 @@ export const ShowShopButton = styled.button`
     padding: 0 .75rem;
     font-size: 14px;
     background: rgba(255,87,34,0.1);
-    color: #ee4d2d;
-    border: 1px solid #ee4d2d;
+    color: ${theme.textRed};
+    border: 1px solid ${theme.textRed};
     box-shadow: 0 1px 1px 0 rgb(0 0 0 / 3%);
     border-radius: 2px;
     display: flex;
@@ -264,7 +265,7 @@ export const ShopInforRight = styled.div`
         cursor: default;
     }
     span{
-        color: #ee4d2d;
+        color:${theme.textRed};
         cursor: pointer;
         
     }
@@ -286,14 +287,14 @@ export const Container03Left = styled.div`
 
 export const Container03Right = styled.div`
     flex-basis: 20%;
-    background-color: #ffffff;
+    background-color:${theme.white};
     border-radius: 3px;
     margin-left: 1.2rem;
 `;
 
 export const Container03LeftTop = styled.div`
     padding: 25px;
-    background-color: #ffffff;
+    background-color: ${theme.white};
     border-radius: 3px;
 `;
 
@@ -332,7 +333,7 @@ export const TextDescriceProduct = styled.div`
 `;
 
 export const Container03LeftBottom = styled.div`
-    background-color: #ffffff;
+    background-color: ${theme.white};
     border-radius: 3px;
     padding-left: 25px;
     padding-bottom: 25px;
@@ -349,7 +350,7 @@ export const TitleComment = styled.div`
 `;
 
 export const HeaderComment = styled.div`
-    background-color: #fffbf8;
+    background-color: ${theme.bgE5};
     min-height: 5rem;
     border: 1px solid #f9ede5;
     border-radius: 2px;
@@ -362,7 +363,7 @@ export const HeaderComment = styled.div`
 
 export const Star = styled.div`
     text-align: center;
-    color: #ee4d2d;
+    color: ${theme.textRed};
     font-size: 18px;
     margin-right: 20px;
 `;
@@ -384,7 +385,7 @@ export const ButtonStar = styled.div`
     min-width: 70px;
     text-align: center;
     padding: 0 .625rem;
-    background-color: #fff;
+    background-color: ${theme.white};
     border: 1px solid rgba(0,0,0,.09);
     margin: 5px;
 `;

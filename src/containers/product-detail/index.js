@@ -13,6 +13,7 @@ import imgProvider from '../../assests/img/user-default.png'
 import Feedback from './feeback';
 import TopProductSale from '../../components/cardProduct'
 import * as PD from './style';
+import { useEffect } from 'react';
 
 const ProductDetail = () => {
 
@@ -39,7 +40,9 @@ const ProductDetail = () => {
             setAmount(amount - 1)
         }
     }
-
+    useEffect(()=>{
+       window.scrollTo(0,0);
+    },[])
     return (
         <PD.Layout>
             <PD.Container01>

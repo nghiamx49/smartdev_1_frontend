@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../../assests/common/color";
 
 export const FeedbackDetail = styled.div`
     display: flex;
@@ -14,8 +15,8 @@ export const ImgUserFeedback = styled.img`
 
 export const StarDetail = styled.div`
     margin-right: 10px;
-    color: #ee4d2d;
-    display: inline;
+    color: ${theme.textRed};
+    display: inline-block;
     width: 10px;
     height: 10px;
     fill: currentColor;
