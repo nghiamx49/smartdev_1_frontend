@@ -30,6 +30,7 @@ const routes = [
     path: "/admin",
     component: Admin,
     exact: true,
+    // isAuthorize: "all",
     isAuthorize: "authorize",
     role: "admin",
   },

@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import {connect} from 'react-redux'
+import * as all from '../../../../../../actions/adminAction'
+
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -13,7 +16,16 @@ import {
   AiFillFilter,AiFillCaretDown
 } from "react-icons/ai";
 import {GrNext,GrPrevious} from 'react-icons/gr'
-function UserAmin() {
+
+
+function UserAdmin({users,...action}) {
+  useEffect(() => {
+    async function a() {
+      await action.getUser();
+    }
+    a()
+  }, [])
+  console.log(users)
     return (
         <MainAdminContent>
         <MainAdminAllUser>
@@ -38,31 +50,33 @@ function UserAmin() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <MainAdminFlex>
-                  <img
-                    height="30"
-                    width="30"
-                    src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"
-                    alt="dfkjghdfg"
-                  />
-                  <MainAdminStrong>huynh huu hieu</MainAdminStrong>
-                </MainAdminFlex>
-              </td>
-              <td>
-                <MainAdminStrong>ngo quyen da nang</MainAdminStrong>
-              </td>
-              <td>
-                <MainAdminStrong>03-06-2020</MainAdminStrong>
-              </td>
-              <td>
-                <MainAdminStrong>hieu@gmail.com</MainAdminStrong>
-              </td>
-              <td>
-                <MainAdminStrong>0987654321</MainAdminStrong>
-              </td>
-            </tr>
+            {/* {users.map((user)=>(
+               <tr key={user.id}>
+               <td>
+                 <MainAdminFlex>
+                   <img
+                     height="30"
+                     width="30"
+                     src={user.avatar_source}
+                     alt={user.id}
+                   />
+                   <MainAdminStrong>{user.username}</MainAdminStrong>
+                 </MainAdminFlex>
+               </td>
+               <td>
+                 <MainAdminStrong>{user.address}</MainAdminStrong>
+               </td>
+               <td>
+                 <MainAdminStrong>03-06-2020</MainAdminStrong>
+               </td>
+               <td>
+                 <MainAdminStrong>{user.email}</MainAdminStrong>
+               </td>
+               <td>
+                 <MainAdminStrong>{user.phone_number}</MainAdminStrong>
+               </td>
+             </tr>
+            ))} */}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
@@ -73,4 +87,14 @@ function UserAmin() {
     )
 }
 
-export default UserAmin
+const mapStateToProps = (state) =>{
+  return {
+      users : state.adminReducer.allUsers,
+  }
+}
+
+const mapDispatchToProps =  {
+  getUser : all.getUserAlowed,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserAdmin);

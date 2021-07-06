@@ -13,7 +13,8 @@ import {
 } from "./style";
 import { AiOutlineSortAscending, AiFillFilter,AiOutlineSearch,AiFillCaretDown } from "react-icons/ai";
 import {GrPrevious,GrNext} from 'react-icons/gr'
-import UserTable from "./components";
+import UserTable from "./components/User";
+
 function MainAdmin() {
   return (
     <MainAdminContainer>
@@ -34,7 +35,7 @@ function MainAdmin() {
         </MainAdminHeaderRight>
       </MainAdminHeader>
       <MainAdminContent>
-        <MainAdminAllUser>
+        {/* <MainAdminAllUser>
           <h3>ALL USERS</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
@@ -53,7 +54,8 @@ function MainAdmin() {
             <p>
                 <span>1-8 of 1240</span><GrPrevious/><GrNext/>
             </p>
-        </MainAdminPage>
+        </MainAdminPage> */}
+         <UserTable/>
       </MainAdminContent>
     </MainAdminContainer>
   );
