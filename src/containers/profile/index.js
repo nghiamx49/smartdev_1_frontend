@@ -1,8 +1,24 @@
-import React from 'react'
+import axios from 'axios'
+import React,{useEffect,useState} from 'react'
+import { connect } from 'react-redux'
 import imgUserDefault from '../../assests/img/user-default.png'
 import SlidebarOfProfile from '../../components/slidebarOfProfile'
 import * as UP from './style'
-const UserProfile = () => {
+const UserProfile = (props) => {
+    const [User, setUser] = useState({})
+    const token = {
+        token : props.token
+    }
+    useEffect(() => {
+        try{
+            axios.get(`${process.env.REACT_APP_API}/user/profile`, token).then(reponse => console.log(reponse))
+        }
+        catch(e){
+            console.log(e);
+        }
+        
+
+    }, [])
     return (
             <UP.Layout>
                 <UP.Container>
@@ -64,4 +80,11 @@ const UserProfile = () => {
     )
 }
 
-export default UserProfile
+const mapStateToProp = state =>{
+    return {
+        token: state.authenticateReducer.token
+    }
+}
+
+
+export default connect(mapStateToProp, )(UserProfile)
