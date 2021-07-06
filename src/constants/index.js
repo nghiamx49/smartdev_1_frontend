@@ -35,6 +35,7 @@ export const cartContants = {
 export const authenticateContants = {
   LOGIN: `${authenticatePrefix}LOGIN`,
   LOGIN_SUCCESS: `${authenticatePrefix}LOGIN_SUCCESS`,
+  LOGIN_FAILED: `${authenticatePrefix}LOGIN_FAILED`,
   GET_USER_DETAIL: `${authenticatePrefix}GET_USER_DETAIL`,
   GET_USER_DETAIL_SUCCESS: `${authenticatePrefix}GET_USER_DETAIL_SUCCESS`,
   FORGOT_PASSWORD: `${authenticatePrefix}FORGOT_PASSWORD`,
