@@ -4,6 +4,7 @@ const cartPrefix = "CART/";
 const authenticatePrefix = "AUTHENTICATE/";
 const userPrefix = "USER/";
 const providerPrefix = "PROVIDER/";
+const loadingPrefix = "LOADING/";
 
 export const adminContants = {
   GET_ALL_PROVIDERS: `${adminPrefix}GET_ALL_PROVIDERS`,
@@ -64,3 +65,5 @@ export const providerContants = {
   ADD_NEW_PRODUCT: `${providerPrefix}ADD_NEW_PRODUCT`,
   ADD_NEW_PRODUCT_SUCCESS: `${providerPrefix}ADD_NEW_PRODUCT_SUCCESS`,
 };
+
+export const SET_LOADING_STATE = `${loadingPrefix}/SET_LOADING_STATE`;

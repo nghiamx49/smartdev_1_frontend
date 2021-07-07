@@ -87,16 +87,13 @@ const HeaderComponent = ({ authenticateReducer, logout }) => {
             </div>
           </HEADER.HeaderBottomCenter>
           <HEADER.HeaderBottomRight>
-            <Link to="cart">
-              <BiCart />
-            </Link>
-            <div>
-              <img
-                src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/9bdd8040b334d31946f49e36beaf32db.png"
-                alt=""
-              />
-              <p>chưa có sản phẩm</p>
-            </div>
+            {authenticateReducer.isLoggedIn && (
+              <>
+                <Link to="cart">
+                  <BiCart />
+                </Link>
+              </>
+            )}
           </HEADER.HeaderBottomRight>
         </HEADER.HeaderBottom>
       </Container>
