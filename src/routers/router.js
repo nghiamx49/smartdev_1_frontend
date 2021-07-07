@@ -3,6 +3,7 @@ import ProviderRegister from "../containers/provider-register/";
 import UserRegister from "../containers/user-register/";
 import Admin from "../containers/admin";
 import Profile from "../containers/profile";
+import ChangePass from '../containers/change_password'
 import ProductDetail from "../containers/product-detail";
 import Orderhistory from "../containers/orderhistory";
 import OrderDetail from "../containers/order_detail";
@@ -51,6 +52,14 @@ const routes = [
   {
     path: "/profile",
     component: Profile,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "authorize",
+    role: "user",
+  },
+  {
+    path: "/changePass",
+    component: ChangePass,
     exact: true,
     layout: Layout,
     isAuthorize: "authorize",
