@@ -21,9 +21,10 @@ const apiClient = {
 
   apiClientPost: async (endpoint, value, token) => {
     try {
+      console.log(value)
       const request = await axios.put(
         `${process.env.REACT_APP_API}${endpoint}`,
-        value,
+        {...value},
         {
           headers: {
             Authorization: `Bearer ${token}`,

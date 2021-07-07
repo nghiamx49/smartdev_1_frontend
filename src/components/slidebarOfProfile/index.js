@@ -1,5 +1,5 @@
 import React from 'react'
-import { FcBusinessman,FcKindle,FcAdvertising,FcStackOfPhotos ,FcStumbleupon} from "react-icons/fc";
+import { FcBusinessman,FcKindle,FcAdvertising,FcStackOfPhotos ,FcStumbleupon, FcKey} from "react-icons/fc";
 import {SlidebarOfProfileTop, SlidebarProfile , SlidebarOfProfileBottom} from './style'
 
 function SlidebarOfProfile() {
@@ -18,6 +18,7 @@ function SlidebarOfProfile() {
             <SlidebarOfProfileBottom>
                 <ul>
                     <li><FcBusinessman/> <span>Tai Khoan Cua Toi</span></li>
+                    <li><FcKey/> <span>Đổi mật khẩu</span></li>
                     <li><FcKindle/><span> Don Mua</span></li>
                     <li><FcAdvertising/><span> Thông Báo</span></li>
                     <li><FcStackOfPhotos /><span> Kho Voucher</span></li>

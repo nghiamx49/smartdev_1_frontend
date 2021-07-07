@@ -2,35 +2,38 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import imgUserDefault from '../../assests/img/user-default.png'
 import SlidebarOfProfile from '../../components/slidebarOfProfile'
 import * as UP from './style'
 import apiClient from '../../apiServices/axiosClient'
 import yup from './yupGlobal'
+import { storage } from '../../firebase/config'
 
 const userSchema = yup.object().shape({
     full_name: yup
         .string()
-        .required("username is required")
-        .full_name("name invalid"),
+        .required("tên không được bỏ trống")
+        .full_name("tên không đúng định dạng. vui lòng nhập lai"),
     phone_number: yup
         .string()
-        .required("phone is requrired")
-        .phone_number("phone invalid"),
+        .required("số điện thoại không được bỏ trống")
+        .phone_number("số điên thoại không đúng định dạng. vui lòng nhập lai"),
     address: yup
         .string()
-        .required("address is requrired"),
+        .required("địa chỉ không được bỏ trống"),
 });
 
 const UserProfile = (props) => {
-    const [data, setData] = useState({})
+    const [data, setData] = useState({});
 
     const { apiClientGet } = apiClient;
     const { apiClientPost } = apiClient;
 
 
-    const { register, watch, setValue, handleSubmit, formState: { errors } } = useForm({
+    const { register, setValue, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             full_name: data?.full_name,
             phone_number: data?.phone_number,
@@ -54,21 +57,45 @@ const UserProfile = (props) => {
     }, []);
 
     const onSubmit = (dataSubmit) => {
-        console.log(dataSubmit);
         const user = {
             ...data,
             full_name: dataSubmit.full_name,
             phone_number: dataSubmit.phone_number,
             address: dataSubmit.address,
         }
-        console.log(user);
         updateUser(user);
     };
 
     const updateUser = async (user) => {
         const result = await apiClientPost('/user/update_profile', user, props.token);
-        console.log(result);
+        if (result.status === 200) {
+            return toast.success(result.message);
+        }
+        return toast.warn(result.message);
     }
+
+    const handleChange = (e) => {
+        if (e.target.files[0]) {
+            const uploadTask = storage.ref(`images/${e.target.files[0].name}`).put(e.target.files[0]);
+            uploadTask.on(
+                "state_changed",
+                snapshot => { },
+                error => {
+                    console.log(error);
+                },
+                () => {
+                    storage
+                        .ref("images")
+                        .child(e.target.files[0].name)
+                        .getDownloadURL()
+                        .then(url => {
+                            setData({ ...data, avatar_source: url })
+                        
+                        });
+                }
+            )
+        }
+    };
 
     return (
         <UP.Layout>
@@ -132,9 +159,9 @@ const UserProfile = (props) => {
                                 </UP.ProfileFormRow>
                             </UP.ProfileBottomLeft>
                             <UP.ProfileBottomRight>
-                                <UP.ProfileAvata src={imgUserDefault} alt="" />
+                                <UP.ProfileAvata src={data.avatar_source || imgUserDefault} alt="" />
                                 <label htmlFor="avatar">Chọn ảnh</label>
-                                <input type="file" name="avatar" id="avatar" accept="image/*" />
+                                <input type="file" name="avatar" onChange={handleChange} id="avatar" accept="image/*" />
                                 <p>Dụng lượng file tối đa 1 MB </p>
                                 <p>Định dạng:.JPEG, .PNG</p>
                             </UP.ProfileBottomRight>
@@ -151,6 +178,5 @@ const mapStateToProp = state => {
         token: state.authenticateReducer.token
     }
 }
-
 
 export default connect(mapStateToProp,)(UserProfile)

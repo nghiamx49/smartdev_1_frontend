@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import apiClient from '../../apiServices/axiosClient'
 import SlidebarOfProfile from '../../components/slidebarOfProfile'
@@ -11,15 +13,15 @@ import * as UP from './style'
 const passwordSchema = yup.object().shape({
     old_password: yup
         .string()
-        .required("username is required"),
+        .required("mật khẩu cũ không được bỏ trống"),
     new_password: yup
         .string()
-        .required("phone is requrired")
-        .min(6, 'Password must be at least 6 characters'),
+        .required("mật khẩu mới không được bỏ trống")
+        .min(6, "mật khẩu ít 6 kí tự. vui lòng nhập lại"),
     confirm_password: yup
         .string()
-        .required("address is requrired")
-        .oneOf([yup.ref('new_password'), null], 'Passwords does not match'),
+        .required("nhập lại mật khẩu không được bỏ trống")
+        .oneOf([yup.ref('new_password'), null], 'nhập lại mật khẩu không trùng khớp'),
 });
 
 const ChangePass = (props) => {
@@ -31,14 +33,17 @@ const ChangePass = (props) => {
     });
 
     const onSubmit = (dataSubmit) => {
-        console.log(dataSubmit);
-        changePassword({dataSubmit});
+        changePassword(dataSubmit);
     };
 
     const changePassword = async (data) => {
-        const pass = {old_password: data.old_password, new_password:data.new_password}
-        const result = await apiClientPost('/user/change_password', pass, props.token);
-        console.log(result);
+        const value = { old_password: data.old_password, new_password: data.new_password }
+        console.log(value)
+        const result = await apiClientPost('/user/change_password', value, props.token);
+        if (result.status === 200) {
+            return toast.success(result.message);
+        }
+        return toast.warn(result.message);
     }
 
     return (
@@ -52,7 +57,6 @@ const ChangePass = (props) => {
                     </UP.ProfileTop>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <UP.ProfileBottom>
-
                             <UP.ProfileBottomLeft>
 
                                 <UP.ProfileFormRow>
