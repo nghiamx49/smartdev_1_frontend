@@ -23,7 +23,7 @@ export const userRegisterSchema = yup.object().shape({
     .string()
     .email("email is invalid")
     .required("email không được để trồng"),
-  zipcode: yup.string().required("zipcode không được để trống"),
+  zipcode: yup.number().required("zipcode không được để trống"),
 });
 
 const UserRegister = () => {

@@ -1,61 +1,18 @@
-const initialState = {
-  listProducts: [
-    {
-      id: 0,
-      shopName: "shop Hoang 0",
-      linkImage:
-        "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
-      name: "tai nghe 0 day",
-      price: 100,
-      number: 1,
-      status: false,
-    },
-    {
-      id: 1,
-      shopName: "shop Hoang 1",
-      linkImage:
-        "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
-      name: "tai nghe 0 day",
-      price: 100,
-      number: 1,
-      status: false,
-    },
-    {
-      id: 2,
-      shopName: "shop Hoang 2",
-      linkImage:
-        "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
-      name: "tai nghe 0 day",
-      price: 100,
-      number: 1,
-      status: false,
-    },
-    {
-      id: 3,
-      shopName: "shop Hoang 3",
-      linkImage:
-        "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
-      name: "tai nghe 0 day",
-      price: 100,
-      number: 1,
-      status: false,
-    },
-    {
-      id: 4,
-      shopName: "shop Hoang 4",
-      linkImage:
-        "https://cdn.mediamart.vn/Product/tai-nghe-chup-dau-co-mic-kanen-ip2050-mau-do-den-y72Dcj.png",
-      name: "tai nghe 0 day",
-      price: 100,
-      number: 1,
-      status: false,
-    },
-  ],
-  total: 750000,
-};
+import { cartContants } from "../constants/";
+
+const initialState = [];
+
+const { GET_ALL_PRODUCTS_IN_CART_SUCCESS, REMOVE_PRODUCT_FROM_CART_SUCCESS } =
+  cartContants;
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_PRODUCTS_IN_CART_SUCCESS:
+      return action.payload;
+    case REMOVE_PRODUCT_FROM_CART_SUCCESS:
+      return state.filter(
+        (item) => parseInt(item.id) !== parseInt(action.payload),
+      );
     default:
       return state;
   }
