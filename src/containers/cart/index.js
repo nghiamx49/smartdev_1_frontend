@@ -3,6 +3,8 @@ import { FcShipped } from "react-icons/fc";
 import CartItem from "./cartItem";
 import TotalCart from "./cartTotal";
 
+import { Loadingbtn } from "../../components/loading/";
+
 import { getAllProductInCart } from "../../actions/cartAction";
 
 import {
@@ -72,7 +74,7 @@ const Cart = ({ cartLists, token, getCarItems, loading }) => {
               ))}
           </>
         ) : (
-          <h1>Loading...</h1>
+          <Loadingbtn />
         )}
         <TotalCart
           total={cartLists.length}
@@ -99,8 +101,8 @@ const Cart = ({ cartLists, token, getCarItems, loading }) => {
 const mapStateToProps = (state) => {
   return {
     token: state.authenticateReducer.token,
-    cartLists: state.cartReducer,
-    loading: state.loadingReducer,
+    cartLists: state.cartReducer.data,
+    loading: state.cartReducer.loading,
   };
 };
 
