@@ -21,9 +21,14 @@ import { connect } from 'react-redux';
 import avatar from   "../../../../../../assests/img/user-default.png"
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
-function ApproveProvider({providers, token, ...action}) {
+function ApproveProvider({providers, token , pagesProduct, ...action}) {
+  let pagination = []
+  
   async function getData() {
     await action.getUser(token);
+    for(var i=0 ; i<=pagesProduct ; i++){
+      pagination.push(i)
+    }
   }
   useEffect(() => {
     getData()
@@ -100,14 +105,18 @@ function ApproveProvider({providers, token, ...action}) {
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
-            <div>Rows per page:8 <span><AiFillCaretDown/></span></div>
-            <div>1-8 of 1240 <span><GrPrevious/><GrNext/></span></div>
+          {
+            pagination.map((page)=>{
+              <button>pgea</button>
+            })
+          }
         </MainAdminPage>
       </MainAdminContent>
     )
 }
 const mapStateToProps = (state) =>{
   return {
+      pagesProduct : state.adminReducer.pagesProduct,
       providers : state.adminReducer.allProviders,
       token : state.authenticateReducer.token,
   }

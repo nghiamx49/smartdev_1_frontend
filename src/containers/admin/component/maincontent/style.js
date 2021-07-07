@@ -126,7 +126,7 @@ export const MainAdmintextfunction = styled.p`
 `;
 export const MainAdminPage = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 10px 20px;
   align-items: center;
   p {

@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form';
+
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -18,7 +20,10 @@ import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
+
+
 function Product({products, token,...action}) {
+  const { register , handleSubmit} = useForm();
   async function getData() {
     await action.getAllProduct(token);
   }
@@ -35,7 +40,7 @@ function Product({products, token,...action}) {
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL Product</h3>
+          <h3>ALL Product</h3> 
           <MainAdminFlex>
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <span>sort</span>

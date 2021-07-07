@@ -5,7 +5,8 @@ const adminService = {
   getAllProvider: async (status ,token) => {
     try{
       const request = await getCLient(`/admin/providers/${status}`, token);
-      let response = await request.data;
+      let response = await request;
+      console.log(request);
       return response;
     }catch(e){
       console.log(e);
@@ -14,7 +15,7 @@ const adminService = {
   getAllUser: async (status , token) => {
     try{
       const request = await getCLient(`/admin/users/${status}`, token);
-      let response = await request.data;
+      let response = await request;
       console.log(request)
       return response;
     }catch(e){
@@ -24,7 +25,7 @@ const adminService = {
   getAllProduct: async (status ,token) => {
     try{
       const request = await getCLient(`/admin/product_requests/${status}`, token);
-      let response = await request.data;
+      let response = await request;
       console.log(request)
       return response;
     }catch(e){

@@ -8,15 +8,9 @@ import {
   MainAdminHeaderRight,
   MainAdminHeaderUser,
   MainAdminHeaderSearch,
-  MainAdminContent,
-  MainAdminAllUser,
-  MainAdmintextfunction,
-  MainAdminFlex,
-  MainAdminPage,
   LogoutButton,
 } from "./style";
-import { AiOutlineSortAscending, AiFillFilter,AiOutlineSearch,AiFillCaretDown } from "react-icons/ai";
-import {GrPrevious,GrNext} from 'react-icons/gr'
+import {AiOutlineSearch,} from "react-icons/ai";
 import UserTable from "./components/User";
 import ProviderTable from "./components/Provider";
 import Approveproviders from "./components/approveproviders";

@@ -21,6 +21,7 @@ export const adminContants = {
   GET_ALL_PRODUCTS: `${adminPrefix}GET_ALL_PRODUCTS`,
   GET_ALL_PRODUCTS_SUCCESS: `${adminPrefix}GET_ALL_PRODUCTS_SUCCESS`,
   GET_ALL_PRODUCTS_FAILED: `${adminPrefix}GET_ALL_PRODUCTS_FAILED`,
+
 };
 
 export const productContants = {

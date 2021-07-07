@@ -70,3 +70,4 @@ export const getAllProductPendingSuccess = (data) => {
         payload : data,
     }
 }
+
