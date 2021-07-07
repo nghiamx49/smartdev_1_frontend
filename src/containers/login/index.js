@@ -1,47 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { loginSuccess } from "../../actions/authenticateAction";
+import { submitLogin } from "../../actions/authenticateAction";
 
 import { LoginContainer, Logo, LoginForm, LoginButton } from "./style";
 import logo from "../../assests/img/logo.png";
 import { connect } from "react-redux";
-
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import authenticateService from "../../apiServices/authenticateService";
 
 const loginSchema = yup.object().shape({
   username: yup.string().required("username không được để trống"),
   password: yup.string().required("password không được để trống"),
 });
 
-const Login = ({ loginSuccess }) => {
+const Login = ({ loading, login }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
 
-  const { login } = authenticateService;
-
-  const [submitting, setSubmitting] = useState(false);
-
   const onSubmit = async (data) => {
-    setSubmitting(true);
-    const result = await login(data);
-    setSubmitting(false);
-    if (result.status === 200) {
-      loginSuccess(result);
-      return toast.success(result.message);
-    }
-    return toast.error(result.message);
+    await login(data);
   };
-
   return (
     <>
       <LoginContainer>
@@ -60,8 +44,8 @@ const Login = ({ loginSuccess }) => {
             placeholder="mật khẩu"
           />
           <span>{errors.password?.message}</span>
-          <LoginButton disabled={submitting}>
-            {submitting ? "Loading..." : "Đăng nhập"}
+          <LoginButton disabled={loading}>
+            {loading ? "Loading..." : "Đăng nhập"}
           </LoginButton>
           <a href="#forgotpassword">Quên Mật Khẩu</a>
           <hr />
@@ -74,10 +58,16 @@ const Login = ({ loginSuccess }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    loginSuccess: (data) => dispatch(loginSuccess(data)),
+    loading: state.loadingReducer,
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (data) => dispatch(submitLogin(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
