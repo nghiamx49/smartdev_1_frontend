@@ -3,8 +3,6 @@ import { Switch, BrowserRouter, Route } from "react-router-dom";
 import routes from "./router";
 import AuthorizeHOC from "../HOCs/AuthorizeHOC";
 import UnauthorizeHOC from "../HOCs/UnauthorizeHOC";
-import Layout from "../components/layout/Layout";
-import Home from "../containers/home";
 
 const AppRouter = () => (
   <BrowserRouter>
