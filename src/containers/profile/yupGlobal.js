@@ -1,21 +1,21 @@
 import * as yup from 'yup'
 
-const REGEX_PASSWORD= /^(?=.*\d)(?=.*[a-zA-Z])[\da-zA-Z_.\-@]{8,}$/
-const REGEX_ONLY_NUMBER= /^\d+$/
+const REGEX_FULL_NAME= /^[^\d\t`~!@#$%^&*()_\-+=|\\{}\[\]:;"'<>,.?\/]+$/
+const REGEX_PHONE= /^0[35789]\d{8}$/
 
-yup.addMethod(yup.string, 'password', function (
+yup.addMethod(yup.string, 'full_name', function (
   message,
 ) {
-  return this.matches(REGEX_PASSWORD, {
+  return this.matches(REGEX_FULL_NAME, {
     message,
     excludeEmptyString: true,
   })
 })
 
-yup.addMethod(yup.string, 'onlyNumber', function (
+yup.addMethod(yup.string, 'phone_number', function (
   message,
 ) {
-  return this.matches(REGEX_ONLY_NUMBER, {
+  return this.matches(REGEX_PHONE, {
     message,
     excludeEmptyString: true,
   })
