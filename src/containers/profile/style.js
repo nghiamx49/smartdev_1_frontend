@@ -72,6 +72,10 @@ export const ProfileInput = styled.input`
     }
 `;
 
+export const Error = styled.p`
+    color: red;
+`;
+
 export const ProfileRadio = styled.div`
     display: flex;
     margin-right: 5px;
@@ -80,7 +84,7 @@ export const ProfileRadio = styled.div`
     }
 `;
 
-export const ProfileButton = styled.input`
+export const ProfileButton = styled.button`
     color: ${theme.white};
     background: ${theme.textRed};
     height: 40px;
