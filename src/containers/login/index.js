@@ -11,10 +11,6 @@ import { LoginContainer, Logo, LoginForm, LoginButton } from "./style";
 import logo from "../../assests/img/logo.png";
 import { connect } from "react-redux";
 
-import { toast, ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 const loginSchema = yup.object().shape({
   username: yup.string().required("username không được để trống"),
   password: yup.string().required("password không được để trống"),
@@ -26,20 +22,6 @@ const Login = ({ loading, login }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
-
-  const { login } = authenticateService;
-
-
-  const onSubmit = async (data) => {
-    setSubmitting(true);
-    const result = await login(data);
-    setSubmitting(false);
-    if (result.status === 200) {
-      loginSuccess(result);
-      return toast.success(result.message);
-    }
-    return toast.error(result.message);
-  };
 
   const onSubmit = async (data) => {
     await login(data);

@@ -23,9 +23,9 @@ function* doLogin(action) {
     yield put(setLoading(false));
     if (result.status === 200) {
       yield put(loginSuccess(result));
-      return toast.success(result.message);
+      return toast(<h3 color="black">{result.message}</h3>);
     }
-    return toast.error(result.message);
+    return toast(<h3 color="black">{result.message}</h3>);
   } catch (error) {
     console.log(error);
   }

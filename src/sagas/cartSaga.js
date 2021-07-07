@@ -29,11 +29,10 @@ function* getCartItems(action) {
 function* removeCartItem({ payload }) {
   try {
     const { id, token } = payload;
-    console.log(id + " " + token);
     let result = yield call(removeProductFromCart, { id, token });
     if (result.status === 200) {
       yield put(removeItemSuccess(id));
-      return toast.success(result.message);
+      return toast(<h3 color="black">{result.message}</h3>);
     }
   } catch (error) {
     console.log(error);
