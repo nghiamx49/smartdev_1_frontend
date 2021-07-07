@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -6,14 +6,37 @@ import {
     MainAdminTable,
     MainAdminStrong,
     MainAdminFlex,
-    MainAdminPage
+    MainAdminPage,
+    ButtonBan,
+    ButtonApprove
   } from "../../style";
 import {
   AiOutlineSortDescending,
   AiFillFilter,AiFillCaretDown
 } from "react-icons/ai";
 import {GrNext,GrPrevious} from 'react-icons/gr'
-function ApproveProvider() {
+import * as all from '../../../../../../actions/adminAction'
+import { connect } from 'react-redux';
+import avatar from   "../../../../../../assests/img/user-default.png"
+import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
+
+function ApproveProvider({providers, token, ...action}) {
+  async function getData() {
+    await action.getUser(token);
+  }
+  useEffect(() => {
+    getData()
+  }, []);
+
+  async function handleStatusProvider (id , status) {
+    console.log(id, status);
+    let data = JSON.stringify({
+      "id": id,
+      "status": status
+    });
+    const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
+    console.log(message);
+  }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
@@ -40,38 +63,41 @@ function ApproveProvider() {
             </tr>
           </thead>
           <tbody>
-            <tr>
+          {providers.map((provider) =>(
+            <tr key={provider.id}>
               <td>
                 <MainAdminFlex>
                   <img
                     height="30"
                     width="30"
-                    src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"
-                    alt="dfkjghdfg"
+                    src={provider.avatar_source ? provider.avatar_source : avatar }
+                    alt="avatar"
                   />
-                  <MainAdminStrong>hoang provider</MainAdminStrong>
+                  <MainAdminStrong>{provider.username}</MainAdminStrong>
                 </MainAdminFlex>
               </td>
               <td>
-                <MainAdminStrong>ngo quyen da nang</MainAdminStrong>
+                <MainAdminStrong>{provider.address}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>shop ban hang</MainAdminStrong>
+                <MainAdminStrong>{provider.store_name}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>hieu@gmail.com</MainAdminStrong>
+                <MainAdminStrong>{provider.email}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>0987654321</MainAdminStrong>
+                <MainAdminStrong>{provider.phone_number}</MainAdminStrong>
               </td>
               <td>
                 <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-                    <button>approve</button>
-                    <button>refuse</button>
+                <button  onClick={handleStatusProvider.bind(this, provider.id , "Allowed")}>khsd</button>
+                <ButtonApprove>Approve</ButtonApprove>
+                <ButtonBan>Reject</ButtonBan>
               </td>
-            </tr>
+            </tr> 
+          ))}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
@@ -81,5 +107,15 @@ function ApproveProvider() {
       </MainAdminContent>
     )
 }
+const mapStateToProps = (state) =>{
+  return {
+      providers : state.adminReducer.allProviders,
+      token : state.authenticateReducer.token,
+  }
+}
 
-export default ApproveProvider
+const mapDispatchToProps =  {
+  getUser : all.getProviderPending,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApproveProvider);

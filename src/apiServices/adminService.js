@@ -1,27 +1,31 @@
 import axios from "axios";
+import getCLient from "./axiosClient"
 
 const adminService = {
-  getAllProvider: async (status) => {
-    const token = {
-      token : localStorage.getItem("token")
-    }
+  getAllProvider: async (status ,token) => {
     try{
-      let request = await axios.get(`${process.env.REACT_APP_API}/admin/providers/${status}`,token);
+      const request = await getCLient(`/admin/providers/${status}`, token);
       let response = await request.data;
-      return response.data;
+      return response;
     }catch(e){
       console.log(e);
     }
   },
-  getAllUser: async (status) => {
-    // const token = {
-    //   token : localStorage.getItem("token")
-    // }
+  getAllUser: async (status , token) => {
     try{
-      let request = await axios.get(`${process.env.REACT_APP_API}/admin/users/${status}`,  localStorage.getItem("token"));
+      const request = await getCLient(`/admin/users/${status}`, token);
       let response = await request.data;
-      console.log(response)
-      return response.data;
+      return response;
+    }catch(e){
+      console.log(e);
+    }
+  },
+  getAllProduct: async (status ,token) => {
+    try{
+      const request = await getCLient(`/admin/product_requests/${status}`, token);
+      let response = await request.data;
+      console.log(request)
+      return response;
     }catch(e){
       console.log(e);
     }

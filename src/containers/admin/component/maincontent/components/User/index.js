@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {connect} from 'react-redux'
 import * as all from '../../../../../../actions/adminAction'
+import avatar from   "../../../../../../assests/img/user-default.png"
 
 import {
     MainAdminContent,
@@ -18,14 +19,14 @@ import {
 import {GrNext,GrPrevious} from 'react-icons/gr'
 
 
-function UserAdmin({users,...action}) {
+function UserAdmin({users, token,...action}) {
   useEffect(() => {
     async function a() {
-      await action.getUser();
+      await action.getUser(token);
     }
     a()
   }, [])
-  console.log(users)
+  // console.log(users)
     return (
         <MainAdminContent>
         <MainAdminAllUser>
@@ -47,18 +48,19 @@ function UserAdmin({users,...action}) {
               <th>Birthday</th>
               <th>Email</th>
               <th>Phone number</th>
+              <th>Ban</th>
             </tr>
           </thead>
           <tbody>
-            {/* {users.map((user)=>(
+            {users.map((user)=>(
                <tr key={user.id}>
                <td>
                  <MainAdminFlex>
                    <img
                      height="30"
                      width="30"
-                     src={user.avatar_source}
-                     alt={user.id}
+                     src={user.avatar_source ? user.avatar_source : avatar }
+                     alt="avatar"
                    />
                    <MainAdminStrong>{user.username}</MainAdminStrong>
                  </MainAdminFlex>
@@ -75,8 +77,11 @@ function UserAdmin({users,...action}) {
                <td>
                  <MainAdminStrong>{user.phone_number}</MainAdminStrong>
                </td>
+               <td>
+                 <button>Ban User</button>
+               </td>
              </tr>
-            ))} */}
+            ))}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
@@ -90,6 +95,7 @@ function UserAdmin({users,...action}) {
 const mapStateToProps = (state) =>{
   return {
       users : state.adminReducer.allUsers,
+      token : state.authenticateReducer.token,
   }
 }
 

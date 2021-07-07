@@ -14,8 +14,41 @@ import {
 import { AiOutlineSortAscending, AiFillFilter,AiOutlineSearch,AiFillCaretDown } from "react-icons/ai";
 import {GrPrevious,GrNext} from 'react-icons/gr'
 import UserTable from "./components/User";
+import ProviderTable from "./components/Provider";
+import Approveproviders from "./components/approveproviders";
+import Product from "./components/product";
+import NewProduct from "./components/newProduct";
+import { apiClientPatch } from "../../../../apiServices/axiosAdmin";
 
-function MainAdmin() {
+
+function MainAdmin(props) {
+  const {menu} = props
+  function setLayout (com){
+    switch(com){
+      case "Users":
+        return <UserTable/>
+      case "Providers":
+          return <ProviderTable/>
+      case "Approveproviders":
+        return <Approveproviders/>
+      case "Products":
+        return <Product/>
+      case "NewProduct":
+        return <NewProduct/>
+         
+      default:
+        return <Approveproviders/>
+    }
+  }
+  async function handleStatusProvider (id , status) {
+    console.log(id, status);
+    let data = JSON.stringify({
+      "id": id,
+      "status": status
+    });
+    const message = await apiClientPatch("/admin/providers/update_status" , "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNTcwMzA1MiwiaWF0IjoxNjI1NjE2NjUyfQ.Ztj4PWr5JrCYQ3OZKh8nVLaJcHeaO6sEdT84qjWIMdM" , 12 , "Allowed");
+    console.log(message);
+  }
   return (
     <MainAdminContainer>
       <MainAdminHeader>
@@ -34,29 +67,10 @@ function MainAdmin() {
           </MainAdminHeaderUser>
         </MainAdminHeaderRight>
       </MainAdminHeader>
-      <MainAdminContent>
-        {/* <MainAdminAllUser>
-          <h3>ALL USERS</h3>
-          <MainAdminFlex>
-            <MainAdmintextfunction>
-              <AiOutlineSortAscending /> <span>sort</span>
-            </MainAdmintextfunction>
-            <MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
-            </MainAdmintextfunction>
-          </MainAdminFlex>
-        </MainAdminAllUser>
-        <UserTable/>
-        <MainAdminPage>
-            <p>
-                <span>Rows per page : 8 </span> <AiFillCaretDown/>
-            </p>
-            <p>
-                <span>1-8 of 1240</span><GrPrevious/><GrNext/>
-            </p>
-        </MainAdminPage> */}
-         <UserTable/>
-      </MainAdminContent>
+      <button  onClick={handleStatusProvider.bind(this, 12 , "Allowed")}>nfndjkf</button>
+      {
+        setLayout(menu)
+      }
     </MainAdminContainer>
   );
 }

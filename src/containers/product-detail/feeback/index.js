@@ -23,8 +23,6 @@ const rating = [
       create_at: "23/06/2021",
     },
   ];
-  console.log(rating)
-
 const Feeback = () => {
   return (
     <div>

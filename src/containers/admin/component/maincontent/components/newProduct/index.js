@@ -13,22 +13,21 @@ import {
   AiFillFilter,AiFillCaretDown
 } from "react-icons/ai";
 import {GrNext,GrPrevious} from 'react-icons/gr'
-import { connect } from 'react-redux';
 import * as all from '../../../../../../actions/adminAction'
+import { connect } from 'react-redux';
 
-
-function ProviderAdmin({providers, token,...action}) {
+function NewProduct({products, token,...action}) {
   useEffect(() => {
     async function a() {
-      await action.getUser(token);
+      await action.getAllProductPending(token);
     }
     a()
   }, [])
-  console.log(providers)
+  console.log(products)
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL Provider</h3>
+          <h3>ALL New Product</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <span>sort</span>
@@ -41,41 +40,42 @@ function ProviderAdmin({providers, token,...action}) {
         <MainAdminTable>
           <thead>
             <tr>
-              <th>User name</th>
-              <th>Address</th>
-              <th>Birthday</th>
-              <th>Email</th>
-              <th>Phone number</th>
+              <th>Name</th>
+              <th>ShopName</th>
+              <th>Price</th>
+              <th>Date Create</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {providers.map((provider) =>(
+          {products.map((product) =>(
             <tr>
               <td>
                 <MainAdminFlex>
                   <img
                     height="30"
                     width="30"
-                    src={provider.avatar_source}
+                    src={product.image_source}
                     alt="dfkjghdfg"
                   />
-                  <MainAdminStrong>{provider.username}</MainAdminStrong>
+                  <MainAdminStrong>{product.name}</MainAdminStrong>
                 </MainAdminFlex>
               </td>
               <td>
-                <MainAdminStrong>{provider.address}</MainAdminStrong>
+                <MainAdminStrong>{product.provider_name}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>03-06-2020</MainAdminStrong>
+                <MainAdminStrong>{product.unit_price}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>{provider.email}</MainAdminStrong>
+                <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>{provider.phone_number}</MainAdminStrong>
+                <button>Allowed</button>
+                <button>Reject</button>
               </td>
             </tr>
-))}
+          ))}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
@@ -85,17 +85,15 @@ function ProviderAdmin({providers, token,...action}) {
       </MainAdminContent>
     )
 }
-
 const mapStateToProps = (state) =>{
   return {
-      providers : state.adminReducer.allProviders,
+      products : state.adminReducer.allProducts,
       token : state.authenticateReducer.token,
   }
 }
 
 const mapDispatchToProps =  {
-  getUser : all.getProviderAllowed,
+  getAllProductPending : all.getAllProductPending,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProviderAdmin);
-
+export default connect(mapStateToProps, mapDispatchToProps)(NewProduct);

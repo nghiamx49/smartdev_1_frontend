@@ -11,7 +11,7 @@ import {MdContacts,MdSettingsApplications,MdSubscriptions} from 'react-icons/md'
 const listLi = [
     {
         icons:GrOverview,
-        text:"overview"
+        text:"Approveproviders"
     },
     {
         icons:ImUsers,
@@ -23,11 +23,11 @@ const listLi = [
     },
     {
         icons:MdContacts,
-        text:"Contacts"
+        text:"Products"
     },
     {
         icons:FaMagento,
-        text:"Agents"
+        text:"NewProduct"
     },
     {
         icons:MdSettingsApplications,
@@ -41,6 +41,7 @@ const listLi = [
 ];
 // sidebar cho admin
 function SideBar(props) {
+    const {handle} = props
     return (
         <SideBarContainer>
             <SideBarLogo>
@@ -50,7 +51,7 @@ function SideBar(props) {
                 <SideBarUl>
                    {
                         listLi.map((item,index) => 
-                        <LinkSideBar index={index} Icons={item.icons} text={item.text}/>
+                        <LinkSideBar handle={handle} key={index} Icons={item.icons} text={item.text}/>
                         )
                     }
                 </SideBarUl>
