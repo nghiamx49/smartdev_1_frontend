@@ -44,9 +44,8 @@ export const cartContants = {
 export const authenticateContants = {
   LOGIN: `${authenticatePrefix}LOGIN`,
   LOGIN_SUCCESS: `${authenticatePrefix}LOGIN_SUCCESS`,
+  LOGOUT: `${authenticatePrefix}LOGOUT`,
   LOGIN_FAILED: `${authenticatePrefix}LOGIN_FAILED`,
-  GET_USER_DETAIL: `${authenticatePrefix}GET_USER_DETAIL`,
-  GET_USER_DETAIL_SUCCESS: `${authenticatePrefix}GET_USER_DETAIL_SUCCESS`,
   FORGOT_PASSWORD: `${authenticatePrefix}FORGOT_PASSWORD`,
   FORGOT_PASSWORD_PROCESS_SUCCESS: `${authenticatePrefix}FORGOT_PASSWORD_PROCESS_SUCCESS`,
   REGISTER_AS_USER: `${authenticatePrefix}REGISTER_AS_USER`,
@@ -56,6 +55,8 @@ export const authenticateContants = {
 };
 
 export const userContants = {
+  GET_USER_DETAIL: `${userPrefix}GET_USER_DETAIL`,
+  GET_USER_DETAIL_SUCCESS: `${userPrefix}GET_USER_DETAIL_SUCCESS`,
   UPDATE_INFORMATION: `${userPrefix}UPDATE_INFORMATION`,
   UPDATE_INFORMATION_SUCCESS: `${userPrefix}UPDATE_INFORMATION_SUCCESS`,
   GET_ORDERS_HISTORY: `${userPrefix}GET_ORDERS_HISTORY`,

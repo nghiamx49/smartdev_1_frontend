@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {theme} from "../../../../assests/common/color"
+import { theme } from "../../../../assests/common/color";
 export const MainAdminContainer = styled.div`
   flex-basis: 80%;
 `;
@@ -68,7 +68,6 @@ export const MainAdminTable = styled.table`
   }
 `;
 
-
 export const MainAdminFlex = styled.div`
   display: flex;
   img {
@@ -117,10 +116,21 @@ export const MainAdminPage = styled.div`
     font-size: 12px;
     line-height: 20px;
     margin-left: 15px;
-    svg{
-        font-size: 10px;
-        margin-top: 2px;
-        margin-left: 5px;
+    svg {
+      font-size: 10px;
+      margin-top: 2px;
+      margin-left: 5px;
     }
+  }
+`;
+
+export const LogoutButton = styled.button`
+  margin-right: 5px;
+  border: none;
+  padding: 5px;
+  background-color: inherit;
+  :hover {
+    cursor: pointer;
+    color: red;
   }
 `;

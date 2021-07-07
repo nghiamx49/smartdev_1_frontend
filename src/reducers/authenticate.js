@@ -1,5 +1,5 @@
 import { authenticateContants } from "../constants/index";
-const { LOGIN_SUCCESS, LOGIN_FAILED } = authenticateContants;
+const { LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } = authenticateContants;
 
 const initialState = {
   account: {
@@ -24,6 +24,21 @@ const authenticateReducer = (state = initialState, action) => {
     case LOGIN_FAILED:
       const { error } = action;
       return { ...state, ...error };
+    case LOGOUT:
+      return {
+        account: {
+          address: "",
+          avatar_source: "",
+          email: "",
+          phone_number: "",
+          role: "",
+          username: "",
+        },
+        token: "",
+        isLoggedIn: false,
+        message: "",
+        status: null,
+      };
     default:
       return state;
   }

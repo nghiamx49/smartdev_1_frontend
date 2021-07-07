@@ -1,11 +1,10 @@
 import axios from "axios";
 
-export const apiClientPatch = async (endpoint, token , id , status) => {
-  try {
-    const request =  await axios.patch(`${process.env.REACT_APP_API}/admin/providers/update_status`,
-      {
-        id , status,
-      },
+export const apiClientPatch =  async (endpoint, token , id , status) => {
+  return axios.put(`${process.env.REACT_APP_API}${endpoint}`,
+        JSON.stringify({
+          id : id , status : "Allowed",
+          }),
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -14,11 +13,30 @@ export const apiClientPatch = async (endpoint, token , id , status) => {
         validateStatus: function (status) {
           return status < 500;
         },
-      },).then((response) => console.log(response));
-    const response = await request.data;
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
+      },
+    ).then((response)=>{
+      return response.data
+    }).catch((error)=>{
+      return error
+    })
+};
+
+export const apiClientPatchUser =  async (endpoint, token) => {
+  axios.put(`${process.env.REACT_APP_API}${endpoint}`,
+  {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        validateStatus: function (status) {
+          return status < 500;
+        },
+      },
+    ).then((response)=>{
+      return response.data
+    }).catch((error)=>{
+      return error
+    })
 };
 

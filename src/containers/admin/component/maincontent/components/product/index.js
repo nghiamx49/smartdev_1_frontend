@@ -6,7 +6,8 @@ import {
     MainAdminTable,
     MainAdminStrong,
     MainAdminFlex,
-    MainAdminPage
+    MainAdminPage,
+    ButtonBan
   } from "../../style";
 import {
   AiOutlineSortDescending,
@@ -15,14 +16,21 @@ import {
 import {GrNext,GrPrevious} from 'react-icons/gr'
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
+import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
 function Product({products, token,...action}) {
+  async function getData() {
+    await action.getAllProduct(token);
+  }
   useEffect(() => {
-    async function a() {
-      await action.getAllProduct(token);
-    }
-    a()
+   getData()
   }, [])
+  async function handleStatusProduct (id , status) {
+    console.log(id, status);
+    const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
+    console.log(message);
+    getData()
+  }
   console.log(products)
     return (
         <MainAdminContent>
@@ -48,7 +56,7 @@ function Product({products, token,...action}) {
             </tr>
           </thead>
           <tbody>
-          {products.map((product) =>(
+          {(products.length !== 0)  ? (products.map((product) =>(
             <tr>
               <td>
                 <MainAdminFlex>
@@ -72,11 +80,12 @@ function Product({products, token,...action}) {
                 <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-               
-                <button>Reject</button>
+                <ButtonBan onClick={() => handleStatusProduct( product.id , "Reject")}>Reject</ButtonBan>
               </td>
             </tr>
-          ))}
+          ))) : (
+            <h3>No Product</h3>
+          )}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>

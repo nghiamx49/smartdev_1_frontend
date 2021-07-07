@@ -1,4 +1,7 @@
 import React from "react";
+
+import { submitLogout } from "../../../../actions/authenticateAction";
+import defaultAvt from "../../../../assests/img/user-default.png";
 import {
   MainAdminContainer,
   MainAdminHeader,
@@ -9,7 +12,8 @@ import {
   MainAdminAllUser,
   MainAdmintextfunction,
   MainAdminFlex,
-  MainAdminPage
+  MainAdminPage,
+  LogoutButton,
 } from "./style";
 import { AiOutlineSortAscending, AiFillFilter,AiOutlineSearch,AiFillCaretDown } from "react-icons/ai";
 import {GrPrevious,GrNext} from 'react-icons/gr'
@@ -18,11 +22,10 @@ import ProviderTable from "./components/Provider";
 import Approveproviders from "./components/approveproviders";
 import Product from "./components/product";
 import NewProduct from "./components/newProduct";
-import { apiClientPatch } from "../../../../apiServices/axiosAdmin";
 
-
-function MainAdmin(props) {
-  const {menu} = props
+import { connect } from "react-redux";
+function MainAdmin({ authenticateReducer, logout, menu }) {
+  
   function setLayout (com){
     switch(com){
       case "Users":
@@ -40,39 +43,42 @@ function MainAdmin(props) {
         return <Approveproviders/>
     }
   }
-  async function handleStatusProvider (id , status) {
-    console.log(id, status);
-    let data = JSON.stringify({
-      "id": id,
-      "status": status
-    });
-    const message = await apiClientPatch("/admin/providers/update_status" , "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNTcwMzA1MiwiaWF0IjoxNjI1NjE2NjUyfQ.Ztj4PWr5JrCYQ3OZKh8nVLaJcHeaO6sEdT84qjWIMdM" , 12 , "Allowed");
-    console.log(message);
-  }
   return (
     <MainAdminContainer>
       <MainAdminHeader>
         <h3>Tickets</h3>
         <MainAdminHeaderRight>
           <MainAdminHeaderSearch>
-
-            <p><AiOutlineSearch/> <span>search</span></p>
+            <p>
+              <AiOutlineSearch /> <span>search</span>
+            </p>
           </MainAdminHeaderSearch>
           <MainAdminHeaderUser>
-            <p>admin name</p>
+            <p>{authenticateReducer.account.username}</p>
             <img
-              src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"
-              alt="dfkjghdfg"
+              src={authenticateReducer.account.avatar_source || defaultAvt}
+              alt="admin avatar"
             />
+            <LogoutButton onClick={() => logout()}>Logout</LogoutButton>
           </MainAdminHeaderUser>
         </MainAdminHeaderRight>
       </MainAdminHeader>
-      <button  onClick={handleStatusProvider.bind(this, 12 , "Allowed")}>nfndjkf</button>
       {
         setLayout(menu)
       }
+    
     </MainAdminContainer>
   );
 }
 
-export default MainAdmin;
+const mapStateToProps = (state) => {
+  return { authenticateReducer: state.authenticateReducer };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(submitLogout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainAdmin);

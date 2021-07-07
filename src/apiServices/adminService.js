@@ -15,6 +15,7 @@ const adminService = {
     try{
       const request = await getCLient(`/admin/users/${status}`, token);
       let response = await request.data;
+      console.log(request)
       return response;
     }catch(e){
       console.log(e);

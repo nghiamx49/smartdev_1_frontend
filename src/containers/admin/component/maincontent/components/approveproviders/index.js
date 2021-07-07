@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -30,12 +31,9 @@ function ApproveProvider({providers, token, ...action}) {
 
   async function handleStatusProvider (id , status) {
     console.log(id, status);
-    let data = JSON.stringify({
-      "id": id,
-      "status": status
-    });
     const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
     console.log(message);
+    getData()
   }
     return (
         <MainAdminContent>
@@ -63,7 +61,7 @@ function ApproveProvider({providers, token, ...action}) {
             </tr>
           </thead>
           <tbody>
-          {providers.map((provider) =>(
+          {(providers.length !== 0)  ? (providers.map((provider) =>(
             <tr key={provider.id}>
               <td>
                 <MainAdminFlex>
@@ -92,12 +90,13 @@ function ApproveProvider({providers, token, ...action}) {
                 <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-                <button  onClick={handleStatusProvider.bind(this, provider.id , "Allowed")}>khsd</button>
-                <ButtonApprove>Approve</ButtonApprove>
-                <ButtonBan>Reject</ButtonBan>
+                <ButtonApprove onClick={() => handleStatusProvider( provider.id , "Allowed")}>Approve</ButtonApprove>
+                <ButtonBan onClick={() => handleStatusProvider( provider.id , "Reject")}>Reject</ButtonBan>
               </td>
             </tr> 
-          ))}
+          ))) : (
+            <h3>No Provider</h3>
+          )}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>

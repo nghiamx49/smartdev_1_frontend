@@ -4,15 +4,15 @@ import { MainAdminTable, MainAdminStrong } from "../style";
 const listLi = [
   {
     name: "Ao Quan Tre Em",
-      category_name: "Ao Quan",
-      provider_name: "store1",
-      unit_price: 150000,
-      number_of_sold: 300,
-      product_description: "ao quan danh cho tre em cac kieu bla bla",
-      product_images: [
-        "https://vinakids.vn/hinhanh/tintuc/tim-hieu-ve-thi-truong-quan-ao-tre-em-viet-nam-hien-nay-1.jpg",
-        "https://honikids.com/wp-content/uploads/2019/01/tim-dai-ly-quan-ao-tre-em-thai-lan.jpg",
-      ]
+    category_name: "Ao Quan",
+    provider_name: "store1",
+    unit_price: 150000,
+    number_of_sold: 300,
+    product_description: "ao quan danh cho tre em cac kieu bla bla",
+    product_images: [
+      "https://vinakids.vn/hinhanh/tintuc/tim-hieu-ve-thi-truong-quan-ao-tre-em-viet-nam-hien-nay-1.jpg",
+      "https://honikids.com/wp-content/uploads/2019/01/tim-dai-ly-quan-ao-tre-em-thai-lan.jpg",
+    ],
   },
 ];
 function UserTable() {
@@ -30,7 +30,7 @@ function UserTable() {
       </thead>
       <tbody>
         {listLi.map((item, index) => (
-          <tr>
+          <tr key={index}>
             <td>
               <MainAdminStrong>{item.name}</MainAdminStrong>
             </td>
@@ -48,8 +48,18 @@ function UserTable() {
             </td>
             <td>
               <MainAdminStrong>
-                  <img height="60px"  width="60px" src={item.product_images[0]} alt="dkjfhgkdjfg"/>
-                  <img height="60px"  width="60px" src={item.product_images[1]} alt="dkjfhgkdjfg"/>
+                <img
+                  height="60px"
+                  width="60px"
+                  src={item.product_images[0]}
+                  alt="dkjfhgkdjfg"
+                />
+                <img
+                  height="60px"
+                  width="60px"
+                  src={item.product_images[1]}
+                  alt="dkjfhgkdjfg"
+                />
               </MainAdminStrong>
             </td>
           </tr>

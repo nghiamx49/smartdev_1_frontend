@@ -10,23 +10,32 @@ import {
     MainAdminTable,
     MainAdminStrong,
     MainAdminFlex,
-    MainAdminPage
+    MainAdminPage,
+    ButtonBan
   } from "../../style";
 import {
   AiOutlineSortDescending,
   AiFillFilter,AiFillCaretDown
 } from "react-icons/ai";
 import {GrNext,GrPrevious} from 'react-icons/gr'
+import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
 
 
 function UserAdmin({users, token,...action}) {
+  async function getData() {
+    await action.getUser(token);
+  }
   useEffect(() => {
-    async function a() {
-      await action.getUser(token);
-    }
-    a()
+    
+    getData()
   }, [])
-  // console.log(users)
+
+  async function handleStatusProvider (id) {
+    console.log(id);
+    const message = await apiClientPatchUser(`/admin/users/${id}/ban` , token);
+    console.log(message);
+    getData()
+  }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
@@ -45,7 +54,7 @@ function UserAdmin({users, token,...action}) {
             <tr>
               <th>User name</th>
               <th>Address</th>
-              <th>Birthday</th>
+              <th>Full Name</th>
               <th>Email</th>
               <th>Phone number</th>
               <th>Ban</th>
@@ -69,7 +78,7 @@ function UserAdmin({users, token,...action}) {
                  <MainAdminStrong>{user.address}</MainAdminStrong>
                </td>
                <td>
-                 <MainAdminStrong>03-06-2020</MainAdminStrong>
+                 <MainAdminStrong>{user.full_name}</MainAdminStrong>
                </td>
                <td>
                  <MainAdminStrong>{user.email}</MainAdminStrong>
@@ -78,7 +87,7 @@ function UserAdmin({users, token,...action}) {
                  <MainAdminStrong>{user.phone_number}</MainAdminStrong>
                </td>
                <td>
-                 <button>Ban User</button>
+                 <ButtonBan  onClick={() => handleStatusProvider( user.id)}>Ban User</ButtonBan>
                </td>
              </tr>
             ))}

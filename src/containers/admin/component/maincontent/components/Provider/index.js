@@ -6,7 +6,8 @@ import {
     MainAdminTable,
     MainAdminStrong,
     MainAdminFlex,
-    MainAdminPage
+    MainAdminPage,
+    ButtonBan
   } from "../../style";
 import {
   AiOutlineSortDescending,
@@ -15,16 +16,23 @@ import {
 import {GrNext,GrPrevious} from 'react-icons/gr'
 import { connect } from 'react-redux';
 import * as all from '../../../../../../actions/adminAction'
+import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
+import avatar from   "../../../../../../assests/img/user-default.png"
 
 
 function ProviderAdmin({providers, token,...action}) {
+  async function getData() {
+    await action.getUser(token);
+  }
   useEffect(() => {
-    async function a() {
-      await action.getUser(token);
-    }
-    a()
+    getData()
   }, [])
-  console.log(providers)
+  async function handleStatusProvider (id , status) {
+    console.log(id, status);
+    const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
+    console.log(message);
+    getData()
+  }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
@@ -43,20 +51,21 @@ function ProviderAdmin({providers, token,...action}) {
             <tr>
               <th>User name</th>
               <th>Address</th>
-              <th>Birthday</th>
+              <th>Store_name</th>
               <th>Email</th>
               <th>Phone number</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {providers.map((provider) =>(
+            {(providers.length !== 0)  ? (providers.map((provider) =>(
             <tr>
               <td>
                 <MainAdminFlex>
                   <img
                     height="30"
                     width="30"
-                    src={provider.avatar_source}
+                    src={provider.avatar_source ? provider.avatar_source :avatar }
                     alt="dfkjghdfg"
                   />
                   <MainAdminStrong>{provider.username}</MainAdminStrong>
@@ -66,7 +75,7 @@ function ProviderAdmin({providers, token,...action}) {
                 <MainAdminStrong>{provider.address}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>03-06-2020</MainAdminStrong>
+                <MainAdminStrong>{provider.store_name}</MainAdminStrong>
               </td>
               <td>
                 <MainAdminStrong>{provider.email}</MainAdminStrong>
@@ -74,8 +83,13 @@ function ProviderAdmin({providers, token,...action}) {
               <td>
                 <MainAdminStrong>{provider.phone_number}</MainAdminStrong>
               </td>
+              <td>
+              <ButtonBan onClick={() => handleStatusProvider( provider.id , "Reject")}>Reject</ButtonBan>
+              </td>
             </tr>
-))}
+            ))) : (
+              <h3>No Provider</h3>
+            )}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>

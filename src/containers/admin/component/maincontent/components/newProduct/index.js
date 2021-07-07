@@ -6,7 +6,9 @@ import {
     MainAdminTable,
     MainAdminStrong,
     MainAdminFlex,
-    MainAdminPage
+    MainAdminPage,
+    ButtonApprove,
+    ButtonBan
   } from "../../style";
 import {
   AiOutlineSortDescending,
@@ -15,15 +17,22 @@ import {
 import {GrNext,GrPrevious} from 'react-icons/gr'
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
+import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
 function NewProduct({products, token,...action}) {
+  
+  async function getData() {
+    await action.getAllProductPending(token);
+  }
   useEffect(() => {
-    async function a() {
-      await action.getAllProductPending(token);
-    }
-    a()
+    getData()
   }, [])
-  console.log(products)
+  async function handleStatusProduct (id , status) {
+    console.log(id, status);
+    const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
+    console.log(message);
+    getData()
+  }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
@@ -48,7 +57,7 @@ function NewProduct({products, token,...action}) {
             </tr>
           </thead>
           <tbody>
-          {products.map((product) =>(
+          {(products.length !== 0)  ? (products.map((product) =>(
             <tr>
               <td>
                 <MainAdminFlex>
@@ -71,11 +80,13 @@ function NewProduct({products, token,...action}) {
                 <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-                <button>Allowed</button>
-                <button>Reject</button>
+                <ButtonApprove onClick={() => handleStatusProduct( product.id , "Allowed")}>Allowed</ButtonApprove>
+                <ButtonBan  onClick={() => handleStatusProduct( product.id , "Reject")}>Reject</ButtonBan>
               </td>
             </tr>
-          ))}
+          ))) : (
+            <h3>No Product</h3>
+          )}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>

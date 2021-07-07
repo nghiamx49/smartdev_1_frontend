@@ -22,8 +22,24 @@ const authenticateService = {
   getUserDetail: async () => {},
   logout: async () => {},
   forgotPassword: async () => {},
-  registerAsUser: async () => {},
-  registerAsProvider: async () => {},
+  registerAsUser: async (requestBody) => {
+    let request = await axios.post(
+      `${process.env.REACT_APP_API}/authenticate/register/user`,
+      requestBody,
+      config,
+    );
+    let response = await request.data;
+    return response;
+  },
+  registerAsProvider: async (requestBody) => {
+    let request = await axios.post(
+      `${process.env.REACT_APP_API}/authenticate/register/provider`,
+      requestBody,
+      config,
+    );
+    let response = await request.data;
+    return response;
+  },
 };
 
 export default authenticateService;
