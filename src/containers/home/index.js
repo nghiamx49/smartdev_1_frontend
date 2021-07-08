@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import home_img_1 from "../../assests/img/home-img-4.jpg";
 import home_img_2 from "../../assests/img/home-img-1.png";
 import home_img_3 from "../../assests/img/home-img-2.png";
@@ -25,8 +25,14 @@ import FlashSale from "./flashsale";
 import ShopSmallItem from "./shopsmall";
 import HomeSearch from "./search";
 import Product from "../../components/cardProduct";
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import { getProductsRequest } from "../../actions/productAction";
 
-function Home() {
+function Home({list,getList}) {
+  useEffect(()=>{
+    getList()
+  },[getList])
   return (
     <div>
       <Container>
@@ -180,7 +186,9 @@ function Home() {
               </HOME.HomeShoppeSmallTopRight>
             </HOME.HomeTitle>
             <HOME.HomeProductList>
-              <Product />
+             {
+               list.map((item,index) => <Product item={item} key={index}/>)
+             }
             </HOME.HomeProductList>
           </div>
         </Container>
@@ -189,4 +197,18 @@ function Home() {
   );
 }
 
-export default Home;
+
+
+const mapStateToProps = (state) => {
+  return {
+      list: state.productReducer.allProducts
+  }
+}
+const mapDispatchToProps = (dispatch) =>
+  ({getList: () => dispatch(getProductsRequest())})
+
+Home.propTypes = {
+  list: PropTypes.array,
+  getList: PropTypes.func,
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Home)

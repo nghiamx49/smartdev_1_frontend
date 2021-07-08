@@ -11,16 +11,21 @@ import imgProduct3 from '../../assests/img/san-pham-3.jpeg'
 import imgProduct4 from '../../assests/img/san-pham-4.jpeg'
 import imgProvider from '../../assests/img/user-default.png'
 import Feedback from './feeback';
-import TopProductSale from '../../components/cardProduct'
+import Product from '../../components/cardProduct'
 import * as PD from './style';
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getProductsRequest } from "../../actions/productAction";
 
-const ProductDetail = () => {
+const ProductDetail = ({list,getList}) => {
 
     const [imgShow, setImgShow] = useState(imgProduct1)
     const [amount, setAmount] = useState(1)
     const numberComment = 1;
-
+    useEffect(()=>{
+        getList()
+      },[getList])
     const listImg = [
         imgProduct1,
         imgProduct2,
@@ -49,8 +54,8 @@ const ProductDetail = () => {
                 <PD.MainLeft>
                     <PD.ImgShow src={imgShow} alt="" />
                     <PD.ListImgProduct>
-                        {listImg.map((img) => (
-                            <img key={listImg.indexOf(img)} src={img} alt="" onClick={changeImgShow.bind(this, listImg.indexOf(img))} />
+                        {listImg.map((img,index) => (
+                            <img key={index} src={img} alt="" onClick={changeImgShow.bind(this, listImg.indexOf(img))} />
                         ))}
                     </PD.ListImgProduct>
                 </PD.MainLeft>
@@ -169,15 +174,9 @@ const ProductDetail = () => {
                 <PD.Container03Right>
                     <PD.TitleProductTopSale>Top sản phẩm bán chạy</PD.TitleProductTopSale>
                     <PD.ProductTopSaleDetailCover>
-                        <PD.ProductTopSaleDetail>
-                            <TopProductSale />
-                        </PD.ProductTopSaleDetail>
-                        <PD.ProductTopSaleDetail>
-                            <TopProductSale />
-                        </PD.ProductTopSaleDetail>
-                        <PD.ProductTopSaleDetail>
-                            <TopProductSale />
-                        </PD.ProductTopSaleDetail>
+                        {
+                            list.slice(0,3).map((item,index)=><Product key={index} item={item}/>)
+                        }
                     </PD.ProductTopSaleDetailCover>
                 </PD.Container03Right>
             </PD.Container03>
@@ -185,4 +184,16 @@ const ProductDetail = () => {
     )
 }
 
-export default ProductDetail
+const mapStateToProps = (state) => {
+    return {
+        list: state.productReducer.allProducts
+    }
+  }
+  const mapDispatchToProps = (dispatch) =>
+    ({getList: () => dispatch(getProductsRequest())})
+  
+ProductDetail.propTypes = {
+    list: PropTypes.array,
+    getList: PropTypes.func,
+  };
+export default connect(mapStateToProps,mapDispatchToProps)(ProductDetail)

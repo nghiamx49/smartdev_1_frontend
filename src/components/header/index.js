@@ -68,8 +68,10 @@ const HeaderComponent = ({ authenticateReducer, logout }) => {
 
         <HEADER.HeaderBottom>
           <HEADER.HeaderBottomLeft>
+            <Link to="/">
             <img src={imgLogo} alt="" />
             <span>Shop Easiest</span>
+            </Link>
           </HEADER.HeaderBottomLeft>
           <HEADER.HeaderBottomCenter>
             <HEADER.HeaderBottomCenterTop>
