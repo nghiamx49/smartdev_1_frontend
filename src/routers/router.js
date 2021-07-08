@@ -13,6 +13,7 @@ import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
 import Provider from "../containers/provider";
 import Page404 from "../containers/page404";
+import LayoutDashborad from "../components/layout/layoutDashborad";
 const routes = [
   {
     path: "/login",
@@ -47,6 +48,7 @@ const routes = [
     component: Provider,
     exact: true,
     isAuthorize: "authorize",
+    layout: LayoutDashborad,
     role: "provider",
   },
   {
