@@ -1,69 +1,87 @@
-import React from 'react'
-import { BottomLeft, Container, MiddleLeft, MiddleRight, OrderHistoryTagBottom, OrderHistoryTagTop, TopLeft, TopRight } from './style'
-import PropTypes from 'prop-types';
+import React from "react";
+import { AiOutlineShop } from "react-icons/ai";
+import {
+  BottomLeft,
+  Container,
+  MiddleLeft,
+  MiddleRight,
+  OrderHistoryTagBottom,
+  ListItemContainer,
+  CustomButton,
+  CustomHr,
+  StoreContainer,
+  CustomImg,
+  Detail,
+  CustomProductName,
+  TotalContainer,
+} from "./style";
+import PropTypes from "prop-types";
 
 OrderHistoryTag.propTypes = {
-    orderHistory :  PropTypes.shape({
-        shop_Name : PropTypes.string,
-        productName : PropTypes.string,
-        linkimage :PropTypes.string,
-        num : PropTypes.number,
-        price : PropTypes.number,
-        total : PropTypes.number,
-    })
-}
+  orderHistory: PropTypes.shape({
+    store_name: PropTypes.string,
+    product_name: PropTypes.string,
+    image_source: PropTypes.string,
+    quantity_purchased: PropTypes.number,
+    unit_price: PropTypes.string,
+    product_id: PropTypes.number,
+  }),
+};
 
 export default function OrderHistoryTag(props) {
-    console.log(props);
-    const {orderHistory} = props;
-    return (
-        <Container>
-            <OrderHistoryTagTop>
-                <TopLeft>
-                    <span>{orderHistory.shop_Name}</span>
-                    <button>Đi Đến Shop</button>
-                </TopLeft>
-                <TopRight>
-                    <h3>Đã giao</h3>
-                </TopRight>
-            </OrderHistoryTagTop>
-            <OrderHistoryTagTop>
-                <MiddleLeft>
-                    <div>
-                        <img src={orderHistory.linkimage} alt=""></img>
-                    </div>
-                    <div>
-                        <ul>
-                            <li><span>{orderHistory.productName}</span></li>
-                            <li><span>x{orderHistory.num}</span></li>
-                        </ul>
-                    </div>
-                </MiddleLeft>
-                <MiddleRight>
-                    <span>
-                        Giá : {orderHistory.price}
-                    </span>
-                </MiddleRight>
-            </OrderHistoryTagTop>
-            <OrderHistoryTagBottom>
-                <BottomLeft>
-                    <div>
-                        <span>
-                        Tông tiền : {orderHistory.total}
-                        </span>
-                    </div>
-                </BottomLeft>
-                <BottomLeft>
-                    <div>
-                        <button>
-                            Mua Lần Nữa
-                        </button>
-                        <button>
-                            Liên Hệ Người Bán
-                        </button>
-                    </div>
-                </BottomLeft>
-            </OrderHistoryTagBottom>
-        </Container>
-    )
+  const { orderHistory } = props;
+  return (
+    <Container>
+      <StoreContainer>
+        <AiOutlineShop />
+        <span>{orderHistory.store_name}</span>
+      </StoreContainer>
+
+      <CustomHr />
+      <ListItemContainer>
+        <MiddleLeft>
+          <div>
+            <CustomImg src={orderHistory.image_source} alt="" />
+          </div>
+          <Detail>
+            <ul>
+              <li>
+                <CustomProductName>
+                  {orderHistory.product_name}
+                </CustomProductName>
+              </li>
+              <li>
+                <span>x{orderHistory.quantity_purchased}</span>
+              </li>
+            </ul>
+          </Detail>
+        </MiddleLeft>
+        <MiddleRight>
+          <span>
+            {(+orderHistory.unit_price).toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </span>
+        </MiddleRight>
+      </ListItemContainer>
+      <CustomHr />
+      <OrderHistoryTagBottom>
+        <TotalContainer>
+          <h3 style={{ color: "#d73211" }}>
+            {(
+              +orderHistory.unit_price * orderHistory.quantity_purchased
+            ).toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </h3>
+          <label style={{ paddingRight: "10px" }}>Tông tiền: </label>{" "}
+        </TotalContainer>
+        <BottomLeft>
+          <CustomButton>Mua Lần Nữa</CustomButton>
+        </BottomLeft>
+      </OrderHistoryTagBottom>
+    </Container>
+  );
 }
