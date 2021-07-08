@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {theme} from "../../../../assests/common/color"
+import {theme} from "../../assests/common/color"
 export const SideBarContainer = styled.div`
     background-color: ${theme.bgSideBarAdmin};
     flex-basis: 20%;

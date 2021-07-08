@@ -11,3 +11,7 @@ export const DisplayFlexWrap = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;
+
+export const LayoutDashboradStyle = styled.div`
+    display: flex;
+`;

@@ -14,10 +14,12 @@ export const SideBarLi = styled.li`
            stroke: #A4A6B3;
        }
     }
-    span{
+    a{
         font-size: 16px;
         font-weight: 400;
         text-transform: capitalize;
+        text-decoration: none;
+        color: #fff;
     }
     &:hover{
         background-color: #9FA2B4;
