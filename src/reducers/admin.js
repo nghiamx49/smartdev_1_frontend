@@ -15,17 +15,10 @@ const adminReducer = (state = initialState, action) => {
       return {...state , allUsers : action.payload.data , pagesUsers  : action.payload.pages};
 
     case adminContants.GET_ALL_PROVIDERS_SUCCESS:
-      console.log(action.payload.pages)
-      return {...state , allProviders : action.payload.data , pagesProvider : action.payload.pages};
-
-    case adminContants.GET_ALL_PROVIDERS_SUCCESS_PENDING:
       return {...state , allProviders : action.payload.data , pagesProvider : action.payload.pages};
 
     case adminContants.GET_ALL_PRODUCTS_SUCCESS:
-      return {...state , allProducts : action.payload.data , allProducts:  action.payload.pages};
-
-    case adminContants.GET_ALL_PRODUCTS_SUCCESS_PENDING:
-      return {...state , allProducts : action.payload.data , allProducts:  action.payload.pages};
+      return {...state , allProducts : action.payload.data , pagesProducts:  action.payload.pages};
 
   default:
     console.log(state)

@@ -35,7 +35,7 @@ const listLi = [
     },
     {
         icons:MdSettingsApplications,
-        text:"Settings"
+        text:"ProductReject"
     },
     {
         icons:MdSubscriptions,

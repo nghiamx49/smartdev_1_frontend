@@ -13,26 +13,33 @@ import {
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter,AiFillCaretDown
+  AiFillFilter
 } from "react-icons/ai";
-import {GrNext,GrPrevious} from 'react-icons/gr'
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import avatar from   "../../../../../../assests/img/user-default.png"
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
-function ApproveProvider({providers, token , pagesProduct, ...action}) {
+function ApproveProvider({providers, token , pagesProvider, ...action}) {
+
   let pagination = []
-  
-  async function getData() {
-    await action.getUser(token);
-    for(var i=0 ; i<=pagesProduct ; i++){
-      pagination.push(i)
-    }
+  const [pagina, setpagina] = useState([])
+
+  async function getData(page) {
+    await action.getProvider("Pending", token , page);
   }
+
   useEffect(() => {
-    getData()
+    getData(0)
   }, []);
+
+  useEffect(() => {
+    for(var i=0 ; i < pagesProvider ; i++){
+      pagination.push(i)
+      console.log(pagination);
+    }
+    setpagina(pagination)
+  }, [pagesProvider])
 
   async function handleStatusProvider (id , status) {
     console.log(id, status);
@@ -40,6 +47,7 @@ function ApproveProvider({providers, token , pagesProduct, ...action}) {
     console.log(message);
     getData()
   }
+
     return (
         <MainAdminContent>
         <MainAdminAllUser>
@@ -100,15 +108,15 @@ function ApproveProvider({providers, token , pagesProduct, ...action}) {
               </td>
             </tr> 
           ))) : (
-            <h3>No Provider</h3>
+            <td><h3>No Provider</h3></td>
           )}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
           {
-            pagination.map((page)=>{
-              <button>pgea</button>
-            })
+            pagina.map((page) =>(
+              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
+            ))
           }
         </MainAdminPage>
       </MainAdminContent>
@@ -116,14 +124,14 @@ function ApproveProvider({providers, token , pagesProduct, ...action}) {
 }
 const mapStateToProps = (state) =>{
   return {
-      pagesProduct : state.adminReducer.pagesProduct,
+      pagesProvider : state.adminReducer.pagesProvider,
       providers : state.adminReducer.allProviders,
       token : state.authenticateReducer.token,
   }
 }
 
 const mapDispatchToProps =  {
-  getUser : all.getProviderPending,
+  getProvider : all.getProvider,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApproveProvider);

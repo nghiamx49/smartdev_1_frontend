@@ -15,21 +15,29 @@ import {
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter,AiFillCaretDown
+  AiFillFilter
 } from "react-icons/ai";
-import {GrNext,GrPrevious} from 'react-icons/gr'
 import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
 
 
-function UserAdmin({users, token,...action}) {
-  async function getData() {
-    await action.getUser(token);
+function UserAdmin({users,pagesUser , token,...action}) {
+  let pagination = []
+  const [pagina, setpagina] = useState([])
+
+  async function getData(page) {
+    await action.getUser("not_ban" ,token , page);
   }
   useEffect(() => {
-    
-    getData()
+    getData(0)
   }, [])
 
+  useEffect(() => {
+    for(var i=0 ; i<pagesUser ; i++){
+      pagination.push(i)
+      console.log(pagination);
+    }
+    setpagina(pagination)
+  }, [pagesUser])
   async function handleStatusProvider (id) {
     console.log(id);
     const message = await apiClientPatchUser(`/admin/users/${id}/ban` , token);
@@ -94,8 +102,11 @@ function UserAdmin({users, token,...action}) {
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
-            <div>Rows per page:8 <span><AiFillCaretDown/></span></div>
-            <div>1-8 of 1240 <span><GrPrevious/><GrNext/></span></div>
+          {
+            pagina.map((page) =>(
+              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
+            ))
+          }
         </MainAdminPage>
       </MainAdminContent>
     )
@@ -105,11 +116,12 @@ const mapStateToProps = (state) =>{
   return {
       users : state.adminReducer.allUsers,
       token : state.authenticateReducer.token,
+      pagesUser : state.adminReducer.pagesUsers
   }
 }
 
 const mapDispatchToProps =  {
-  getUser : all.getUserAlowed,
+  getUser : all.getUser,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserAdmin);

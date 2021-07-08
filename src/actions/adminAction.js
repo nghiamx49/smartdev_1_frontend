@@ -1,17 +1,20 @@
 import {adminContants} from '../constants/index'
 
-export const getUserAlowed = (token) => {
+export const getUser = ( status , token , page) => {
     return {
         type : adminContants.GET_ALL_USERS,
         payload : token,
+        page : page, 
+        status : status
     }
 }
 
-
-export const getProviderAllowed = (token) => {
+export const getProvider = (status ,token, page) => {
     return {
         type : adminContants.GET_ALL_PROVIDERS,
         payload : token,
+        page : page,
+        status: status
     }
 }
 
@@ -29,24 +32,12 @@ export const getUserSuccess = (data) => {
     }
 }
 
-export const getProviderPending = (token) => {
-    return {
-        type : adminContants.GET_ALL_PROVIDERS_PENDING,
-        payload : token,
-    }
-}
-
-export const getProviderPendingSuccess = (data) => {
-    return {
-        type :adminContants.GET_ALL_PROVIDERS_SUCCESS_PENDING, 
-        payload : data,
-    }
-}
-
-export const getAllProduct = (token) => {
+export const getAllProduct = (status ,token,page) => {
     return {
         type : adminContants.GET_ALL_PRODUCTS,
         payload : token,
+        page : page,
+        status
     }
 }
 
@@ -57,16 +48,18 @@ export const getAllProductSuccess = (data) => {
     }
 }
 
-export const getAllProductPending = (token) => {
+export const searchProduct = (status ,token, num) => {
     return {
-        type : adminContants.GET_ALL_PRODUCTS_PENDING,
+        type : adminContants.SEARCH,
         payload : token,
+        search : num.searchStr,
+        status
     }
 }
 
-export const getAllProductPendingSuccess = (data) => {
+export const  searchProductSuccess = (data) => {
     return {
-        type :adminContants.GET_ALL_PRODUCTS_SUCCESS_PENDING, 
+        type :adminContants.GET_ALL_PRODUCTS_SUCCESS, 
         payload : data,
     }
 }

@@ -16,6 +16,7 @@ import ProviderTable from "./components/Provider";
 import Approveproviders from "./components/approveproviders";
 import Product from "./components/product";
 import NewProduct from "./components/newProduct";
+import ProductBan from "./components/productBan";
 
 import { connect } from "react-redux";
 function MainAdmin({ authenticateReducer, logout, menu }) {
@@ -32,7 +33,8 @@ function MainAdmin({ authenticateReducer, logout, menu }) {
         return <Product/>
       case "NewProduct":
         return <NewProduct/>
-         
+      case "ProductReject":
+        return <ProductBan/>
       default:
         return <Approveproviders/>
     }

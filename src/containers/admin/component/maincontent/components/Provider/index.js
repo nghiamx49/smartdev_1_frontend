@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -20,13 +20,24 @@ import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 import avatar from   "../../../../../../assests/img/user-default.png"
 
 
-function ProviderAdmin({providers, token,...action}) {
-  async function getData() {
-    await action.getUser(token);
+function ProviderAdmin({providers , pagesProvider, token,...action}) {
+  let pagination = []
+  const [pagina, setpagina] = useState([])
+
+  async function getData(page) {
+    await action.getProvider("Allowed" ,token , page);
   }
   useEffect(() => {
-    getData()
+    getData(0)
   }, [])
+  useEffect(() => {
+    for(var i=0 ; i<pagesProvider ; i++){
+      pagination.push(i)
+      console.log(pagination);
+    }
+    setpagina(pagination)
+  }, [pagesProvider])
+
   async function handleStatusProvider (id , status) {
     console.log(id, status);
     const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
@@ -93,8 +104,11 @@ function ProviderAdmin({providers, token,...action}) {
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
-            <div>Rows per page:8 <span><AiFillCaretDown/></span></div>
-            <div>1-8 of 1240 <span><GrPrevious/><GrNext/></span></div>
+          {
+            pagina.map((page) =>(
+              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
+            ))
+          }
         </MainAdminPage>
       </MainAdminContent>
     )
@@ -102,13 +116,14 @@ function ProviderAdmin({providers, token,...action}) {
 
 const mapStateToProps = (state) =>{
   return {
+      pagesProvider : state.adminReducer.pagesProvider,
       providers : state.adminReducer.allProviders,
       token : state.authenticateReducer.token,
   }
 }
 
 const mapDispatchToProps =  {
-  getUser : all.getProviderAllowed,
+  getProvider : all.getProvider,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProviderAdmin);

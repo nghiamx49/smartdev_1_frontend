@@ -1,20 +1,12 @@
 import {call , put, takeLatest } from 'redux-saga/effects'
 import AdminService from '../apiServices/adminService'
-import {getUserSuccess , getProviderSuccess, getProviderPendingSuccess, getAllProductSuccess, getAllProductPendingSuccess, setSearchProduct} from '../actions/adminAction'
+import {getUserSuccess , getProviderSuccess, getAllProductSuccess, getAllProductPendingSuccess} from '../actions/adminAction'
 import {adminContants} from '../constants/index'
 
-const initialState = {
-    allProviders: [],
-    allUsers: [],
-    allProducts:[],
-    pagesProvider : 1 ,
-    pagesUsers : 1 ,
-    pagesProducts : 1 ,
-  };
 
 function* handleGetUser (action) {
     try {
-        const response = yield call( AdminService.getAllUser,"not_ban" ,action.payload);
+        const response = yield call( AdminService.getAllUser,action.status ,action.payload , action.page , );
         if (response.data === undefined){
             response = {
                 data: [],
@@ -29,7 +21,7 @@ function* handleGetUser (action) {
 
 function* handleGetProvider (action) {
     try {
-        const response = yield call( AdminService.getAllProvider,"Allowed" ,action.payload);
+        const response = yield call( AdminService.getAllProvider,action.status ,action.payload ,  action.page);
         console.log(response);
         if (response.data === undefined){
             response = {
@@ -43,24 +35,9 @@ function* handleGetProvider (action) {
     }
 }
 
-function* handleGetProviderPending (action) {
-    try {
-        const response = yield call( AdminService.getAllProvider,"Pending" ,action.payload);
-        if (response.data === undefined){
-            response = {
-                data: [],
-                pages : 1 ,
-            };
-        }
-        yield put(getProviderPendingSuccess(response));
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 function* handleGetProduct (action) {
     try {
-        const response = yield call( AdminService.getAllProduct,"Allowed" ,action.payload);
+        const response = yield call( AdminService.getAllProduct,action.status ,action.payload ,  action.page);
         if (response.data === undefined){
             response = {
                 data: [],
@@ -73,27 +50,9 @@ function* handleGetProduct (action) {
     }
 }
 
-function* handleGetProductPending (action) {
-    try {
-        const response = yield call( AdminService.getAllProduct,"Pending" ,action.payload);
-        if (response.data === undefined){
-            response = {
-                data: [],
-                pages : 1 ,
-            };
-        }
-        yield put(getAllProductPendingSuccess(response));
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-
 export default function* watcherSaga () {
     yield takeLatest(adminContants.GET_ALL_USERS, handleGetUser)
     yield takeLatest(adminContants.GET_ALL_PROVIDERS, handleGetProvider)
-    yield takeLatest(adminContants.GET_ALL_PROVIDERS_PENDING, handleGetProviderPending)
     yield takeLatest(adminContants.GET_ALL_PRODUCTS, handleGetProduct)
-    yield takeLatest(adminContants.GET_ALL_PRODUCTS_PENDING, handleGetProductPending)
 }
 

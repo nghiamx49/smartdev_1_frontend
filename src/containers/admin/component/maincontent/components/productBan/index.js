@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form';
-
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -9,6 +7,7 @@ import {
     MainAdminStrong,
     MainAdminFlex,
     MainAdminPage,
+    ButtonApprove,
     ButtonBan
   } from "../../style";
 import {
@@ -19,22 +18,19 @@ import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
-
-
-function Product({products, pagesProduct, token,...action}) {
+function ProductBan({products, pagesProduct, token,...action}) {
   let pagination = []
   const [pagina, setpagina] = useState([])
-  const { register , handleSubmit} = useForm();
-
+  
   async function getData(page) {
-    await action.getAllProduct("Allowed",token , page);
+    await action.getAllProduct("Rejected",token , page);
   }
   useEffect(() => {
-   getData(0)
+    getData(0)
   }, [])
 
   useEffect(() => {
-    for(var i=0 ; i<pagesProduct ; i++){
+    for(var i=0 ; i < pagesProduct ; i++){
       pagination.push(i)
       console.log(pagination);
     }
@@ -47,20 +43,12 @@ function Product({products, pagesProduct, token,...action}) {
     console.log(message);
     getData()
   }
-  console.log(products)
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL Product</h3> 
-          <div>
-            <form onSubmit={handleSubmit(action.search)}>
-                <input type="text"  {...register("searchStr" ,{ require : true})} placeholder="Name"></input>
-                <button>Search</button>
-            </form>
-          </div>
+          <h3>ALL New Product</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-           
               <AiOutlineSortDescending /> <span>sort</span>
             </MainAdmintextfunction>
             <MainAdmintextfunction>
@@ -98,12 +86,11 @@ function Product({products, pagesProduct, token,...action}) {
               <td>
                 <MainAdminStrong>{product.unit_price}</MainAdminStrong>
               </td>
-      
               <td>
                 <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-                <ButtonBan onClick={() => handleStatusProduct( product.id , "Reject")}>Reject</ButtonBan>
+                <ButtonApprove onClick={() => handleStatusProduct( product.id , "Allowed")}>Allowed</ButtonApprove>
               </td>
             </tr>
           ))) : (
@@ -131,7 +118,6 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps =  {
   getAllProduct : all.getAllProduct,
-  search : all.searchProduct
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductBan);

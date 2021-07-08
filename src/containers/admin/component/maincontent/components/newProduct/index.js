@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -12,21 +12,31 @@ import {
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter,AiFillCaretDown
+  AiFillFilter
 } from "react-icons/ai";
-import {GrNext,GrPrevious} from 'react-icons/gr'
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
-function NewProduct({products, token,...action}) {
+function NewProduct({products, pagesProduct, token,...action}) {
+  let pagination = []
+  const [pagina, setpagina] = useState([])
   
-  async function getData() {
-    await action.getAllProductPending(token);
+  async function getData(page) {
+    await action.getAllProductPending("Pending",token , page);
   }
   useEffect(() => {
-    getData()
+    getData(0)
   }, [])
+
+  useEffect(() => {
+    for(var i=0 ; i < pagesProduct ; i++){
+      pagination.push(i)
+      console.log(pagination);
+    }
+    setpagina(pagination)
+  }, [pagesProduct])
+
   async function handleStatusProduct (id , status) {
     console.log(id, status);
     const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
@@ -90,8 +100,11 @@ function NewProduct({products, token,...action}) {
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
-            <div>Rows per page:8 <span><AiFillCaretDown/></span></div>
-            <div>1-8 of 1240 <span><GrPrevious/><GrNext/></span></div>
+          {
+            pagina.map((page) =>(
+              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
+            ))
+          }
         </MainAdminPage>
       </MainAdminContent>
     )
@@ -100,11 +113,12 @@ const mapStateToProps = (state) =>{
   return {
       products : state.adminReducer.allProducts,
       token : state.authenticateReducer.token,
+      pagesProduct : state.adminReducer.pagesProducts
   }
 }
 
 const mapDispatchToProps =  {
-  getAllProductPending : all.getAllProductPending,
+  getAllProductPending : all.getAllProduct,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewProduct);

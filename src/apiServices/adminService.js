@@ -2,9 +2,9 @@ import axios from "axios";
 import getCLient from "./axiosClient"
 
 const adminService = {
-  getAllProvider: async (status ,token) => {
+  getAllProvider: async (status ,token ,page) => {
     try{
-      const request = await getCLient(`/admin/providers/${status}`, token);
+      const request = await getCLient(`/admin/providers/${status}?page=${page}`, token);
       let response = await request;
       console.log(request);
       return response;
@@ -12,9 +12,9 @@ const adminService = {
       console.log(e);
     }
   },
-  getAllUser: async (status , token) => {
+  getAllUser: async (status , token , page) => {
     try{
-      const request = await getCLient(`/admin/users/${status}`, token);
+      const request = await getCLient(`/admin/users/${status}?page=${page}`, token);
       let response = await request;
       console.log(request)
       return response;
@@ -22,9 +22,9 @@ const adminService = {
       console.log(e);
     }
   },
-  getAllProduct: async (status ,token) => {
+  getAllProduct: async (status ,token , page) => {
     try{
-      const request = await getCLient(`/admin/product_requests/${status}`, token);
+      const request = await getCLient(`/admin/product_requests/${status}?page=${page}`, token);
       let response = await request;
       console.log(request)
       return response;
