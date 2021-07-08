@@ -157,6 +157,11 @@ export const HeaderBottomCenter = styled.div`
 export const HeaderBottomLeft = styled.div`
     display: flex;
     align-items: center;
+    a{
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
     span{
       font-size: 20px;
       font-weight: 600;
