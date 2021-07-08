@@ -18,9 +18,12 @@ const cartReducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS_IN_CART_SUCCESS:
       return { ...state, data: action.payload };
     case REMOVE_PRODUCT_FROM_CART_SUCCESS:
-      return state.data.filter(
-        (item) => parseInt(item.id) !== parseInt(action.payload),
-      );
+      return {
+        ...state,
+        data: state.data.filter(
+          (item) => parseInt(item.id) !== parseInt(action.payload),
+        ),
+      };
     case INCREASE_QUANTITY_SUCCESS:
       let data = [...state.data];
       const itemIndex = data.indexOf(action.payload);
