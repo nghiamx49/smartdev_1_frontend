@@ -23,9 +23,11 @@ import avatar from   "../../../../../../assests/img/user-default.png"
 function ProviderAdmin({providers , pagesProvider, token,...action}) {
   let pagination = []
   const [pagina, setpagina] = useState([])
+  const [page, setPage] = useState(0)
 
   async function getData(page) {
     await action.getProvider("Allowed" ,token , page);
+    setPage(page)
   }
   useEffect(() => {
     getData(0)
@@ -33,16 +35,14 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
   useEffect(() => {
     for(var i=0 ; i<pagesProvider ; i++){
       pagination.push(i)
-      console.log(pagination);
     }
     setpagina(pagination)
-  }, [pagesProvider])
+  }, [pagesProvider,pagination])
 
   async function handleStatusProvider (id , status) {
-    console.log(id, status);
     const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
     console.log(message);
-    getData()
+    getData(page)
   }
     return (
         <MainAdminContent>
@@ -50,7 +50,7 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
           <h3>ALL Provider</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <span>sort</span>
+              <AiOutlineSortDescending />  <button onClick={action.sort}>Sort By Username</button>
             </MainAdmintextfunction>
             <MainAdmintextfunction>
               <AiFillFilter /> <span>filter</span>
@@ -95,7 +95,7 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
                 <MainAdminStrong>{provider.phone_number}</MainAdminStrong>
               </td>
               <td>
-              <ButtonBan onClick={() => handleStatusProvider( provider.id , "Reject")}>Reject</ButtonBan>
+              <ButtonBan onClick={() => handleStatusProvider( provider.id , "Rejected")}>Rejected</ButtonBan>
               </td>
             </tr>
             ))) : (
@@ -119,11 +119,13 @@ const mapStateToProps = (state) =>{
       pagesProvider : state.adminReducer.pagesProvider,
       providers : state.adminReducer.allProviders,
       token : state.authenticateReducer.token,
+      sortValue : state.adminReducer.sort
   }
 }
 
 const mapDispatchToProps =  {
-  getProvider : all.getProvider,
+    getProvider : all.getProvider,
+    sort : all.sortProvider,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProviderAdmin);

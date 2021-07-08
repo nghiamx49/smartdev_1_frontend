@@ -23,9 +23,11 @@ import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
 function UserAdmin({users,pagesUser , token,...action}) {
   let pagination = []
   const [pagina, setpagina] = useState([])
+  const [page, setPage] = useState(0)
 
   async function getData(page) {
     await action.getUser("not_ban" ,token , page);
+    setPage(page)
   }
   useEffect(() => {
     getData(0)
@@ -42,7 +44,7 @@ function UserAdmin({users,pagesUser , token,...action}) {
     console.log(id);
     const message = await apiClientPatchUser(`/admin/users/${id}/ban` , token);
     console.log(message);
-    getData()
+    getData(page)
   }
     return (
         <MainAdminContent>
@@ -50,7 +52,7 @@ function UserAdmin({users,pagesUser , token,...action}) {
           <h3>ALL USERS</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <span>sort</span>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
             </MainAdmintextfunction>
             <MainAdmintextfunction>
               <AiFillFilter /> <span>filter</span>
@@ -116,12 +118,14 @@ const mapStateToProps = (state) =>{
   return {
       users : state.adminReducer.allUsers,
       token : state.authenticateReducer.token,
-      pagesUser : state.adminReducer.pagesUsers
+      pagesUser : state.adminReducer.pagesUsers,
+      sortvalue : state.adminReducer.sort
   }
 }
 
 const mapDispatchToProps =  {
   getUser : all.getUser,
+  sort : all.sortUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserAdmin);

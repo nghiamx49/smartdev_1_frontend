@@ -62,7 +62,7 @@ const routes = [
     component: Orderhistory,
     exact: true,
     layout: Layout,
-    isAuthorize: "authorize",
+    isAuthorize: "all",
     role: "user",
   },
   {

@@ -32,6 +32,17 @@ const adminService = {
       console.log(e);
     }
   },
+
+  searchProduct: async (status ,token , searchValue) => {
+    try{
+      const request = await getCLient(`/admin/product_requests/${status}?keyword=${searchValue}`, token);
+      let response = await request;
+      console.log(request)
+      return response;
+    }catch(e){
+      console.log(e);
+    }
+  },
 };
 
 

@@ -48,11 +48,11 @@ export const getAllProductSuccess = (data) => {
     }
 }
 
-export const searchProduct = (status ,token, num) => {
+export const searchProduct = (status ,token, searchValue) => {
     return {
         type : adminContants.SEARCH,
         payload : token,
-        search : num.searchStr,
+        search : searchValue,
         status
     }
 }
@@ -61,6 +61,24 @@ export const  searchProductSuccess = (data) => {
     return {
         type :adminContants.GET_ALL_PRODUCTS_SUCCESS, 
         payload : data,
+    }
+}
+
+export const  sortProvider = () => {
+    return {
+        type :adminContants.SORT_PROVIDER, 
+    }
+}
+
+export const  sortUser = () => {
+    return {
+        type :adminContants.SORT_USER, 
+    }
+}
+
+export const  sortProduct = () => {
+    return {
+        type :adminContants.SORT_PRODUCT, 
     }
 }
 

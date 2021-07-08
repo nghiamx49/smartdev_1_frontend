@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -13,7 +13,6 @@ import {
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter
 } from "react-icons/ai";
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
@@ -21,12 +20,12 @@ import avatar from   "../../../../../../assests/img/user-default.png"
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
 function ApproveProvider({providers, token , pagesProvider, ...action}) {
-
   let pagination = []
   const [pagina, setpagina] = useState([])
-
+  const [page, setPage] = useState(0)
   async function getData(page) {
     await action.getProvider("Pending", token , page);
+    setPage(page)
   }
 
   useEffect(() => {
@@ -36,29 +35,24 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
   useEffect(() => {
     for(var i=0 ; i < pagesProvider ; i++){
       pagination.push(i)
-      console.log(pagination);
     }
     setpagina(pagination)
   }, [pagesProvider])
 
   async function handleStatusProvider (id , status) {
-    console.log(id, status);
     const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
-    console.log(message);
-    getData()
+    getData(page)
   }
-
+  console.log(providers);
     return (
         <MainAdminContent>
         <MainAdminAllUser>
           <h3>ALL ApproveProvider</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <span>sort</span>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
             </MainAdmintextfunction>
-            <MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
-            </MainAdmintextfunction>
+           
           </MainAdminFlex>
         </MainAdminAllUser>
         <MainAdminTable>
@@ -103,8 +97,8 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
                 <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-                <ButtonApprove onClick={() => handleStatusProvider( provider.id , "Allowed")}>Approve</ButtonApprove>
-                <ButtonBan onClick={() => handleStatusProvider( provider.id , "Reject")}>Reject</ButtonBan>
+                <ButtonApprove onClick={() => handleStatusProvider( provider.id , "Allowed")}>Allowed</ButtonApprove>
+                <ButtonBan onClick={() => handleStatusProvider( provider.id , "Rejected")}>Rejected</ButtonBan>
               </td>
             </tr> 
           ))) : (
@@ -127,11 +121,13 @@ const mapStateToProps = (state) =>{
       pagesProvider : state.adminReducer.pagesProvider,
       providers : state.adminReducer.allProviders,
       token : state.authenticateReducer.token,
+      sortValue : state.adminReducer.sort
   }
 }
 
 const mapDispatchToProps =  {
   getProvider : all.getProvider,
+  sort : all.sortProvider,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApproveProvider);

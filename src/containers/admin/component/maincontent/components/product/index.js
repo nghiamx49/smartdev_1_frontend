@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form';
 
 import {
     MainAdminContent,
@@ -24,10 +23,12 @@ import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 function Product({products, pagesProduct, token,...action}) {
   let pagination = []
   const [pagina, setpagina] = useState([])
-  const { register , handleSubmit} = useForm();
+  const [page, setpage] = useState(0)
+  const [searchValue, setSearchValue] = useState("")
 
   async function getData(page) {
     await action.getAllProduct("Allowed",token , page);
+    setpage(page)
   }
   useEffect(() => {
    getData(0)
@@ -45,17 +46,21 @@ function Product({products, pagesProduct, token,...action}) {
     console.log(id, status);
     const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
     console.log(message);
-    getData()
+    getData(page)
   }
-  console.log(products)
+
+  function handleSearch(e){
+    e.preventDefault();
+    action.search("Allowed" , token , searchValue)
+  }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
           <h3>ALL Product</h3> 
           <div>
-            <form onSubmit={handleSubmit(action.search)}>
-                <input type="text"  {...register("searchStr" ,{ require : true})} placeholder="Name"></input>
-                <button>Search</button>
+            <form onSubmit={handleSearch}>
+                <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}></input>
+                <button >Search</button>
             </form>
           </div>
           <MainAdminFlex>
@@ -103,7 +108,7 @@ function Product({products, pagesProduct, token,...action}) {
                 <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-                <ButtonBan onClick={() => handleStatusProduct( product.id , "Reject")}>Reject</ButtonBan>
+                <ButtonBan onClick={() => handleStatusProduct( product.id , "Rejected")}>Rejected</ButtonBan>
               </td>
             </tr>
           ))) : (

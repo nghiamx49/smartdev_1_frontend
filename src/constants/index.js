@@ -22,6 +22,11 @@ export const adminContants = {
   SEARCH_SUCCESS: `${adminPrefix}SEARCH_SUCCESS`,
   SEARCH_FAILED: `${adminPrefix}SEARCH_FAILED`,
 
+  SORT_PROVIDER: `${adminPrefix}SORT_PROVIDER`,
+  SORT_PRODUCT: `${adminPrefix}SORT_PROVIDER`,
+  SORT_USER: `${adminPrefix}SORT_PROVIDER`,
+
+
 };
 
 export const productContants = {

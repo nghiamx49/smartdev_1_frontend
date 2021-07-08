@@ -21,6 +21,7 @@ import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 function ProductBan({products, pagesProduct, token,...action}) {
   let pagination = []
   const [pagina, setpagina] = useState([])
+  const [searchValue, setSearchValue] = useState("")
   
   async function getData(page) {
     await action.getAllProduct("Rejected",token , page);
@@ -43,13 +44,24 @@ function ProductBan({products, pagesProduct, token,...action}) {
     console.log(message);
     getData()
   }
+
+  function handleSearch(e){
+    e.preventDefault();
+    action.search("Reiected" , token , searchValue)
+  }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
           <h3>ALL New Product</h3>
+          <div>
+              <form onSubmit={handleSearch}>
+                <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}></input>
+                <button >Search</button>
+            </form>
+            </div>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <span>sort</span>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort By NameProduct</button>
             </MainAdmintextfunction>
             <MainAdmintextfunction>
               <AiFillFilter /> <span>filter</span>
@@ -112,12 +124,14 @@ const mapStateToProps = (state) =>{
   return {
       products : state.adminReducer.allProducts,
       token : state.authenticateReducer.token,
-      pagesProduct : state.adminReducer.pagesProducts
+      pagesProduct : state.adminReducer.pagesProducts,
+      sortValue : state.adminReducer.sort
   }
 }
 
 const mapDispatchToProps =  {
   getAllProduct : all.getAllProduct,
+  sort : all.sortProduct
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductBan);
