@@ -11,6 +11,9 @@ export const ListItemContainer = styled.div`
   max-width: 95%;
   margin: auto;
   color: ${theme.red};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Detail = styled.div`
@@ -33,13 +36,15 @@ export const StoreContainer = styled.div`
 `;
 
 export const CustomImg = styled.img`
-  border: 1px solid ${theme.black};
+  width: 80px;
+  height: 80px;
+  border: 1px groove;
 `;
 
 export const CustomProductName = styled.h4`
   while-space: wrap;
   font-weight: 500;
-  width: 200px;
+  width: 400px;
   overflow: hidden;
   text-overflow: clip;
 `;

@@ -13,7 +13,7 @@ const OrderHistory = ({ token }) => {
 
   useEffect(() => {
     const getOrderHistoryList = async () => {
-      const response = await getOrderHistory("/user/order_history", token);
+      const response = await getOrderHistory(token);
       const { data } = response;
       setOrderHistory(data);
     };

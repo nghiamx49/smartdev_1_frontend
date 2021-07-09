@@ -11,7 +11,7 @@ const apiClient = {
             "Content-Type": "application/json",
           },
           validateStatus: function (status) {
-            return status < 500;
+            return status <= 500;
           },
         },
       );

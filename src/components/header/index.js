@@ -53,8 +53,8 @@ const HeaderComponent = ({ authenticateReducer, logout }) => {
                 />
                 <p>{authenticateReducer.account.username}</p>
                 <div>
-                  <Link to="profile">tài khoản của tôi</Link>
-                  <Link to="orderhistory">Đơn mua</Link>
+                  <Link to="/profile">tài khoản của tôi</Link>
+                  <Link to="/order_history">Đơn mua</Link>
                   <Link to="" onClick={() => logout()}>
                     Đăng xuất
                   </Link>
@@ -69,8 +69,8 @@ const HeaderComponent = ({ authenticateReducer, logout }) => {
         <HEADER.HeaderBottom>
           <HEADER.HeaderBottomLeft>
             <Link to="/">
-            <img src={imgLogo} alt="" />
-            <span>Shop Easiest</span>
+              <img src={imgLogo} alt="" />
+              <span>Shop Easiest</span>
             </Link>
           </HEADER.HeaderBottomLeft>
           <HEADER.HeaderBottomCenter>
