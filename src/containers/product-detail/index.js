@@ -163,7 +163,6 @@ const ProductDetail = () => {
                         </PD.HeaderComment>
                         <div>
                             <Feedback />
-
                         </div>
                     </PD.Container03LeftBottom>
                 </PD.Container03Left>

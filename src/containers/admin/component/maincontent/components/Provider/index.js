@@ -11,9 +11,9 @@ import {
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter,AiFillCaretDown
+  AiFillFilter,//AiFillCaretDown
 } from "react-icons/ai";
-import {GrNext,GrPrevious} from 'react-icons/gr'
+// import {GrNext,GrPrevious} from 'react-icons/gr'
 import { connect } from 'react-redux';
 import * as all from '../../../../../../actions/adminAction'
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';

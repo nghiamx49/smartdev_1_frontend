@@ -8,7 +8,6 @@ import {
     MainAdminFlex,
     MainAdminPage,
     ButtonApprove,
-    ButtonBan
   } from "../../style";
 import {
   AiOutlineSortDescending,
@@ -22,9 +21,11 @@ function ProductBan({products, pagesProduct, token,...action}) {
   let pagination = []
   const [pagina, setpagina] = useState([])
   const [searchValue, setSearchValue] = useState("")
+  const [page, setpage] = useState(0)
   
   async function getData(page) {
     await action.getAllProduct("Rejected",token , page);
+    setpage(page)
   }
   useEffect(() => {
     getData(0)
@@ -42,7 +43,7 @@ function ProductBan({products, pagesProduct, token,...action}) {
     console.log(id, status);
     const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
     console.log(message);
-    getData()
+    getData(page)
   }
 
   function handleSearch(e){
@@ -52,7 +53,7 @@ function ProductBan({products, pagesProduct, token,...action}) {
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL New Product</h3>
+          <h3>ALL Product Rejected</h3>
           <div>
               <form onSubmit={handleSearch}>
                 <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}></input>

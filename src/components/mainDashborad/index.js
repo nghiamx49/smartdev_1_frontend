@@ -1,7 +1,7 @@
 import React from "react";
 
-import { submitLogout } from "../../../../actions/authenticateAction";
-import defaultAvt from "../../../../assests/img/user-default.png";
+import { submitLogout } from "../../actions/authenticateAction";
+import defaultAvt from "../../assests/img/user-default.png";
 import {
   MainAdminContainer,
   MainAdminHeader,
@@ -10,35 +10,11 @@ import {
   MainAdminHeaderSearch,
   LogoutButton,
 } from "./style";
-import {AiOutlineSearch,} from "react-icons/ai";
-import UserTable from "./components/User";
-import ProviderTable from "./components/Provider";
-import Approveproviders from "./components/approveproviders";
-import Product from "./components/product";
-import NewProduct from "./components/newProduct";
-import ProductBan from "./components/productBan";
-
+import {
+  AiOutlineSearch,
+} from "react-icons/ai";
 import { connect } from "react-redux";
-function MainAdmin({ authenticateReducer, logout, menu }) {
-  
-  function setLayout (com){
-    switch(com){
-      case "Users":
-        return <UserTable/>
-      case "Providers":
-          return <ProviderTable/>
-      case "Approveproviders":
-        return <Approveproviders/>
-      case "Products":
-        return <Product/>
-      case "NewProduct":
-        return <NewProduct/>
-      case "ProductReject":
-        return <ProductBan/>
-      default:
-        return <Approveproviders/>
-    }
-  }
+function MainAdmin({ authenticateReducer, logout ,mainContant}) {
   return (
     <MainAdminContainer>
       <MainAdminHeader>
@@ -59,10 +35,7 @@ function MainAdmin({ authenticateReducer, logout, menu }) {
           </MainAdminHeaderUser>
         </MainAdminHeaderRight>
       </MainAdminHeader>
-      {
-        setLayout(menu)
-      }
-    
+      {mainContant}
     </MainAdminContainer>
   );
 }

@@ -2,13 +2,13 @@ import {call , put, takeLatest } from 'redux-saga/effects'
 import AdminService from '../apiServices/adminService'
 import {getUserSuccess , getProviderSuccess, getAllProductSuccess} from '../actions/adminAction'
 import {adminContants} from '../constants/index'
+import { toast } from "react-toastify";
 
 
 function* handleGetUser (action) {
     try {
         let response = yield call( AdminService.getAllUser,action.status ,action.payload , action.page , );
         if (response.data === undefined){
-           
             response.data = [];
             response.pages = 1;
         }
@@ -21,16 +21,14 @@ function* handleGetUser (action) {
 function* handleGetProvider (action) {
     try {
         let response = yield call( AdminService.getAllProvider,action.status ,action.payload ,  action.page);
-        console.log(response);
-        if (response.data === undefined){
-            response = {
-                data: [],
-                pages : 1 ,
-            };
+        if (response !== undefined){
+            yield put(getProviderSuccess(response));
+            return toast(<h3 color="black">{response.message}</h3>);
         }
-        yield put(getProviderSuccess(response));
+        return toast(<h3 color="black">Không thể kết nối với Server</h3>);
     } catch (error) {
         console.log(error)
+        // return toast(<h3 color="black">Không thể kết nối với Server</h3>);
     }
 }
 

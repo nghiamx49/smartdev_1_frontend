@@ -4,6 +4,7 @@ const cartPrefix = "CART/";
 const authenticatePrefix = "AUTHENTICATE/";
 const userPrefix = "USER/";
 const providerPrefix = "PROVIDER/";
+const loadingPrefix = "LOADING/";
 
 export const adminContants = {
   GET_ALL_PROVIDERS: `${adminPrefix}GET_ALL_PROVIDERS`,
@@ -23,8 +24,8 @@ export const adminContants = {
   SEARCH_FAILED: `${adminPrefix}SEARCH_FAILED`,
 
   SORT_PROVIDER: `${adminPrefix}SORT_PROVIDER`,
-  SORT_PRODUCT: `${adminPrefix}SORT_PROVIDER`,
-  SORT_USER: `${adminPrefix}SORT_PROVIDER`,
+  SORT_PRODUCT: `${adminPrefix}SORTT_PRODUCT`,
+  SORT_USER: `${adminPrefix}SORT_USER`,
 
 
 };
@@ -43,8 +44,13 @@ export const productContants = {
 export const cartContants = {
   GET_ALL_PRODUCTS_IN_CART: `${cartPrefix}GET_ALL_PRODUCTS_IN_CART`,
   GET_ALL_PRODUCTS_IN_CART_SUCCESS: `${cartPrefix}GET_ALL_PRODUCTS_IN_CART_SUCCESS`,
+  SET_CART_LOADING: `${cartPrefix}SET_CART_LOADING`,
   REMOVE_PRODUCT_FROM_CART: `${cartPrefix}REMOVE_PRODUCT_FROM_CART`,
   REMOVE_PRODUCT_FROM_CART_SUCCESS: `${cartPrefix}REMOVE_PRODUCT_FROM_CART_SUCCESS`,
+  INCREASE_QUANTITY: `${cartPrefix}INCREASE_QUANTITY`,
+  INCREASE_QUANTITY_SUCCESS: `${cartPrefix}INCREASE_QUANTITY_SUCCESS`,
+  DECREASE_QUANTITY: `${cartPrefix}DECREASE_QUANTITY`,
+  DECREASE_QUANTITY_SUCCESS: `${cartPrefix}DECREASE_QUANTITY_CUCCESS`,
 };
 
 export const authenticateContants = {
@@ -76,6 +82,10 @@ export const userContants = {
 export const providerContants = {
   GET_ALL_OWN_PRODUCT: `${providerPrefix}GET_ALL_OWN_PRODUCT`,
   GET_ALL_OWN_PRODUCT_SUCCESS: `${providerPrefix}GET_ALL_OWN_PRODUCT_SUCCESS`,
+  GET_ALL_OWN_PRODUCT_PENDING: `${providerPrefix}GET_ALL_OWN_PRODUCT_PENDING`,
+  GET_ALL_OWN_PRODUCT_PENDING_SUCCESS: `${providerPrefix}GET_ALL_OWN_PRODUCT_PENDING_SUCCESS`,
   ADD_NEW_PRODUCT: `${providerPrefix}ADD_NEW_PRODUCT`,
   ADD_NEW_PRODUCT_SUCCESS: `${providerPrefix}ADD_NEW_PRODUCT_SUCCESS`,
 };
+
+export const SET_LOADING_STATE = `${loadingPrefix}/SET_LOADING_STATE`;

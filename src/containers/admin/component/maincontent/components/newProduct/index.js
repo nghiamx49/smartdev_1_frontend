@@ -20,11 +20,13 @@ import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
 function NewProduct({products, pagesProduct, token,...action}) {
   let pagination = []
+  const [page, setpage] = useState(0)
   const [pagina, setpagina] = useState([])
   const [searchValue, setSearchValue] = useState("")
   
   async function getData(page) {
     await action.getAllProductPending("Pending",token , page);
+    setpage(page)
   }
   useEffect(() => {
     getData(0)
@@ -42,12 +44,12 @@ function NewProduct({products, pagesProduct, token,...action}) {
     console.log(id, status);
     const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
     console.log(message);
-    getData()
+    getData(page)
   }
 
   function handleSearch(e){
     e.preventDefault();
-    action.search("Allowed" , token , searchValue)
+    action.search("Pending" , token , searchValue)
   }
     return (
         <MainAdminContent>
@@ -62,9 +64,6 @@ function NewProduct({products, pagesProduct, token,...action}) {
           <MainAdminFlex>
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <button onClick={action.sort}>Sort By NameProduct</button>
-            </MainAdmintextfunction>
-            <MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
@@ -103,7 +102,7 @@ function NewProduct({products, pagesProduct, token,...action}) {
               </td>
               <td>
                 <ButtonApprove onClick={() => handleStatusProduct( product.id , "Allowed")}>Allowed</ButtonApprove>
-                <ButtonBan  onClick={() => handleStatusProduct( product.id , "Reject")}>Reject</ButtonBan>
+                <ButtonBan  onClick={() => handleStatusProduct( product.id , "Rejected")}>Reject</ButtonBan>
               </td>
             </tr>
           ))) : (
@@ -132,7 +131,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps =  {
   getAllProductPending : all.getAllProduct,
-  sort : all.sortProduct
+  sort : all.sortProduct,
+  search : all.searchProduct,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewProduct);

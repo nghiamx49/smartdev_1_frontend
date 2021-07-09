@@ -12,7 +12,6 @@ import {
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter
 } from "react-icons/ai";
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
@@ -65,11 +64,7 @@ function Product({products, pagesProduct, token,...action}) {
           </div>
           <MainAdminFlex>
             <MainAdmintextfunction>
-           
-              <AiOutlineSortDescending /> <span>sort</span>
-            </MainAdmintextfunction>
-            <MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort By NameProduct</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
@@ -130,13 +125,15 @@ const mapStateToProps = (state) =>{
   return {
       products : state.adminReducer.allProducts,
       token : state.authenticateReducer.token,
-      pagesProduct : state.adminReducer.pagesProducts
+      pagesProduct : state.adminReducer.pagesProducts,
+      sortValue : state.adminReducer.sort
   }
 }
 
 const mapDispatchToProps =  {
   getAllProduct : all.getAllProduct,
-  search : all.searchProduct
+  search : all.searchProduct,
+  sort : all.sortProduct
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

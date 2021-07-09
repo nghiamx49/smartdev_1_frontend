@@ -10,6 +10,7 @@ import cartReducer from "./cart";
 import productReducer from "./product";
 import providerReducer from "./provider";
 import userReducer from "./users";
+import loadingReducer from "./loading";
 
 const rootReducer = combineReducers({
   adminReducer,
@@ -18,11 +19,13 @@ const rootReducer = combineReducers({
   productReducer,
   providerReducer,
   userReducer,
+  loadingReducer,
 });
 
 const persistsConfig = {
   key: "root",
   storage,
+  whitelist: ["authenticateReducer"],
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

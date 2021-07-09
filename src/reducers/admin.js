@@ -29,12 +29,12 @@ const adminReducer = (state = initialState, action) => {
     case adminContants.SORT_USER:
       let sortUser = state.allUsers;
       sortUser.sort((a,b) => (a.username > b.username) ? 1 : -1);
-      return {...state , allProviders : sortProvider , sort : adminContants.SORT_USER};
+      return {...state , allProviders : sortUser , sort : adminContants.SORT_USER};
 
     case adminContants.SORT_PRODUCT:
       let sortProduct = state.allProducts;
-      sortProduct.sort((a,b) => (a.username > b.username) ? 1 : -1);
-      return {...state , allProviders : sortProvider , sort : adminContants.SORT_PRODUCT};
+      sortProduct.sort((a,b) => (a.name > b.name) ? 1 : -1);
+      return {...state , allProviders : sortProduct , sort : adminContants.SORT_PRODUCT};
 
   default:
       return {...state};// tại sao khi return về state thì chỉ có allUser

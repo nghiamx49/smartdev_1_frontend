@@ -5,11 +5,7 @@ import LinkSideBar from "./components/LinkSideBar";
 import { GrOverview } from "react-icons/gr";
 import { ImUsers } from "react-icons/im";
 import { FaUsers, FaMagento } from "react-icons/fa";
-import {
-  MdContacts,
-  MdSettingsApplications,
-  MdSubscriptions,
-} from "react-icons/md";
+import {MdContacts,  MdSettingsApplications,  MdSubscriptions,} from "react-icons/md";
 
 const listLi = [
     {
