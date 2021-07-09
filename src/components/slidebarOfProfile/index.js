@@ -27,7 +27,7 @@ function SlidebarOfProfile({ account }) {
         <ul>
           <li>
             <FcKindle />
-            <Link to="/orderhistory">Đơn Mua</Link>
+            <Link to="/order_history">Đơn Mua</Link>
           </li>
           <li>
             <FaShoppingCart color="#FD5F32" />

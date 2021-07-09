@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineShop } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
 import {
   BottomLeft,
   Container,
@@ -30,6 +31,7 @@ OrderHistoryTag.propTypes = {
 
 export default function OrderHistoryTag(props) {
   const { orderHistory } = props;
+  const history = useHistory();
   return (
     <Container>
       <StoreContainer>
@@ -38,7 +40,12 @@ export default function OrderHistoryTag(props) {
       </StoreContainer>
 
       <CustomHr />
-      <ListItemContainer>
+      <ListItemContainer
+        onClick={() => {
+          console.log("clicked");
+          history.push(`/order_detail/${orderHistory.id}`);
+        }}
+      >
         <MiddleLeft>
           <div>
             <CustomImg src={orderHistory.image_source} alt="" />
