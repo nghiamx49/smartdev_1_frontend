@@ -1,11 +1,14 @@
-import axios from "axios";
 import apiClient from "./axiosClient";
 
 const { apiClientGet } = apiClient;
 
 const userService = {
-  getOrderHistory: async (endpoint, token) => {
-    const response = await apiClientGet(endpoint, token);
+  getOrderHistory: async (token) => {
+    const response = await apiClientGet(`/user/order_history`, token);
+    return response;
+  },
+  getOrderDetail: async (id, token) => {
+    const response = await apiClientGet(`/user/order_history/${id}`, token);
     return response;
   },
 };

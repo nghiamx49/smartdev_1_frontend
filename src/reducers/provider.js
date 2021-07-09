@@ -2,6 +2,7 @@ import { providerContants } from "../constants";
 
 const initialState = {
   listProducts:[],
+  
 };
 
 const providerReducer = (state = initialState, action) => {

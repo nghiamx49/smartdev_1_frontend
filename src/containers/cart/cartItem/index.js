@@ -104,6 +104,14 @@ CartItem.prototype = {
   }),
 };
 
+CartItem.propTypes = {
+  handleCheck: PropTypes.func,
+  product: PropTypes.object,
+  token: PropTypes.string,
+  remove: PropTypes.func,
+  increase: PropTypes.func,
+  decrease: PropTypes.func,
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     remove: (id, token) => dispatch(removeCartItem(id, token)),

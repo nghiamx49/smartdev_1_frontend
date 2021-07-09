@@ -10,6 +10,8 @@ import { RegisterContainer, RegisterForm, Logo, RegisterButton } from "./style";
 import logo from "../../assests/img/logo.png";
 import { useState } from "react";
 
+const phoneRegExp = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+
 export const userRegisterSchema = yup.object().shape({
   full_name: yup.string().required("họ tên không được để trống"),
   username: yup.string().required("tên đăng nhập không được để trống"),
@@ -18,7 +20,10 @@ export const userRegisterSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "mật khẩu chưa trùng"),
   address: yup.string().required("địa chỉ không được để trống"),
-  phone_number: yup.number().required("số điện thoại không được để trống"),
+  phone_number: yup
+    .string()
+    .matches(phoneRegExp, "Số điện thoại không hợp lệ")
+    .required("số điện thoại không được để trống"),
   email: yup
     .string()
     .email("email is invalid")

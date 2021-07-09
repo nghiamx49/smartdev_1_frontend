@@ -2,7 +2,7 @@ import Login from "../containers/login";
 import ProviderRegister from "../containers/provider-register/";
 import UserRegister from "../containers/user-register/";
 import Profile from "../containers/profile";
-import ChangePass from '../containers/change_password'
+import ChangePass from "../containers/change_password";
 import ProductDetail from "../containers/product-detail";
 import Orderhistory from "../containers/orderhistory";
 import OrderDetail from "../containers/order_detail";
@@ -126,7 +126,7 @@ const routes = [
     role: "user",
   },
   {
-    path: "/changePass",
+    path: "/change_pass",
     component: ChangePass,
     exact: true,
     layout: Layout,
@@ -134,7 +134,7 @@ const routes = [
     role: "user",
   },
   {
-    path: "/orderhistory",
+    path: "/order_history",
     component: Orderhistory,
     exact: true,
     layout: Layout,
@@ -142,7 +142,7 @@ const routes = [
     role: "user",
   },
   {
-    path: "/orderdetail",
+    path: "/order_detail/:id",
     component: OrderDetail,
     exact: true,
     layout: Layout,
