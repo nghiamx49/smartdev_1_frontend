@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -6,25 +7,52 @@ import {
     MainAdminTable,
     MainAdminStrong,
     MainAdminFlex,
-    MainAdminPage
+    MainAdminPage,
+    ButtonBan,
+    ButtonApprove
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter,AiFillCaretDown
 } from "react-icons/ai";
-import {GrNext,GrPrevious} from 'react-icons/gr'
-function ApproveProvider() {
+import * as all from '../../../../../../actions/adminAction'
+import { connect } from 'react-redux';
+import avatar from   "../../../../../../assests/img/user-default.png"
+import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
+
+function ApproveProvider({providers, token , pagesProvider, ...action}) {
+  let pagination = []
+  const [pagina, setpagina] = useState([])
+  const [page, setPage] = useState(0)
+  async function getData(page) {
+    await action.getProvider("Pending", token , page);
+    setPage(page)
+  }
+
+  useEffect(() => {
+    getData(0)
+  }, []);
+
+  useEffect(() => {
+    for(var i=0 ; i < pagesProvider ; i++){
+      pagination.push(i)
+    }
+    setpagina(pagination)
+  }, [pagesProvider])
+
+  async function handleStatusProvider (id , status) {
+    const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
+    getData(page)
+  }
+  console.log(providers);
     return (
         <MainAdminContent>
         <MainAdminAllUser>
           <h3>ALL ApproveProvider</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <span>sort</span>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
             </MainAdmintextfunction>
-            <MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
-            </MainAdmintextfunction>
+           
           </MainAdminFlex>
         </MainAdminAllUser>
         <MainAdminTable>
@@ -40,46 +68,66 @@ function ApproveProvider() {
             </tr>
           </thead>
           <tbody>
-            <tr>
+          {(providers.length !== 0)  ? (providers.map((provider) =>(
+            <tr key={provider.id}>
               <td>
                 <MainAdminFlex>
                   <img
                     height="30"
                     width="30"
-                    src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"
-                    alt="dfkjghdfg"
+                    src={provider.avatar_source ? provider.avatar_source : avatar }
+                    alt="avatar"
                   />
-                  <MainAdminStrong>hoang provider</MainAdminStrong>
+                  <MainAdminStrong>{provider.username}</MainAdminStrong>
                 </MainAdminFlex>
               </td>
               <td>
-                <MainAdminStrong>ngo quyen da nang</MainAdminStrong>
+                <MainAdminStrong>{provider.address}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>shop ban hang</MainAdminStrong>
+                <MainAdminStrong>{provider.store_name}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>hieu@gmail.com</MainAdminStrong>
+                <MainAdminStrong>{provider.email}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>0987654321</MainAdminStrong>
+                <MainAdminStrong>{provider.phone_number}</MainAdminStrong>
               </td>
               <td>
                 <MainAdminStrong>03-04-2021</MainAdminStrong>
               </td>
               <td>
-                    <button>approve</button>
-                    <button>refuse</button>
+                <ButtonApprove onClick={() => handleStatusProvider( provider.id , "Allowed")}>Allowed</ButtonApprove>
+                <ButtonBan onClick={() => handleStatusProvider( provider.id , "Rejected")}>Rejected</ButtonBan>
               </td>
-            </tr>
+            </tr> 
+          ))) : (
+            <td><h3>No Provider</h3></td>
+          )}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
-            <div>Rows per page:8 <span><AiFillCaretDown/></span></div>
-            <div>1-8 of 1240 <span><GrPrevious/><GrNext/></span></div>
+          {
+            pagina.map((page) =>(
+              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
+            ))
+          }
         </MainAdminPage>
       </MainAdminContent>
     )
 }
+const mapStateToProps = (state) =>{
+  return {
+      pagesProvider : state.adminReducer.pagesProvider,
+      providers : state.adminReducer.allProviders,
+      token : state.authenticateReducer.token,
+      sortValue : state.adminReducer.sort
+  }
+}
 
-export default ApproveProvider
+const mapDispatchToProps =  {
+  getProvider : all.getProvider,
+  sort : all.sortProvider,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApproveProvider);

@@ -67,6 +67,27 @@ export const MainAdminTable = styled.table`
     padding: 15px 20px;
   }
 `;
+export const ButtonBan = styled.button`
+  background-color: #f3836c;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left:5px;
+  border: 0;
+  &:hover{
+    background-color: white;
+  }
+`
+
+export const ButtonApprove = styled.button`
+  background-color: #24a5fb;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left:5px;
+  border: 0;
+  &:hover{
+    background-color: white;
+  }
+`
 
 export const MainAdminFlex = styled.div`
   display: flex;
@@ -105,7 +126,7 @@ export const MainAdmintextfunction = styled.p`
 `;
 export const MainAdminPage = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 10px 20px;
   align-items: center;
   p {

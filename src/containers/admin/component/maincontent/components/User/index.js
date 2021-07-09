@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import {connect} from 'react-redux'
+import * as all from '../../../../../../actions/adminAction'
+import avatar from   "../../../../../../assests/img/user-default.png"
+
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -6,21 +10,49 @@ import {
     MainAdminTable,
     MainAdminStrong,
     MainAdminFlex,
-    MainAdminPage
+    MainAdminPage,
+    ButtonBan
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter,AiFillCaretDown
+  AiFillFilter
 } from "react-icons/ai";
-import {GrNext,GrPrevious} from 'react-icons/gr'
-function UserAmin() {
+import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
+
+
+function UserAdmin({users,pagesUser , token,...action}) {
+  let pagination = []
+  const [pagina, setpagina] = useState([])
+  const [page, setPage] = useState(0)
+
+  async function getData(page) {
+    await action.getUser("not_ban" ,token , page);
+    setPage(page)
+  }
+  useEffect(() => {
+    getData(0)
+  }, [])
+
+  useEffect(() => {
+    for(var i=0 ; i<pagesUser ; i++){
+      pagination.push(i)
+      console.log(pagination);
+    }
+    setpagina(pagination)
+  }, [pagesUser])
+  async function handleStatusProvider (id) {
+    console.log(id);
+    const message = await apiClientPatchUser(`/admin/users/${id}/ban` , token);
+    console.log(message);
+    getData(page)
+  }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
           <h3>ALL USERS</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <span>sort</span>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
             </MainAdmintextfunction>
             <MainAdmintextfunction>
               <AiFillFilter /> <span>filter</span>
@@ -32,45 +64,68 @@ function UserAmin() {
             <tr>
               <th>User name</th>
               <th>Address</th>
-              <th>Birthday</th>
+              <th>Full Name</th>
               <th>Email</th>
               <th>Phone number</th>
+              <th>Ban</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <MainAdminFlex>
-                  <img
-                    height="30"
-                    width="30"
-                    src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"
-                    alt="dfkjghdfg"
-                  />
-                  <MainAdminStrong>huynh huu hieu</MainAdminStrong>
-                </MainAdminFlex>
-              </td>
-              <td>
-                <MainAdminStrong>ngo quyen da nang</MainAdminStrong>
-              </td>
-              <td>
-                <MainAdminStrong>03-06-2020</MainAdminStrong>
-              </td>
-              <td>
-                <MainAdminStrong>hieu@gmail.com</MainAdminStrong>
-              </td>
-              <td>
-                <MainAdminStrong>0987654321</MainAdminStrong>
-              </td>
-            </tr>
+            {users.map((user)=>(
+               <tr key={user.id}>
+               <td>
+                 <MainAdminFlex>
+                   <img
+                     height="30"
+                     width="30"
+                     src={user.avatar_source ? user.avatar_source : avatar }
+                     alt="avatar"
+                   />
+                   <MainAdminStrong>{user.username}</MainAdminStrong>
+                 </MainAdminFlex>
+               </td>
+               <td>
+                 <MainAdminStrong>{user.address}</MainAdminStrong>
+               </td>
+               <td>
+                 <MainAdminStrong>{user.full_name}</MainAdminStrong>
+               </td>
+               <td>
+                 <MainAdminStrong>{user.email}</MainAdminStrong>
+               </td>
+               <td>
+                 <MainAdminStrong>{user.phone_number}</MainAdminStrong>
+               </td>
+               <td>
+                 <ButtonBan  onClick={() => handleStatusProvider( user.id)}>Ban User</ButtonBan>
+               </td>
+             </tr>
+            ))}
           </tbody>
         </MainAdminTable>
         <MainAdminPage>
-            <div>Rows per page:8 <span><AiFillCaretDown/></span></div>
-            <div>1-8 of 1240 <span><GrPrevious/><GrNext/></span></div>
+          {
+            pagina.map((page) =>(
+              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
+            ))
+          }
         </MainAdminPage>
       </MainAdminContent>
     )
 }
 
-export default UserAmin
+const mapStateToProps = (state) =>{
+  return {
+      users : state.adminReducer.allUsers,
+      token : state.authenticateReducer.token,
+      pagesUser : state.adminReducer.pagesUsers,
+      sortvalue : state.adminReducer.sort
+  }
+}
+
+const mapDispatchToProps =  {
+  getUser : all.getUser,
+  sort : all.sortUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserAdmin);
