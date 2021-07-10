@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiClientPatch =  async (endpoint, token , id , status) => {
-  return axios.put(`${process.env.REACT_APP_API}${endpoint}`,
+  return await axios.put(`${process.env.REACT_APP_API}${endpoint}`,
         JSON.stringify({
           id : id , status : status,
           }),
@@ -22,7 +22,7 @@ export const apiClientPatch =  async (endpoint, token , id , status) => {
 };
 
 export const apiClientPatchUser =  async (endpoint, token) => {
-  axios.put(`${process.env.REACT_APP_API}${endpoint}`,
+  await axios.put(`${process.env.REACT_APP_API}${endpoint}`,
   {},
       {
         headers: {

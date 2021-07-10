@@ -50,7 +50,7 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
           <h3>ALL ApproveProvider</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort By Username</button>
             </MainAdmintextfunction>
            
           </MainAdminFlex>

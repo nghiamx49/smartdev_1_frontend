@@ -9,14 +9,12 @@ const adminService = {
       let response = await request;
       return response;
     }catch(e){
-     
     }
   },
   getAllUser: async (status , token , page) => {
     try{
       const request = await getCLient.apiClientGet(`/admin/users/${status}?page=${page}`, token);
       let response = await request;
-      console.log(request)
       return response;
     }catch(e){
       console.log(e);
@@ -27,7 +25,6 @@ const adminService = {
     try{
       const request = await getCLient.apiClientGet(`/admin/product_requests/${status}?page=${page}`, token);
       let response = await request;
-      console.log(request)
       return response;
     }catch(e){
       console.log(e);
