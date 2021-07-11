@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { listRequest, listRequestProductPending } from "../../../actions/providerAction";
-import { MainAdminTable, MainAdminStrong } from "../style";
+import { MainAdminTable, MainAdminStrong,BtnUpdate } from "../style";
 
 
 function ProductAllowed({list,getList,token,handle,getListPending}) {
@@ -51,7 +51,7 @@ function ProductAllowed({list,getList,token,handle,getListPending}) {
               </MainAdminStrong>
             </td>
             <td>
-              <button onClick={()=>handle(item)}>cap nhat</button>
+              <BtnUpdate onClick={()=>handle(item)}>cập nhật</BtnUpdate>
             </td>
           </tr>
         ))}

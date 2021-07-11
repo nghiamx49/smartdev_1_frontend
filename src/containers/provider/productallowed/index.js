@@ -5,7 +5,6 @@ import * as Main from "../style";
 import {
   AiOutlineSortAscending,
   AiFillFilter,
-  AiFillCaretDown,
 } from "react-icons/ai";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import ProductAllowed from "./productallowed";
@@ -33,19 +32,19 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu}) {
   const [description,setDecription] = useState('')
   const [quantity,setQuantity] = useState('')
   const [showUpdate,setShowUpdate] = useState(false)
-  const [productUpdate,setProductUpdate] = useState({id:0})
+  const [productUpdate,setProductUpdate] = useState({id:0,name:""})
 
   const handle = (item) =>{
       console.log(item)
       setShowUpdate(!showUpdate)
-      setProductUpdate({...productUpdate,id:item.id});
+      setProductUpdate({...productUpdate,id:item.id,name:item.name});
   }
    
 
   const onSubmit = async (data) => {
     console.log(data)
     try{
-     let result =  await axios.put(`${process.env.REACT_APP_API}/provider/update_product`,{
+      await axios.put(`${process.env.REACT_APP_API}/provider/update_product`,{
         product_description:data.descriptionProducts,
         quantity:data.quantity,
         id:productUpdate.id
@@ -58,11 +57,10 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu}) {
           return status < 500;
         },
       });
-      console.log(result.data)
-     return result
     }catch(e){
       console.log(e)
     }
+    window.location.reload();
   }
 
   return ( 
@@ -79,32 +77,50 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu}) {
             </Main.MainAdmintextfunction>
           </Main.MainAdminFlex>
         </Main.MainAdminAllUser>
-            <ProductAllowed handle={handle}/>
+           <Main.ContainerTable>
+              <ProductAllowed handle={handle}/>
+           </Main.ContainerTable>
         <Main.MainAdminPage>
-          <p>
-            <span>Rows per page : 8 </span> <AiFillCaretDown />
-          </p>
-          <p>
-            <span>1-8 of 1240</span>
-            <GrPrevious />
-            <GrNext />
-          </p>
+        <Main.Pagination>
+          <button >&laquo;</button>
+          <button >1</button>
+          <button>2</button>
+          <button >3</button>
+          
+          <button >&raquo;</button>
+        </Main.Pagination>
         </Main.MainAdminPage>
       </Main.MainAdminContent>
-
-      <div style={{display:`${showUpdate?'block':'none'}`,margin:"30px"}}>
+      <Main.ContainerUpdateForm showUpdate={showUpdate && "flex"} onClick={()=>setShowUpdate(!showUpdate)}>
+      </Main.ContainerUpdateForm>
+      <Main.UpdateForm showUpdate={showUpdate && "block"}>
+          <h3>cập nhập sản phẩm {productUpdate.name}</h3>
          <form onSubmit={handleSubmit(onSubmit)}>
-            <div style={{marginBottom:"10px"}}>
-              <label>description products</label>
+            <Main.InputControls>
+              <label>mô tả sản phẩm mới :</label>
               <input {...register('descriptionProducts')} type="text" value={description} onChange={e => setDecription(e.target.value)} />
-            </div>
-            <div>
-              <label>quantity products</label>
+              {
+                errors.descriptionProducts && (
+                  <div>
+                    {errors.descriptionProducts.message}
+                  </div>
+                )
+              }
+            </Main.InputControls>
+            <Main.InputControls>
+              <label>số lượng sản phẩm mới :</label>
               <input {...register('quantity')} type="text" value={quantity} onChange={e => setQuantity(e.target.value)} />
-            </div>
-            <button type="submit">update</button>
+              {
+                errors.quantity && (
+                  <div>
+                    {errors.quantity.message}
+                  </div>
+                )
+              }
+            </Main.InputControls>
+            <Main.BtnCreate type="submit">update</Main.BtnCreate>
          </form>
-      </div>
+      </Main.UpdateForm>
     </Main.MainAdminContainer>
   );
 }

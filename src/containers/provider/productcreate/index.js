@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import axios from "axios";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { connect } from 'react-redux';
 import { storage } from '../../../firebase/config';
-import {InputControls,TitleProducts,BtnCreate} from "./style"
+import {TiTick} from "react-icons/ti"
+import {InputControls,TitleProducts,BtnCreate,InputFile, ContainerInputFile} from "./style"
 
 
 
@@ -16,7 +17,10 @@ const schema = yup.object().shape({
     category_id: yup.string().required(),
     unit_price: yup.string().required(),
     product_description: yup.string().required(),
-    images: yup.string().required()
+    images: yup.string().required(),
+    images1: yup.string().required(),
+    images2: yup.string().required(),
+    images3: yup.string().required()
   })
 
   
@@ -27,6 +31,11 @@ function Createproduct({token}) {
   const [category_id,setCategory_id] = useState('')
   const [price,setPrice] = useState('')
   const [imgUrl,setImgUrl] = useState('')
+  const [imgUrl1,setImgUrl1] = useState('')
+  const [imgUrl2,setImgUrl2] = useState('')
+  const [imgUrl3,setImgUrl3] = useState('')
+  const [countImg,setCountImg] = useState(0)
+  const imgRef1 = useRef();
     const {
         register,
         handleSubmit,
@@ -46,7 +55,10 @@ function Createproduct({token}) {
             unit_price:data.unit_price,
             product_description:data.product_description,
             images:[
-               data.images
+               data.images,
+               data.images1,
+               data.images2,
+               data.images3,
             ]
           }
         ,{
@@ -69,9 +81,6 @@ function Createproduct({token}) {
           console.log(e)
         }
       }
-
-
-
       const handleChange = e => {
         console.log("abc")
         if(e.target.files[0]){
@@ -90,15 +99,28 @@ function Createproduct({token}) {
                             .child(e.target.files[0].name)
                             .getDownloadURL()
                             .then(url =>{
-                              setImgUrl(url)
+                              switch (countImg){
+                                case 3:
+                                  imgUrl3 === "" && setImgUrl3(url)
+                                  break;
+                                case 2:
+                                    imgUrl2 === "" && setImgUrl2(url)
+                                    setCountImg(countImg +1)
+                                    break;
+                                case 1:
+                                    imgUrl1 === "" && setImgUrl1(url)
+                                    setCountImg(countImg +1)
+                                    break;
+                                default:
+                                    imgUrl === "" && setImgUrl(url)
+                                    setCountImg(countImg +1)
+                                    break;
+                              }
                             });
                     }
                 )
         }
-        console.log("test file")
-        console.log(imgUrl)
     }
-
 
 
 
@@ -112,28 +134,44 @@ function Createproduct({token}) {
              <div style={{margin:"30px"}}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <InputControls>
-                      <label>name products:</label>
+                      <label>tên của sản phẩm :</label>
                       <input {...register('name')} type="text" value={name} onChange={e => setName(e.target.value)} />
                     </InputControls>
                     <InputControls >
-                      <label>quantity products</label>
+                      <label>số lượng sản phẩm :</label>
                       <input {...register('quantity')} type="text" value={quantity} onChange={e => setQuantity(e.target.value)} />
                     </InputControls>
                     <InputControls >
-                      <label>category products</label>
+                      <label>số kho sản phẩm :</label>
                       <input {...register('category_id')} type="text" value={category_id} onChange={e => setCategory_id(e.target.value)} />
                     </InputControls>
                     <InputControls>
-                      <label>unit_price products</label>
+                      <label>giá cả của sản phẩm :</label>
                       <input {...register('unit_price')} type="text" value={price} onChange={e => setPrice(e.target.value)} />
                     </InputControls>
                     <InputControls>
-                      <label>description products</label>
+                      <label>mô tả sản phẩm :</label>
                       <input {...register('product_description')} type="text" value={description} onChange={e => setDecription(e.target.value)} />
                     </InputControls>
-                    <input  {...register('images')}  value={imgUrl}/>
-                    <input type="file" onChange={handleChange}/>
-                    <BtnCreate type="submit">create products</BtnCreate>
+                      <div>
+                        <input style={{visibility:"hidden"}}   {...register('images')}  value={imgUrl} />
+                        <InputFile inputTitle="chọn hình ảnh sản phẩm 1" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
+                      
+                      </div>
+                      <div>
+                        <input style={{visibility:"hidden"}}  {...register('images1')}  value={imgUrl1} />
+                        <InputFile inputColor="chọn hình ảnh sản phẩm 2" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
+                      </div>
+                      <div>
+                        <input style={{visibility:"hidden"}}  {...register('images2')}  value={imgUrl2} />
+                        <InputFile inputTitle="chọn hình ảnh sản phẩm 3" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
+                      </div>
+                      <ContainerInputFile>
+                        <input style={{visibility:"hidden"}}  {...register('images3')}  value={imgUrl3} />
+                        <InputFile inputTitle="chọn hình ảnh sản phẩm 4" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
+                      </ContainerInputFile>
+                     
+                    <BtnCreate type="submit">tạo sản phẩm mới</BtnCreate>
                 </form>
             </div>
         </div>

@@ -16,6 +16,32 @@ export const MainAdminHeader = styled.div`
 export const MainAdminHeaderRight = styled.div`
   display: flex;
 `;
+export const InputControls = styled.div`
+   label{
+       font-size: 16px;
+       text-transform: capitalize;
+       margin-right: 10px;
+       display: inline-block;
+       width: 180px;
+       font-size: 15px;
+      font-weight: 500;
+   }
+   input{
+      margin:5px 0;
+      padding:5px 10px;
+      width:300px;
+      outline:none;
+      border:1px solid #bbb;
+      border-radius:3px;
+      display:inline-block;
+      box-sizing:border-box;
+      transition:0.2s ease all;
+   }
+`;
+export const ContainerTable = styled.div`
+  min-height:340px;
+  background-color:${theme.white}
+`;
 export const MainAdminHeaderUser = styled.div`
   display: flex;
   align-items: center;
@@ -38,6 +64,20 @@ export const MainAdminHeaderSearch = styled.div`
     }
   }
 `;
+export const BtnCreate = styled.button`
+   background-color: ${theme.textRed};
+   color:${theme.white};
+   font-size: 15px;
+   font-weight: 500;
+   display: block;
+   padding: 10px 30px;
+   border: none;
+   outline: none;
+   border-radius: 3px;
+   margin-top: 30px;
+   margin-left: 380px;
+   text-transform: capitalize;
+`;
 export const MainAdminContent = styled.div`
   margin: 30px;
   border: 1px solid #dfe0eb;
@@ -53,18 +93,20 @@ export const MainAdminTable = styled.table`
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 14px;
     padding: 10px 20px;
     color: ${theme.textTitleTable};
+    text-transform: capitalize;
   }
   tbody tr {
     border-top: 1.5px solid #dfe0eb;
+    text-transform: capitalize;
     &:hover {
       background-color: ${theme.bgE5};
     }
   }
   td {
-    padding: 15px 20px;
+    padding: 10px 20px;
   }
 `;
 
@@ -123,7 +165,14 @@ export const MainAdminPage = styled.div`
     }
   }
 `;
-
+export const BtnUpdate = styled.button`
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: ${theme.textRed};
+  color:${theme.white};
+  border:none;
+  text-transform: capitalize;
+`;
 export const LogoutButton = styled.button`
   margin-right: 5px;
   border: none;
@@ -172,5 +221,46 @@ export const Loadingbtn = styled.div`
   }
 
 `;
+export const ContainerUpdateForm = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    height:100vh;
+    width:100%;
+    background-color:rgba(0,0,0,0.4);
+    display:${props => props.showUpdate || "none"};
+    justify-content:center;
+    align-items: center;
+    `;
+export const UpdateForm = styled.div`
+    position: relative;
+    top:-400px;
+    left: 200px;
+    z-index:100;
+    background-color:${theme.white};
+    padding:30px;
+    display:${props => props.showUpdate || "none"};
+    text-transform: capitalize;
+    width: 500px;
+    h3{
+      font-size: 20px;
+    }
+`;
 
+export const Pagination = styled.div`
+    
+    button{
+      display: inline-block;
+      color: black;
+      padding: 8px 16px;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      background-color:transparent;
+      &:hover {
+        background-color: #ddd;
+        border-radius: 5px;
+      }
+    }
+`;
 
