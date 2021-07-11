@@ -91,7 +91,7 @@ const HeaderComponent = ({ authenticateReducer, logout }) => {
           <HEADER.HeaderBottomRight>
             {authenticateReducer.isLoggedIn && (
               <>
-                <Link to="cart">
+                <Link to="/cart">
                   <BiCart />
                 </Link>
               </>
