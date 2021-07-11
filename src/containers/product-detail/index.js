@@ -1,14 +1,9 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { RiStarFill } from "react-icons/ri";
 import { GrDeliver } from "react-icons/gr";
 import { CgMathPlus, CgMathMinus } from "react-icons/cg";
 import { FaCartPlus } from "react-icons/fa";
 import { AiTwotoneShop } from 'react-icons/ai'
-
-import imgProduct1 from '../../assests/img/san-pham-1.jpeg'
-import imgProduct2 from '../../assests/img/san-pham-2.jpeg'
-import imgProduct3 from '../../assests/img/san-pham-3.jpeg'
-import imgProduct4 from '../../assests/img/san-pham-4.jpeg'
 import imgProvider from '../../assests/img/user-default.png'
 import Feedback from './feeback';
 import Product from '../../components/cardProduct'
@@ -21,30 +16,15 @@ import { useParams } from 'react-router-dom';
 
 const ProductDetail = ({state,getList,getProductDetail}) => {
 
-    const [imgShow, setImgShow] = useState("")
     const [amount, setAmount] = useState(1)
+    const imgRef = useRef()
     let {idProduct} = useParams();
+    
     useEffect(()=>{
         getList()
         getProductDetail(idProduct)
        
       },[getList,getProductDetail,idProduct])
-      console.log(idProduct);
-      console.log(state);
-      console.log(state.product.image_sources && state.product.image_sources[0].image_source);
-    const listImg = [
-        imgProduct1,
-        imgProduct2,
-        imgProduct3,
-        imgProduct4
-    ];
-    function getImageOne () {
-        let img = ""
-        state.product.image_sources?.forEach(element => {
-          
-        
-        });
-    }
     function getNumberRating () {
         return state.product.rating?.reduce((a,b)=>a.star + b.star,{star:0}) / state.product.rating?.length
     }
@@ -56,8 +36,9 @@ const ProductDetail = ({state,getList,getProductDetail}) => {
         return count
     }
     getNumberRating ()
-    function changeImgShow(number) {
-        setImgShow(listImg[number])
+    function changeImgShow(imgSrc) {
+        console.log(imgSrc)
+        imgRef.current.src = imgSrc
     }
 
     function increasingAmount(e) {
@@ -76,10 +57,10 @@ const ProductDetail = ({state,getList,getProductDetail}) => {
         <PD.Layout>
             <PD.Container01>
                 <PD.MainLeft>
-                    <PD.ImgShow src={imgShow} alt="" />
+                    <PD.ImgShow ref={imgRef} src={state.product.image_sources && state.product.image_sources[0].image_source} alt="" />
                     <PD.ListImgProduct>
                         {state.product.image_sources?.map((img,index) => (
-                            <img key={index} src={img.image_source} alt="" onClick={changeImgShow.bind(this, listImg.indexOf(img))} />
+                            <img  key={index} src={img.image_source} alt="" onClick={()=>changeImgShow(img.image_source)} />
                         ))}
                     </PD.ListImgProduct>
                 </PD.MainLeft>
@@ -165,9 +146,9 @@ const ProductDetail = ({state,getList,getProductDetail}) => {
                         <PD.TitleComment>Đánh giá sản phẩm</PD.TitleComment>
                         <PD.HeaderComment>
                             <PD.Star>
-                                <div><PD.NumberStar>{getNumberRating()}</PD.NumberStar> trên 5</div>
+                                <div><PD.NumberStar>{getNumberRating()||0}</PD.NumberStar> trên 5</div>
                                 <div>
-                                    <RiStarFill /> <RiStarFill /> <RiStarFill /> <RiStarFill /> <RiStarFill />
+                                    {new Array(getNumberRating()||0).fill(0).map((item, index)=>  <RiStarFill key={index} />)}
                                 </div>
                             </PD.Star>
                             <PD.CoverButtonStar>
