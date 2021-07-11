@@ -12,6 +12,7 @@ import LoginLayout from "../components/layout/LoginLayout";
 import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
 import Provider from "../containers/provider";
+import Checkout from "../containers/checkout/";
 import Page404 from "../containers/page404";
 import LayoutDashborad from "../components/layout/layoutDashborad";
 const routes = [
@@ -54,6 +55,14 @@ const routes = [
   {
     path: "/profile",
     component: Profile,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "authorize",
+    role: "user",
+  },
+  {
+    path: "/checkout",
+    component: Checkout,
     exact: true,
     layout: Layout,
     isAuthorize: "authorize",
