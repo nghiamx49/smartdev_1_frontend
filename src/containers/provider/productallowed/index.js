@@ -6,7 +6,6 @@ import {
   AiOutlineSortAscending,
   AiFillFilter,
 } from "react-icons/ai";
-import { GrPrevious, GrNext } from "react-icons/gr";
 import ProductAllowed from "./productallowed";
 import { connect } from "react-redux";
 import { useState } from "react";

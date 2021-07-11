@@ -12,15 +12,15 @@ import {InputControls,TitleProducts,BtnCreate,InputFile, ContainerInputFile} fro
 
 
 const schema = yup.object().shape({
-    name: yup.string().required(),
-    quantity: yup.string().required(),
-    category_id: yup.string().required(),
-    unit_price: yup.string().required(),
-    product_description: yup.string().required(),
-    images: yup.string().required(),
-    images1: yup.string().required(),
-    images2: yup.string().required(),
-    images3: yup.string().required()
+    name: yup.string().required("không được để trống"),
+    quantity: yup.string().required("không được để trống"),
+    category_id: yup.string().required("không được để trống"),
+    unit_price: yup.string().required("không được để trống"),
+    product_description: yup.string().required("không được để trống"),
+    images: yup.string().required("không được để trống"),
+    images1: yup.string().required("không được để trống"),
+    images2: yup.string().required("không được để trống"),
+    images3: yup.string().required("không được để trống")
   })
 
   
@@ -136,39 +136,101 @@ function Createproduct({token}) {
                     <InputControls>
                       <label>tên của sản phẩm :</label>
                       <input {...register('name')} type="text" value={name} onChange={e => setName(e.target.value)} />
+                      {
+                      errors.name && (
+                        <div style={{marginLeft:"180px"}}>
+                          {errors.name.message}
+                        </div>
+                      )
+                    }
                     </InputControls>
                     <InputControls >
                       <label>số lượng sản phẩm :</label>
                       <input {...register('quantity')} type="text" value={quantity} onChange={e => setQuantity(e.target.value)} />
+                      {
+                      errors.quantity && (
+                        <div style={{marginLeft:"180px"}}>
+                          {errors.quantity.message}
+                        </div>
+                      )
+                    }
                     </InputControls>
                     <InputControls >
                       <label>số kho sản phẩm :</label>
                       <input {...register('category_id')} type="text" value={category_id} onChange={e => setCategory_id(e.target.value)} />
+                      {
+                      errors.category_id && (
+                        <div style={{marginLeft:"180px"}}>
+                          {errors.category_id.message}
+                        </div>
+                      )
+                    }
                     </InputControls>
                     <InputControls>
                       <label>giá cả của sản phẩm :</label>
                       <input {...register('unit_price')} type="text" value={price} onChange={e => setPrice(e.target.value)} />
+                      {
+                      errors.unit_price && (
+                        <div style={{marginLeft:"180px"}}>
+                          {errors.unit_price.message}
+                        </div>
+                      )
+                    }
                     </InputControls>
                     <InputControls>
                       <label>mô tả sản phẩm :</label>
                       <input {...register('product_description')} type="text" value={description} onChange={e => setDecription(e.target.value)} />
+                      {
+                      errors.product_description && (
+                        <div style={{marginLeft:"180px"}}>
+                          {errors.product_description.message}
+                        </div>
+                      )
+                    }
                     </InputControls>
-                      <div>
+                      <ContainerInputFile>
                         <input style={{visibility:"hidden"}}   {...register('images')}  value={imgUrl} />
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 1" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                      
-                      </div>
-                      <div>
+                        {
+                          errors.images && (
+                            <div style={{marginLeft:"380px",marginTop:"-30px"}}>
+                              {errors.images.message}
+                            </div>
+                          )
+                        }
+                      </ContainerInputFile>
+                      <ContainerInputFile>
                         <input style={{visibility:"hidden"}}  {...register('images1')}  value={imgUrl1} />
                         <InputFile inputColor="chọn hình ảnh sản phẩm 2" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                      </div>
-                      <div>
+                        {
+                          errors.images1 && (
+                            <div style={{marginLeft:"380px",marginTop:"-30px"}}>
+                              {errors.images1.message}
+                            </div>
+                          )
+                        }
+                      </ContainerInputFile>
+                      <ContainerInputFile>
                         <input style={{visibility:"hidden"}}  {...register('images2')}  value={imgUrl2} />
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 3" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                      </div>
+                        {
+                          errors.images2 && (
+                            <div style={{marginLeft:"380px",marginTop:"-30px"}}>
+                              {errors.images2.message}
+                            </div>
+                          )
+                        }
+                      </ContainerInputFile>
                       <ContainerInputFile>
                         <input style={{visibility:"hidden"}}  {...register('images3')}  value={imgUrl3} />
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 4" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
+                        {
+                          errors.images3 && (
+                            <div style={{marginLeft:"380px",marginTop:"-30px"}}>
+                              {errors.images3.message}
+                            </div>
+                          )
+                        }
                       </ContainerInputFile>
                      
                     <BtnCreate type="submit">tạo sản phẩm mới</BtnCreate>

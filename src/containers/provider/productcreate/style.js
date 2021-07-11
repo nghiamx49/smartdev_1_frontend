@@ -75,7 +75,8 @@ export const InputFile = styled.input`
 `;
 export const  ContainerInputFile = styled.div`
  
-   width: 450px;
+   width: 550px;
    position: relative;
    height:30px;
+   margin-top: 10px;
 `;
