@@ -15,6 +15,7 @@ import Provider from "../containers/provider";
 import Checkout from "../containers/checkout/";
 import Page404 from "../containers/page404";
 import LayoutDashborad from "../components/layout/layoutDashborad";
+import ProductLanding from "../containers/product-landing";
 const routes = [
   {
     path: "/login",
@@ -101,8 +102,15 @@ const routes = [
     role: "user",
   },
   {
-    path: "/product-detail",
+    path: "/product-detail/:idProduct",
     component: ProductDetail,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "all",
+  },
+  {
+    path: "/product-landing",
+    component: ProductLanding,
     exact: true,
     layout: Layout,
     isAuthorize: "all",

@@ -1,14 +1,9 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { RiStarFill } from "react-icons/ri";
 import { GrDeliver } from "react-icons/gr";
 import { CgMathPlus, CgMathMinus } from "react-icons/cg";
 import { FaCartPlus } from "react-icons/fa";
 import { AiTwotoneShop } from 'react-icons/ai'
-
-import imgProduct1 from '../../assests/img/san-pham-1.jpeg'
-import imgProduct2 from '../../assests/img/san-pham-2.jpeg'
-import imgProduct3 from '../../assests/img/san-pham-3.jpeg'
-import imgProduct4 from '../../assests/img/san-pham-4.jpeg'
 import imgProvider from '../../assests/img/user-default.png'
 import Feedback from './feeback';
 import Product from '../../components/cardProduct'
@@ -16,24 +11,34 @@ import * as PD from './style';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getProductsRequest } from "../../actions/productAction";
+import { getProductsRequest,getProductDetailRequest } from "../../actions/productAction";
+import { useParams } from 'react-router-dom';
 
-const ProductDetail = ({list,getList}) => {
+const ProductDetail = ({state,getList,getProductDetail}) => {
 
-    const [imgShow, setImgShow] = useState(imgProduct1)
     const [amount, setAmount] = useState(1)
-    const numberComment = 1;
+    const imgRef = useRef()
+    let {idProduct} = useParams();
+    
     useEffect(()=>{
         getList()
-      },[getList])
-    const listImg = [
-        imgProduct1,
-        imgProduct2,
-        imgProduct3,
-        imgProduct4
-    ];
-    function changeImgShow(number) {
-        setImgShow(listImg[number])
+        getProductDetail(idProduct)
+       
+      },[getList,getProductDetail,idProduct])
+    function getNumberRating () {
+        return state.product.rating?.reduce((a,b)=>a.star + b.star,{star:0}) / state.product.rating?.length
+    }
+    function getNumberRatingChose (star) {
+        let count = 0;
+         state.product.rating?.forEach(element => {
+            element.star === star && count++
+        });
+        return count
+    }
+    getNumberRating ()
+    function changeImgShow(imgSrc) {
+        console.log(imgSrc)
+        imgRef.current.src = imgSrc
     }
 
     function increasingAmount(e) {
@@ -52,15 +57,15 @@ const ProductDetail = ({list,getList}) => {
         <PD.Layout>
             <PD.Container01>
                 <PD.MainLeft>
-                    <PD.ImgShow src={imgShow} alt="" />
+                    <PD.ImgShow ref={imgRef} src={state.product.image_sources && state.product.image_sources[0].image_source} alt="" />
                     <PD.ListImgProduct>
-                        {listImg.map((img,index) => (
-                            <img key={index} src={img} alt="" onClick={changeImgShow.bind(this, listImg.indexOf(img))} />
+                        {state.product.image_sources?.map((img,index) => (
+                            <img  key={index} src={img.image_source} alt="" onClick={()=>changeImgShow(img.image_source)} />
                         ))}
                     </PD.ListImgProduct>
                 </PD.MainLeft>
                 <PD.MainRight>
-                    <PD.Title>Dép nữ quai bèo cực xinh Hot Trend 2021. Dép nữ quai ngang đẹp đi chơi Mika Store</PD.Title>
+                    <PD.Title>{state.product.name}</PD.Title>
                     <PD.StarCommetAmount>
                         <div>
                             <PD.AverageStar>4.9</PD.AverageStar>
@@ -80,7 +85,7 @@ const ProductDetail = ({list,getList}) => {
                         </PD.StarCommetAmountDiv>
                     </PD.StarCommetAmount>
                     <PD.Price>
-                        ₫25.000
+                        ₫{state.product.unit_price}.00
                         </PD.Price>
                     <PD.Delivery>
                         <PD.LeftText>Vận chuyển</PD.LeftText>
@@ -128,42 +133,31 @@ const ProductDetail = ({list,getList}) => {
                     <PD.Container03LeftTop>
                         <PD.ProductDetailContainer03Left>
                             <PD.TextDescriceProduct>Chi tiết sản phẩm</PD.TextDescriceProduct>
-                            <label>Danh mục</label><span>Giày dép nữ</span>
+                            <label>Danh mục</label><span>{state.product.category_name}</span>
                         </PD.ProductDetailContainer03Left>
                         <PD.ProductDescriteContainer03Left>
                             <PD.TextDescriceProduct>Mô tả sản phẩm</PD.TextDescriceProduct>
-                            <pre>Sunnie Shoes - "Let shop fair - It's Sunnie"
-                            Luôn luôn cập nhật những mẫu mã mới , đa dạng – Sunnie Shoes hứa hẹn sẽ luôn đem lại cho bạn những sản phẩm thời trang ưng ý và hoàn hảo nhất !
-                            ----------------------------------------------------------------------
-                            Mô tả sản phẩm chi tiết:
-                            Màu sắc: Trắng/ Đen
-                            Phiên bản: Hàn quốc
-                            Size: 36, 37, 38, 39, 40, 41
-                            Nhãn hiệu : Sunnie Signature
-                            Chất liệu : Nhựa dẻo siêu bền
-                            Hoa văn:  TRƠN, GỢN MA SÁT CHÂN SIÊU THOẢI MÁI
-                            Thời gian giao hàng: HCM : 1- 2 ngày, ngoại tỉnh 3-5 ngày làm việc.
-                            Bảo hành: Miễn phí đổi trả trong Hồ Chí Minh, hỗ trợ đổi trả tại các Tỉnh thành khác
-                            -------------------------------------------------------------------------
-                            SUNNY VIETNAM Co., Ltd</pre>
+                            <pre>
+                                {state.product.product_description}
+                            </pre>
                         </PD.ProductDescriteContainer03Left>
                     </PD.Container03LeftTop>
                     <PD.Container03LeftBottom>
                         <PD.TitleComment>Đánh giá sản phẩm</PD.TitleComment>
                         <PD.HeaderComment>
                             <PD.Star>
-                                <div><PD.NumberStar>5</PD.NumberStar> trên 5</div>
+                                <div><PD.NumberStar>{getNumberRating()||0}</PD.NumberStar> trên 5</div>
                                 <div>
-                                    <RiStarFill /> <RiStarFill /> <RiStarFill /> <RiStarFill /> <RiStarFill />
+                                    {new Array(getNumberRating()||0).fill(0).map((item, index)=>  <RiStarFill key={index} />)}
                                 </div>
                             </PD.Star>
                             <PD.CoverButtonStar>
                                 <PD.ButtonStar type="button">Tất cả</PD.ButtonStar>
-                                <PD.ButtonStar type="button">5 sao({numberComment})</PD.ButtonStar>
-                                <PD.ButtonStar type="button">4 sao()</PD.ButtonStar>
-                                <PD.ButtonStar type="button">3 sao()</PD.ButtonStar>
-                                <PD.ButtonStar type="button">2 sao()</PD.ButtonStar>
-                                <PD.ButtonStar type="button">1 sao()</PD.ButtonStar>
+                                <PD.ButtonStar type="button">5 sao({getNumberRatingChose(5)})</PD.ButtonStar>
+                                <PD.ButtonStar type="button">4 sao({getNumberRatingChose(4)})</PD.ButtonStar>
+                                <PD.ButtonStar type="button">3 sao({getNumberRatingChose(3)})</PD.ButtonStar>
+                                <PD.ButtonStar type="button">2 sao({getNumberRatingChose(2)})</PD.ButtonStar>
+                                <PD.ButtonStar type="button">1 sao({getNumberRatingChose(1)})</PD.ButtonStar>
                             </PD.CoverButtonStar>
                         </PD.HeaderComment>
                         <div>
@@ -175,7 +169,7 @@ const ProductDetail = ({list,getList}) => {
                     <PD.TitleProductTopSale>Top sản phẩm bán chạy</PD.TitleProductTopSale>
                     <PD.ProductTopSaleDetailCover>
                         {
-                            list.slice(0,3).map((item,index)=><Product key={index} item={item}/>)
+                            state.allProducts.slice(0,3).map((item,index)=><Product key={index} item={item}/>)
                         }
                     </PD.ProductTopSaleDetailCover>
                 </PD.Container03Right>
@@ -186,14 +180,18 @@ const ProductDetail = ({list,getList}) => {
 
 const mapStateToProps = (state) => {
     return {
-        list: state.productReducer.allProducts
+        state: state.productReducer,
     }
   }
   const mapDispatchToProps = (dispatch) =>
-    ({getList: () => dispatch(getProductsRequest())})
+    ({
+        getList: () => dispatch(getProductsRequest()),
+        getProductDetail: id => dispatch(getProductDetailRequest(id)),
+    })
   
 ProductDetail.propTypes = {
-    list: PropTypes.array,
     getList: PropTypes.func,
+    getProductDetail:PropTypes.func,
+    state:PropTypes.object,
   };
 export default connect(mapStateToProps,mapDispatchToProps)(ProductDetail)
