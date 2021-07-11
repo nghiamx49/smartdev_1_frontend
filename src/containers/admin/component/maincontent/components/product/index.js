@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -8,10 +7,13 @@ import {
     MainAdminStrong,
     MainAdminFlex,
     MainAdminPage,
-    ButtonBan
+    ButtonBan,
+    ContainerTable,
+    ContainerSearch
   } from "../../style";
 import {
   AiOutlineSortDescending,
+  AiOutlineSearch
 } from "react-icons/ai";
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
@@ -55,62 +57,66 @@ function Product({products, pagesProduct, token,...action}) {
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL Product</h3> 
-          <div>
-            <form onSubmit={handleSearch}>
-                <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}></input>
-                <button >Search</button>
-            </form>
-          </div>
+          <h3>ALL New Product</h3>
           <MainAdminFlex>
+            
+            <ContainerSearch>
+              
+              <form onSubmit={handleSearch}>
+                  <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}/>
+              </form>
+              <button><AiOutlineSearch/></button>
+            </ContainerSearch>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort By NameProduct</button>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
-        <MainAdminTable>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>ShopName</th>
-              <th>Price</th>
-              <th>Date Create</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-          {(products.length !== 0)  ? (products.map((product) =>(
-            <tr>
-              <td>
-                <MainAdminFlex>
-                  <img
-                    height="30"
-                    width="30"
-                    src={product.image_source}
-                    alt="images"
-                  />
-                  <MainAdminStrong>{product.name}</MainAdminStrong>
-                </MainAdminFlex>
-              </td>
-              <td>
-                <MainAdminStrong>{product.provider_name}</MainAdminStrong>
-              </td>
-              <td>
-                <MainAdminStrong>{product.unit_price}</MainAdminStrong>
-              </td>
-      
-              <td>
-                <MainAdminStrong>03-04-2021</MainAdminStrong>
-              </td>
-              <td>
-                <ButtonBan onClick={() => handleStatusProduct( product.id , "Rejected")}>Rejected</ButtonBan>
-              </td>
-            </tr>
-          ))) : (
-            <h3>No Product</h3>
-          )}
-          </tbody>
-        </MainAdminTable>
+        <ContainerTable>
+          <MainAdminTable>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>ShopName</th>
+                <th>Price</th>
+                <th>Date Create</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {(products.length !== 0)  ? (products.map((product) =>(
+              <tr>
+                <td>
+                  <MainAdminFlex>
+                    <img
+                      height="30"
+                      width="30"
+                      src={product.image_source}
+                      alt="images"
+                    />
+                    <MainAdminStrong>{product.name}</MainAdminStrong>
+                  </MainAdminFlex>
+                </td>
+                <td>
+                  <MainAdminStrong>{product.provider_name}</MainAdminStrong>
+                </td>
+                <td>
+                  <MainAdminStrong>{product.unit_price}</MainAdminStrong>
+                </td>
+        
+                <td>
+                  <MainAdminStrong>03-04-2021</MainAdminStrong>
+                </td>
+                <td>
+                  <ButtonBan onClick={() => handleStatusProduct( product.id , "Rejected")}>Rejected</ButtonBan>
+                </td>
+              </tr>
+            ))) : (
+              <h3>No Product</h3>
+            )}
+            </tbody>
+          </MainAdminTable>
+        </ContainerTable>
         <MainAdminPage>
           {
             pagina.map((page) =>(

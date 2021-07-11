@@ -9,7 +9,8 @@ import {
     MainAdminFlex,
     MainAdminPage,
     ButtonBan,
-    ButtonApprove
+    ButtonApprove,
+    ContainerTable
   } from "../../style";
 import {
   AiOutlineSortDescending,
@@ -50,12 +51,13 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
           <h3>ALL ApproveProvider</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort By Username</button>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort </button>
             </MainAdmintextfunction>
            
           </MainAdminFlex>
         </MainAdminAllUser>
-        <MainAdminTable>
+       <ContainerTable>
+       <MainAdminTable>
           <thead>
             <tr>
               <th>User name</th>
@@ -106,6 +108,7 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
           )}
           </tbody>
         </MainAdminTable>
+       </ContainerTable>
         <MainAdminPage>
           {
             pagina.map((page) =>(

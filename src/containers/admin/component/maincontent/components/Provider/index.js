@@ -7,7 +7,8 @@ import {
     MainAdminStrong,
     MainAdminFlex,
     MainAdminPage,
-    ButtonBan
+    ButtonBan,
+    ContainerTable
   } from "../../style";
 import {
   AiOutlineSortDescending,
@@ -50,13 +51,11 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
           <h3>ALL Provider</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending />  <button onClick={action.sort}>Sort By Username</button>
-            </MainAdmintextfunction>
-            <MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
+              <AiOutlineSortDescending />  <button onClick={action.sort}>Sort </button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
+        <ContainerTable>
         <MainAdminTable>
           <thead>
             <tr>
@@ -103,6 +102,7 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
             )}
           </tbody>
         </MainAdminTable>
+        </ContainerTable>
         <MainAdminPage>
           {
             pagina.map((page) =>(

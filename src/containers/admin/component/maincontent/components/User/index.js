@@ -11,7 +11,8 @@ import {
     MainAdminStrong,
     MainAdminFlex,
     MainAdminPage,
-    ButtonBan
+    ButtonBan,
+    ContainerTable
   } from "../../style";
 import {
   AiOutlineSortDescending,
@@ -54,11 +55,9 @@ function UserAdmin({users,pagesUser , token,...action}) {
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
             </MainAdmintextfunction>
-            <MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
-            </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
+        <ContainerTable>
         <MainAdminTable>
           <thead>
             <tr>
@@ -103,6 +102,7 @@ function UserAdmin({users,pagesUser , token,...action}) {
             ))}
           </tbody>
         </MainAdminTable>
+        </ContainerTable>
         <MainAdminPage>
           {
             pagina.map((page) =>(

@@ -8,10 +8,12 @@ import {
     MainAdminFlex,
     MainAdminPage,
     ButtonApprove,
+    ContainerSearch,
+    ContainerTable
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter
+  AiOutlineSearch
 } from "react-icons/ai";
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
@@ -53,22 +55,22 @@ function ProductBan({products, pagesProduct, token,...action}) {
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL Product Rejected</h3>
-          <div>
-              <form onSubmit={handleSearch}>
-                <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}></input>
-                <button >Search</button>
-            </form>
-            </div>
+          <h3>ALL New Product</h3>
           <MainAdminFlex>
+            
+            <ContainerSearch>
+              
+              <form onSubmit={handleSearch}>
+                  <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}/>
+              </form>
+              <button><AiOutlineSearch/></button>
+            </ContainerSearch>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort By NameProduct</button>
-            </MainAdmintextfunction>
-            <MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
+              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
+        <ContainerTable>
         <MainAdminTable>
           <thead>
             <tr>
@@ -111,6 +113,7 @@ function ProductBan({products, pagesProduct, token,...action}) {
           )}
           </tbody>
         </MainAdminTable>
+        </ContainerTable>
         <MainAdminPage>
           {
             pagina.map((page) =>(
