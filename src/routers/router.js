@@ -92,7 +92,7 @@ const routes = [
     role: "user",
   },
   {
-    path: "/product-detail",
+    path: "/product-detail/:idProduct",
     component: ProductDetail,
     exact: true,
     layout: Layout,

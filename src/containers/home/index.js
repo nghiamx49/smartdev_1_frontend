@@ -189,6 +189,9 @@ function Home({list,getList}) {
              {
                list.map((item,index) => <Product item={item} key={index}/>)
              }
+             {
+                 console.log(list)
+             }
             </HOME.HomeProductList>
           </div>
         </Container>
