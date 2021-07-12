@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import PropsTypes from "prop-types";
+
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -64,8 +66,8 @@ function Product({products, pagesProduct, token,...action}) {
               
               <form onSubmit={handleSearch}>
                   <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}/>
+                  <button><AiOutlineSearch/></button>
               </form>
-              <button><AiOutlineSearch/></button>
             </ContainerSearch>
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <button onClick={action.sort}>Sort</button>
@@ -112,7 +114,9 @@ function Product({products, pagesProduct, token,...action}) {
                 </td>
               </tr>
             ))) : (
+              <tr><td>
               <h3>No Product</h3>
+              </td></tr>
             )}
             </tbody>
           </MainAdminTable>
@@ -134,6 +138,16 @@ const mapStateToProps = (state) =>{
       pagesProduct : state.adminReducer.pagesProducts,
       sortValue : state.adminReducer.sort
   }
+}
+
+Product.prototype = {
+  products : PropsTypes.array,
+  token : PropsTypes.string,
+  pagesProduct : PropsTypes.number,
+  sortValue : PropsTypes.string,
+  getAllProduct : PropsTypes.func,
+  search : PropsTypes.func,
+  sort : PropsTypes.func
 }
 
 const mapDispatchToProps =  {

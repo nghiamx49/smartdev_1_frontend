@@ -7,16 +7,27 @@ export const listRequest = (token) => {
     };
   };
 
-  export const listSuccess = (list) => {
+  export const listSuccess = (action) => {
     return {
       type:  contants.providerContants.GET_ALL_OWN_PRODUCT_SUCCESS,
-      payload:list
+      payload:action.data,
+      page:action.pages
     };
   };
 
-  export const listRequestProductPending = (token) => {
+  export const listRequestProductPending = (action) => {
     return {
       type: contants.providerContants.GET_ALL_OWN_PRODUCT_PENDING,
-      token:token
+      token:action.token,
+      page:action.page
+    };
+  };
+
+
+export const listProductsPendingSuccess = (action) => {
+    return {
+      type: contants.providerContants.GET_ALL_OWN_PRODUCT_PENDING_SUCCESS,
+      payload:action.data,
+      page:action.pages
     };
   };

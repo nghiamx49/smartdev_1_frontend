@@ -7,12 +7,8 @@ import {
   MainAdminHeader,
   MainAdminHeaderRight,
   MainAdminHeaderUser,
-  MainAdminHeaderSearch,
   LogoutButton,
 } from "./style";
-import {
-  AiOutlineSearch,
-} from "react-icons/ai";
 import { connect } from "react-redux";
 function MainAdmin({ authenticateReducer, logout ,mainContant}) {
   return (

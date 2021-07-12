@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { connect } from 'react-redux';
-import { storage } from '../../../firebase/config';
 import {TiTick} from "react-icons/ti"
+import { storage } from '../../../firebase/config';
 import {InputControls,TitleProducts,BtnCreate,InputFile, ContainerInputFile} from "./style"
 
 
@@ -35,7 +35,6 @@ function Createproduct({token}) {
   const [imgUrl2,setImgUrl2] = useState('')
   const [imgUrl3,setImgUrl3] = useState('')
   const [countImg,setCountImg] = useState(0)
-  const imgRef1 = useRef();
     const {
         register,
         handleSubmit,
@@ -56,9 +55,9 @@ function Createproduct({token}) {
             product_description:data.product_description,
             images:[
                data.images,
-               data.images1,
-               data.images2,
-               data.images3,
+               data.images1 || "",
+               data.images2 || "",
+               data.images3  || "",
             ]
           }
         ,{
@@ -75,6 +74,10 @@ function Createproduct({token}) {
           setCategory_id('')
           setPrice('')
           setDecription('')
+          setImgUrl('')
+          setImgUrl1('')
+          setImgUrl2('')
+          setImgUrl3('')
           console.log(result);
           return result
         }catch(e){
@@ -121,13 +124,6 @@ function Createproduct({token}) {
                 )
         }
     }
-
-
-
-
-
-
-
     return (
         <div>
           <TitleProducts>Tạo một sản phẩm mới</TitleProducts>
@@ -189,48 +185,31 @@ function Createproduct({token}) {
                     }
                     </InputControls>
                       <ContainerInputFile>
-                        <input style={{visibility:"hidden"}}   {...register('images')}  value={imgUrl} />
+                        <input  {...register('images')}  value={imgUrl} />
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 1" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
+                        {imgUrl && <TiTick/>}
                         {
                           errors.images && (
-                            <div style={{marginLeft:"380px",marginTop:"-30px"}}>
+                            <div style={{marginLeft:"180px"}}>
                               {errors.images.message}
                             </div>
                           )
                         }
                       </ContainerInputFile>
                       <ContainerInputFile>
-                        <input style={{visibility:"hidden"}}  {...register('images1')}  value={imgUrl1} />
+                        <input   {...register('images1')}  value={imgUrl1} />
                         <InputFile inputColor="chọn hình ảnh sản phẩm 2" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                        {
-                          errors.images1 && (
-                            <div style={{marginLeft:"380px",marginTop:"-30px"}}>
-                              {errors.images1.message}
-                            </div>
-                          )
-                        }
+                        {imgUrl1 && <TiTick/>}
                       </ContainerInputFile>
                       <ContainerInputFile>
-                        <input style={{visibility:"hidden"}}  {...register('images2')}  value={imgUrl2} />
+                        <input    {...register('images2')}  value={imgUrl2} />
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 3" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                        {
-                          errors.images2 && (
-                            <div style={{marginLeft:"380px",marginTop:"-30px"}}>
-                              {errors.images2.message}
-                            </div>
-                          )
-                        }
+                        {imgUrl2 && <TiTick/>}
                       </ContainerInputFile>
                       <ContainerInputFile>
-                        <input style={{visibility:"hidden"}}  {...register('images3')}  value={imgUrl3} />
+                        <input   {...register('images3')}  value={imgUrl3} />
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 4" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                        {
-                          errors.images3 && (
-                            <div style={{marginLeft:"380px",marginTop:"-30px"}}>
-                              {errors.images3.message}
-                            </div>
-                          )
-                        }
+                        {imgUrl3 && <TiTick/>}
                       </ContainerInputFile>
                      
                     <BtnCreate type="submit">tạo sản phẩm mới</BtnCreate>

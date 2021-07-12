@@ -24,7 +24,7 @@ export const listLi = [
   export const listLiAdmin = [
     {
         icons:GrOverview,
-        text:"Approve Providers",
+        text:"New Providers",
         link : "/admin"
     },
     {
@@ -50,8 +50,18 @@ export const listLi = [
     },
     {
         icons:MdSettingsApplications,
-        text:"Product Rejected",
+        text:"Products Rejected",
         link : "/admin/products-rejected"
+    },
+    {
+      icons:MdSettingsApplications,
+      text:"Providers Rejected",
+      link : "/admin/providers-rejected"
+    },
+    {
+      icons:MdSettingsApplications,
+      text:"Users Ban",
+      link : "/admin/users-ban"
     },
     
 ];

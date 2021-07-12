@@ -98,7 +98,9 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
               </td>
             </tr>
             ))) : (
+              <tr><td>
               <h3>No Provider</h3>
+              </td></tr>
             )}
           </tbody>
         </MainAdminTable>

@@ -45,6 +45,8 @@ export const BtnCreate = styled.button`
 export const InputFile = styled.input`
       color: transparent;
       margin-bottom: 10px;
+      width: 180px;
+      height: 40px;
       &::-webkit-file-upload-button {
       visibility: hidden;
       }
@@ -79,4 +81,9 @@ export const  ContainerInputFile = styled.div`
    position: relative;
    height:30px;
    margin-top: 10px;
+   display: flex;
+   svg{
+      font-size: 30px;
+      color:#0DEF42;
+   }
 `;

@@ -22,6 +22,8 @@ import Product from "../containers/admin/component/maincontent/components/produc
 import ProductBan from "../containers/admin/component/maincontent/components/productBan";
 import ProviderAdmin from "../containers/admin/component/maincontent/components/Provider";
 import User from "../containers/admin/component/maincontent/components/User";
+import ProviderRejected from "../containers/admin/component/maincontent/components/ProviderRejected";
+import UserBan from "../containers/admin/component/maincontent/components/UserBan";
 
 const routes = [
   {
@@ -88,6 +90,22 @@ const routes = [
   {
     path: "/admin/products-rejected",
     component: ProductBan,
+    exact: true,
+    isAuthorize: "authorize",
+    layout: LayoutDashborad,
+    role: "admin",
+  },
+  {
+    path: "/admin/providers-rejected",
+    component: ProviderRejected,
+    exact: true,
+    isAuthorize: "authorize",
+    layout: LayoutDashborad,
+    role: "admin",
+  },
+  {
+    path: "/admin/users-ban",
+    component: UserBan,
     exact: true,
     isAuthorize: "authorize",
     layout: LayoutDashborad,

@@ -233,10 +233,10 @@ export const ContainerUpdateForm = styled.div`
     align-items: center;
     `;
 export const UpdateForm = styled.div`
-    position: relative;
-    top:-400px;
-    left: 200px;
-    z-index:100;
+    position: fixed;
+    top:35%;
+    left: 35%;
+    z-index:102;
     background-color:${theme.white};
     padding:30px;
     display:${props => props.showUpdate || "none"};

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { submitLogout } from "../../../actions/authenticateAction";
 import * as Main from "../style";
@@ -20,7 +20,7 @@ const schema = yup.object().shape({
 })
 
 
-function ProviderProductAllowed({ authenticateReducer, logout,token ,menu}) {
+function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page}) {
   const {
     register,
     handleSubmit,
@@ -32,14 +32,22 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu}) {
   const [quantity,setQuantity] = useState('')
   const [showUpdate,setShowUpdate] = useState(false)
   const [productUpdate,setProductUpdate] = useState({id:0,name:""})
+  const [listPage,setListPage] = useState([])
+  const [pagePra,setPagePra] = useState(0)
 
   const handle = (item) =>{
       console.log(item)
       setShowUpdate(!showUpdate)
       setProductUpdate({...productUpdate,id:item.id,name:item.name});
   }
-   
-
+  useEffect(()=>{
+    let a = [];
+    for(let i = 1;i<page.totalPage;i++){
+      a.push(i)
+    }
+    setListPage(a)
+  },[page.totalPage])
+  
   const onSubmit = async (data) => {
     console.log(data)
     try{
@@ -61,7 +69,20 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu}) {
     }
     window.location.reload();
   }
-
+  const changePage = (index) =>{
+    setPagePra(index)
+    
+  }
+  const changePagePrev = () =>{
+    if(pagePra !== 0){
+      setPagePra(pagePra -1)
+    }
+  }
+  const changePageNext = () =>{
+    if(pagePra !== page.totalPage){
+      setPagePra(pagePra +1)
+    }
+  }
   return ( 
     <Main.MainAdminContainer>
       <Main.MainAdminContent>
@@ -77,16 +98,15 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu}) {
           </Main.MainAdminFlex>
         </Main.MainAdminAllUser>
            <Main.ContainerTable>
-              <ProductAllowed handle={handle}/>
+              <ProductAllowed handle={handle} pageParent={pagePra}/>
            </Main.ContainerTable>
         <Main.MainAdminPage>
         <Main.Pagination>
-          <button >&laquo;</button>
-          <button >1</button>
-          <button>2</button>
-          <button >3</button>
-          
-          <button >&raquo;</button>
+        <button onClick={changePagePrev}>&laquo;</button>
+          {
+            listPage.map((index)=><button onClick={()=>changePage(index -1)} key={index}>{index}</button>)
+          }
+          <button onClick={changePageNext}>&raquo;</button>
         </Main.Pagination>
         </Main.MainAdminPage>
       </Main.MainAdminContent>
@@ -126,7 +146,8 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu}) {
 const mapStateToProps = (state) => {
   return { 
     authenticateReducer: state.authenticateReducer,
-    token:state.authenticateReducer.token
+    token:state.authenticateReducer.token,
+    page:state.providerReducer
    };
 };
 

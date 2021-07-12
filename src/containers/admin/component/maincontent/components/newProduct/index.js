@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropsTypes from "prop-types";
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -58,13 +59,11 @@ function NewProduct({products, pagesProduct, token,...action}) {
         <MainAdminAllUser>
           <h3>ALL New Product</h3>
           <MainAdminFlex>
-            
             <ContainerSearch>
-              
               <form onSubmit={handleSearch}>
                   <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}/>
+                  <button><AiOutlineSearch/></button>
               </form>
-              <button><AiOutlineSearch/></button>
             </ContainerSearch>
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <button onClick={action.sort}>Sort</button>
@@ -107,11 +106,13 @@ function NewProduct({products, pagesProduct, token,...action}) {
               </td>
               <td>
                 <ButtonApprove onClick={() => handleStatusProduct( product.id , "Allowed")}>Allowed</ButtonApprove>
-                <ButtonBan  onClick={() => handleStatusProduct( product.id , "Rejected")}>Reject</ButtonBan>
+                <ButtonBan  onClick={() => handleStatusProduct( product.id , "Rejected")}>Rejected</ButtonBan>
               </td>
             </tr>
           ))) : (
-            <h3>No Product</h3>
+            <tr><td>
+              <h3>No Product</h3>
+            </td></tr>
           )}
           </tbody>
         </MainAdminTable>
@@ -133,6 +134,16 @@ const mapStateToProps = (state) =>{
       pagesProduct : state.adminReducer.pagesProducts,
       sortValue : state.adminReducer.sort
   }
+}
+
+NewProduct.prototype = {
+  pagesProduct : PropsTypes.number,
+  products : PropsTypes.array,
+  token : PropsTypes.string,
+  sortValue : PropsTypes.string,
+  getAllProductPending : PropsTypes.func,
+  sort : PropsTypes.func,
+  search : PropsTypes.func
 }
 
 const mapDispatchToProps =  {

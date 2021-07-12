@@ -1,25 +1,25 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import { listRequest, listRequestProductPending } from "../../../actions/providerAction";
 import { MainAdminTable, MainAdminStrong,BtnUpdate } from "../style";
 
 
-function ProductAllowed({list,getList,token,handle,getListPending}) {
-
+function ProductAllowed({list,getList,token,handle,getListPending,page,pageParent}) {
   useEffect(()=>{
-    window.location.pathname === '/provider' && getList(token)
-    window.location.pathname === '/provider/products-request' && getListPending(token)
-  },[token,getList,getListPending])
+    window.location.pathname === '/provider' && getList({token:token,page:pageParent})
+    window.location.pathname === `/provider/products-request` && getListPending({token:token,page:pageParent})
+  },[token,getList,getListPending,pageParent])
   return (
     <MainAdminTable>
       <thead>
         <tr>
-          <th>Products Name</th>
-          <th>provider name</th>
-          <th>price product</th>
-          <th>number of sold</th>
-          <th>product quantity</th>
-          <th>product images</th>
+          <th>Tên Sản Phẩm</th>
+          <th>Nhà cung cấp </th>
+          <th>giá sản phẩm</th>
+          <th>số lương đã bán</th>
+          <th>số lượng sản phẩm</th>
+          <th>hình ảnh sản phẩm</th>
         </tr>
       </thead>
       <tbody>
@@ -64,13 +64,14 @@ function ProductAllowed({list,getList,token,handle,getListPending}) {
 const mapStateToProps = (state) => {
   return {
       list: state.providerReducer.listProducts,
-      token:state.authenticateReducer.token
+      token:state.authenticateReducer.token,
+      page:state.providerReducer
   }
 }
 
 const mapDispatchToProps = (dispatch) =>
     ({
-      getList: (token) => dispatch(listRequest(token)),
-      getListPending: (token) => dispatch(listRequestProductPending(token))
+      getList: (action) => dispatch(listRequest(action)),
+      getListPending: action => dispatch(listRequestProductPending(action))
     })
 export default connect(mapStateToProps,mapDispatchToProps)(ProductAllowed);

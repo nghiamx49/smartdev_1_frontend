@@ -1,5 +1,5 @@
 import { takeLatest, put, call } from "redux-saga/effects";
-import { listSuccess } from "../actions/providerAction";
+import { listProductsPendingSuccess, listSuccess } from "../actions/providerAction";
 import apiClient from "../apiServices/axiosClient";
 
 import { providerContants } from "../constants";
@@ -7,11 +7,12 @@ import { providerContants } from "../constants";
 
 function * getListProducts(action) {
     console.log(action)
+    console.log("sdfhksjdf")
     try {
-        let data = yield call(apiClient.apiClientGet,'/provider/all_products/Allowed',action.token);
-        console.log(data);
+        let data = yield call(apiClient.apiClientGet,`/provider/all_products/Allowed?page=${action.token.page}`,action.token.token);
+        console.log(data)
         if (data.status === 200) {
-            yield put(listSuccess(data.data));
+            yield put(listSuccess(data));
         }
     } catch (e) {
         console.log(e)
@@ -21,10 +22,9 @@ function * getListProducts(action) {
 
 function * getListProductsPending(action) {
     try {
-        let data = yield call(apiClient.apiClientGet,'/provider/all_products/Pending',action.token);
-        console.log(data);
+        let data = yield call(apiClient.apiClientGet,`/provider/all_products/Pending?page=${action.page}`,action.token);
         if (data.status === 200) {
-            yield put(listSuccess(data.data));
+            yield put(listProductsPendingSuccess(data));
         }
     } catch (e) {
         console.log(e)

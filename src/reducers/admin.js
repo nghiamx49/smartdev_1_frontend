@@ -37,7 +37,7 @@ const adminReducer = (state = initialState, action) => {
       return {...state , allProviders : sortProduct , sort : adminContants.SORT_PRODUCT};
 
   default:
-      return {...state};// tại sao khi return về state thì chỉ có allUser
+      return {...state};
   }
 };
 

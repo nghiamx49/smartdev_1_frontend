@@ -98,6 +98,7 @@ export const ButtonApprove = styled.button`
   padding: 5px;
   margin-left:5px;
   border: 0;
+  cursor: pointer;
   &:hover{
     background-color: white;
   }
@@ -137,6 +138,7 @@ export const MainAdmintextfunction = styled.p`
     outline: none;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
   }
 `;
 export const MainAdminPage = styled.div`
@@ -201,5 +203,6 @@ button{
   background:transparent;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 `;

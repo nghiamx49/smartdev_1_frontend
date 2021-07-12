@@ -20,13 +20,13 @@ import {
 import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
 
 
-function UserAdmin({users,pagesUser , token,...action}) {
+function UserBan({users,pagesUser , token,...action}) {
   let pagination = []
   const [pagina, setpagina] = useState([])
   const [page, setPage] = useState(0)
 
   async function getData(page) {
-    await action.getUser("not_ban" ,token , page);
+    await action.getUser("ban" ,token , page);
     setPage(page)
   }
   useEffect(() => {
@@ -36,18 +36,19 @@ function UserAdmin({users,pagesUser , token,...action}) {
   useEffect(() => {
     for(var i=0 ; i<pagesUser ; i++){
       pagination.push(i)
+      console.log(pagination);
     }
     setpagina(pagination)
   }, [pagesUser])
   async function handleStatusProvider (id) {
-    const message = await apiClientPatchUser(`/admin/users/${id}/ban` , token);
-    console.log(message);
+    console.log(id);
+    const message = await apiClientPatchUser(`/admin/users/${id}/not_ban` , token);
     getData(page)
   }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL USERS</h3>
+          <h3>ALL USERS BAN</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
@@ -93,12 +94,12 @@ function UserAdmin({users,pagesUser , token,...action}) {
                  <MainAdminStrong>{user.phone_number}</MainAdminStrong>
                </td>
                <td>
-                 <ButtonBan  onClick={() => handleStatusProvider( user.id)}>Ban User</ButtonBan>
+                 <ButtonBan  onClick={() => handleStatusProvider( user.id)}>Allowed User</ButtonBan>
                </td>
              </tr>
             )) : (
               <tr><td>
-                  <h3> No User</h3>
+                <h3>No User</h3>
               </td></tr>
             )}
           </tbody>
@@ -129,4 +130,4 @@ const mapDispatchToProps =  {
   sort : all.sortUser
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserAdmin);
+export default connect(mapStateToProps, mapDispatchToProps)(UserBan);
