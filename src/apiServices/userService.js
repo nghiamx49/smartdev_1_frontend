@@ -1,4 +1,7 @@
+import apiClient from "./axiosClient";
 import axios from "axios";
+
+const { apiClientGet } = apiClient;
 
 const userService = {
 
@@ -28,6 +31,14 @@ const userService = {
       }
     )
     return result;
+  },
+  getOrderHistory: async (token) => {
+    const response = await apiClientGet(`/user/order_history`, token);
+    return response;
+  },
+  getOrderDetail: async (id, token) => {
+    const response = await apiClientGet(`/user/order_history/${id}`, token);
+    return response;
   },
 };
 

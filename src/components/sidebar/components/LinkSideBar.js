@@ -1,14 +1,14 @@
 import React from 'react'
 import {SideBarLi} from "./style"
 import PropTypes from 'prop-types'
-
+import {Link} from 'react-router-dom'
 
 
 function LinkSideBar(props) {
-    const { Icons, text} = props 
+    const { Icons, text,link} = props 
     return (
         <SideBarLi>
-             {Icons && <Icons/>}<span>{text}</span>
+             {Icons && <Icons/>}<Link to={link}>{text}</Link>
         </SideBarLi>
     )
 }

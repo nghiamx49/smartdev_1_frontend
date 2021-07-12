@@ -3,8 +3,10 @@ import { BiArrowBack } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import bcrypt from 'bcryptjs';
+import { useHistory } from "react-router";
 
 import { FPContainer, FPCoverContainer, FPTitle, FPTitleIcon, FPTitleName, FPContent, FPContentName, FPContentInputDiv, FPContentInput, FPContentButton, FPContentBorderButton, Error } from './style'
 import { resetPasswordRequest } from '../../actions/userAction'
@@ -16,7 +18,16 @@ const forgotpasswordSchema = yup.object().shape({
         .min(6, "mật khẩu ít nhất 6 kí tự. vui lòng nhập lại"),
 });
 
-function ResetPassword({username, resetpassword}) {
+function ResetPassword({ username, resetpassword }) {
+    const history = useHistory();
+
+    let { slug } = useParams();
+    console.log(slug);
+
+    if(!bcrypt.compareSync(username, slug)) {
+        history.push("/login");
+    }
+
     const {
         register,
         handleSubmit,
@@ -24,9 +35,7 @@ function ResetPassword({username, resetpassword}) {
     } = useForm({ resolver: yupResolver(forgotpasswordSchema) });
 
     const onSubmit = (dataSubmit) => {
-        console.log(dataSubmit.new_password);
-        console.log(username);
-        resetpassword({new_password:dataSubmit.new_password, username: username})
+        resetpassword({ new_password: dataSubmit.new_password, username: username })
     };
 
     return (
@@ -34,7 +43,7 @@ function ResetPassword({username, resetpassword}) {
             <FPContainer>
                 <FPTitle>
                     <FPTitleIcon>
-                    <Link to="/forgotpassword"><BiArrowBack color="#FD5F32" style={{ fontSize: "25px" }} /></Link>
+                        <Link to="/forgotpassword"><BiArrowBack color="#FD5F32" style={{ fontSize: "25px" }} /></Link>
                     </FPTitleIcon>
                     <FPTitleName>
                         Thiếp Lập Mật Khẩu
@@ -42,7 +51,7 @@ function ResetPassword({username, resetpassword}) {
                 </FPTitle>
                 <FPContent>
                     <FPContentName>
-                        Tạo mật khẩu mới 
+                        Tạo mật khẩu mới
                     </FPContentName>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <FPContentInputDiv>
@@ -69,11 +78,11 @@ function ResetPassword({username, resetpassword}) {
 
 const mapStateToProps = (state) => {
     return {
-      username: state.userReducer.username,
+        username: state.userReducer.username,
     };
-  };
+};
 
-  const mapDispatchToProps = {
+const mapDispatchToProps = {
     resetpassword: resetPasswordRequest
 };
 

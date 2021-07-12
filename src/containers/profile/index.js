@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -77,9 +77,12 @@ const UserProfile = ({token,updateAvatar}) => {
     const updateUser = async (user) => {
         const result = await apiClientPost('/user/update_profile', user, token);
         if (result.status === 200) {
-            return toast.success(result.message);
+            // return toast.success(result.message);
+            return toast(<h3 color="black">{result.message}</h3>);
+
         }
-        return toast.warn(result.message);
+        return toast(<h3 color="black">{result.message}</h3>);
+        // return toast.warn(result.message);
     }
 
     const handleChange = (e) => {
@@ -196,10 +199,5 @@ const mapStateToProp = state => {
 const mapDispatchToProps = {
     updateAvatar: updateAvatarRequest
 };
-// const mapDispatchToProps = dispatch =>{
-//     return {
-//         updateAvatar: (avatar_source) => dispatch(updateAvatarRequest(avatar_source))
-//     }
-// };
 
 export default connect(mapStateToProp,mapDispatchToProps)(UserProfile)

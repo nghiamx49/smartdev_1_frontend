@@ -31,11 +31,11 @@ function SlidebarOfProfile({ account }) {
           </li>
           <li>
             <FcKey />
-            <Link to="/changePass">Đổi mật khẩu</Link>
+            <Link to="/change_pass">Đổi mật khẩu</Link>
           </li>
           <li>
             <FcKindle />
-            <Link to="/orderhistory">Đơn Mua</Link>
+            <Link to="/order_history">Đơn Mua</Link>
           </li>
           <li>
             <FaShoppingCart color="#FD5F32" />

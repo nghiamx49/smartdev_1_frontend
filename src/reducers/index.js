@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
 const persistsConfig = {
   key: "root",
   storage,
+  whitelist: ["authenticateReducer"],
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

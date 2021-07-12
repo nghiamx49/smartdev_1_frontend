@@ -1,15 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { BiArrowBack } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import bcrypt from 'bcryptjs';
 import { FPContainer, FPCoverContainer, FPTitle, FPTitleIcon, FPTitleName, FPContent, FPContentName, FPContentInputDiv, FPContentInput, FPContentButton, FPContentBorderButton, Error } from './style'
 import { connect } from 'react-redux';
+
 const forgotpasswordSchema = yup.object().shape({
     otp: yup
         .string()
@@ -17,6 +17,13 @@ const forgotpasswordSchema = yup.object().shape({
 });
 
 function VerifyOTP({ props }) {
+
+    // useEffect(() => {
+    //     if (props.otp == "") {
+    //         history.push("/forgotpassword");
+    //     }
+    // }, [props.otp]);
+
     const {
         register,
         handleSubmit,
@@ -26,11 +33,12 @@ function VerifyOTP({ props }) {
     const history = useHistory();
 
     const onSubmit = (dataSubmit) => {
-        if(dataSubmit.otp == props.otp){
+        if (dataSubmit.otp == props.otp) {
             console.log(props.username)
-            history.push(`/reset_password/${bcrypt.hashSync(props.username, 8)}`);
-        } else{
-            return toast.warn("otp không hợp lệ");
+            const params = bcrypt.hashSync(props.username, 8)
+            history.push(`/reset_password/${params}`);
+        } else {
+            return toast(<h3 color="black">otp không hợp lệ</h3>);
         }
     };
 
@@ -74,8 +82,8 @@ function VerifyOTP({ props }) {
 
 const mapStateToProps = (state) => {
     return {
-      props: state.userReducer,
+        props: state.userReducer,
     };
-  };
+};
 
 export default connect(mapStateToProps, null)(VerifyOTP);

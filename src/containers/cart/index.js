@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
 import { FcShipped } from "react-icons/fc";
 import CartItem from "./cartItem";
 import TotalCart from "./cartTotal";
+
+import { Loadingbtn } from "../../components/loading/";
 
 import { getAllProductInCart } from "../../actions/cartAction";
 
@@ -72,11 +76,11 @@ const Cart = ({ cartLists, token, getCarItems, loading }) => {
               ))}
           </>
         ) : (
-          <h1>Loading...</h1>
+          <Loadingbtn />
         )}
         <TotalCart
           total={cartLists.length}
-          count={10}
+          count={checkOutItem.quantity_purchased || 0}
           totalMoney={
             checkOutItem.id
               ? (
@@ -99,9 +103,16 @@ const Cart = ({ cartLists, token, getCarItems, loading }) => {
 const mapStateToProps = (state) => {
   return {
     token: state.authenticateReducer.token,
-    cartLists: state.cartReducer,
-    loading: state.loadingReducer,
+    cartLists: state.cartReducer.data,
+    loading: state.cartReducer.loading,
   };
+};
+
+Cart.propTypes = {
+  loading: PropTypes.bool,
+  cartLists: PropTypes.array,
+  token: PropTypes.string,
+  getCarItems: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => {

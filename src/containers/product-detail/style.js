@@ -32,6 +32,7 @@ export const ListImgProduct = styled.div`
         height: 100px;
         margin-right: 8px;
         border: 1px solid ${theme.bgE5};
+        cursor: pointer;
     }
 `;
 
@@ -141,6 +142,7 @@ export const PlusAndMinus = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `;
 
 export const NumberBetweenPlusMinus = styled.div`
@@ -177,7 +179,7 @@ export const AddCartButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-
+    cursor: pointer;
 `;
 
 export const BuyNowButton = styled.button`
@@ -194,7 +196,7 @@ export const BuyNowButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-
+    cursor: pointer;
 `;
 
 export const Container02 = styled.div`

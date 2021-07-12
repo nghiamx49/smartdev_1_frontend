@@ -1,4 +1,5 @@
 import React from "react";
+import PropsTypes from "prop-types";
 
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -63,6 +64,11 @@ const mapStateToProps = (state) => {
   return {
     loading: state.loadingReducer,
   };
+};
+
+Login.propTypes = {
+  loading: PropsTypes.bool,
+  login: PropsTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => {

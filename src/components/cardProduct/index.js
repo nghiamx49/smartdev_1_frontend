@@ -2,20 +2,20 @@ import React from 'react'
 import { ProductBottom,   DivProductName,ProductImage, ProductFavourite, NameProduct, ProductPrice, ProductDiscount, ProductSold, ProductSimilar, ProductStyle, ProductContainer } from './style'
 
 export default function Product(props) {
-    const {nameContent,img,price}= props;
+    const {item}= props;
     return (
-        <ProductContainer to="product-detail">
+        <ProductContainer to={`product-detail/${item.id}`}>
             <ProductStyle>
                 <ProductImage>
-                    <img src={img} alt=""/>
+                    <img src={item.image_source} alt=""/>
                 </ProductImage>
                 <ProductDiscount>20% Giảm</ProductDiscount>
                 <ProductFavourite>Yêu thích</ProductFavourite>
                 <DivProductName>
-                <NameProduct>{nameContent}</NameProduct>
+                <NameProduct>{item.name}</NameProduct>
                 </DivProductName>
                 <ProductBottom>
-                    <ProductPrice>₫{price}</ProductPrice>
+                    <ProductPrice>₫{item.unit_price}</ProductPrice>
                     <ProductSold>Đã Bán:10k</ProductSold>
                 </ProductBottom>
                 <ProductSimilar className="similar">

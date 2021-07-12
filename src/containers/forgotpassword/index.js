@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BiArrowBack } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { FPContainer, FPCoverContainer, FPTitle, FPTitleIcon, FPTitleName, FPContent, FPContentName, FPContentInputDiv, FPContentInput, FPContentButton, FPContentBorderButton, Error } from './style'
 import { sendEmailRequest } from '../../actions/userAction'
@@ -15,8 +16,14 @@ const forgotpasswordSchema = yup.object().shape({
         .email("email không đúng định dạng"),
 });
 
-function Forgotpassword({ sendEmail }) {
+function Forgotpassword({ otp, sendEmail }) {
+    const history = useHistory();
 
+    // useEffect(() => {
+    //     if (otp !== "") {
+    //         history.push("/verify_otp");
+    //     }
+    // }, [otp])
     const {
         register,
         handleSubmit,
@@ -65,10 +72,15 @@ function Forgotpassword({ sendEmail }) {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        otp: state.userReducer.otp
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
         sendEmail: (email) => dispatch(sendEmailRequest(email))
     }
 };
 
-export default connect(null, mapDispatchToProps)(Forgotpassword);
+export default connect(mapStateToProps, mapDispatchToProps)(Forgotpassword);

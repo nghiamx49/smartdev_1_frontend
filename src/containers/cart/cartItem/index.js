@@ -2,8 +2,13 @@ import React from "react";
 import { FcShipped } from "react-icons/fc";
 import { MdAccountBalanceWallet } from "react-icons/md";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router";
 
-import { removeCartItem } from "../../../actions/cartAction";
+import {
+  removeCartItem,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../../../actions/cartAction";
 
 import {
   BtnDelete,
@@ -14,10 +19,19 @@ import {
   Magess,
   Right,
   ShopName,
+  Quantity,
 } from "./style";
 import { connect } from "react-redux";
 
-const CartItem = ({ handleCheck, product, token, remove }) => {
+const CartItem = ({
+  handleCheck,
+  product,
+  token,
+  remove,
+  increase,
+  decrease,
+}) => {
+  const history = useHistory();
   return (
     <CartItemLayout>
       <ShopName>
@@ -34,7 +48,11 @@ const CartItem = ({ handleCheck, product, token, remove }) => {
         <Right></Right>
       </ShopName>
       <ShopName>
-        <Left>
+        <Left
+          onClick={() => {
+            history.push(`/product-detail/${product.id}`);
+          }}
+        >
           <img src={product.thumbnail_image} alt="" />
           <p>{product.product_name}</p>
         </Left>
@@ -47,9 +65,9 @@ const CartItem = ({ handleCheck, product, token, remove }) => {
           </ColumnDiv>
           <ColumnDiv>
             {" "}
-            <BtnPlus>+</BtnPlus>
-            <input defaultValue={product.quantity_purchased} disabled />
-            <BtnPlus>-</BtnPlus>
+            <BtnPlus onClick={() => increase(product, token)}>+</BtnPlus>
+            <Quantity>{product.quantity_purchased}</Quantity>
+            <BtnPlus onClick={() => decrease(product, token)}>-</BtnPlus>
           </ColumnDiv>
           <ColumnDiv>
             {(+product.unit_price * product.quantity_purchased).toLocaleString(
@@ -92,9 +110,19 @@ CartItem.prototype = {
   }),
 };
 
+CartItem.propTypes = {
+  handleCheck: PropTypes.func,
+  product: PropTypes.object,
+  token: PropTypes.string,
+  remove: PropTypes.func,
+  increase: PropTypes.func,
+  decrease: PropTypes.func,
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     remove: (id, token) => dispatch(removeCartItem(id, token)),
+    increase: (product, token) => dispatch(increaseQuantity(product, token)),
+    decrease: (product, token) => dispatch(decreaseQuantity(product, token)),
   };
 };
 

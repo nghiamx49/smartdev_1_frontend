@@ -3,8 +3,8 @@ import ProviderRegister from "../containers/provider-register/";
 import UserRegister from "../containers/user-register/";
 import Admin from "../containers/admin";
 import Profile from "../containers/profile";
-import ChangePass from '../containers/change_password'
 import Forgotpassword from '../containers/forgotpassword'
+import ChangePass from "../containers/change_password";
 import ProductDetail from "../containers/product-detail";
 import Orderhistory from "../containers/orderhistory";
 import OrderDetail from "../containers/order_detail";
@@ -13,10 +13,12 @@ import LoginLayout from "../components/layout/LoginLayout";
 import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
 import Provider from "../containers/provider";
+import Checkout from "../containers/checkout/";
 import Page404 from "../containers/page404";
 import VerifyOTP from '../containers/verify_otp';
 import ResetPassword from '../containers/resetpassword';
-
+import LayoutDashborad from "../components/layout/layoutDashborad";
+import ProductLanding from "../containers/product-landing";
 const routes = [
   {
     path: "/login",
@@ -72,6 +74,7 @@ const routes = [
     component: Provider,
     exact: true,
     isAuthorize: "authorize",
+    layout: LayoutDashborad,
     role: "provider",
   },
   {
@@ -83,7 +86,15 @@ const routes = [
     role: "user",
   },
   {
-    path: "/changePass",
+    path: "/checkout",
+    component: Checkout,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "authorize",
+    role: "user",
+  },
+  {
+    path: "/change_pass",
     component: ChangePass,
     exact: true,
     layout: Layout,
@@ -91,7 +102,7 @@ const routes = [
     role: "user",
   },
   {
-    path: "/orderhistory",
+    path: "/order_history",
     component: Orderhistory,
     exact: true,
     layout: Layout,
@@ -99,7 +110,7 @@ const routes = [
     role: "user",
   },
   {
-    path: "/orderdetail",
+    path: "/order_detail/:id",
     component: OrderDetail,
     exact: true,
     layout: Layout,
@@ -115,8 +126,15 @@ const routes = [
     role: "user",
   },
   {
-    path: "/product-detail",
+    path: "/product-detail/:idProduct",
     component: ProductDetail,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "all",
+  },
+  {
+    path: "/product-landing",
+    component: ProductLanding,
     exact: true,
     layout: Layout,
     isAuthorize: "all",

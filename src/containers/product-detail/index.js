@@ -1,188 +1,265 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from "react";
+import { useHistory } from "react-router";
+
 import { RiStarFill } from "react-icons/ri";
 import { GrDeliver } from "react-icons/gr";
 import { CgMathPlus, CgMathMinus } from "react-icons/cg";
 import { FaCartPlus } from "react-icons/fa";
-import { AiTwotoneShop } from 'react-icons/ai'
+import imgProvider from "../../assests/img/user-default.png";
+import Feedback from "./feeback";
+import Product from "../../components/cardProduct";
+import * as PD from "./style";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import {
+  getProductsRequest,
+  getProductDetailRequest,
+} from "../../actions/productAction";
+import { useParams } from "react-router-dom";
 
-import imgProduct1 from '../../assests/img/san-pham-1.jpeg'
-import imgProduct2 from '../../assests/img/san-pham-2.jpeg'
-import imgProduct3 from '../../assests/img/san-pham-3.jpeg'
-import imgProduct4 from '../../assests/img/san-pham-4.jpeg'
-import imgProvider from '../../assests/img/user-default.png'
-import Feedback from './feeback';
-import TopProductSale from '../../components/cardProduct'
-import * as PD from './style';
-import { useEffect } from 'react';
+import cartService from "../../apiServices/cartService";
+import { toast } from "react-toastify";
 
-const ProductDetail = () => {
+const { addToCart } = cartService;
 
-    const [imgShow, setImgShow] = useState(imgProduct1)
-    const [amount, setAmount] = useState(1)
-    const numberComment = 1;
+const ProductDetail = ({
+  state,
+  getList,
+  getProductDetail,
+  token,
+  isLoggedIn,
+}) => {
+  const imgRef = useRef();
+  let { idProduct } = useParams();
 
-    const listImg = [
-        imgProduct1,
-        imgProduct2,
-        imgProduct3,
-        imgProduct4
-    ];
-    function changeImgShow(number) {
-        setImgShow(listImg[number])
+  const [product, setProduct] = useState({
+    product_id: null,
+    quantity_purchased: 1,
+  });
+
+  useEffect(() => {
+    const getProduct = async () => {
+      await getProductDetail(idProduct);
+      setProduct({ ...product, product_id: state.product.id });
+    };
+
+    getProduct();
+  }, [getProductDetail]);
+
+  console.log(JSON.stringify(product));
+
+  const history = useHistory();
+
+  const handleAddToCart = async () => {
+    if (!isLoggedIn) {
+      history.push("/login");
+    } else {
+      let response = await addToCart(product, token);
+      if (response.status === 200) {
+        history.push("/cart");
+      } else {
+        return toast(response.message);
+      }
     }
+  };
 
-    function increasingAmount(e) {
-        setAmount(amount + 1)
-    }
-
-    function decreaseAmount(e) {
-        if (amount >= 1) {
-            setAmount(amount - 1)
-        }
-    }
-    useEffect(()=>{
-       window.scrollTo(0,0);
-    },[])
+  function getNumberRating() {
     return (
-        <PD.Layout>
-            <PD.Container01>
-                <PD.MainLeft>
-                    <PD.ImgShow src={imgShow} alt="" />
-                    <PD.ListImgProduct>
-                        {listImg.map((img) => (
-                            <img key={listImg.indexOf(img)} src={img} alt="" onClick={changeImgShow.bind(this, listImg.indexOf(img))} />
-                        ))}
-                    </PD.ListImgProduct>
-                </PD.MainLeft>
-                <PD.MainRight>
-                    <PD.Title>Dép nữ quai bèo cực xinh Hot Trend 2021. Dép nữ quai ngang đẹp đi chơi Mika Store</PD.Title>
-                    <PD.StarCommetAmount>
-                        <div>
-                            <PD.AverageStar>4.9</PD.AverageStar>
-                            <RiStarFill color="#ee4d2d" />
-                            <RiStarFill color="#ee4d2d" />
-                            <RiStarFill color="#ee4d2d" />
-                            <RiStarFill color="#ee4d2d" />
-                            <RiStarFill color="#ee4d2d" />
-                        </div>
-                        <PD.StarCommetAmountDiv>
-                            <PD.TotalComment>74</PD.TotalComment>
-                            <PD.StarCommetAmountText>Đánh giá</PD.StarCommetAmountText>
-                        </PD.StarCommetAmountDiv>
-                        <PD.StarCommetAmountDiv>
-                            <PD.TotalSold>310</PD.TotalSold>
-                            <PD.StarCommetAmountText>Đã bán</PD.StarCommetAmountText>
-                        </PD.StarCommetAmountDiv>
-                    </PD.StarCommetAmount>
-                    <PD.Price>
-                        ₫25.000
-                        </PD.Price>
-                    <PD.Delivery>
-                        <PD.LeftText>Vận chuyển</PD.LeftText>
-                        <GrDeliver />
-                        <div>
-                            <span>Vận chuyển toàn quốc</span>
-                            <PD.FeeDelivery>
-                                <span>Phí Vận Chuyển</span>
-                                <span>₫25.000</span>
-                            </PD.FeeDelivery>
-                        </div>
-                    </PD.Delivery>
-                    <PD.Amount>
-                        <PD.LeftText>Số lượng</PD.LeftText>
-                        <PD.PlusAndMinus onClick={decreaseAmount}>
-                            <CgMathMinus />
-                        </PD.PlusAndMinus>
-                        <PD.NumberBetweenPlusMinus>{amount}</PD.NumberBetweenPlusMinus>
-                        <PD.PlusAndMinus onClick={increasingAmount}>
-                            <CgMathPlus />
-                        </PD.PlusAndMinus>
-                    </PD.Amount>
-                    <PD.CoverButton>
-                        <PD.AddCartButton type="button"><FaCartPlus /> &nbsp;Thêm vào giỏ hàng</PD.AddCartButton>
-                        <PD.BuyNowButton type="button">Mua ngay</PD.BuyNowButton>
-                    </PD.CoverButton>
-                </PD.MainRight>
-            </PD.Container01>
-            <PD.Container02>
-                <PD.ShopInforLeft>
-                    <PD.ImgProvider src={imgProvider} alt="" />
-                    <PD.CoverNameShop>
-                        <p>mikastore95</p>
-                        <PD.ShowShopButton type="button"><AiTwotoneShop /> &nbsp;Xem shop</PD.ShowShopButton>
-                    </PD.CoverNameShop>
-                </PD.ShopInforLeft>
-                <PD.ShopInforRight>
-                    <div><label>Đánh Giá</label><span>1,5k</span></div>
-                    <div><label>Sản Phẩm</label><span></span></div>
-                    <div><label>Tham gia </label><span>6 tháng trước</span></div>
-                </PD.ShopInforRight>
-            </PD.Container02>
-            <PD.Container03>
-                <PD.Container03Left>
-                    <PD.Container03LeftTop>
-                        <PD.ProductDetailContainer03Left>
-                            <PD.TextDescriceProduct>Chi tiết sản phẩm</PD.TextDescriceProduct>
-                            <label>Danh mục</label><span>Giày dép nữ</span>
-                        </PD.ProductDetailContainer03Left>
-                        <PD.ProductDescriteContainer03Left>
-                            <PD.TextDescriceProduct>Mô tả sản phẩm</PD.TextDescriceProduct>
-                            <pre>Sunnie Shoes - "Let shop fair - It's Sunnie"
-                            Luôn luôn cập nhật những mẫu mã mới , đa dạng – Sunnie Shoes hứa hẹn sẽ luôn đem lại cho bạn những sản phẩm thời trang ưng ý và hoàn hảo nhất !
-                            ----------------------------------------------------------------------
-                            Mô tả sản phẩm chi tiết:
-                            Màu sắc: Trắng/ Đen
-                            Phiên bản: Hàn quốc
-                            Size: 36, 37, 38, 39, 40, 41
-                            Nhãn hiệu : Sunnie Signature
-                            Chất liệu : Nhựa dẻo siêu bền
-                            Hoa văn:  TRƠN, GỢN MA SÁT CHÂN SIÊU THOẢI MÁI
-                            Thời gian giao hàng: HCM : 1- 2 ngày, ngoại tỉnh 3-5 ngày làm việc.
-                            Bảo hành: Miễn phí đổi trả trong Hồ Chí Minh, hỗ trợ đổi trả tại các Tỉnh thành khác
-                            -------------------------------------------------------------------------
-                            SUNNY VIETNAM Co., Ltd</pre>
-                        </PD.ProductDescriteContainer03Left>
-                    </PD.Container03LeftTop>
-                    <PD.Container03LeftBottom>
-                        <PD.TitleComment>Đánh giá sản phẩm</PD.TitleComment>
-                        <PD.HeaderComment>
-                            <PD.Star>
-                                <div><PD.NumberStar>5</PD.NumberStar> trên 5</div>
-                                <div>
-                                    <RiStarFill /> <RiStarFill /> <RiStarFill /> <RiStarFill /> <RiStarFill />
-                                </div>
-                            </PD.Star>
-                            <PD.CoverButtonStar>
-                                <PD.ButtonStar type="button">Tất cả</PD.ButtonStar>
-                                <PD.ButtonStar type="button">5 sao({numberComment})</PD.ButtonStar>
-                                <PD.ButtonStar type="button">4 sao()</PD.ButtonStar>
-                                <PD.ButtonStar type="button">3 sao()</PD.ButtonStar>
-                                <PD.ButtonStar type="button">2 sao()</PD.ButtonStar>
-                                <PD.ButtonStar type="button">1 sao()</PD.ButtonStar>
-                            </PD.CoverButtonStar>
-                        </PD.HeaderComment>
-                        <div>
-                            <Feedback />
-                        </div>
-                    </PD.Container03LeftBottom>
-                </PD.Container03Left>
-                <PD.Container03Right>
-                    <PD.TitleProductTopSale>Top sản phẩm bán chạy</PD.TitleProductTopSale>
-                    <PD.ProductTopSaleDetailCover>
-                        <PD.ProductTopSaleDetail>
-                            <TopProductSale />
-                        </PD.ProductTopSaleDetail>
-                        <PD.ProductTopSaleDetail>
-                            <TopProductSale />
-                        </PD.ProductTopSaleDetail>
-                        <PD.ProductTopSaleDetail>
-                            <TopProductSale />
-                        </PD.ProductTopSaleDetail>
-                    </PD.ProductTopSaleDetailCover>
-                </PD.Container03Right>
-            </PD.Container03>
-        </PD.Layout>
-    )
-}
+      state.product.rating?.reduce((a, b) => a.star + b.star, { star: 0 }) /
+      state.product.rating?.length
+    );
+  }
+  function getNumberRatingChose(star) {
+    let count = 0;
+    state.product.rating?.forEach((element) => {
+      element.star === star && count++;
+    });
+    return count;
+  }
+  getNumberRating();
+  function changeImgShow(imgSrc) {
+    console.log(imgSrc);
+    imgRef.current.src = imgSrc;
+  }
 
-export default ProductDetail
+  function increasingAmount(e) {
+    setProduct({
+      ...product,
+      quantity_purchased: (product.quantity_purchased += 1),
+    });
+  }
+
+  function decreaseAmount(e) {
+    if (product.quantity_purchased > 1) {
+      setProduct({
+        ...product,
+        quantity_purchased: (product.quantity_purchased -= 1),
+      });
+    }
+  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <PD.Layout>
+      <PD.Container01>
+        <PD.MainLeft>
+          <PD.ImgShow
+            ref={imgRef}
+            src={
+              state.product.image_sources &&
+              state.product.image_sources[0].image_source
+            }
+            alt=""
+          />
+          <PD.ListImgProduct>
+            {state.product.image_sources?.map((img, index) => (
+              <img
+                key={index}
+                src={img.image_source}
+                alt=""
+                onClick={() => changeImgShow(img.image_source)}
+              />
+            ))}
+          </PD.ListImgProduct>
+        </PD.MainLeft>
+        <PD.MainRight>
+          <PD.Title>{state.product.name}</PD.Title>
+          <PD.StarCommetAmount>
+            <div>
+              <PD.AverageStar>
+                {Math.round(
+                  state.product.rating?.reduce(
+                    (total, item) => total + item.star,
+                    0,
+                  ) / state.product.rating?.length,
+                ) || 0}
+              </PD.AverageStar>
+              <RiStarFill color="#ee4d2d" />
+              <RiStarFill color="#ee4d2d" />
+              <RiStarFill color="#ee4d2d" />
+              <RiStarFill color="#ee4d2d" />
+              <RiStarFill color="#ee4d2d" />
+            </div>
+            <PD.StarCommetAmountDiv>
+              <PD.TotalComment>{state.product.rating?.length}</PD.TotalComment>
+              <PD.StarCommetAmountText>Đánh giá</PD.StarCommetAmountText>
+            </PD.StarCommetAmountDiv>
+            <PD.StarCommetAmountDiv>
+              <PD.TotalSold>{state.product.number_of_sold}</PD.TotalSold>
+              <PD.StarCommetAmountText>Đã bán</PD.StarCommetAmountText>
+            </PD.StarCommetAmountDiv>
+          </PD.StarCommetAmount>
+          <PD.Price>
+            {(+state.product.unit_price).toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </PD.Price>
+          <PD.Delivery>
+            <PD.LeftText>Vận chuyển</PD.LeftText>
+            <GrDeliver />
+            <div>
+              <span>Vận chuyển toàn quốc</span>
+              <PD.FeeDelivery>
+                <span>Phí Vận Chuyển</span>
+                <span>₫25.000</span>
+              </PD.FeeDelivery>
+            </div>
+          </PD.Delivery>
+          <PD.Amount>
+            <PD.LeftText>Số lượng</PD.LeftText>
+            <PD.PlusAndMinus onClick={decreaseAmount}>
+              <CgMathMinus />
+            </PD.PlusAndMinus>
+            <PD.NumberBetweenPlusMinus>
+              {product.quantity_purchased}
+            </PD.NumberBetweenPlusMinus>
+            <PD.PlusAndMinus onClick={increasingAmount}>
+              <CgMathPlus />
+            </PD.PlusAndMinus>
+          </PD.Amount>
+          <PD.CoverButton>
+            <PD.AddCartButton onClick={handleAddToCart}>
+              <FaCartPlus /> &nbsp;Thêm vào giỏ hàng
+            </PD.AddCartButton>
+            <PD.BuyNowButton type="button">Mua ngay</PD.BuyNowButton>
+          </PD.CoverButton>
+        </PD.MainRight>
+      </PD.Container01>
+      <PD.Container02>
+        <PD.ShopInforLeft>
+          <PD.ImgProvider src={imgProvider} alt="" />
+          <PD.CoverNameShop>
+            <p>{state.product.provider_name}</p>
+          </PD.CoverNameShop>
+        </PD.ShopInforLeft>
+      </PD.Container02>
+      <PD.Container03>
+        <PD.Container03Left>
+          <PD.Container03LeftTop>
+            <PD.ProductDetailContainer03Left>
+              <PD.TextDescriceProduct>Chi tiết sản phẩm</PD.TextDescriceProduct>
+              <label>Danh mục</label>
+              <span>{state.product.category_name}</span>
+            </PD.ProductDetailContainer03Left>
+            <PD.ProductDescriteContainer03Left>
+              <PD.TextDescriceProduct>Mô tả sản phẩm</PD.TextDescriceProduct>
+              <pre>{state.product.product_description}</pre>
+            </PD.ProductDescriteContainer03Left>
+          </PD.Container03LeftTop>
+          <PD.Container03LeftBottom>
+            <PD.TitleComment>Đánh giá sản phẩm</PD.TitleComment>
+            <PD.HeaderComment>
+              <PD.Star>
+                <div>
+                  <PD.NumberStar>{getNumberRating() || 0}</PD.NumberStar> trên 5
+                </div>
+                <div>
+                  {new Array(getNumberRating() || 0)
+                    .fill(0)
+                    .map((item, index) => (
+                      <RiStarFill key={index} />
+                    ))}
+                </div>
+              </PD.Star>
+            </PD.HeaderComment>
+            <div>
+              <Feedback />
+            </div>
+          </PD.Container03LeftBottom>
+        </PD.Container03Left>
+        <PD.Container03Right>
+          <PD.TitleProductTopSale>Top sản phẩm bán chạy</PD.TitleProductTopSale>
+          <PD.ProductTopSaleDetailCover>
+            {state.allProducts.slice(0, 3).map((item, index) => (
+              <Product key={index} item={item} />
+            ))}
+          </PD.ProductTopSaleDetailCover>
+        </PD.Container03Right>
+      </PD.Container03>
+    </PD.Layout>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    state: state.productReducer,
+    token: state.authenticateReducer.token,
+    isLoggedIn: state.authenticateReducer.isLoggedIn,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
+  getList: () => dispatch(getProductsRequest()),
+  getProductDetail: (id) => dispatch(getProductDetailRequest(id)),
+});
+
+ProductDetail.propTypes = {
+  getList: PropTypes.func,
+  getProductDetail: PropTypes.func,
+  state: PropTypes.object,
+  token: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

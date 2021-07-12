@@ -1,63 +1,31 @@
-import React from "react";
-import {
-  LayoutOrderHistory,
-  Container,
-  MainHistory,
-  OrderHistoryTop,
-  OrderHistoryTopLink,
-  Search,
-} from "./style";
+import React, { useEffect, useState } from "react";
+import { LayoutOrderHistory, Container, MainHistory } from "./style";
 import SlidebarOfProfile from "../../components/slidebarOfProfile";
 import OrderHistoryTag from "./orderHistoryTag";
 
-export default function OrderHistory() {
-  const orderHistorys = [
-    {
-      shop_Name: "Shop thời trang hover",
-      productName: "Áo hai Dây tay dài cổ rộng",
-      linkimage:
-        "https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_cay-1595747664059.jpg",
-      num: 2,
-      price: 100,
-      total: 200,
-    },
-    {
-      shop_Name: "abc",
-      productName: "Áo hai Dây",
-      linkimage:
-        "https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_cay-1595747664059.jpg",
-      num: 2,
-      price: 100,
-      total: 200,
-    },
-    {
-      shop_Name: "abc",
-      productName: "Áo hai Dây",
-      linkimage:
-        "https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_cay-1595747664059.jpg",
-      num: 2,
-      price: 100,
-      total: 200,
-    },
-  ];
+import userSevice from "../../apiServices/userService";
+import { connect } from "react-redux";
+
+const { getOrderHistory } = userSevice;
+
+const OrderHistory = ({ token }) => {
+  const [orderHistory, setOrderHistory] = useState([]);
+
+  useEffect(() => {
+    const getOrderHistoryList = async () => {
+      const response = await getOrderHistory(token);
+      const { data } = response;
+      setOrderHistory(data);
+    };
+    getOrderHistoryList();
+  }, [token]);
+
   return (
     <LayoutOrderHistory>
       <Container>
         <SlidebarOfProfile></SlidebarOfProfile>
         <MainHistory>
-          <OrderHistoryTop>
-            <OrderHistoryTopLink> Tất Cả</OrderHistoryTopLink>
-            <OrderHistoryTopLink> Chờ Xác Nhận</OrderHistoryTopLink>
-            <OrderHistoryTopLink> Chờ Lấy Hàng</OrderHistoryTopLink>
-            <OrderHistoryTopLink> Đang giao</OrderHistoryTopLink>
-            <OrderHistoryTopLink> Đã giao</OrderHistoryTopLink>
-            <OrderHistoryTopLink> Đã Hủy</OrderHistoryTopLink>
-          </OrderHistoryTop>
-          <Search>
-            <input placeholder="Tìm kiếm theo shop, ID đơn Hàng hoặc Tên Sẳn Phẩm"></input>
-            <button>Search</button>
-          </Search>
-          {orderHistorys.map((orderHistory, index) => (
+          {orderHistory.map((orderHistory, index) => (
             <OrderHistoryTag
               key={index}
               orderHistory={orderHistory}
@@ -67,4 +35,12 @@ export default function OrderHistory() {
       </Container>
     </LayoutOrderHistory>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.authenticateReducer.token,
+  };
+};
+
+export default connect(mapStateToProps)(OrderHistory);

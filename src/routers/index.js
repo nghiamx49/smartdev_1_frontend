@@ -1,11 +1,14 @@
 import React, { Fragment } from "react";
 import { Switch, BrowserRouter, Route } from "react-router-dom";
+import { Router } from 'react-router';
+
 import routes from "./router";
 import AuthorizeHOC from "../HOCs/AuthorizeHOC";
 import UnauthorizeHOC from "../HOCs/UnauthorizeHOC";
+import history from '../sagas/history';
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <Switch>
       {routes.map((routeItem, index) => {
         const {
@@ -38,7 +41,7 @@ const AppRouter = () => (
         );
       })}
     </Switch>
-  </BrowserRouter>
+  </Router>
 );
 
 export default AppRouter;
