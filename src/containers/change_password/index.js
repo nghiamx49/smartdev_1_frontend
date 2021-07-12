@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 import apiClient from '../../apiServices/axiosClient'
 import SlidebarOfProfile from '../../components/slidebarOfProfile'
@@ -97,6 +98,9 @@ const ChangePass = (props) => {
                                     <UP.ProfileButton type="submit">Xác nhận</UP.ProfileButton>
                                 </UP.ProfileFormRow>
                             </UP.ProfileBottomLeft>
+                            <UP.ProfileBottomRight>
+                                {/* <Link to="/forgotpassword">Quên mật khẩu?</Link> */}
+                            </UP.ProfileBottomRight>
                         </UP.ProfileBottom>
                     </form>
                 </UP.Main>

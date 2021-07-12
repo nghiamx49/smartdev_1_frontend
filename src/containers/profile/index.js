@@ -11,6 +11,7 @@ import * as UP from './style'
 import apiClient from '../../apiServices/axiosClient'
 import yup from './yupGlobal'
 import { storage } from '../../firebase/config'
+import { updateAvatarRequest } from '../../actions/authenticateAction';
 
 const userSchema = yup.object().shape({
     full_name: yup
@@ -24,9 +25,13 @@ const userSchema = yup.object().shape({
     address: yup
         .string()
         .required("địa chỉ không được bỏ trống"),
+    zipcode: yup
+        .string()
+        .required("zipcode không được bỏ trống")
+        .zipcode("zipcode không đúng định dạng. vui lòng nhập lai"),
 });
 
-const UserProfile = (props) => {
+const UserProfile = ({token,updateAvatar}) => {
     const [data, setData] = useState({});
 
     const { apiClientGet } = apiClient;
@@ -37,7 +42,8 @@ const UserProfile = (props) => {
         defaultValues: {
             full_name: data?.full_name,
             phone_number: data?.phone_number,
-            address: data?.address
+            address: data?.address,
+            zipcode: data?.zipcode
         },
         resolver: yupResolver(userSchema)
     });
@@ -45,8 +51,8 @@ const UserProfile = (props) => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const data = await apiClientGet('/user/profile', props.token);
-                const fields = ['full_name', 'phone_number', 'address'];
+                const data = await apiClientGet('/user/profile', token);
+                const fields = ['full_name', 'phone_number', 'address', 'zipcode'];
                 fields.forEach(field => setValue(field, data.data[field]));
                 setData(data.data);
             } catch (error) {
@@ -62,12 +68,14 @@ const UserProfile = (props) => {
             full_name: dataSubmit.full_name,
             phone_number: dataSubmit.phone_number,
             address: dataSubmit.address,
+            zipcode: dataSubmit.zipcode,
         }
         updateUser(user);
+        updateAvatar(user.avatar_source)
     };
 
     const updateUser = async (user) => {
-        const result = await apiClientPost('/user/update_profile', user, props.token);
+        const result = await apiClientPost('/user/update_profile', user, token);
         if (result.status === 200) {
             return toast.success(result.message);
         }
@@ -90,7 +98,6 @@ const UserProfile = (props) => {
                         .getDownloadURL()
                         .then(url => {
                             setData({ ...data, avatar_source: url })
-                        
                         });
                 }
             )
@@ -150,8 +157,15 @@ const UserProfile = (props) => {
 
                                 <UP.ProfileFormRow>
                                     <UP.ProfileFormName>Zipcode:</UP.ProfileFormName>
-                                    <p>{data.zipcode}</p>
+                                    <UP.ProfileInput type="text" {...register("zipcode")} />
+                                    {/* <p>{data.zipcode}</p> */}
                                 </UP.ProfileFormRow>
+                                {errors.zipcode &&
+                                    <UP.ProfileFormRow>
+                                        <UP.ProfileFormName></UP.ProfileFormName>
+                                        <UP.Error>{errors.zipcode?.message}</UP.Error>
+                                    </UP.ProfileFormRow>
+                                }
 
                                 <UP.ProfileFormRow>
                                     <UP.ProfileFormName></UP.ProfileFormName>
@@ -179,4 +193,13 @@ const mapStateToProp = state => {
     }
 }
 
-export default connect(mapStateToProp,)(UserProfile)
+const mapDispatchToProps = {
+    updateAvatar: updateAvatarRequest
+};
+// const mapDispatchToProps = dispatch =>{
+//     return {
+//         updateAvatar: (avatar_source) => dispatch(updateAvatarRequest(avatar_source))
+//     }
+// };
+
+export default connect(mapStateToProp,mapDispatchToProps)(UserProfile)

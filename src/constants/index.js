@@ -4,6 +4,7 @@ const cartPrefix = "CART/";
 const authenticatePrefix = "AUTHENTICATE/";
 const userPrefix = "USER/";
 const providerPrefix = "PROVIDER/";
+const loadingPrefix = "LOADING/";
 
 export const adminContants = {
   GET_ALL_PROVIDERS: `${adminPrefix}GET_ALL_PROVIDERS`,
@@ -38,7 +39,10 @@ export const authenticateContants = {
   LOGOUT: `${authenticatePrefix}LOGOUT`,
   LOGIN_FAILED: `${authenticatePrefix}LOGIN_FAILED`,
   FORGOT_PASSWORD: `${authenticatePrefix}FORGOT_PASSWORD`,
+  FORGOT_PASSWORD_FAILD: `${authenticatePrefix}FORGOT_PASSWORD_FAILD`,
   FORGOT_PASSWORD_PROCESS_SUCCESS: `${authenticatePrefix}FORGOT_PASSWORD_PROCESS_SUCCESS`,
+  RESET_PASSWORD: `${authenticatePrefix}RESET_PASSWORD`,
+  UPDATEP_AVATAR: `${authenticatePrefix}UPDATEP_AVATAR`,
   REGISTER_AS_USER: `${authenticatePrefix}REGISTER_AS_USER`,
   REGISTER_AS_USER_SUCCESS: `${authenticatePrefix}REGISTER_AS_USER_SUCCESS`,
   REGISTER_AS_PROVIDER: `${authenticatePrefix}REGISTER_AS_PROVIDER`,
@@ -64,3 +68,5 @@ export const providerContants = {
   ADD_NEW_PRODUCT: `${providerPrefix}ADD_NEW_PRODUCT`,
   ADD_NEW_PRODUCT_SUCCESS: `${providerPrefix}ADD_NEW_PRODUCT_SUCCESS`,
 };
+
+export const SET_LOADING_STATE = `${loadingPrefix}/SET_LOADING_STATE`;

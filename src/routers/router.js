@@ -4,6 +4,7 @@ import UserRegister from "../containers/user-register/";
 import Admin from "../containers/admin";
 import Profile from "../containers/profile";
 import ChangePass from '../containers/change_password'
+import Forgotpassword from '../containers/forgotpassword'
 import ProductDetail from "../containers/product-detail";
 import Orderhistory from "../containers/orderhistory";
 import OrderDetail from "../containers/order_detail";
@@ -13,6 +14,9 @@ import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
 import Provider from "../containers/provider";
 import Page404 from "../containers/page404";
+import VerifyOTP from '../containers/verify_otp';
+import ResetPassword from '../containers/resetpassword';
+
 const routes = [
   {
     path: "/login",
@@ -24,6 +28,27 @@ const routes = [
   {
     path: "/register/provider",
     component: ProviderRegister,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/forgotpassword",
+    component: Forgotpassword,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/verify_otp",
+    component: VerifyOTP,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/reset_password/:slug",
+    component: ResetPassword,
     exact: true,
     layout: LoginLayout,
     isAuthorize: "unauthorize",

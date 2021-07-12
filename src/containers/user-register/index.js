@@ -23,7 +23,7 @@ export const userRegisterSchema = yup.object().shape({
     .string()
     .email("email is invalid")
     .required("email không được để trồng"),
-  zipcode: yup.string().required("zipcode không được để trống"),
+  zipcode: yup.number().required("zipcode không được để trống"),
 });
 
 const UserRegister = () => {
@@ -45,13 +45,12 @@ const UserRegister = () => {
     if (response.errors) {
       return response.errors.map((item) => toast.error(item));
     }
-    console.log(response);
     setLoading(false);
     if (response.status === 201) {
       history.push("/login");
-      return toast.success(response.message);
+      return toast(<h3 color="black">{response.message}</h3>);
     }
-    return toast.error(response.message);
+    return toast(<h3 color="black">{response.message}</h3>);
   };
 
   return (
