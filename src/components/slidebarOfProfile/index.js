@@ -19,7 +19,7 @@ function SlidebarOfProfile({ account }) {
           <img src={account.avatar_source || defaultAvt} alt="avatar"></img>
         </div>
         <div>
-          <h3>{account.username}</h3>
+          <h3>{account.full_name}</h3>
           <Link to="/profile">Chỉnh Sửa Hồ Sơ</Link>
         </div>
       </SlidebarOfProfileTop>

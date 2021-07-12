@@ -36,6 +36,7 @@ export const cartContants = {
   INCREASE_QUANTITY_SUCCESS: `${cartPrefix}INCREASE_QUANTITY_SUCCESS`,
   DECREASE_QUANTITY: `${cartPrefix}DECREASE_QUANTITY`,
   DECREASE_QUANTITY_SUCCESS: `${cartPrefix}DECREASE_QUANTITY_CUCCESS`,
+  SET_CHECKOUT_ITEM: `${cartPrefix}SET_CHECKOUT_ITEM`,
 };
 
 export const authenticateContants = {

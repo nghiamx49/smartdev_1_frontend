@@ -5,6 +5,8 @@ import { FcShipped } from "react-icons/fc";
 import CartItem from "./cartItem";
 import TotalCart from "./cartTotal";
 
+import { setCheckoutItem } from "../../actions/cartAction";
+
 import { Loadingbtn } from "../../components/loading/";
 
 import { getAllProductInCart } from "../../actions/cartAction";
@@ -20,18 +22,15 @@ import {
 } from "./style";
 import { connect } from "react-redux";
 
-const Cart = ({ cartLists, token, getCarItems, loading }) => {
-  const [checkOutItem, setCheckOutItem] = useState({
-    id: null,
-    product_name: "",
-    quantity_purchased: null,
-    store_name: "",
-    thumbnail_image: "",
-    unit_price: "",
-  });
-
+const Cart = ({
+  cartLists,
+  token,
+  getCarItems,
+  loading,
+  setCheckOut,
+  checkOutItem,
+}) => {
   useEffect(() => {
-    setCheckOutItem({});
     getCarItems(token);
   }, [getCarItems, token]);
 
@@ -42,7 +41,7 @@ const Cart = ({ cartLists, token, getCarItems, loading }) => {
     });
     e.target.checked = true;
     const obj = cartLists.filter((item) => parseInt(item.id) === parseInt(id));
-    setCheckOutItem(obj[0]);
+    setCheckOut(obj[0]);
   };
 
   return (
@@ -105,6 +104,7 @@ const mapStateToProps = (state) => {
     token: state.authenticateReducer.token,
     cartLists: state.cartReducer.data,
     loading: state.cartReducer.loading,
+    checkOutItem: state.checkoutReducer,
   };
 };
 
@@ -118,6 +118,7 @@ Cart.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCarItems: (token) => dispatch(getAllProductInCart(token)),
+    setCheckOut: (item) => dispatch(setCheckoutItem(item)),
   };
 };
 

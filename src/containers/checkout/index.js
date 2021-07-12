@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router";
+
+import Paypal from "./Paypal";
+
+import userService from "../../apiServices/userService";
 
 import { HiLocationMarker } from "react-icons/hi";
 import {
@@ -19,6 +24,8 @@ import {
   PaymentButton,
   ButtonContainer,
 } from "./style";
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
 const chosenStyled = {
   border: "1px solid #ee4d2d",
@@ -26,15 +33,53 @@ const chosenStyled = {
   fontWeight: 600,
 };
 
-const Checkout = () => {
-  const [method, setMethod] = useState("COD");
+const Checkout = ({ account, checkoutItem, token }) => {
+  const [paypalSuccess, setPaypalSucess] = useState(false);
+
+  const history = useHistory();
+
+  const { doCheckout } = userService;
+
+  useEffect(() => {
+    if (!checkoutItem.id) {
+      history.push("/cart");
+    }
+  }, [history, checkoutItem.id]);
+
+  const { full_name, phone_number, address } = account;
+
+  const { product_name, thumbnail_image, unit_price, quantity_purchased } =
+    checkoutItem;
+  const formartPhoneNumber = (phone_number) => {
+    if (phone_number) {
+      let splitDown = phone_number.split("");
+      splitDown.splice(0, 1, "(+84) ");
+      return splitDown.join("");
+    }
+  };
+
+  const countFee = +unit_price * quantity_purchased;
+
+  const [payload, setPayload] = useState({
+    method: "COD",
+    product_id: checkoutItem.product_id,
+    total: String(countFee + 20000),
+  });
+
+  console.log(payload);
 
   const handleChosen = (e) => {
     e.preventDefault();
-    setMethod(e.target.value);
+    setPayload({ ...payload, method: e.target.value });
   };
 
-  console.log(method);
+  const handleSubmit = async () => {
+    const response = await doCheckout(payload, token);
+    if (response.status === 200) {
+      history.push(`/order_detail/${checkoutItem.id}`);
+    }
+    return toast(response.message);
+  };
 
   return (
     <Container>
@@ -45,9 +90,9 @@ const Checkout = () => {
           <h2>Địa chỉ nhận hàng</h2>
         </AdressContainer>
         <UserInformation>
-          <h3>Mai Xuan Nghia</h3>
-          <h3>{"(+84) 977831551"}</h3>
-          <span>84 Cao Xuan Duc, Hai Chau, Da Nang</span>
+          <h3>{full_name}</h3>
+          <h3>{formartPhoneNumber(phone_number)}</h3>
+          <span>{address}</span>
         </UserInformation>
       </SectionContainer>
       <SectionContainer>
@@ -62,16 +107,23 @@ const Checkout = () => {
         </Product>
         <Product>
           <ProductNameAndImg>
-            <img
-              src="https://cf.shopee.vn/file/5d9ad43b692b660edd70bbff67bbda8e_tn"
-              alt=""
-            />
-            <h3>Tên sản phẩm ở đây</h3>
+            <img src={thumbnail_image} alt="" />
+            <h3>{product_name}</h3>
           </ProductNameAndImg>
           <ProductInfo>
-            <span>100.000</span>
-            <span>1</span>
-            <span>100.000</span>
+            <span>
+              {(+unit_price).toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </span>
+            <span>{quantity_purchased}</span>
+            <span>
+              {countFee.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </span>
           </ProductInfo>
         </Product>
       </SectionContainer>
@@ -81,46 +133,86 @@ const Checkout = () => {
           <PaymentMethod
             value="COD"
             onClick={handleChosen}
-            style={method === "COD" ? chosenStyled : null}
+            style={payload.method === "COD" ? chosenStyled : null}
           >
             Thanh toán khi nhận hàng
           </PaymentMethod>
           <PaymentMethod
             value="Paypal"
             onClick={handleChosen}
-            style={method === "Paypal" ? chosenStyled : null}
+            style={payload.method === "Paypal" ? chosenStyled : null}
           >
             Thanh toán bằng Paypal
           </PaymentMethod>
         </MethodContainer>
         <hr />
         <MethodDetail>
-          <h1>Thanh Toán khi nhận hàng</h1>
+          {payload.method === "Paypal" ? (
+            <Paypal
+              productName={product_name}
+              totalFee={countFee + 20000}
+              handleSuccess={setPaypalSucess}
+            />
+          ) : (
+            <h1>Thanh Toán khi nhận hàng</h1>
+          )}
         </MethodDetail>
         <hr />
         <PaymentDetail>
           <div>
             <span>Tổng tiền hàng:</span>
-            <span>100.000</span>
+            <span>
+              {countFee.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </span>
           </div>
           <div>
             <span>Phí vận chuyển:</span>
-            <span>20.000</span>
+            <span>
+              {(20000).toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </span>
           </div>
           <div>
             <span>Tổng tiền hàng:</span>
-            <Total>120.000</Total>
+            <Total>
+              {(countFee + 20000).toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </Total>
           </div>
         </PaymentDetail>
         <hr />
         <ButtonContainer>
-          <PaymentButton>Đặt hàng</PaymentButton>
+          <PaymentButton
+            onClick={handleSubmit}
+            disabled={payload.method === "Paypal" && paypalSuccess === false}
+          >
+            Đặt hàng
+          </PaymentButton>
         </ButtonContainer>
       </SectionContainer>
     </Container>
   );
 };
 
-Checkout.propTypes = {};
+Checkout.propTypes = {
+  checkoutItem: PropTypes.object,
+  account: PropTypes.object,
+  token: PropTypes.string,
+};
 
-export default Checkout;
+const mapStateToProps = (state) => {
+  return {
+    checkoutItem: state.checkoutReducer,
+    account: state.authenticateReducer.account,
+    token: state.authenticateReducer.token,
+  };
+};
+
+export default connect(mapStateToProps)(Checkout);

@@ -115,12 +115,14 @@ export const PaymentMethod = styled.button`
 `;
 
 export const MethodDetail = styled.div`
+  margin-left: 10px;
   h1 {
     opacity: 0.7;
   }
 `;
 
 export const PaymentDetail = styled.div`
+  margin-left: 10px;
   div {
     display: flex;
     align-items: center;
@@ -160,5 +162,8 @@ export const PaymentButton = styled.button`
   &:hover {
     cursor: pointer;
     background-color: #f23f1f;
+  }
+  &:disabled {
+    cursor: not-allowed;
   }
 `;
