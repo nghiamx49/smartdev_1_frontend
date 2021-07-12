@@ -34,6 +34,9 @@ export const Left = styled.div`
   display: flex;
   align-items: center;
   padding: 10px 0px;
+  &:hover {
+    cursor: pointer;
+  }
 
   img {
     max-height: 15rem;

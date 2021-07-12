@@ -22,6 +22,21 @@ const cartService = {
       console.log(error);
     }
   },
+  addToCart: async (data, token) => {
+    try {
+      const request = await axios.post(
+        `${process.env.REACT_APP_API}/user/cart/add`,
+        JSON.stringify({
+          ...data,
+        }),
+        config(token),
+      );
+      const response = await request.data;
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 export default cartService;

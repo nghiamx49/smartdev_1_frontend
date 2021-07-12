@@ -2,6 +2,7 @@ import React from "react";
 import { FcShipped } from "react-icons/fc";
 import { MdAccountBalanceWallet } from "react-icons/md";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router";
 
 import {
   removeCartItem,
@@ -30,6 +31,7 @@ const CartItem = ({
   increase,
   decrease,
 }) => {
+  const history = useHistory();
   return (
     <CartItemLayout>
       <ShopName>
@@ -46,7 +48,11 @@ const CartItem = ({
         <Right></Right>
       </ShopName>
       <ShopName>
-        <Left>
+        <Left
+          onClick={() => {
+            history.push(`/product-detail/${product.id}`);
+          }}
+        >
           <img src={product.thumbnail_image} alt="" />
           <p>{product.product_name}</p>
         </Left>
