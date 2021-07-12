@@ -34,7 +34,7 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
   const [productUpdate,setProductUpdate] = useState({id:0,name:""})
   const [listPage,setListPage] = useState([])
   const [pagePra,setPagePra] = useState(0)
-
+  console.log(page);
   const handle = (item) =>{
       console.log(item)
       setShowUpdate(!showUpdate)
@@ -42,12 +42,12 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
   }
   useEffect(()=>{
     let a = [];
-    for(let i = 1;i<page.totalPage;i++){
+    for(let i = 0;i<page;i++){
       a.push(i)
     }
     setListPage(a)
-  },[page.totalPage])
-  
+  },[page])
+  console.log(listPage);
   const onSubmit = async (data) => {
     console.log(data)
     try{
@@ -71,16 +71,15 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
   }
   const changePage = (index) =>{
     setPagePra(index)
-    
   }
   const changePagePrev = () =>{
     if(pagePra !== 0){
-      setPagePra(pagePra -1)
+     setPagePra(pagePra - 1)
     }
   }
   const changePageNext = () =>{
-    if(pagePra !== page.totalPage){
-      setPagePra(pagePra +1)
+    if(pagePra < page - 1){
+      setPagePra(pagePra + 1)
     }
   }
   return ( 
@@ -104,7 +103,7 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
         <Main.Pagination>
         <button onClick={changePagePrev}>&laquo;</button>
           {
-            listPage.map((index)=><button onClick={()=>changePage(index -1)} key={index}>{index}</button>)
+            listPage.map((index)=><button onClick={()=>changePage(index)} key={index}>{index + 1}</button>)
           }
           <button onClick={changePageNext}>&raquo;</button>
         </Main.Pagination>
@@ -147,7 +146,7 @@ const mapStateToProps = (state) => {
   return { 
     authenticateReducer: state.authenticateReducer,
     token:state.authenticateReducer.token,
-    page:state.providerReducer
+    page:state.providerReducer.totalPage
    };
 };
 

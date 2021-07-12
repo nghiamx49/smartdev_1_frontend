@@ -6,7 +6,6 @@ const initialState = {
 };
 
 const providerReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case providerContants.GET_ALL_OWN_PRODUCT_SUCCESS:
 
@@ -17,7 +16,7 @@ const providerReducer = (state = initialState, action) => {
     case providerContants.GET_ALL_OWN_PRODUCT_PENDING_SUCCESS:
         const newlistpending = [...action.payload]
         return {
-          ...state,listProducts:newlistpending,totalPage:action.page
+          ...state,listProducts:newlistpending,totalPage:action.page - 1
         }
     default:
       return state;

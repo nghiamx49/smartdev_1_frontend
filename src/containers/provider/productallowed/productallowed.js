@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
 import { listRequest, listRequestProductPending } from "../../../actions/providerAction";
 import { MainAdminTable, MainAdminStrong,BtnUpdate } from "../style";
 
@@ -18,8 +17,8 @@ function ProductAllowed({list,getList,token,handle,getListPending,page,pageParen
           <th>Nhà cung cấp </th>
           <th>giá sản phẩm</th>
           <th>số lương đã bán</th>
-          <th>số lượng sản phẩm</th>
-          <th>hình ảnh sản phẩm</th>
+          <th>số lượng </th>
+          <th>hình ảnh </th>
         </tr>
       </thead>
       <tbody>

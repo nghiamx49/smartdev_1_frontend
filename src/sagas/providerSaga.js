@@ -6,8 +6,7 @@ import { providerContants } from "../constants";
 
 
 function * getListProducts(action) {
-    console.log(action)
-    console.log("sdfhksjdf")
+   
     try {
         let data = yield call(apiClient.apiClientGet,`/provider/all_products/Allowed?page=${action.token.page}`,action.token.token);
         console.log(data)

@@ -5,7 +5,6 @@ import { productContants } from "../constants";
 
 
 function* getProducts() {
-    console.log("saga")
     try {
         let data = yield call(productService.getAllProduct);
         console.log(data.data)
