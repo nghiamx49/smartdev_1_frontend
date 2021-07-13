@@ -7,10 +7,12 @@ import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagramSquare } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { connect } from "react-redux";
+import { getProductsRequest } from "../../actions/productAction";
 
 import { submitLogout } from "../../actions/authenticateAction";
 
 import userDefault from "../../assests/img/user-default.png";
+import { useState } from "react";
 
 const listTextHeaderBottom = [
   "Guốc xỏ ngón",
@@ -22,7 +24,21 @@ const listTextHeaderBottom = [
   "Khăn đa năng",
 ];
 
-const HeaderComponent = ({ authenticateReducer, logout }) => {
+const HeaderComponent = ({ authenticateReducer, logout, getList }) => {
+  const [searchField, setSearchFiled] = useState("");
+
+  const handleSearchField = (e) => {
+    setSearchFiled(e.target.value);
+  };
+
+  const handleSearch = () => {
+    getList({ searchParam: searchField });
+  };
+
+  const handlePress = (e) => {
+    e.key === "Enter" && handleSearch();
+  };
+
   return (
     <HEADER.Header>
       <Container>
@@ -75,8 +91,12 @@ const HeaderComponent = ({ authenticateReducer, logout }) => {
           </HEADER.HeaderBottomLeft>
           <HEADER.HeaderBottomCenter>
             <HEADER.HeaderBottomCenterTop>
-              <HEADER.HeaderInput type="text" />
-              <HEADER.HeaderSearch>
+              <HEADER.HeaderInput
+                type="text"
+                onChange={handleSearchField}
+                onKeyPress={handlePress}
+              />
+              <HEADER.HeaderSearch onClick={handleSearch}>
                 <FiSearch />
               </HEADER.HeaderSearch>
             </HEADER.HeaderBottomCenterTop>
@@ -112,6 +132,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(submitLogout()),
+    getList: (page) => dispatch(getProductsRequest(page)),
   };
 };
 

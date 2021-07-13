@@ -10,7 +10,6 @@ import OrderDetail from "../containers/order_detail";
 import Cart from "../containers/cart";
 import LoginLayout from "../components/layout/LoginLayout";
 import Layout from "../components/layout/Layout";
-import Home from "../containers/home";
 import ProviderProductAllowed from "../containers/provider/productallowed";
 import Createproduct from "../containers/provider/productcreate";
 import Checkout from "../containers/checkout/";
@@ -219,13 +218,6 @@ const routes = [
     isAuthorize: "all",
   },
   {
-    path: "/product-landing",
-    component: ProductLanding,
-    exact: true,
-    layout: Layout,
-    isAuthorize: "all",
-  },
-  {
     path: "/page404",
     component: Page404,
     exact: true,
@@ -233,7 +225,7 @@ const routes = [
   },
   {
     path: "/",
-    component: Home,
+    component: ProductLanding,
     exact: true,
     layout: Layout,
     isAuthorize: "all",
