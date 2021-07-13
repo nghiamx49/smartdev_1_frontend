@@ -7,12 +7,8 @@ import {
   MainAdminHeader,
   MainAdminHeaderRight,
   MainAdminHeaderUser,
-  MainAdminHeaderSearch,
   LogoutButton,
 } from "./style";
-import {
-  AiOutlineSearch,
-} from "react-icons/ai";
 import { connect } from "react-redux";
 function MainAdmin({ authenticateReducer, logout ,mainContant}) {
   return (
@@ -20,11 +16,6 @@ function MainAdmin({ authenticateReducer, logout ,mainContant}) {
       <MainAdminHeader>
         <h3>Tickets</h3>
         <MainAdminHeaderRight>
-          <MainAdminHeaderSearch>
-            <p>
-              <AiOutlineSearch /> <span>search</span>
-            </p>
-          </MainAdminHeaderSearch>
           <MainAdminHeaderUser>
             <p>{authenticateReducer.account.username}</p>
             <img

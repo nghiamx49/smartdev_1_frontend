@@ -19,10 +19,15 @@ export const MainAdminHeaderRight = styled.div`
 export const MainAdminHeaderUser = styled.div`
   display: flex;
   align-items: center;
+  p{
+    text-transform: capitalize;
+    font-size: 16px;
+  }
   img {
     height: 30px;
     width: 30px;
     margin-left: 10px;
+    border-radius:50%;
   }
 `;
 export const MainAdminHeaderSearch = styled.div`

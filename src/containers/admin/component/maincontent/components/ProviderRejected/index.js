@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PropsTypes from "prop-types";
-
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -10,76 +8,72 @@ import {
     MainAdminFlex,
     MainAdminPage,
     ButtonBan,
-    ButtonApprove,
     ContainerTable
   } from "../../style";
 import {
   AiOutlineSortDescending,
 } from "react-icons/ai";
-import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
-import avatar from   "../../../../../../assests/img/user-default.png"
+import * as all from '../../../../../../actions/adminAction'
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
+import avatar from   "../../../../../../assests/img/user-default.png"
 
-function ApproveProvider({providers, token , pagesProvider, ...action}) {
+
+function ProviderRejected({providers , pagesProvider, token,...action}) {
   let pagination = []
   const [pagina, setpagina] = useState([])
   const [page, setPage] = useState(0)
+
   async function getData(page) {
-    await action.getProvider("Pending", token , page);
+    await action.getProvider("Rejected" ,token , page);
     setPage(page)
   }
-
   useEffect(() => {
     getData(0)
-  }, []);
-
+  }, [])
   useEffect(() => {
-    for(var i=0 ; i < pagesProvider ; i++){
+    for(var i=0 ; i<pagesProvider ; i++){
       pagination.push(i)
     }
     setpagina(pagination)
-  }, [pagesProvider])
+  }, [pagesProvider,pagination])
 
   async function handleStatusProvider (id , status) {
     const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
     getData(page)
   }
-  console.log(providers);
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL New Provider</h3>
+          <h3>ALL Provider Rejected</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort </button>
+              <AiOutlineSortDescending />  <button onClick={action.sort}>Sort </button>
             </MainAdmintextfunction>
-           
           </MainAdminFlex>
         </MainAdminAllUser>
-       <ContainerTable>
-       <MainAdminTable>
+        <ContainerTable>
+        <MainAdminTable>
           <thead>
             <tr>
               <th>User name</th>
               <th>Address</th>
-              <th>Shop name</th>
+              <th>Store_name</th>
               <th>Email</th>
               <th>Phone number</th>
-              <th>Date Create</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-          {(providers.length !== 0)  ? (providers.map((provider) =>(
-            <tr key={provider.id}>
+            {(providers.length !== 0)  ? (providers.map((provider) =>(
+            <tr>
               <td>
                 <MainAdminFlex>
                   <img
                     height="30"
                     width="30"
-                    src={provider.avatar_source ? provider.avatar_source : avatar }
-                    alt="avatar"
+                    src={provider.avatar_source ? provider.avatar_source :avatar }
+                    alt="dfkjghdfg"
                   />
                   <MainAdminStrong>{provider.username}</MainAdminStrong>
                 </MainAdminFlex>
@@ -97,19 +91,17 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
                 <MainAdminStrong>{provider.phone_number}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>03-04-2021</MainAdminStrong>
+              <ButtonBan onClick={() => handleStatusProvider( provider.id , "Allowed")}>Allowed</ButtonBan>
               </td>
-              <td>
-                <ButtonApprove onClick={() => handleStatusProvider( provider.id , "Allowed")}>Allowed</ButtonApprove>
-                <ButtonBan onClick={() => handleStatusProvider( provider.id , "Rejected")}>Rejected</ButtonBan>
-              </td>
-            </tr> 
-          ))) : (
-            <tr><td><h3>No Provider</h3></td></tr>
-          )}
+            </tr>
+            ))) : (
+              <tr><td>
+              <h3>No Provider</h3>
+              </td></tr>
+            )}
           </tbody>
         </MainAdminTable>
-       </ContainerTable>
+        </ContainerTable>
         <MainAdminPage>
           {
             pagina.map((page) =>(
@@ -120,6 +112,7 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
       </MainAdminContent>
     )
 }
+
 const mapStateToProps = (state) =>{
   return {
       pagesProvider : state.adminReducer.pagesProvider,
@@ -128,17 +121,11 @@ const mapStateToProps = (state) =>{
       sortValue : state.adminReducer.sort
   }
 }
-ApproveProvider.prototype ={
-  pagesProvider : PropsTypes.number,
-  providers : PropsTypes.array,
-  token : PropsTypes.string,
-  sortValue : PropsTypes.string,
-  getProvider : PropsTypes.func,
-  sort : PropsTypes.func
-}
+
 const mapDispatchToProps =  {
-  getProvider : all.getProvider,
-  sort : all.sortProvider,
+    getProvider : all.getProvider,
+    sort : all.sortProvider,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApproveProvider);
+export default connect(mapStateToProps, mapDispatchToProps)(ProviderRejected);
+

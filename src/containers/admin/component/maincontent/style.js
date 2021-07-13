@@ -38,6 +38,11 @@ export const MainAdminHeaderSearch = styled.div`
     }
   }
 `;
+export const ContainerTable = styled.div`
+  height:340px;
+  background-color:${theme.white}
+`;
+
 export const MainAdminContent = styled.div`
   margin: 30px;
   border: 1px solid #dfe0eb;
@@ -48,6 +53,12 @@ export const MainAdminTable = styled.table`
   background: ${theme.white};
   box-sizing: border-box;
   border-collapse: collapse;
+  thead{
+  
+  }
+  tbody{
+   
+  }
   th {
     text-align: left;
     font-style: normal;
@@ -59,6 +70,8 @@ export const MainAdminTable = styled.table`
   }
   tbody tr {
     border-top: 1.5px solid #dfe0eb;
+  
+    height:50px;
     &:hover {
       background-color: ${theme.bgE5};
     }
@@ -67,6 +80,29 @@ export const MainAdminTable = styled.table`
     padding: 15px 20px;
   }
 `;
+export const ButtonBan = styled.button`
+  background-color: #f3836c;
+  border-radius: 2px;
+  padding: 5px ;
+  margin-left:5px;
+  border: 0;
+  cursor: pointer;
+  &:hover{
+    background-color: white;
+  }
+`
+
+export const ButtonApprove = styled.button`
+  background-color: #24a5fb;
+  border-radius: 2px;
+  padding: 5px;
+  margin-left:5px;
+  border: 0;
+  cursor: pointer;
+  &:hover{
+    background-color: white;
+  }
+`
 
 export const MainAdminFlex = styled.div`
   display: flex;
@@ -89,18 +125,20 @@ export const MainAdminStrong = styled.strong`
 export const MainAdmintextfunction = styled.p`
   display: flex;
   align-items: center;
-  margin-right: 15px;
-
-  span {
-    font-family: Mulish;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.2px;
-    text-transform: capitalize;
-    color: ${theme.textAdminFunction};
-    margin-left: 10px;
+  margin-right: 10px;
+  margin-left: 15px;
+  svg{
+    font-size: 20px;
+  }
+  button{
+    padding:0px 10px;
+    height:20px;
+    box-sizing: border-box;
+    background: #ccc;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
 `;
 export const MainAdminPage = styled.div`
@@ -108,18 +146,22 @@ export const MainAdminPage = styled.div`
   justify-content: flex-end;
   padding: 10px 20px;
   align-items: center;
-  p {
-    display: flex;
-    align-items: center;
-    padding: 5px 0;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 20px;
-    margin-left: 15px;
-    svg {
-      font-size: 10px;
-      margin-top: 2px;
-      margin-left: 5px;
+  padding-right: 30px;
+  border-top: 1.5px solid #dfe0eb;
+  button{
+    background: #ccc;
+    padding: 5px 10px;
+    margin: 1px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    position: relative;
+    border-radius: 3px;
+    transition: 0.3s;
+    border:none;
+    &:hover{
+      background: #ADADAD;
+      transition-duration: 0.3s;
     }
   }
 `;
@@ -133,4 +175,34 @@ export const LogoutButton = styled.button`
     cursor: pointer;
     color: red;
   }
+`;
+export const ButtonSort = styled.button`
+
+
+`;
+export const ContainerSearch = styled.div`
+ display:flex;
+ align-items: center;
+ position: relative;
+ input{
+    border-radius: 20px;
+    border:1px solid gray;
+    height:20px;
+    width: 200px;
+    padding: 14px 15px;
+    box-sizing: border-box;
+    position: relative;
+    font-size:12px;
+    outline:none;
+ }
+button{
+  font-size: 14px;
+  position: absolute;
+  top: 12px;
+  right: 0;
+  background:transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 `;

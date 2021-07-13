@@ -1,74 +1,43 @@
+import {adminContants} from '../constants/index'
+
 const initialState = {
-  allProviders: [
-    {
-      username: "provider1",
-      avatar_source:
-        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
-      address: "Hai Chau, Da nang",
-      phone_number: "0977813xxx",
-      email: "provider1@gmail.com",
-      store_name: "store1",
-      status: "active",
-    },
-    {
-      username: "provider2",
-      avatar_source:
-        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
-      address: "Hai Chau, Da nang",
-      phone_number: "0977814xxx",
-      email: "provider2@gmail.com",
-      store_name: "store2",
-      status: "pending",
-    },
-    {
-      username: "provider3",
-      avatar_source:
-        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
-      address: "Lien Chieu, Da nang",
-      phone_number: "0977815xxx",
-      email: "provider3@gmail.com",
-      store_name: "store3",
-      status: "reject",
-    },
-  ],
-  allUsers: [
-    {
-      username: "user1",
-      avatar_source:
-        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
-      address: "Hai Chau, Da nang",
-      phone_number: "0977811xxx",
-      email: "user1@gmail.com",
-      full_name: "Mai Xuan Nghia",
-      status: "active",
-    },
-    {
-      username: "user2",
-      avatar_source:
-        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
-      address: "Hai Chau, Da nang",
-      phone_number: "0977816xxx",
-      email: "user2@gmail.com",
-      full_name: "Mai Xuan Nghia",
-      status: "ban",
-    },
-    {
-      username: "user3",
-      avatar_source:
-        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
-      address: "Hai Chau, Da nang",
-      phone_number: "0977817xxx",
-      email: "user3@gmail.com",
-      full_name: "Mai Xuan Nghia",
-      status: "active",
-    },
-  ],
+  allProviders: [],
+  allUsers: [],
+  allProducts:[],
+  pagesProvider : 1 ,
+  pagesUsers : 1 ,
+  pagesProducts : 1 ,
+  sort: ""
 };
 
 const adminReducer = (state = initialState, action) => {
   switch (action.type) {
-    default:
-      return state;
+    case adminContants.GET_ALL_USERS_SUCCESS:
+      return {...state , allUsers : action.payload.data , pagesUsers  : action.payload.pages , sort : ""};
+
+    case adminContants.GET_ALL_PROVIDERS_SUCCESS:
+      return {...state , allProviders : action.payload.data , pagesProvider : action.payload.pages , sort : ""};
+
+    case adminContants.GET_ALL_PRODUCTS_SUCCESS:
+      return {...state , allProducts : action.payload.data , pagesProducts:  action.payload.pages , sort : ""};
+
+    case adminContants.SORT_PROVIDER:
+      let sortProvider = state.allProviders;
+      sortProvider.sort((a,b) => (a.username > b.username) ? 1 : -1);
+      return {...state , allProviders : sortProvider , sort : adminContants.SORT_PROVIDER};
+    
+    case adminContants.SORT_USER:
+      let sortUser = state.allUsers;
+      sortUser.sort((a,b) => (a.username > b.username) ? 1 : -1);
+      return {...state , allProviders : sortUser , sort : adminContants.SORT_USER};
+
+    case adminContants.SORT_PRODUCT:
+      let sortProduct = state.allProducts;
+      sortProduct.sort((a,b) => (a.name > b.name) ? 1 : -1);
+      return {...state , allProviders : sortProduct , sort : adminContants.SORT_PRODUCT};
+
+  default:
+      return {...state};
   }
 };
 

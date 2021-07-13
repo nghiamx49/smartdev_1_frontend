@@ -10,9 +10,24 @@ export const adminContants = {
   GET_ALL_PROVIDERS: `${adminPrefix}GET_ALL_PROVIDERS`,
   GET_ALL_PROVIDERS_SUCCESS: `${adminPrefix}GET_ALL_PROVIDERS_SUCCESS`,
   GET_ALL_PROVIDERS_FAILED: `${adminPrefix}GET_ALL_PROVIDERS_FAILED`,
+
   GET_ALL_USERS: `${adminPrefix}GET_ALL_USERS`,
   GET_ALL_USERS_SUCCESS: `${adminPrefix}GET_ALL_USERS_SUCCESS`,
   GET_ALL_USERS_FAILED: `${adminPrefix}GET_ALL_USERS_FAILED`,
+
+  GET_ALL_PRODUCTS: `${adminPrefix}GET_ALL_PRODUCTS`,
+  GET_ALL_PRODUCTS_SUCCESS: `${adminPrefix}GET_ALL_PRODUCTS_SUCCESS`,
+  GET_ALL_PRODUCTS_FAILED: `${adminPrefix}GET_ALL_PRODUCTS_FAILED`,
+
+  SEARCH: `${adminPrefix}SEARCH`,
+  SEARCH_SUCCESS: `${adminPrefix}SEARCH_SUCCESS`,
+  SEARCH_FAILED: `${adminPrefix}SEARCH_FAILED`,
+
+  SORT_PROVIDER: `${adminPrefix}SORT_PROVIDER`,
+  SORT_PRODUCT: `${adminPrefix}SORTT_PRODUCT`,
+  SORT_USER: `${adminPrefix}SORT_USER`,
+
+
 };
 
 export const productContants = {
@@ -71,6 +86,8 @@ export const userContants = {
 export const providerContants = {
   GET_ALL_OWN_PRODUCT: `${providerPrefix}GET_ALL_OWN_PRODUCT`,
   GET_ALL_OWN_PRODUCT_SUCCESS: `${providerPrefix}GET_ALL_OWN_PRODUCT_SUCCESS`,
+  GET_ALL_OWN_PRODUCT_PENDING: `${providerPrefix}GET_ALL_OWN_PRODUCT_PENDING`,
+  GET_ALL_OWN_PRODUCT_PENDING_SUCCESS: `${providerPrefix}GET_ALL_OWN_PRODUCT_PENDING_SUCCESS`,
   ADD_NEW_PRODUCT: `${providerPrefix}ADD_NEW_PRODUCT`,
   ADD_NEW_PRODUCT_SUCCESS: `${providerPrefix}ADD_NEW_PRODUCT_SUCCESS`,
 };
