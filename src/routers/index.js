@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
-import { Switch, BrowserRouter, Route } from "react-router-dom";
-import { Router } from 'react-router';
+import { Switch, Route } from "react-router-dom";
+import { Router } from "react-router";
 
 import routes from "./router";
 import AuthorizeHOC from "../HOCs/AuthorizeHOC";
 import UnauthorizeHOC from "../HOCs/UnauthorizeHOC";
-import history from '../sagas/history';
+import history from "../sagas/history";
 
 const AppRouter = () => (
   <Router history={history}>

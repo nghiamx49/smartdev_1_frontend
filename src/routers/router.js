@@ -2,7 +2,7 @@ import Login from "../containers/login";
 import ProviderRegister from "../containers/provider-register/";
 import UserRegister from "../containers/user-register/";
 import Profile from "../containers/profile";
-import Forgotpassword from '../containers/forgotpassword'
+import Forgotpassword from "../containers/forgotpassword";
 import ChangePass from "../containers/change_password";
 import ProductDetail from "../containers/product-detail";
 import Orderhistory from "../containers/orderhistory";
@@ -12,12 +12,11 @@ import LoginLayout from "../components/layout/LoginLayout";
 import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
 import ProviderProductAllowed from "../containers/provider/productallowed";
-import Createproduct from "../containers/provider/productcreate"
-import Provider from "../containers/provider";
+import Createproduct from "../containers/provider/productcreate";
 import Checkout from "../containers/checkout/";
 import Page404 from "../containers/page404";
-import VerifyOTP from '../containers/verify_otp';
-import ResetPassword from '../containers/resetpassword';
+import VerifyOTP from "../containers/verify_otp";
+import ResetPassword from "../containers/resetpassword";
 import LayoutDashborad from "../components/layout/layoutDashborad";
 
 //component of admin
@@ -29,6 +28,8 @@ import ProviderAdmin from "../containers/admin/component/maincontent/components/
 import User from "../containers/admin/component/maincontent/components/User";
 import ProviderRejected from "../containers/admin/component/maincontent/components/ProviderRejected";
 import UserBan from "../containers/admin/component/maincontent/components/UserBan";
+
+import Error from "../containers/page404/";
 
 import ProductLanding from "../containers/product-landing";
 const routes = [
@@ -231,8 +232,15 @@ const routes = [
     layout: Layout,
   },
   {
-    path: "",
+    path: "/",
     component: Home,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "all",
+  },
+  {
+    path: "*",
+    component: Error,
     exact: true,
     layout: Layout,
     isAuthorize: "all",

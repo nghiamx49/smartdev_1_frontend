@@ -4,17 +4,17 @@ const productService = {
   getAllProduct: () => {
     return axios.request({
       method: "get",
-      url: `${process.env.REACT_APP_API}/products`
-  });
+      url: `${process.env.REACT_APP_API}/products`,
+    });
   },
   getAllByCategory: async () => {},
   getProductDetail: (id) => {
-    return axios.request({
-      method: "get",
-      url: `${process.env.REACT_APP_API}/products/${id}`
-  })
+    return axios.get(`${process.env.REACT_APP_API}/products/${id}`, {
+      validateStatus: (status) => {
+        return status <= 500;
+      },
+    });
   },
-  addProductToCart: async () => {},
 };
 
 export default productService;
