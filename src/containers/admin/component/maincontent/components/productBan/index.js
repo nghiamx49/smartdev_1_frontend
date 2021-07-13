@@ -58,7 +58,7 @@ function ProductBan({products, pagesProduct, token,...action}) {
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL New Product</h3>
+          <h3>ALL Product Rejected</h3>
           <MainAdminFlex>
             
             <ContainerSearch>
@@ -85,8 +85,8 @@ function ProductBan({products, pagesProduct, token,...action}) {
             </tr>
           </thead>
           <tbody>
-          {(products.length !== 0)  ? (products.map((product) =>(
-            <tr>
+          {(products.length !== 0)  ? (products.map((product, item) =>(
+            <tr key={item}>
               <td>
                 <MainAdminFlex>
                   <img
@@ -122,7 +122,7 @@ function ProductBan({products, pagesProduct, token,...action}) {
         <MainAdminPage>
           <span>Page {page +1} of {pagesProduct}</span>
           <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")} next>Next</button>
+          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")}>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

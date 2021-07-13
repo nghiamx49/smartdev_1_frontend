@@ -68,8 +68,8 @@ function ProviderRejected({providers , pagesProvider, token,...action}) {
             </tr>
           </thead>
           <tbody>
-            {(providers.length !== 0)  ? (providers.map((provider) =>(
-            <tr>
+            {(providers.length !== 0)  ? (providers.map((provider, item) =>(
+            <tr key={item}>
               <td>
                 <MainAdminFlex>
                   <img
@@ -108,7 +108,7 @@ function ProviderRejected({providers , pagesProvider, token,...action}) {
         <MainAdminPage>
           <span>Page {page +1} of {pagesProvider}</span>
           <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")} next>Next</button>
+          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")}>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

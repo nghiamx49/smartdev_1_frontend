@@ -83,8 +83,8 @@ function NewProduct({products, pagesProduct, token,...action}) {
             </tr>
           </thead>
           <tbody>
-          {(products.length !== 0)  ? (products.map((product) =>(
-            <tr>
+          {(products.length !== 0)  ? (products.map((product, item) =>(
+            <tr key={item}>
               <td>
                 <MainAdminFlex>
                   <img
@@ -121,7 +121,7 @@ function NewProduct({products, pagesProduct, token,...action}) {
         <MainAdminPage>
           <span>Page {page +1} of {pagesProduct}</span>
           <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")} next>Next</button>
+          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")}>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

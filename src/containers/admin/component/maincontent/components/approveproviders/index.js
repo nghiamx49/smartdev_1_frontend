@@ -44,7 +44,6 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
     const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
     getData(page)
   }
-  console.log(providers);
     return (
         <MainAdminContent>
         <MainAdminAllUser>
@@ -112,7 +111,7 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
         <MainAdminPage>
           <span>Page {page +1} of {pagesProvider}</span>
           <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")} next>Next</button>
+          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")}>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

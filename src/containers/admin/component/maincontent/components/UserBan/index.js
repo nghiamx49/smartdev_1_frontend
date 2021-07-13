@@ -50,7 +50,7 @@ function UserBan({users,pagesUser , token,...action}) {
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL USERS BAN</h3>
+          <h3>All Users Ban</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
@@ -110,7 +110,7 @@ function UserBan({users,pagesUser , token,...action}) {
         <MainAdminPage>
           <span>Page {page +1} of {pagesUser}</span>
           <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesUser-1} onClick={() => handlePage("next")} next>Next</button>
+          <button disabled={page === pagesUser-1} onClick={() => handlePage("next")}>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

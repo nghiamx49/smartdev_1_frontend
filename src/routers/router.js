@@ -13,7 +13,6 @@ import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
 import ProviderProductAllowed from "../containers/provider/productallowed";
 import Createproduct from "../containers/provider/productcreate"
-import Provider from "../containers/provider";
 import Checkout from "../containers/checkout/";
 import Page404 from "../containers/page404";
 import VerifyOTP from '../containers/verify_otp';

@@ -12,18 +12,16 @@ import {
   } from "../../style";
 import {
   AiOutlineSortDescending,
-  AiFillFilter,//AiFillCaretDown
 } from "react-icons/ai";
-// import {GrNext,GrPrevious} from 'react-icons/gr'
 import { connect } from 'react-redux';
 import * as all from '../../../../../../actions/adminAction'
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 import avatar from   "../../../../../../assests/img/user-default.png"
+import { Provider } from 'react-redux';
 
 
 function ProviderAdmin({providers , pagesProvider, token,...action}) {
-  let pagination = []
-  const [pagina, setpagina] = useState([])
+  
   const [page, setPage] = useState(0)
 
   async function getData(page) {
@@ -33,6 +31,7 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
   useEffect(() => {
     getData(0)
   }, [])
+  
   function handlePage (status) {
     if(status === "next"){
       getData(page+1)
@@ -71,8 +70,8 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
             </tr>
           </thead>
           <tbody>
-            {(providers.length !== 0)  ? (providers.map((provider) =>(
-            <tr>
+            {(providers.length !== 0)  ? (providers.map((provider , item) =>(
+            <tr key = {item}>
               <td>
                 <MainAdminFlex>
                   <img
@@ -111,7 +110,7 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
         <MainAdminPage>
           <span>Page {page +1} of {pagesProvider}</span>
           <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")} next>Next</button>
+          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")}>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

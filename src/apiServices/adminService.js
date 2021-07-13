@@ -3,7 +3,6 @@ import getCLient from "./axiosClient"
 
 const adminService = {
   getAllProvider: async (status ,token ,page) => {
-    console.log("123444");
     try{
       const request = await getCLient.apiClientGet(`/admin/providers/${status}?page=${page}`, token);
       let response = await request;
@@ -17,7 +16,6 @@ const adminService = {
       let response = await request;
       return response;
     }catch(e){
-      console.log(e);
       return e ;
     }
   },
@@ -27,7 +25,6 @@ const adminService = {
       let response = await request;
       return response;
     }catch(e){
-      console.log(e);
     }
   },
 
@@ -35,10 +32,8 @@ const adminService = {
     try{
       const request = await getCLient.apiClientGet(`/admin/product_requests/${status}?keyword=${searchValue}`, token);
       let response = await request;
-      console.log(request)
       return response;
     }catch(e){
-      console.log(e);
     }
   },
 };

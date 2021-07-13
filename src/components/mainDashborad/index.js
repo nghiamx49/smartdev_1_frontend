@@ -14,7 +14,7 @@ function MainAdmin({ authenticateReducer, logout ,mainContant}) {
   return (
     <MainAdminContainer>
       <MainAdminHeader>
-        <h3>Tickets</h3>
+        <h3>Dashborad</h3>
         <MainAdminHeaderRight>
           <MainAdminHeaderUser>
             <p>{authenticateReducer.account.username}</p>
