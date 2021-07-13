@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router";
+import StarRatingComponent from "react-star-rating-component";
 
 import ErrorComponent from "../page404/";
-import { RiStarFill } from "react-icons/ri";
+import { AiFillStar } from "react-icons/ai";
 import { GrDeliver } from "react-icons/gr";
 import { CgMathPlus, CgMathMinus } from "react-icons/cg";
 import { FaCartPlus } from "react-icons/fa";
@@ -21,10 +22,17 @@ import { useParams } from "react-router-dom";
 
 import cartService from "../../apiServices/cartService";
 import { toast } from "react-toastify";
+import { Rating } from "./feeback/style";
 
 const { addToCart } = cartService;
 
-const ProductDetail = ({ state, getProductDetail, token, isLoggedIn }) => {
+const ProductDetail = ({
+  state,
+  getProductDetail,
+  token,
+  isLoggedIn,
+  getList,
+}) => {
   const imgRef = useRef();
   let { idProduct } = useParams();
 
@@ -43,6 +51,7 @@ const ProductDetail = ({ state, getProductDetail, token, isLoggedIn }) => {
       return;
     } else {
       getProductDetail(idProduct);
+      getList({});
     }
   }, [getProductDetail, idProduct]);
 
@@ -53,8 +62,6 @@ const ProductDetail = ({ state, getProductDetail, token, isLoggedIn }) => {
     }
     setProduct({ ...product, product_id: state.product.id });
   }, [state.product.id, state.product.status]);
-
-  console.log(state.product);
 
   const handleAddToCart = async () => {
     if (!isLoggedIn) {
@@ -136,7 +143,7 @@ const ProductDetail = ({ state, getProductDetail, token, isLoggedIn }) => {
             <PD.MainRight>
               <PD.Title>{state.product.name}</PD.Title>
               <PD.StarCommetAmount>
-                <div>
+                <Rating>
                   <PD.AverageStar>
                     {Math.round(
                       state.product.rating?.reduce(
@@ -145,12 +152,21 @@ const ProductDetail = ({ state, getProductDetail, token, isLoggedIn }) => {
                       ) / state.product.rating?.length,
                     ) || 0}
                   </PD.AverageStar>
-                  <RiStarFill color="#ee4d2d" />
-                  <RiStarFill color="#ee4d2d" />
-                  <RiStarFill color="#ee4d2d" />
-                  <RiStarFill color="#ee4d2d" />
-                  <RiStarFill color="#ee4d2d" />
-                </div>
+                  <StarRatingComponent
+                    name="star"
+                    value={
+                      Math.round(
+                        state.product.rating?.reduce(
+                          (total, item) => total + item.star,
+                          0,
+                        ) / state.product.rating?.length,
+                      ) || 0
+                    }
+                    renderStarIcon={() => <AiFillStar size="20" />}
+                    editing={false}
+                    starColor="#EE4D2D"
+                  />
+                </Rating>
                 <PD.StarCommetAmountDiv>
                   <PD.TotalComment>
                     {state.product.rating?.length}
@@ -175,7 +191,7 @@ const ProductDetail = ({ state, getProductDetail, token, isLoggedIn }) => {
                   <span>Vận chuyển toàn quốc</span>
                   <PD.FeeDelivery>
                     <span>Phí Vận Chuyển</span>
-                    <span>₫25.000</span>
+                    <span>₫20.000</span>
                   </PD.FeeDelivery>
                 </div>
               </PD.Delivery>
@@ -195,7 +211,6 @@ const ProductDetail = ({ state, getProductDetail, token, isLoggedIn }) => {
                 <PD.AddCartButton onClick={handleAddToCart}>
                   <FaCartPlus /> &nbsp;Thêm vào giỏ hàng
                 </PD.AddCartButton>
-                <PD.BuyNowButton type="button">Mua ngay</PD.BuyNowButton>
               </PD.CoverButton>
             </PD.MainRight>
           </PD.Container01>
@@ -226,23 +241,8 @@ const ProductDetail = ({ state, getProductDetail, token, isLoggedIn }) => {
               </PD.Container03LeftTop>
               <PD.Container03LeftBottom>
                 <PD.TitleComment>Đánh giá sản phẩm</PD.TitleComment>
-                <PD.HeaderComment>
-                  <PD.Star>
-                    <div>
-                      <PD.NumberStar>{getNumberRating() || 0}</PD.NumberStar>{" "}
-                      trên 5
-                    </div>
-                    <div>
-                      {new Array(getNumberRating() || 0)
-                        .fill(0)
-                        .map((item, index) => (
-                          <RiStarFill key={index} />
-                        ))}
-                    </div>
-                  </PD.Star>
-                </PD.HeaderComment>
                 <div>
-                  <Feedback />
+                  <Feedback rating={state.product.rating || []} />
                 </div>
               </PD.Container03LeftBottom>
             </PD.Container03Left>
@@ -271,7 +271,7 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  getList: () => dispatch(getProductsRequest()),
+  getList: (data) => dispatch(getProductsRequest(data)),
   getProductDetail: (id) => dispatch(getProductDetailRequest(id)),
 });
 

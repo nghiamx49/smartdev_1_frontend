@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  getList: (page) => dispatch(getProductsRequest(page)),
+  getList: (data) => dispatch(getProductsRequest(data)),
 });
 
 ProductLanding.propTypes = {

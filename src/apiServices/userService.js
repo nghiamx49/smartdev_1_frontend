@@ -5,19 +5,18 @@ import config from "./requestConfig";
 const { apiClientGet } = apiClient;
 
 const userService = {
-
   changePassword: async (email) => {
     let result = await axios.post(
       `${process.env.REACT_APP_API}/authenticate/verify_mail`,
       {
-        email: email
+        email: email,
       },
       {
         validateStatus: (status) => {
           return status < 500;
-        }
-      }
-    )
+        },
+      },
+    );
 
     return result;
   },
@@ -28,9 +27,9 @@ const userService = {
       {
         validateStatus: (status) => {
           return status < 500;
-        }
-      }
-    )
+        },
+      },
+    );
     return result;
   },
   getOrderHistory: async (token) => {
@@ -45,6 +44,21 @@ const userService = {
     try {
       const request = await axios.put(
         `${process.env.REACT_APP_API}/user/cart/checkout`,
+        JSON.stringify({
+          ...data,
+        }),
+        config(token),
+      );
+      const response = await request.data;
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  submitFeedback: async (data, token) => {
+    try {
+      const request = await axios.post(
+        `${process.env.REACT_APP_API}/user/rating_product`,
         JSON.stringify({
           ...data,
         }),

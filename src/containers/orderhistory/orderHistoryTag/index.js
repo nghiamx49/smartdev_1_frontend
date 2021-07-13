@@ -86,7 +86,13 @@ export default function OrderHistoryTag(props) {
           <label style={{ paddingRight: "10px" }}>Tông tiền: </label>{" "}
         </TotalContainer>
         <BottomLeft>
-          <CustomButton>Mua Lần Nữa</CustomButton>
+          <CustomButton
+            onClick={() =>
+              history.push(`/product-detail/${orderHistory.product_id}`)
+            }
+          >
+            Mua Lần Nữa
+          </CustomButton>
         </BottomLeft>
       </OrderHistoryTagBottom>
     </Container>

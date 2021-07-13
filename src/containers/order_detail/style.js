@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { theme } from "../../assests/common/color";
 
 export const Container = styled.div`
@@ -56,6 +56,7 @@ export const StoreContainer = styled.div`
 export const ProductDetail = styled.div`
   margin: 15px;
   display: flex;
+  align-items: center;
   img {
     width: 80px;
     height: 80px;
@@ -114,4 +115,84 @@ export const Button = styled.button`
     cursor: pointer;
     background-color: ${theme.textRed};
   }
+`;
+
+export const Modal = styled.div`
+  display: ${(props) => (props.toggle ? "block" : "none")};
+  position: fixed;
+  z-index: 5;
+  padding-top: 150px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
+const animationDropDown = keyframes`
+from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+`;
+
+export const ModalContent = styled.div`
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: ${animationDropDown};
+  animation-duration: 0.4s;
+`;
+
+export const CloseButton = styled.span`
+  color: white;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
+`;
+
+export const ModelHeader = styled.div`
+  background-color: #ff6533;
+  padding: 2px 16px;
+  color: white;
+`;
+
+export const ModalBody = styled.div`
+  padding: 2px 16px;
+`;
+export const ModalFooter = styled.div`
+  padding: 10px 16px;
+  background-color: #ff6533;
+  color: white;
+  display: flex;
+  flex-direction: row-reverse;
+  button {
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    &:hover {
+      cursor: pointer;
+      color: white;
+      background-color: #e24414;
+    }
+  }
+`;
+
+export const RatingContainer = styled.div`
+  text-align: center;
+`;
+
+export const TextArea = styled.textarea`
+  width: 100%;
+  height: 150px;
+  margin: 0 auto;
 `;
