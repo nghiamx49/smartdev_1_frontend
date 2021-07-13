@@ -51,7 +51,8 @@ function Createproduct({token}) {
             unit_price:data.unit_price,
             product_description:data.product_description,
             images:[
-               imgUrl,imgUrl1,imgUrl2,imgUrl3,
+               imgUrl||"https://firebasestorage.googleapis.com/v0/b/e-commerce-2aee1.appspot.com/o/images%2F2021-Harem-Joggers-Harajuku-Sweatpant-Casual-Male-Trousers-Track-Cargo-Pants-Men-Joggers-Pants-Trousers-Gyms.jpg_720x720xz%20(1).jpg?alt=media&token=e0e24345-fe51-48f8-baf7-cad8fafcf89c",
+               imgUrl1,imgUrl2,imgUrl3,
             ]
           }
         ,{
