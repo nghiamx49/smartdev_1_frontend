@@ -39,6 +39,9 @@ const authenticateReducer = (state = initialState, action) => {
         message: "",
         status: null,
       };
+    case authenticateContants.UPDATEP_AVATAR:
+      console.log(action.payload);
+      return { ...state, account: {...state.account, avatar_source: action.payload}}
     default:
       return state;
   }

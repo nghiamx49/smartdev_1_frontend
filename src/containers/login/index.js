@@ -48,7 +48,8 @@ const Login = ({ loading, login }) => {
           <LoginButton disabled={loading}>
             {loading ? "Loading..." : "Đăng nhập"}
           </LoginButton>
-          <a href="#forgotpassword">Quên Mật Khẩu</a>
+          {/* <a href="#forgotpassword">Quên Mật Khẩu</a> */}
+          <Link to="/forgotpassword">Quên mật khẩu?</Link>
           <hr />
           <p style={{ textAlign: "center" }}>
             Chưa có tài khoản? <Link to="/register/user">Đăng ký</Link> ngay!

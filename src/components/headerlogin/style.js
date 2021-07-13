@@ -9,6 +9,7 @@ export const HeaderLoginContainer = styled.div`
     height: 60px;
     align-items: center;
     padding: 0 160px;
+    box-shadow: 0 6px 6px rgb(0 0 0 / 6%);
     h3{
         color: ${theme.black};
         font-size: 24px;

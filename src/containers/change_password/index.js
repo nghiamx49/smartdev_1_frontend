@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 import apiClient from "../../apiServices/axiosClient";
 import SlidebarOfProfile from "../../components/slidebarOfProfile";
@@ -52,9 +53,9 @@ const ChangePass = (props) => {
       props.token,
     );
     if (result.status === 200) {
-      return toast.success(result.message);
+      return toast(<h3 color="black">{result.message}</h3>);
     }
-    return toast.warn(result.message);
+    return toast(<h3 color="black">{result.message}</h3>);
   };
 
   return (
@@ -107,7 +108,6 @@ const ChangePass = (props) => {
                     <UP.Error>{errors.confirm_password?.message}</UP.Error>
                   </UP.ProfileFormRow>
                 )}
-
                 <UP.ProfileFormRow>
                   <UP.ProfileFormName></UP.ProfileFormName>
                   <UP.ProfileButton type="submit">Xác nhận</UP.ProfileButton>
