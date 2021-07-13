@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import defaultAvt from "../../assests/img/user-default.png";
-import { FcKindle } from "react-icons/fc";
-import { FaShoppingCart } from "react-icons/fa";
+import { FcKindle, FcKey} from "react-icons/fc";
+import { FaShoppingCart, FaRegUser } from "react-icons/fa";
 import { connect } from "react-redux";
 import {
   SlidebarOfProfileTop,
@@ -25,6 +25,14 @@ function SlidebarOfProfile({ account }) {
       </SlidebarOfProfileTop>
       <SlidebarOfProfileBottom>
         <ul>
+          <li>
+            <FaRegUser />
+            <Link to="/profile">Tài khoản của tôi</Link>
+          </li>
+          <li>
+            <FcKey />
+            <Link to="/change_pass">Đổi mật khẩu</Link>
+          </li>
           <li>
             <FcKindle />
             <Link to="/order_history">Đơn Mua</Link>

@@ -3,6 +3,7 @@ import ProviderRegister from "../containers/provider-register/";
 import UserRegister from "../containers/user-register/";
 import Admin from "../containers/admin";
 import Profile from "../containers/profile";
+import Forgotpassword from '../containers/forgotpassword'
 import ChangePass from "../containers/change_password";
 import ProductDetail from "../containers/product-detail";
 import Orderhistory from "../containers/orderhistory";
@@ -14,6 +15,8 @@ import Home from "../containers/home";
 import Provider from "../containers/provider";
 import Checkout from "../containers/checkout/";
 import Page404 from "../containers/page404";
+import VerifyOTP from '../containers/verify_otp';
+import ResetPassword from '../containers/resetpassword';
 import LayoutDashborad from "../components/layout/layoutDashborad";
 import ProductLanding from "../containers/product-landing";
 const routes = [
@@ -27,6 +30,27 @@ const routes = [
   {
     path: "/register/provider",
     component: ProviderRegister,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/forgotpassword",
+    component: Forgotpassword,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/verify_otp",
+    component: VerifyOTP,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/reset_password/:slug",
+    component: ResetPassword,
     exact: true,
     layout: LoginLayout,
     isAuthorize: "unauthorize",

@@ -97,13 +97,12 @@ export const ProfileButton = styled.button`
 `;
 
 export const ProfileBottomRight = styled.div`
-    border-left: 1px solid ${theme.bgE5};
+    padding-top: 15px;
     margin-left: 50px;
     height: 250px;
     display:flex;
     align-items: center;
     flex-direction: column;
-    padding-left: 30px;
     label{
         margin:20px 0;
         background: ${theme.white};
