@@ -4,12 +4,12 @@ import productService from "../apiServices/productService";
 import { productContants } from "../constants";
 
 
-function* getProducts() {
+function* getProducts(action) {
     try {
-        let data = yield call(productService.getAllProduct);
+        let data = yield call(productService.getAllProduct,action.payload);
         console.log(data.data)
         if (data.status === 200) {
-            yield put(getProductsSuccess(data.data.data));
+            yield put(getProductsSuccess(data.data));
         }
     } catch (e) {
         console.log(e);

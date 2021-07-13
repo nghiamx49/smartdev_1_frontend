@@ -70,13 +70,13 @@ const ProductDetail = ({
       state.product.rating?.length
     );
   }
-  function getNumberRatingChose(star) {
-    let count = 0;
-    state.product.rating?.forEach((element) => {
-      element.star === star && count++;
-    });
-    return count;
-  }
+  // function getNumberRatingChose(star) {
+  //   let count = 0;
+  //   state.product.rating?.forEach((element) => {
+  //     element.star === star && count++;
+  //   });
+  //   return count;
+  // }
   getNumberRating();
   function changeImgShow(imgSrc) {
     console.log(imgSrc);
