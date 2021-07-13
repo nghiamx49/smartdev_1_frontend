@@ -1,14 +1,16 @@
 import { productContants } from "../constants"
 
-export const getProductsRequest = () =>{
+export const getProductsRequest = (page) =>{
     return {
-        type:productContants.GET_ALL_PRODUCTS
+        type:productContants.GET_ALL_PRODUCTS,
+        payload:page
     }
 }
 export const getProductsSuccess = (data) =>{
     return {
         type:productContants.GET_ALL_PRODUCTS_SUCCESS,
-        payload:data
+        payload:data.data,
+        page:data.pages
     }
 }
 

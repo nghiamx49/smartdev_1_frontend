@@ -6,16 +6,17 @@ import {
 import productService from "../apiServices/productService";
 import { productContants } from "../constants";
 
-function* getProducts() {
-  try {
-    let data = yield call(productService.getAllProduct);
-    console.log(data.data);
-    if (data.status === 200) {
-      yield put(getProductsSuccess(data.data.data));
-    }
-  } catch (e) {
-    console.log(e);
-  }
+
+function* getProducts(action) {
+    try {
+        let data = yield call(productService.getAllProduct,action.payload);
+        console.log(data.data)
+        if (data.status === 200) {
+            yield put(getProductsSuccess(data.data));
+        }
+    } catch (e) {
+        console.log(e);
+ }
 }
 function* getProductDetail(action) {
   try {
