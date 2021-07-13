@@ -6,7 +6,6 @@ const initialState = {
 };
 
 const providerReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case providerContants.GET_ALL_OWN_PRODUCT_SUCCESS:
 

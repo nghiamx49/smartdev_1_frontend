@@ -24,26 +24,26 @@ import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
 
 function Product({products, pagesProduct, token,...action}) {
-  let pagination = []
-  const [pagina, setpagina] = useState([])
-  const [page, setpage] = useState(0)
+  const [page, setPage] = useState(0)
   const [searchValue, setSearchValue] = useState("")
 
   async function getData(page) {
     await action.getAllProduct("Allowed",token , page);
-    setpage(page)
+    setPage(page)
   }
   useEffect(() => {
    getData(0)
   }, [])
 
-  useEffect(() => {
-    for(var i=0 ; i<pagesProduct ; i++){
-      pagination.push(i)
-      console.log(pagination);
+  function handlePage (status) {
+    if(status === "next"){
+      getData(page+1)
+      setPage(page+1)
+    }else{
+      getData(page-1)
+      setPage(page-1)
     }
-    setpagina(pagination)
-  }, [pagesProduct])
+  }
 
   async function handleStatusProduct (id , status) {
     console.log(id, status);
@@ -122,11 +122,9 @@ function Product({products, pagesProduct, token,...action}) {
           </MainAdminTable>
         </ContainerTable>
         <MainAdminPage>
-          {
-            pagina.map((page) =>(
-              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
-            ))
-          }
+          <span>Page {page +1} of {pagesProduct}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
+          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")} next>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

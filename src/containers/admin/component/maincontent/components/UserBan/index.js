@@ -21,8 +21,7 @@ import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
 
 
 function UserBan({users,pagesUser , token,...action}) {
-  let pagination = []
-  const [pagina, setpagina] = useState([])
+  
   const [page, setPage] = useState(0)
 
   async function getData(page) {
@@ -33,13 +32,16 @@ function UserBan({users,pagesUser , token,...action}) {
     getData(0)
   }, [])
 
-  useEffect(() => {
-    for(var i=0 ; i<pagesUser ; i++){
-      pagination.push(i)
-      console.log(pagination);
+  function handlePage (status) {
+    if(status === "next"){
+      getData(page+1)
+      setPage(page+1)
+    }else{
+      getData(page-1)
+      setPage(page-1)
     }
-    setpagina(pagination)
-  }, [pagesUser])
+  }
+
   async function handleStatusProvider (id) {
     console.log(id);
     const message = await apiClientPatchUser(`/admin/users/${id}/not_ban` , token);
@@ -106,11 +108,9 @@ function UserBan({users,pagesUser , token,...action}) {
         </MainAdminTable>
         </ContainerTable>
         <MainAdminPage>
-          {
-            pagina.map((page) =>(
-              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
-            ))
-          }
+          <span>Page {page +1} of {pagesUser}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
+          <button disabled={page === pagesUser-1} onClick={() => handlePage("next")} next>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

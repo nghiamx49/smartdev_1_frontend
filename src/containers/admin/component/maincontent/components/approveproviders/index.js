@@ -22,25 +22,24 @@ import avatar from   "../../../../../../assests/img/user-default.png"
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
 function ApproveProvider({providers, token , pagesProvider, ...action}) {
-  let pagination = []
-  const [pagina, setpagina] = useState([])
+
   const [page, setPage] = useState(0)
   async function getData(page) {
     await action.getProvider("Pending", token , page);
     setPage(page)
   }
-
   useEffect(() => {
     getData(0)
   }, []);
-
-  useEffect(() => {
-    for(var i=0 ; i < pagesProvider ; i++){
-      pagination.push(i)
+  function handlePage (status) {
+    if(status === "next"){
+      getData(page+1)
+      setPage(page+1)
+    }else{
+      getData(page-1)
+      setPage(page-1)
     }
-    setpagina(pagination)
-  }, [pagesProvider])
-
+  }
   async function handleStatusProvider (id , status) {
     const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
     getData(page)
@@ -111,11 +110,9 @@ function ApproveProvider({providers, token , pagesProvider, ...action}) {
         </MainAdminTable>
        </ContainerTable>
         <MainAdminPage>
-          {
-            pagina.map((page) =>(
-              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
-            ))
-          }
+          <span>Page {page +1} of {pagesProvider}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
+          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")} next>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )
