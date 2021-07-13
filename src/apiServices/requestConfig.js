@@ -5,7 +5,7 @@ export default function config(token) {
       "Content-Type": "application/json",
     },
     validateStatus: function (status) {
-      return status < 500;
+      return status <= 500;
     },
   };
 }

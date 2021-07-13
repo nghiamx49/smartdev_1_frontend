@@ -10,6 +10,7 @@ const {
   INCREASE_QUANTITY_SUCCESS,
   DECREASE_QUANTITY,
   DECREASE_QUANTITY_SUCCESS,
+  SET_CHECKOUT_ITEM,
 } = cartContants;
 
 export const getAllProductInCart = (token) => {
@@ -46,4 +47,8 @@ export const decreaseQuantity = (product, token) => {
 
 export const decreaseQuantitySuccess = (product) => {
   return { type: DECREASE_QUANTITY_SUCCESS, payload: product };
+};
+
+export const setCheckoutItem = (data) => {
+  return { type: SET_CHECKOUT_ITEM, payload: data };
 };

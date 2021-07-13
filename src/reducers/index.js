@@ -11,6 +11,7 @@ import productReducer from "./product";
 import providerReducer from "./provider";
 import userReducer from "./users";
 import loadingReducer from "./loading";
+import checkoutReducer from "./checkout";
 
 const rootReducer = combineReducers({
   adminReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   providerReducer,
   userReducer,
   loadingReducer,
+  checkoutReducer,
 });
 
 const persistsConfig = {

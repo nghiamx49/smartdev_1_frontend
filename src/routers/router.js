@@ -2,6 +2,7 @@ import Login from "../containers/login";
 import ProviderRegister from "../containers/provider-register/";
 import UserRegister from "../containers/user-register/";
 import Profile from "../containers/profile";
+import Forgotpassword from '../containers/forgotpassword'
 import ChangePass from "../containers/change_password";
 import ProductDetail from "../containers/product-detail";
 import Orderhistory from "../containers/orderhistory";
@@ -12,7 +13,11 @@ import Layout from "../components/layout/Layout";
 import Home from "../containers/home";
 import ProviderProductAllowed from "../containers/provider/productallowed";
 import Createproduct from "../containers/provider/productcreate"
+import Provider from "../containers/provider";
+import Checkout from "../containers/checkout/";
 import Page404 from "../containers/page404";
+import VerifyOTP from '../containers/verify_otp';
+import ResetPassword from '../containers/resetpassword';
 import LayoutDashborad from "../components/layout/layoutDashborad";
 
 //component of admin
@@ -25,6 +30,7 @@ import User from "../containers/admin/component/maincontent/components/User";
 import ProviderRejected from "../containers/admin/component/maincontent/components/ProviderRejected";
 import UserBan from "../containers/admin/component/maincontent/components/UserBan";
 
+import ProductLanding from "../containers/product-landing";
 const routes = [
   {
     path: "/login",
@@ -36,6 +42,27 @@ const routes = [
   {
     path: "/register/provider",
     component: ProviderRegister,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/forgotpassword",
+    component: Forgotpassword,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/verify_otp",
+    component: VerifyOTP,
+    exact: true,
+    layout: LoginLayout,
+    isAuthorize: "unauthorize",
+  },
+  {
+    path: "/reset_password/:slug",
+    component: ResetPassword,
     exact: true,
     layout: LoginLayout,
     isAuthorize: "unauthorize",
@@ -144,6 +171,14 @@ const routes = [
     role: "user",
   },
   {
+    path: "/checkout",
+    component: Checkout,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "authorize",
+    role: "user",
+  },
+  {
     path: "/change_pass",
     component: ChangePass,
     exact: true,
@@ -176,8 +211,15 @@ const routes = [
     role: "user",
   },
   {
-    path: "/product-detail",
+    path: "/product-detail/:idProduct",
     component: ProductDetail,
+    exact: true,
+    layout: Layout,
+    isAuthorize: "all",
+  },
+  {
+    path: "/product-landing",
+    component: ProductLanding,
     exact: true,
     layout: Layout,
     isAuthorize: "all",

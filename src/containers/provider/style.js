@@ -39,7 +39,7 @@ export const InputControls = styled.div`
    }
 `;
 export const ContainerTable = styled.div`
-  min-height:340px;
+  min-height:640px;
   background-color:${theme.white}
 `;
 export const MainAdminHeaderUser = styled.div`

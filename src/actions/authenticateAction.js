@@ -13,3 +13,10 @@ export const loginSuccess = (data) => {
 export const submitLogout = () => {
   return { type: LOGOUT };
 };
+
+export const updateAvatarRequest = (data)=>{
+  return {
+      type: authenticateContants.UPDATEP_AVATAR,
+      payload: data
+  }
+}

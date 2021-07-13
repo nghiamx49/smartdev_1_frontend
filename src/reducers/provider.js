@@ -16,7 +16,7 @@ const providerReducer = (state = initialState, action) => {
     case providerContants.GET_ALL_OWN_PRODUCT_PENDING_SUCCESS:
         const newlistpending = [...action.payload]
         return {
-          ...state,listProducts:newlistpending,totalPage:action.page
+          ...state,listProducts:newlistpending,totalPage:action.page - 1
         }
     default:
       return state;

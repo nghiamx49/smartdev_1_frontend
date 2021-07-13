@@ -8,7 +8,12 @@ const productService = {
   });
   },
   getAllByCategory: async () => {},
-  getProductDetail: async () => {},
+  getProductDetail: (id) => {
+    return axios.request({
+      method: "get",
+      url: `${process.env.REACT_APP_API}/products/${id}`
+  })
+  },
   addProductToCart: async () => {},
 };
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, {  useState } from 'react'
 import axios from "axios";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -17,10 +17,7 @@ const schema = yup.object().shape({
     category_id: yup.string().required("không được để trống"),
     unit_price: yup.string().required("không được để trống"),
     product_description: yup.string().required("không được để trống"),
-    images: yup.string().required("không được để trống"),
-    images1: yup.string().required("không được để trống"),
-    images2: yup.string().required("không được để trống"),
-    images3: yup.string().required("không được để trống")
+   
   })
 
   
@@ -54,10 +51,7 @@ function Createproduct({token}) {
             unit_price:data.unit_price,
             product_description:data.product_description,
             images:[
-               data.images,
-               data.images1 || "",
-               data.images2 || "",
-               data.images3  || "",
+               imgUrl,imgUrl1,imgUrl2,imgUrl3,
             ]
           }
         ,{
@@ -84,7 +78,8 @@ function Createproduct({token}) {
           console.log(e)
         }
       }
-      const handleChange = e => {
+
+const handleChange = e => {
         console.log("abc")
         if(e.target.files[0]){
             // setImage(e.target.files[0]);
@@ -185,29 +180,22 @@ function Createproduct({token}) {
                     }
                     </InputControls>
                       <ContainerInputFile>
-                        <input  {...register('images')}  value={imgUrl} />
+                        <input style={{visibility:"hidden"}}   value={imgUrl} onChange={e => setImgUrl(imgUrl)}/>
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 1" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
                         {imgUrl && <TiTick/>}
-                        {
-                          errors.images && (
-                            <div style={{marginLeft:"180px"}}>
-                              {errors.images.message}
-                            </div>
-                          )
-                        }
                       </ContainerInputFile>
                       <ContainerInputFile>
-                        <input   {...register('images1')}  value={imgUrl1} />
+                        <input  style={{visibility:"hidden"}}    value={imgUrl1}  onChange={e => setImgUrl1(imgUrl1)}/>
                         <InputFile inputColor="chọn hình ảnh sản phẩm 2" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
                         {imgUrl1 && <TiTick/>}
                       </ContainerInputFile>
                       <ContainerInputFile>
-                        <input    {...register('images2')}  value={imgUrl2} />
+                        <input style={{visibility:"hidden"}}     value={imgUrl2} onChange={e => setImgUrl2(imgUrl2)} />
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 3" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
                         {imgUrl2 && <TiTick/>}
                       </ContainerInputFile>
                       <ContainerInputFile>
-                        <input   {...register('images3')}  value={imgUrl3} />
+                        <input style={{visibility:"hidden"}}    value={imgUrl3} onChange={e => setImgUrl3(imgUrl3)} />
                         <InputFile inputTitle="chọn hình ảnh sản phẩm 4" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
                         {imgUrl3 && <TiTick/>}
                       </ContainerInputFile>
