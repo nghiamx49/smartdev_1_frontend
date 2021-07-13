@@ -39,3 +39,8 @@ export const FeedbackBorder = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.09);
   margin-right: 30px;
 `;
+
+export const Rating = styled.div`
+  display: flex;
+  align-items: center;
+`;

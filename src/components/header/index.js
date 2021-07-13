@@ -100,13 +100,6 @@ const HeaderComponent = ({ authenticateReducer, logout, getList }) => {
                 <FiSearch />
               </HEADER.HeaderSearch>
             </HEADER.HeaderBottomCenterTop>
-            <div>
-              <HEADER.HeaderUl>
-                {listTextHeaderBottom.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </HEADER.HeaderUl>
-            </div>
           </HEADER.HeaderBottomCenter>
           <HEADER.HeaderBottomRight>
             {authenticateReducer.isLoggedIn && (

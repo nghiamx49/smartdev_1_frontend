@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import PropTypes from "prop-types";
 
+import { AiFillStar } from "react-icons/ai";
 import { useHistory, useParams } from "react-router-dom";
 
 import userService from "../../apiServices/userService";
 
 import Error from "../../containers/page404/";
+import StarRatingComponent from "react-star-rating-component";
 
 import { AiFillShop } from "react-icons/ai";
 import ProfileSideBar from "../../components/slidebarOfProfile/";
@@ -22,30 +24,52 @@ import {
   Price,
   Table,
   Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModelHeader,
+  CloseButton,
+  RatingContainer,
+  TextArea,
 } from "./style";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 const OrderDetail = ({ token }) => {
   const [orderDetail, setOrderDetail] = useState({});
 
   const [error, setError] = useState(false);
 
-  const { getOrderDetail } = userService;
+  const { getOrderDetail, submitFeedback } = userService;
+
+  const [toggle, SetToggle] = useState(false);
 
   const { id } = useParams();
 
   const history = useHistory();
+
+  const [feedback, setFeedback] = useState({
+    product_id: null,
+    star: 5,
+    comment: "",
+  });
+
+  const setProductId = useCallback((id) => {
+    return setFeedback({ ...feedback, product_id: id });
+  }, []);
 
   useEffect(() => {
     const getDetail = async () => {
       const response = await getOrderDetail(id, token);
       if (response.status === 200) {
         setOrderDetail(response.data);
+        setProductId(response.data.product_id);
       } else {
         setError(true);
       }
     };
     getDetail();
-  }, [token, getOrderDetail, id]);
+  }, [token, getOrderDetail, id, setProductId]);
 
   const formartPhoneNumber = (phone_number) => {
     if (phone_number) {
@@ -53,6 +77,30 @@ const OrderDetail = ({ token }) => {
       splitDown.splice(0, 1, "(+84) ");
       return splitDown.join("");
     }
+  };
+
+  const handleModal = () => {
+    SetToggle(!toggle);
+  };
+
+  const onStarClick = (nextValue, preValue, name) => {
+    setFeedback({ ...feedback, star: nextValue });
+  };
+
+  const handleTextChange = (e) => {
+    setFeedback({ ...feedback, comment: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (feedback.comment === "") {
+      return toast("Comment không được để trống");
+    }
+    const request = await submitFeedback(feedback, token);
+    if (request.status === 200) {
+      SetToggle(false);
+    }
+    return toast(request.message);
   };
 
   return (
@@ -141,7 +189,44 @@ const OrderDetail = ({ token }) => {
                 </b>
               </div>
             </Table>
-            <Button>Mua Lại</Button>
+            <Button onClick={handleModal}>Đánh giá sản phẩm</Button>
+            <Modal toggle={toggle}>
+              <ModalContent>
+                <ModelHeader>
+                  <CloseButton onClick={handleModal}>&times;</CloseButton>
+                  <h2>Đánh giá sản phẩm</h2>
+                </ModelHeader>
+                <ModalBody>
+                  <ProductDetail>
+                    <img src={orderDetail.image_source} alt="" />
+                    <ul>
+                      <li>
+                        <ProductName>{orderDetail.product_name}</ProductName>
+                      </li>
+                      <li>
+                        <p>x{orderDetail.quantity_purchased}</p>
+                      </li>
+                    </ul>
+                  </ProductDetail>
+                  <RatingContainer>
+                    <StarRatingComponent
+                      name="star"
+                      value={feedback.star}
+                      onStarClick={onStarClick}
+                      renderStarIcon={() => <AiFillStar size="50" />}
+                    />
+                  </RatingContainer>
+                  <TextArea
+                    onChange={handleTextChange}
+                    defaultValue={feedback.comment}
+                    placeholder="Hãy cho chúng tôi biết ý kiến của bạn"
+                  ></TextArea>
+                </ModalBody>
+                <ModalFooter>
+                  <button onClick={handleSubmit}>Hoàn tất</button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
           </MainContent>
         </Container>
       )}
