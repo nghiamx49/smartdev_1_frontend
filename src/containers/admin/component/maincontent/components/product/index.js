@@ -23,17 +23,21 @@ import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
 
 
-function Product({products, pagesProduct, token,...action}) {
+function Product({products, pagesProduct, token,getAllProduct ,sort, search}) {
   const [page, setPage] = useState(0)
   const [searchValue, setSearchValue] = useState("")
 
-  async function getData(page) {
-    await action.getAllProduct("Allowed",token , page);
+  function getData(page) {
+    getAllProduct("Allowed",token , page);
     setPage(page)
   }
   useEffect(() => {
-   getData(0)
-  }, [])
+    function getDataEff() {
+      getAllProduct("Allowed",token , 0);
+      setPage(0)
+    }
+   getDataEff()
+  }, [getAllProduct, token])
 
   function handlePage (status) {
     if(status === "next"){
@@ -46,15 +50,14 @@ function Product({products, pagesProduct, token,...action}) {
   }
 
   async function handleStatusProduct (id , status) {
-    console.log(id, status);
-    const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
-    console.log(message);
+   await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
     getData(page)
   }
 
   function handleSearch(e){
     e.preventDefault();
-    action.search("Allowed" , token , searchValue)
+    search("Allowed" , token , searchValue)
+    setPage(0)
   }
     return (
         <MainAdminContent>
@@ -70,7 +73,7 @@ function Product({products, pagesProduct, token,...action}) {
               </form>
             </ContainerSearch>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort</button>
+              <AiOutlineSortDescending /> <button onClick={sort}>Sort</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>

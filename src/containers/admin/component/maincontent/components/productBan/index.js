@@ -21,18 +21,22 @@ import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
-function ProductBan({products, pagesProduct, token,...action}) {
+function ProductBan({products, pagesProduct, token,getAllProduct , sort, search}) {
   
   const [searchValue, setSearchValue] = useState("")
   const [page, setPage] = useState(0)
   
-  async function getData(page) {
-    await action.getAllProduct("Rejected",token , page);
+  function getData(page) {
+    getAllProduct("Rejected",token , page);
     setPage(page)
   }
   useEffect(() => {
-    getData(0)
-  }, [])
+    function getDataEff() {
+      getAllProduct("Rejected",token , 0);
+      setPage(0)
+    }
+    getDataEff()
+  }, [token, getAllProduct])
 
   function handlePage (status) {
     if(status === "next"){
@@ -45,15 +49,14 @@ function ProductBan({products, pagesProduct, token,...action}) {
   }
 
   async function handleStatusProduct (id , status) {
-    console.log(id, status);
-    const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
-    console.log(message);
+    await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
     getData(page)
   }
 
   function handleSearch(e){
     e.preventDefault();
-    action.search("Reiected" , token , searchValue)
+    search("Reiected" , token , searchValue)
+    setPage(0)
   }
     return (
         <MainAdminContent>
@@ -69,7 +72,7 @@ function ProductBan({products, pagesProduct, token,...action}) {
               </form>
             </ContainerSearch>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort</button>
+              <AiOutlineSortDescending /> <button onClick={sort}>Sort</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>

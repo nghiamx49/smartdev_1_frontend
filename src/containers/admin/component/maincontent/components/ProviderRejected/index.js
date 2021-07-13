@@ -19,17 +19,21 @@ import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 import avatar from   "../../../../../../assests/img/user-default.png"
 
 
-function ProviderRejected({providers , pagesProvider, token,...action}) {
+function ProviderRejected({providers , pagesProvider, token,getProvider ,sort}) {
   
   const [page, setPage] = useState(0)
 
-  async function getData(page) {
-    await action.getProvider("Rejected" ,token , page);
+  function getData(page) {
+    getProvider("Rejected" ,token , page);
     setPage(page)
   }
   useEffect(() => {
-    getData(0)
-  }, [])
+    function getDataEff() {
+      getProvider("Rejected" ,token , 0);
+      setPage(0)
+    }
+    getDataEff()
+  }, [getProvider, token])
   function handlePage (status) {
     if(status === "next"){
       getData(page+1)
@@ -42,7 +46,7 @@ function ProviderRejected({providers , pagesProvider, token,...action}) {
 
 
   async function handleStatusProvider (id , status) {
-    const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
+    await apiClientPatch("/admin/providers/update_status" , token , id , status);
     getData(page)
   }
     return (
@@ -51,7 +55,7 @@ function ProviderRejected({providers , pagesProvider, token,...action}) {
           <h3>ALL Provider Rejected</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending />  <button onClick={action.sort}>Sort </button>
+              <AiOutlineSortDescending />  <button onClick={sort}>Sort </button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>

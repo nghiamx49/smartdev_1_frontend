@@ -20,17 +20,21 @@ import {
 import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
 
 
-function UserAdmin({users,pagesUser , token,...action}) {
+function UserAdmin({users,pagesUser , token,getUser ,sort}) {
 
   const [page, setPage] = useState(0)
 
-  async function getData(page) {
-    await action.getUser("not_ban" ,token , page);
+  function getData(page) {
+    getUser("not_ban" ,token , page);
     setPage(page)
   }
   useEffect(() => {
-    getData(0)
-  }, [])
+  function getDataEff() {
+    getUser("not_ban" ,token , 0);
+    setPage(0)
+  }
+    getDataEff()
+  }, [getUser, token])
 
   function handlePage (status) {
     if(status === "next"){
@@ -52,7 +56,7 @@ function UserAdmin({users,pagesUser , token,...action}) {
           <h3>All Users</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
+              <AiOutlineSortDescending /> <button onClick={sort}>sort</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>

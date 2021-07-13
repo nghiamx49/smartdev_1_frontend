@@ -17,20 +17,22 @@ import { connect } from 'react-redux';
 import * as all from '../../../../../../actions/adminAction'
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 import avatar from   "../../../../../../assests/img/user-default.png"
-import { Provider } from 'react-redux';
 
-
-function ProviderAdmin({providers , pagesProvider, token,...action}) {
+function ProviderAdmin({providers , pagesProvider, token,getProvider,sort}) {
   
   const [page, setPage] = useState(0)
 
-  async function getData(page) {
-    await action.getProvider("Allowed" ,token , page);
+  function getData(page) {
+    getProvider("Allowed" ,token , page);
     setPage(page)
   }
   useEffect(() => {
-    getData(0)
-  }, [])
+    function getDataEff() {
+      getProvider("Allowed" ,token , 0);
+      setPage(0)
+    }
+    getDataEff()
+  }, [getProvider, token])
   
   function handlePage (status) {
     if(status === "next"){
@@ -53,7 +55,7 @@ function ProviderAdmin({providers , pagesProvider, token,...action}) {
           <h3>ALL Provider</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending />  <button onClick={action.sort}>Sort </button>
+              <AiOutlineSortDescending />  <button onClick={sort}>Sort </button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>

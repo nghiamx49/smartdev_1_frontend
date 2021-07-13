@@ -21,18 +21,22 @@ import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 
-function NewProduct({products, pagesProduct, token,...action}) {
+function NewProduct({products, pagesProduct, token,getAllProductPending ,search ,sort}) {
 
   const [page, setPage] = useState(0)
   const [searchValue, setSearchValue] = useState("")
   
-  async function getData(page) {
-    await action.getAllProductPending("Pending",token , page);
+  function getData(page) {
+    getAllProductPending("Pending",token , page);
     setPage(page)
   }
   useEffect(() => {
-    getData(0)
-  }, [])
+    function getDataEff() {
+      getAllProductPending("Pending",token , 0);
+      setPage(0)
+    }
+    getDataEff(0)
+  }, [getAllProductPending,token])
 
   function handlePage (status) {
     if(status === "next"){
@@ -53,7 +57,8 @@ function NewProduct({products, pagesProduct, token,...action}) {
 
   function handleSearch(e){
     e.preventDefault();
-    action.search("Pending" , token , searchValue)
+    search("Pending" , token , searchValue)
+    setPage(0)
   }
     return (
         <MainAdminContent>
@@ -67,7 +72,7 @@ function NewProduct({products, pagesProduct, token,...action}) {
               </form>
             </ContainerSearch>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>Sort</button>
+              <AiOutlineSortDescending /> <button onClick={sort}>Sort</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
