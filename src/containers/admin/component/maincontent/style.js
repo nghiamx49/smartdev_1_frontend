@@ -164,6 +164,11 @@ export const MainAdminPage = styled.div`
       transition-duration: 0.3s;
     }
   }
+  span{
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 10px;
+  }
 `;
 
 export const LogoutButton = styled.button`

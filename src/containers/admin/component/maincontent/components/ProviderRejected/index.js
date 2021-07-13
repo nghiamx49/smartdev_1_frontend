@@ -19,27 +19,34 @@ import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
 import avatar from   "../../../../../../assests/img/user-default.png"
 
 
-function ProviderRejected({providers , pagesProvider, token,...action}) {
-  let pagination = []
-  const [pagina, setpagina] = useState([])
+function ProviderRejected({providers , pagesProvider, token,getProvider ,sort}) {
+  
   const [page, setPage] = useState(0)
 
-  async function getData(page) {
-    await action.getProvider("Rejected" ,token , page);
+  function getData(page) {
+    getProvider("Rejected" ,token , page);
     setPage(page)
   }
   useEffect(() => {
-    getData(0)
-  }, [])
-  useEffect(() => {
-    for(var i=0 ; i<pagesProvider ; i++){
-      pagination.push(i)
+    function getDataEff() {
+      getProvider("Rejected" ,token , 0);
+      setPage(0)
     }
-    setpagina(pagination)
-  }, [pagesProvider,pagination])
+    getDataEff()
+  }, [getProvider, token])
+  function handlePage (status) {
+    if(status === "next"){
+      getData(page+1)
+      setPage(page+1)
+    }else{
+      getData(page-1)
+      setPage(page-1)
+    }
+  }
+
 
   async function handleStatusProvider (id , status) {
-    const message = await apiClientPatch("/admin/providers/update_status" , token , id , status);
+    await apiClientPatch("/admin/providers/update_status" , token , id , status);
     getData(page)
   }
     return (
@@ -48,7 +55,7 @@ function ProviderRejected({providers , pagesProvider, token,...action}) {
           <h3>ALL Provider Rejected</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending />  <button onClick={action.sort}>Sort </button>
+              <AiOutlineSortDescending />  <button onClick={sort}>Sort </button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
@@ -65,8 +72,8 @@ function ProviderRejected({providers , pagesProvider, token,...action}) {
             </tr>
           </thead>
           <tbody>
-            {(providers.length !== 0)  ? (providers.map((provider) =>(
-            <tr>
+            {(providers.length !== 0)  ? (providers.map((provider, item) =>(
+            <tr key={item}>
               <td>
                 <MainAdminFlex>
                   <img
@@ -103,11 +110,9 @@ function ProviderRejected({providers , pagesProvider, token,...action}) {
         </MainAdminTable>
         </ContainerTable>
         <MainAdminPage>
-          {
-            pagina.map((page) =>(
-              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
-            ))
-          }
+          <span>Page {page +1} of {pagesProvider}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
+          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")}>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )

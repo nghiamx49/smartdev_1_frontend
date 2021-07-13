@@ -20,25 +20,31 @@ import {
 import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
 
 
-function UserAdmin({users,pagesUser , token,...action}) {
-  let pagination = []
-  const [pagina, setpagina] = useState([])
+function UserAdmin({users,pagesUser , token,getUser ,sort}) {
+
   const [page, setPage] = useState(0)
 
-  async function getData(page) {
-    await action.getUser("not_ban" ,token , page);
+  function getData(page) {
+    getUser("not_ban" ,token , page);
     setPage(page)
   }
   useEffect(() => {
-    getData(0)
-  }, [])
+  function getDataEff() {
+    getUser("not_ban" ,token , 0);
+    setPage(0)
+  }
+    getDataEff()
+  }, [getUser, token])
 
-  useEffect(() => {
-    for(var i=0 ; i<pagesUser ; i++){
-      pagination.push(i)
+  function handlePage (status) {
+    if(status === "next"){
+      getData(page+1)
+      setPage(page+1)
+    }else{
+      getData(page-1)
+      setPage(page-1)
     }
-    setpagina(pagination)
-  }, [pagesUser])
+  }
   async function handleStatusProvider (id) {
     const message = await apiClientPatchUser(`/admin/users/${id}/ban` , token);
     console.log(message);
@@ -47,10 +53,10 @@ function UserAdmin({users,pagesUser , token,...action}) {
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL USERS</h3>
+          <h3>All Users</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
+              <AiOutlineSortDescending /> <button onClick={sort}>sort</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
@@ -105,11 +111,9 @@ function UserAdmin({users,pagesUser , token,...action}) {
         </MainAdminTable>
         </ContainerTable>
         <MainAdminPage>
-          {
-            pagina.map((page) =>(
-              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
-            ))
-          }
+          <span>Page {page +1} of {pagesUser}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
+          <button disabled={page === pagesUser-1} onClick={() => handlePage("next")}>Next</button>
         </MainAdminPage>
       </MainAdminContent>
     )
