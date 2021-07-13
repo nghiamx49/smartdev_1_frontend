@@ -123,7 +123,8 @@ export const HomeSearchTopItem = styled.div`
     }
 `;
 export const HomeProductList = styled.div`
-    margin-top: 20px;
+    margin: 20px auto;
+    width:1000px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

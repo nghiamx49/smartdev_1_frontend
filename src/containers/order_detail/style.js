@@ -37,6 +37,9 @@ export const OrderDetailContainer = styled.div`
     padding: 0;
     margin: 0 auto;
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const StoreContainer = styled.div`

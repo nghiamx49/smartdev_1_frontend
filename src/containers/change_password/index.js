@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
 
 import apiClient from "../../apiServices/axiosClient";
 import SlidebarOfProfile from "../../components/slidebarOfProfile";
@@ -16,7 +15,7 @@ const passwordSchema = yup.object().shape({
   new_password: yup
     .string()
     .required("mật khẩu mới không được bỏ trống")
-    .min(6, "mật khẩu ít 6 kí tự. vui lòng nhập lại"),
+    .min(5, "mật khẩu ít 5kí tự. vui lòng nhập lại"),
   confirm_password: yup
     .string()
     .required("nhập lại mật khẩu không được bỏ trống")
