@@ -1,61 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import {connect} from 'react-redux'
-import * as all from '../../../../../../actions/adminAction'
-import avatar from   "../../../../../../assests/img/user-default.png"
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import * as all from "../../../../../../actions/adminAction";
+import avatar from "../../../../../../assests/img/user-default.png";
 
 import {
-    MainAdminContent,
-    MainAdminAllUser,
-    MainAdmintextfunction,
-    MainAdminTable,
-    MainAdminStrong,
-    MainAdminFlex,
-    MainAdminPage,
-    ButtonBan,
-    ContainerTable
-  } from "../../style";
-import {
-  AiOutlineSortDescending,
-} from "react-icons/ai";
-import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
+  MainAdminContent,
+  MainAdminAllUser,
+  MainAdmintextfunction,
+  MainAdminTable,
+  MainAdminStrong,
+  MainAdminFlex,
+  MainAdminPage,
+  ButtonBan,
+  ContainerTable,
+} from "../../style";
+import { AiOutlineSortDescending } from "react-icons/ai";
+import { apiClientPatchUser } from "../../../../../../apiServices/axiosAdmin";
 
-
-function UserBan({users,pagesUser , token,...action}) {
-  let pagination = []
-  const [pagina, setpagina] = useState([])
-  const [page, setPage] = useState(0)
+function UserBan({ users, pagesUser, token, ...action }) {
+  let pagination = [];
+  const [pagina, setpagina] = useState([]);
+  const [page, setPage] = useState(0);
 
   async function getData(page) {
-    await action.getUser("ban" ,token , page);
-    setPage(page)
+    await action.getUser("ban", token, page);
+    setPage(page);
   }
   useEffect(() => {
-    getData(0)
-  }, [])
+    getData(0);
+  }, []);
 
   useEffect(() => {
-    for(var i=0 ; i<pagesUser ; i++){
-      pagination.push(i)
+    for (var i = 0; i < pagesUser; i++) {
+      pagination.push(i);
       console.log(pagination);
     }
-    setpagina(pagination)
-  }, [pagesUser])
-  async function handleStatusProvider (id) {
+    setpagina(pagination);
+  }, [pagesUser]);
+  async function handleStatusProvider(id) {
     console.log(id);
-    const message = await apiClientPatchUser(`/admin/users/${id}/not_ban` , token);
-    getData(page)
+    const message = await apiClientPatchUser(
+      `/admin/users/${id}/not_ban`,
+      token,
+    );
+    getData(page);
   }
-    return (
-        <MainAdminContent>
-        <MainAdminAllUser>
-          <h3>ALL USERS BAN</h3>
-          <MainAdminFlex>
-            <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={action.sort}>sort</button>
-            </MainAdmintextfunction>
-          </MainAdminFlex>
-        </MainAdminAllUser>
-        <ContainerTable>
+  return (
+    <MainAdminContent>
+      <MainAdminAllUser>
+        <h3>ALL USERS BAN</h3>
+        <MainAdminFlex>
+          <MainAdmintextfunction>
+            <AiOutlineSortDescending />{" "}
+            <button onClick={action.sort}>sort</button>
+          </MainAdmintextfunction>
+        </MainAdminFlex>
+      </MainAdminAllUser>
+      <ContainerTable>
         <MainAdminTable>
           <thead>
             <tr>
@@ -68,66 +69,72 @@ function UserBan({users,pagesUser , token,...action}) {
             </tr>
           </thead>
           <tbody>
-            {(users.length !== 0)  ? users.map((user)=>(
-               <tr key={user.id}>
-               <td>
-                 <MainAdminFlex>
-                   <img
-                     height="30"
-                     width="30"
-                     src={user.avatar_source ? user.avatar_source : avatar }
-                     alt="avatar"
-                   />
-                   <MainAdminStrong>{user.username}</MainAdminStrong>
-                 </MainAdminFlex>
-               </td>
-               <td>
-                 <MainAdminStrong>{user.address}</MainAdminStrong>
-               </td>
-               <td>
-                 <MainAdminStrong>{user.full_name}</MainAdminStrong>
-               </td>
-               <td>
-                 <MainAdminStrong>{user.email}</MainAdminStrong>
-               </td>
-               <td>
-                 <MainAdminStrong>{user.phone_number}</MainAdminStrong>
-               </td>
-               <td>
-                 <ButtonBan  onClick={() => handleStatusProvider( user.id)}>Allowed User</ButtonBan>
-               </td>
-             </tr>
-            )) : (
-              <tr><td>
-                <h3>No User</h3>
-              </td></tr>
+            {users.length !== 0 ? (
+              users.map((user) => (
+                <tr key={user.id}>
+                  <td>
+                    <MainAdminFlex>
+                      <img
+                        height="30"
+                        width="30"
+                        src={user.avatar_source ? user.avatar_source : avatar}
+                        alt="avatar"
+                      />
+                      <MainAdminStrong>{user.username}</MainAdminStrong>
+                    </MainAdminFlex>
+                  </td>
+                  <td>
+                    <MainAdminStrong>{user.address}</MainAdminStrong>
+                  </td>
+                  <td>
+                    <MainAdminStrong>{user.full_name}</MainAdminStrong>
+                  </td>
+                  <td>
+                    <MainAdminStrong>{user.email}</MainAdminStrong>
+                  </td>
+                  <td>
+                    <MainAdminStrong>{user.phone_number}</MainAdminStrong>
+                  </td>
+                  <td>
+                    <ButtonBan onClick={() => handleStatusProvider(user.id)}>
+                      Allowed User
+                    </ButtonBan>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td>
+                  <h3>No User</h3>
+                </td>
+              </tr>
             )}
           </tbody>
         </MainAdminTable>
-        </ContainerTable>
-        <MainAdminPage>
-          {
-            pagina.map((page) =>(
-              <button onClick={()=> getData(page)} key={page}>{page+1}</button>
-            ))
-          }
-        </MainAdminPage>
-      </MainAdminContent>
-    )
+      </ContainerTable>
+      <MainAdminPage>
+        {pagina.map((page) => (
+          <button onClick={() => getData(page)} key={page}>
+            {page + 1}
+          </button>
+        ))}
+      </MainAdminPage>
+    </MainAdminContent>
+  );
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
   return {
-      users : state.adminReducer.allUsers,
-      token : state.authenticateReducer.token,
-      pagesUser : state.adminReducer.pagesUsers,
-      sortvalue : state.adminReducer.sort
-  }
-}
+    users: state.adminReducer.allUsers,
+    token: state.authenticateReducer.token,
+    pagesUser: state.adminReducer.pagesUsers,
+    sortvalue: state.adminReducer.sort,
+  };
+};
 
-const mapDispatchToProps =  {
-  getUser : all.getUser,
-  sort : all.sortUser
-}
+const mapDispatchToProps = {
+  getUser: all.getUser,
+  sort: all.sortUser,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserBan);

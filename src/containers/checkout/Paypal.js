@@ -14,7 +14,7 @@ const PaypalButton = ({ productName, totalFee, handleSuccess }) => {
                 description: `Thanh toán đơn hàng cho sản phẩm ${productName}}`,
                 amount: {
                   currency_code: "USD",
-                  value: Math.round(totalFee / 23000).toFixed(2),
+                  value: (totalFee / 23000).toFixed(2),
                 },
               },
             ],
@@ -22,15 +22,13 @@ const PaypalButton = ({ productName, totalFee, handleSuccess }) => {
         },
         onApprove: async (data, actions) => {
           handleSuccess(true);
-          const order = await actions.order.capture();
-          console.log(order);
         },
         onError: (err) => {
           console.log(err);
         },
       })
       .render(paypal.current);
-  });
+  }, [handleSuccess, productName, totalFee]);
 
   return <div ref={paypal}></div>;
 };

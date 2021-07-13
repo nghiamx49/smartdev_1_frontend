@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import PropTypes from "prop-types";
 
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import userService from "../../apiServices/userService";
 
@@ -32,6 +32,8 @@ const OrderDetail = ({ token }) => {
   const { getOrderDetail } = userService;
 
   const { id } = useParams();
+
+  const history = useHistory();
 
   useEffect(() => {
     const getDetail = async () => {
@@ -70,7 +72,11 @@ const OrderDetail = ({ token }) => {
               </div>
             </UserInfoContainer>
             <HrCustom />
-            <OrderDetailContainer>
+            <OrderDetailContainer
+              onClick={() =>
+                history.push(`/product-detail/${orderDetail.product_id}`)
+              }
+            >
               <StoreContainer>
                 <AiFillShop />
                 <b>{orderDetail.store_name}</b>
