@@ -83,4 +83,5 @@ export const FPContentButton = styled.button`
     border-radius: 1px;
     color: #fff;
     background: #ee4d2d;
+    cursor: pointer;
 `;
