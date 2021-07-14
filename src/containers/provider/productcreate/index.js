@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, {  useState,useCallback } from 'react'
 import axios from "axios";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -6,7 +6,9 @@ import * as yup from 'yup'
 import { connect } from 'react-redux';
 import {TiTick} from "react-icons/ti"
 import { storage } from '../../../firebase/config';
+import firebase from "firebase/app";
 import {InputControls,TitleProducts,BtnCreate,InputFile, ContainerInputFile} from "./style"
+import { useEffect } from 'react';
 
 
 
@@ -27,11 +29,12 @@ function Createproduct({token}) {
   const [name,setName] = useState('')
   const [category_id,setCategory_id] = useState('')
   const [price,setPrice] = useState('')
-  const [imgUrl,setImgUrl] = useState('')
-  const [imgUrl1,setImgUrl1] = useState('')
-  const [imgUrl2,setImgUrl2] = useState('')
-  const [imgUrl3,setImgUrl3] = useState('')
-  const [countImg,setCountImg] = useState(0)
+
+
+
+  const [images, setImages] = useState([]);
+  const [progress, setProgess] = useState(0);
+  const [downloadURL, setDowloadURL] = useState([]);
     const {
         register,
         handleSubmit,
@@ -40,7 +43,6 @@ function Createproduct({token}) {
         resolver: yupResolver(schema),
       })
     const onSubmit = async (data) => {
-      console.log(data)
       console.log("create products")
         try{
          let result =  await axios.post(`${process.env.REACT_APP_API}/provider/create_product`,
@@ -50,10 +52,7 @@ function Createproduct({token}) {
             category_id:data.category_id,
             unit_price:data.unit_price,
             product_description:data.product_description,
-            images:[
-               imgUrl||"https://firebasestorage.googleapis.com/v0/b/e-commerce-2aee1.appspot.com/o/images%2F2021-Harem-Joggers-Harajuku-Sweatpant-Casual-Male-Trousers-Track-Cargo-Pants-Men-Joggers-Pants-Trousers-Gyms.jpg_720x720xz%20(1).jpg?alt=media&token=e0e24345-fe51-48f8-baf7-cad8fafcf89c",
-               imgUrl1,imgUrl2,imgUrl3,
-            ]
+            images:downloadURL
           }
         ,{
             headers: {
@@ -69,57 +68,51 @@ function Createproduct({token}) {
           setCategory_id('')
           setPrice('')
           setDecription('')
-          setImgUrl('')
-          setImgUrl1('')
-          setImgUrl2('')
-          setImgUrl3('')
+  
           console.log(result);
           return result
         }catch(e){
           console.log(e)
         }
       }
+      const handleFile = (e) => {
+        console.log(e.target.files);
+        setImages([...e.target.files]);
+      };
+      const handleUpload = (e) => {
+        setImages([...e.target.files]);
+      };
+      
 
-const handleChange = e => {
-        console.log("abc")
-        if(e.target.files[0]){
-            // setImage(e.target.files[0]);
-            // handleUpload()
-            const uploadTask = storage.ref(`images/${e.target.files[0].name}`).put(e.target.files[0]);
-                uploadTask.on(
-                    "state_changed",
-                    snapshot => {},
-                    error => {
-                        console.log(error);
-                    },
-                    () => {
-                        storage
-                            .ref("images")
-                            .child(e.target.files[0].name)
-                            .getDownloadURL()
-                            .then(url =>{
-                              switch (countImg){
-                                case 3:
-                                  imgUrl3 === "" && setImgUrl3(url)
-                                  break;
-                                case 2:
-                                    imgUrl2 === "" && setImgUrl2(url)
-                                    setCountImg(countImg +1)
-                                    break;
-                                case 1:
-                                    imgUrl1 === "" && setImgUrl1(url)
-                                    setCountImg(countImg +1)
-                                    break;
-                                default:
-                                    imgUrl === "" && setImgUrl(url)
-                                    setCountImg(countImg +1)
-                                    break;
-                              }
-                            });
-                    }
-                )
+      useEffect(() => {
+        const uploadFIle = () => {
+          for(let i =0; i < images.length; i++) {
+            const uploadTask = storage
+              .ref()
+              .child("/images/" + images[i].name)
+              .put(images[i]);
+            uploadTask.on(
+              firebase.storage.TaskEvent.STATE_CHANGED,
+              null,
+              (error) => {
+                throw error;
+              },
+              async function complete() {
+                const url = await uploadTask.snapshot.ref.getDownloadURL();
+                setDowloadURL(preState => [...preState, url])
+              },
+            );
+          }
         }
-    }
+
+        uploadFIle();
+      }, [images.length])
+
+      console.log(images)
+
+      console.log(downloadURL)
+
+
     return (
         <div>
           <TitleProducts>Tạo một sản phẩm mới</TitleProducts>
@@ -181,26 +174,17 @@ const handleChange = e => {
                     }
                     </InputControls>
                       <ContainerInputFile>
-                        <input style={{visibility:"hidden"}}   value={imgUrl} onChange={e => setImgUrl(imgUrl)}/>
-                        <InputFile inputTitle="chọn hình ảnh sản phẩm 1" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                        {imgUrl && <TiTick/>}
+                        <InputFile inputTitle="chọn hình ảnh sản phẩm"
+                          style={{marginLeft:"15px"}} 
+                          type="file" onChange={handleUpload}
+                          placeholder="dlfgjdfl"
+                          id="file"
+                          multiple/>
+                        {<TiTick/>}
                       </ContainerInputFile>
-                      <ContainerInputFile>
-                        <input  style={{visibility:"hidden"}}    value={imgUrl1}  onChange={e => setImgUrl1(imgUrl1)}/>
-                        <InputFile inputColor="chọn hình ảnh sản phẩm 2" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                        {imgUrl1 && <TiTick/>}
-                      </ContainerInputFile>
-                      <ContainerInputFile>
-                        <input style={{visibility:"hidden"}}     value={imgUrl2} onChange={e => setImgUrl2(imgUrl2)} />
-                        <InputFile inputTitle="chọn hình ảnh sản phẩm 3" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                        {imgUrl2 && <TiTick/>}
-                      </ContainerInputFile>
-                      <ContainerInputFile>
-                        <input style={{visibility:"hidden"}}    value={imgUrl3} onChange={e => setImgUrl3(imgUrl3)} />
-                        <InputFile inputTitle="chọn hình ảnh sản phẩm 4" style={{marginLeft:"15px"}} type="file" onChange={handleChange} placeholder="dlfgjdfl"/>
-                        {imgUrl3 && <TiTick/>}
-                      </ContainerInputFile>
-                     
+                      {downloadURL.length && downloadURL.map((item, index) => {
+                        return <img key={index} src={item} width="100" height="100" />
+                      })}
                     <BtnCreate type="submit">tạo sản phẩm mới</BtnCreate>
                 </form>
             </div>
