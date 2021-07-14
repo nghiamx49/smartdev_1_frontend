@@ -1,4 +1,3 @@
-import { RiStarFill } from "react-icons/ri";
 import { AiFillStar } from "react-icons/ai";
 import defaultAvt from "../../../assests/img/user-default.png";
 import StarRatingComponent from "react-star-rating-component";
