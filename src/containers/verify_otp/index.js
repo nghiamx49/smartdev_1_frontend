@@ -3,9 +3,10 @@ import { BiArrowBack } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+
 import {
   FPContainer,
   FPCoverContainer,
@@ -20,23 +21,23 @@ import {
   FPContentBorderButton,
   Error,
 } from "./style";
-import { connect } from "react-redux";
+import { verifyOTPRequest } from "../../actions/userAction";
 
 const forgotpasswordSchema = yup.object().shape({
   otp: yup.string().required("otp không được để trống"),
 });
 
-function VerifyOTP({ props }) {
+function VerifyOTP({ props, verify_otp }) {
   const history = useHistory();
 
   useEffect(() => {
-    const checkValid = (otp, history) => {
-      if (String(otp) === "") {
+    const checkValid = (username, history) => {
+      if (String(username) === "") {
         return history.push("/forgotpassword");
       }
     };
-    checkValid(props.otp, history);
-  }, [history, props.otp]);
+    checkValid(props.username, history);
+  }, [history, props.username]);
 
   const {
     register,
@@ -45,11 +46,10 @@ function VerifyOTP({ props }) {
   } = useForm({ resolver: yupResolver(forgotpasswordSchema) });
 
   const onSubmit = (dataSubmit) => {
-    if (parseInt(dataSubmit.otp) === props.otp) {
-      history.push(`/reset_password/${props.username}`);
-    } else {
-      return toast(<h3 color="black">otp không hợp lệ</h3>);
-    }
+    verify_otp({
+      otp: dataSubmit.otp,
+      username: props.username,
+    });
   };
 
   return (
@@ -70,7 +70,7 @@ function VerifyOTP({ props }) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <FPContentInputDiv>
               <FPContentInput
-                type="number"
+                type="text"
                 placeholder="nhập OTP"
                 {...register("otp")}
               />
@@ -96,4 +96,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(VerifyOTP);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    verify_otp: (data) => dispatch(verifyOTPRequest(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VerifyOTP);

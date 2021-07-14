@@ -94,6 +94,7 @@ export const ProfileButton = styled.button`
     max-width: 220px;
     border: none;
     border-radius: 1px;
+    cursor: pointer;
 `;
 
 export const ProfileBottomRight = styled.div`

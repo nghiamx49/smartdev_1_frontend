@@ -14,9 +14,9 @@ export const submitLogout = () => {
   return { type: LOGOUT };
 };
 
-export const updateAvatarRequest = (data)=>{
+export const updateSidebarRequest = (data)=>{
   return {
-      type: authenticateContants.UPDATEP_AVATAR,
+      type: authenticateContants.UPDATEP_SIDEBAR,
       payload: data
   }
 }

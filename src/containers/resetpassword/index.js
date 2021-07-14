@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-
 import { BiArrowBack } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import ErrorComponent from "../page404/index";
 
+import ErrorComponent from "../page404/index";
 import {
   FPContainer,
   FPCoverContainer,
@@ -25,7 +23,7 @@ import {
 } from "./style";
 import { resetPasswordRequest } from "../../actions/userAction";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
+
 const forgotpasswordSchema = yup.object().shape({
   new_password: yup
     .string()
@@ -33,15 +31,14 @@ const forgotpasswordSchema = yup.object().shape({
     .min(5, "mật khẩu ít nhất 6 kí tự. vui lòng nhập lại"),
 });
 
-function ResetPassword({ username, resetpassword }) {
+function ResetPassword({ props, resetpassword }) {
   let { slug } = useParams();
-  console.log(slug);
 
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const checkValid = () => {
-      if (username === "" || username !== slug) {
+      if (props.slug !== slug) {
         setError(true);
       }
     };
@@ -54,17 +51,11 @@ function ResetPassword({ username, resetpassword }) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(forgotpasswordSchema) });
 
-  const history = useHistory();
-
   const onSubmit = (dataSubmit) => {
-    const response = resetpassword({
+    resetpassword({
       new_password: dataSubmit.new_password,
-      username: username,
+      username: props.username,
     });
-    if (response.status === 200) {
-      history.push("/login");
-    }
-    return toast(response.message);
   };
 
   return (
@@ -111,7 +102,7 @@ function ResetPassword({ username, resetpassword }) {
 
 const mapStateToProps = (state) => {
   return {
-    username: state.userReducer.username,
+    props: state.userReducer,
   };
 };
 
