@@ -6,9 +6,6 @@ import {
   ProductFavourite,
   NameProduct,
   ProductPrice,
-  ProductDiscount,
-  ProductSold,
-  ProductSimilar,
   ProductStyle,
   ProductContainer,
 } from "./style";
@@ -21,7 +18,6 @@ export default function Product(props) {
         <ProductImage>
           <img src={item.image_source} alt="" />
         </ProductImage>
-        <ProductDiscount>20% Giảm</ProductDiscount>
         <ProductFavourite>Yêu thích</ProductFavourite>
         <DivProductName>
           <NameProduct>{item.name}</NameProduct>
