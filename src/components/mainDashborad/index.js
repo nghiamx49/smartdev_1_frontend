@@ -22,7 +22,7 @@ function MainAdmin({ authenticateReducer, logout ,mainContant}) {
               src={authenticateReducer.account.avatar_source || defaultAvt}
               alt="admin avatar"
             />
-            <LogoutButton onClick={() => logout()}>Logout</LogoutButton>
+            <LogoutButton onClick={() => logout()}>Đăng Xuất</LogoutButton>
           </MainAdminHeaderUser>
         </MainAdminHeaderRight>
       </MainAdminHeader>

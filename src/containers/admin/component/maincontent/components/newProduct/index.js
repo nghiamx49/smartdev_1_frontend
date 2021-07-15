@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropsTypes from "prop-types";
+import {GrPrevious , GrNext} from "react-icons/gr"
 import {
     MainAdminContent,
     MainAdminAllUser,
@@ -20,6 +21,7 @@ import {
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
+import { toast } from 'react-toastify';
 
 function NewProduct({products, pagesProduct, token,getAllProductPending ,search ,sort}) {
 
@@ -49,9 +51,8 @@ function NewProduct({products, pagesProduct, token,getAllProductPending ,search 
   }
 
   async function handleStatusProduct (id , status) {
-    console.log(id, status);
-    const message = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
-    console.log(message);
+    const result = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
+    toast(<h3 color="black">{result.data.message}</h3>);
     getData(page)
   }
 
@@ -63,16 +64,16 @@ function NewProduct({products, pagesProduct, token,getAllProductPending ,search 
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL New Product</h3>
+          <h3>Sản Phẩm Mới</h3>
           <MainAdminFlex>
             <ContainerSearch>
               <form onSubmit={handleSearch}>
-                  <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Name Product" value={searchValue}/>
+                  <input type="text" onChange={(e) => setSearchValue(e.target.value)} placeholder="Tên Sản Phẩm" value={searchValue}/>
                   <button><AiOutlineSearch/></button>
               </form>
             </ContainerSearch>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={sort}>Sort</button>
+              <AiOutlineSortDescending /> <button onClick={sort}>Sắp Xếp</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
@@ -80,11 +81,11 @@ function NewProduct({products, pagesProduct, token,getAllProductPending ,search 
        <MainAdminTable>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>ShopName</th>
-              <th>Price</th>
-              <th>Date Create</th>
-              <th>Action</th>
+              <th>Tên Sản Phẩm</th>
+              <th>Tên Shop</th>
+              <th>Giá</th>
+              <th>Số Lượng</th>
+              <th>Hành Động</th>
             </tr>
           </thead>
           <tbody>
@@ -96,7 +97,7 @@ function NewProduct({products, pagesProduct, token,getAllProductPending ,search 
                     height="30"
                     width="30"
                     src={product.image_source}
-                    alt="dfkjghdfg"
+                    alt="ảnh"
                   />
                   <MainAdminStrong>{product.name}</MainAdminStrong>
                 </MainAdminFlex>
@@ -108,25 +109,25 @@ function NewProduct({products, pagesProduct, token,getAllProductPending ,search 
                 <MainAdminStrong>{product.unit_price}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>03-04-2021</MainAdminStrong>
+                <MainAdminStrong>{product.product_quantity}</MainAdminStrong>
               </td>
               <td>
-                <ButtonApprove onClick={() => handleStatusProduct( product.id , "Allowed")}>Allowed</ButtonApprove>
-                <ButtonBan  onClick={() => handleStatusProduct( product.id , "Rejected")}>Rejected</ButtonBan>
+                <ButtonApprove onClick={() => handleStatusProduct( product.id , "Allowed")}>Được Phép</ButtonApprove>
+                <ButtonBan  onClick={() => handleStatusProduct( product.id , "Rejected")}>Từ Chối</ButtonBan>
               </td>
             </tr>
           ))) : (
             <tr><td>
-              <h3>No Product</h3>
+              <h3>Không Có Sản Phẩm Mới</h3>
             </td></tr>
           )}
           </tbody>
         </MainAdminTable>
        </ContainerTable>
         <MainAdminPage>
-          <span>Page {page +1} of {pagesProduct}</span>
-          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")}>Next</button>
+          <span>Trang {page +1}/{pagesProduct}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}><GrPrevious/></button>
+          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")}><GrNext/></button>
         </MainAdminPage>
       </MainAdminContent>
     )

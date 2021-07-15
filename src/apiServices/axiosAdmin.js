@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiClientPatch =  async (endpoint, token , id , status) => {
-  return await axios.put(`${process.env.REACT_APP_API}${endpoint}`,
+  let response = await axios.put(`${process.env.REACT_APP_API}${endpoint}`,
         JSON.stringify({
           id : id , status : status,
           }),
@@ -14,15 +14,17 @@ export const apiClientPatch =  async (endpoint, token , id , status) => {
           return status < 500;
         },
       },
-    ).then((response)=>{
-      return response.data
-    }).catch((error)=>{
-      return error
-    })
+  )
+    // ).then((response)=>{
+    //   return response
+    // }).catch((error)=>{
+    //   return error
+    // })
+    return response
 };
 
 export const apiClientPatchUser =  async (endpoint, token) => {
-  await axios.put(`${process.env.REACT_APP_API}${endpoint}`,
+  let response = await axios.put(`${process.env.REACT_APP_API}${endpoint}`,
   {},
       {
         headers: {
@@ -33,10 +35,12 @@ export const apiClientPatchUser =  async (endpoint, token) => {
           return status < 500;
         },
       },
-    ).then((response)=>{
-      return response.data
-    }).catch((error)=>{
-      return error
-    })
+    )
+    // .then((response)=>{
+    //   return response
+    // }).catch((error)=>{
+    //   return error
+    // })
+    return response
 };
 

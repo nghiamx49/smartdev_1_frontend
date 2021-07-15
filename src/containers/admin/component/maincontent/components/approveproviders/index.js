@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropsTypes from "prop-types";
+import {GrPrevious , GrNext} from "react-icons/gr"
 
 import {
     MainAdminContent,
@@ -20,6 +21,7 @@ import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import avatar from   "../../../../../../assests/img/user-default.png"
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
+import { toast } from 'react-toastify';
 
 function ApproveProvider({providers, token , pagesProvider,getProvider,sort}) {
 
@@ -45,16 +47,17 @@ function ApproveProvider({providers, token , pagesProvider,getProvider,sort}) {
     }
   }
   async function handleStatusProvider (id , status) {
-    await apiClientPatch("/admin/providers/update_status" , token , id , status);
+    let result = await apiClientPatch("/admin/providers/update_status" , token , id , status);
+    toast(<h3 color="black">{result.data.message}</h3>);
     getData(page)
   }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL New Provider</h3>
+          <h3>Nhà Cung Cấp Mới</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={sort}>Sort </button>
+              <AiOutlineSortDescending /> <button onClick={sort}>Sắp Xếp </button>
             </MainAdmintextfunction>
            
           </MainAdminFlex>
@@ -63,13 +66,13 @@ function ApproveProvider({providers, token , pagesProvider,getProvider,sort}) {
        <MainAdminTable>
           <thead>
             <tr>
-              <th>User name</th>
-              <th>Address</th>
-              <th>Shop name</th>
+              <th>Tên Đăng Nhập</th>
+              <th>Địa Chỉ</th>
+              <th>Tên Shop</th>
               <th>Email</th>
-              <th>Phone number</th>
-              <th>Date Create</th>
-              <th>Action</th>
+              <th>Số Điện Thoại</th>
+              <th>Ngày Tạo</th>
+              <th>Hành Động</th>
             </tr>
           </thead>
           <tbody>
@@ -99,23 +102,23 @@ function ApproveProvider({providers, token , pagesProvider,getProvider,sort}) {
                 <MainAdminStrong>{provider.phone_number}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>03-04-2021</MainAdminStrong>
+                <MainAdminStrong>{provider.create_at}</MainAdminStrong>
               </td>
               <td>
-                <ButtonApprove onClick={() => handleStatusProvider( provider.id , "Allowed")}>Allowed</ButtonApprove>
-                <ButtonBan onClick={() => handleStatusProvider( provider.id , "Rejected")}>Rejected</ButtonBan>
+                <ButtonApprove onClick={() => handleStatusProvider( provider.id , "Allowed")}>Được Phép</ButtonApprove>
+                <ButtonBan onClick={() => handleStatusProvider( provider.id , "Rejected")}>Từ Chối</ButtonBan>
               </td>
             </tr> 
           ))) : (
-            <tr><td><h3>No Provider</h3></td></tr>
+            <tr><td><h3>Không Có Nhà Cung Cấp Mới</h3></td></tr>
           )}
           </tbody>
         </MainAdminTable>
        </ContainerTable>
         <MainAdminPage>
-          <span>Page {page +1} of {pagesProvider}</span>
-          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")}>Next</button>
+          <span>Trang {page +1}/{pagesProvider}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}><GrPrevious/></button>
+          <button disabled={page === pagesProvider-1} onClick={() => handlePage("next")}><GrNext/></button>
         </MainAdminPage>
       </MainAdminContent>
     )

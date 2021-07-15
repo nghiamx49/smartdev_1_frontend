@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {GrPrevious , GrNext} from "react-icons/gr"
 import {connect} from 'react-redux'
 import * as all from '../../../../../../actions/adminAction'
 import avatar from   "../../../../../../assests/img/user-default.png"
@@ -18,6 +19,7 @@ import {
   AiOutlineSortDescending,
 } from "react-icons/ai";
 import { apiClientPatchUser } from '../../../../../../apiServices/axiosAdmin';
+import { toast } from 'react-toastify'
 
 
 function UserAdmin({users,pagesUser , token,getUser ,sort}) {
@@ -46,14 +48,14 @@ function UserAdmin({users,pagesUser , token,getUser ,sort}) {
     }
   }
   async function handleStatusProvider (id) {
-    const message = await apiClientPatchUser(`/admin/users/${id}/ban` , token);
-    console.log(message);
+    const result = await apiClientPatchUser(`/admin/users/${id}/ban` , token);
+    toast(<h3 color="black">{result.data.message}</h3>);
     getData(page)
   }
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>All Users</h3>
+          <h3>Tất Cả Người Dùng</h3>
           <MainAdminFlex>
             <MainAdmintextfunction>
               <AiOutlineSortDescending /> <button onClick={sort}>sort</button>
@@ -64,11 +66,11 @@ function UserAdmin({users,pagesUser , token,getUser ,sort}) {
         <MainAdminTable>
           <thead>
             <tr>
-              <th>User name</th>
-              <th>Address</th>
-              <th>Full Name</th>
+              <th>Tên Đăng Nhập</th>
+              <th>Địa Chỉ</th>
+              <th>Tên Người Dùng</th>
               <th>Email</th>
-              <th>Phone number</th>
+              <th>Số Điện Thoại</th>
               <th>Ban</th>
             </tr>
           </thead>
@@ -99,21 +101,21 @@ function UserAdmin({users,pagesUser , token,getUser ,sort}) {
                  <MainAdminStrong>{user.phone_number}</MainAdminStrong>
                </td>
                <td>
-                 <ButtonBan  onClick={() => handleStatusProvider( user.id)}>Ban User</ButtonBan>
+                 <ButtonBan  onClick={() => handleStatusProvider( user.id)}>Ban</ButtonBan>
                </td>
              </tr>
             )) : (
               <tr><td>
-                  <h3> No User</h3>
+                  <h3> Không Có Người Dùng</h3>
               </td></tr>
             )}
           </tbody>
         </MainAdminTable>
         </ContainerTable>
         <MainAdminPage>
-          <span>Page {page +1} of {pagesUser}</span>
-          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesUser-1} onClick={() => handlePage("next")}>Next</button>
+          <span>Trang {page +1} / {pagesUser}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}><GrPrevious/></button>
+          <button disabled={page === pagesUser-1} onClick={() => handlePage("next")}><GrNext/></button>
         </MainAdminPage>
       </MainAdminContent>
     )
