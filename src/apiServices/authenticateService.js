@@ -8,6 +8,7 @@ const config = {
 
 const authenticateService = {
   login: async ({ username, password }) => {
+    console.log(`${process.env.REACT_APP_API}`);
     let request = await axios.post(
       `${process.env.REACT_APP_API}/authenticate/login`,
       {
