@@ -9,12 +9,48 @@ export const InputControls = styled.div`
        display: inline-block;
        width: 170px;
        font-size: 15px;
-   font-weight: 500;
+       font-weight: 500;
    }
    input{
       margin:15px 0;
       padding:15px 10px;
       width:400px;
+      outline:none;
+      border:1px solid #bbb;
+      border-radius:3px;
+      display:inline-block;
+      box-sizing:border-box;
+      transition:0.2s ease all;
+   }
+   select{
+      padding:15px 10px;
+      width:400px;
+      outline:none;
+      border:1px solid #bbb;
+      border-radius:3px;
+      display:inline-block;
+      box-sizing:border-box;
+      transition:0.2s ease all;
+   }
+`;
+export const TextAreaContainer = styled.div`
+  
+   margin-bottom: 20px;
+   display: flex;
+   align-items:center;
+   label{
+       font-size: 16px;
+       text-transform: capitalize;
+       margin-right: 10px;
+       display: inline-block;
+       width: 170px;
+       font-size: 15px;
+       font-weight: 500;
+   }
+   textarea{
+      padding:15px 10px;
+      width:400px;
+      height:100px;
       outline:none;
       border:1px solid #bbb;
       border-radius:3px;
@@ -39,13 +75,13 @@ export const BtnCreate = styled.button`
    outline: none;
    border-radius: 3px;
    margin-top: 30px;
-   margin-left: 380px;
+   margin-left: 390px;
    text-transform: capitalize;
 `;
 export const InputFile = styled.input`
       color: transparent;
       margin-bottom: 10px;
-      width: 180px;
+      width: 190px;
       height: 40px;
       &::-webkit-file-upload-button {
       visibility: hidden;
@@ -76,14 +112,63 @@ export const InputFile = styled.input`
 
 `;
 export const  ContainerInputFile = styled.div`
- 
-   width: 550px;
-   position: relative;
-   height:30px;
-   margin-top: 10px;
    display: flex;
-   svg{
-      font-size: 30px;
-      color:#0DEF42;
+`;
+
+export const  ContainerImages = styled.div`
+   width: 400px;
+   height: 120px;
+   border: 1px solid #bbb;
+   margin-left: -10px;
+   display: flex;
+   padding-top: 10px;
+   box-sizing: border-box;
+   img{
+      margin: 0 5px;
+   }
+`;
+
+export const CreateProductSuccess = styled.div`
+   position: fixed;
+   top: 50px;
+   left: 70%;
+   animation: createSuccess 0.2s linear;
+   div {
+      height:150px;
+      width: 300px;
+      background-color: #fff;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content:center;
+      align-items: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+   }
+   strong{
+      position: absolute;
+      top:0;
+      right:10px;
+      font-size: 20px;
+   }
+   h3{
+      text-transform: capitalize;
+      display: flex;
+      align-items: center;
+      margin: 0;
+
+      svg{
+         font-size: 30px;
+         color: green;
+      }
+   }
+   @keyframes createSuccess {
+      0%{
+         top:-160px;
+         opacity:0;
+      }
+      100%{
+         top: 50px;
+         opacity:1;
+      }
    }
 `;

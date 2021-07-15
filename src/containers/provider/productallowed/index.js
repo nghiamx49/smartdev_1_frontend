@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 
 import { submitLogout } from "../../../actions/authenticateAction";
 import * as Main from "../style";
-import {
-  AiOutlineSortAscending,
-  AiFillFilter,
+import {AiFillStar
 } from "react-icons/ai";
+import{TiTick} from "react-icons/ti"
 import ProductAllowed from "./productallowed";
 import { connect } from "react-redux";
 import { useState } from "react";
@@ -31,23 +30,18 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
   const [description,setDecription] = useState('')
   const [quantity,setQuantity] = useState('')
   const [showUpdate,setShowUpdate] = useState(false)
+  const [showDetail,setShowDetail] = useState(false)
   const [productUpdate,setProductUpdate] = useState({id:0,name:""})
-  const [listPage,setListPage] = useState([])
+  const [productDetail,setProductDetail] = useState({})
   const [pagePra,setPagePra] = useState(0)
-  console.log(page);
+  const [checkCreate,setCheckCreate] = useState(false) 
+  const imgRef = useRef()
   const handle = (item) =>{
       console.log(item)
       setShowUpdate(!showUpdate)
       setProductUpdate({...productUpdate,id:item.id,name:item.name});
   }
-  useEffect(()=>{
-    let a = [];
-    for(let i = 0;i<page;i++){
-      a.push(i)
-    }
-    setListPage(a)
-  },[page])
-  console.log(listPage);
+  
   const onSubmit = async (data) => {
     console.log(data)
     try{
@@ -67,45 +61,76 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
     }catch(e){
       console.log(e)
     }
+    setShowUpdate(false)
     window.location.reload();
   }
-  const changePage = (index) =>{
-    setPagePra(index)
+  function changeImgShow(imgSrc) {
+    console.log(imgSrc);
+    imgRef.current.src = imgSrc;
   }
+  const showProductDetail = (id) => {
+    console.log(id)
+    const fetchCategories = async () => {
+      try {
+        const product = await axios.get(`${process.env.REACT_APP_API}/provider/product_detail/${id}`,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          validateStatus: function (status) {
+            return status < 500;
+          },
+        })
+        setProductDetail(product.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchCategories()
+   setShowDetail(!showUpdate);
+  }
+  console.log(productDetail)
   const changePagePrev = () =>{
     if(pagePra !== 0){
      setPagePra(pagePra - 1)
     }
   }
   const changePageNext = () =>{
-    if(pagePra < page - 1){
+    if(pagePra < page - 3){
       setPagePra(pagePra + 1)
     }
   }
+  const handleCheckCreate = () =>{
+    setCheckCreate(false);
+  }
+
   return ( 
     <Main.MainAdminContainer>
+       {checkCreate && <Main.CreateProductSuccess>
+            <div>
+                <h3>bạn đã thêm sản phẩm thành công <TiTick/> </h3>
+                <span>vui lòng đợi admin xét duyệt</span>
+                <strong style={{cursor:"pointer"}} onClick={handleCheckCreate}>x</strong>
+            </div>
+          </Main.CreateProductSuccess>}
       <Main.MainAdminContent>
         <Main.MainAdminAllUser>
-          <h3>ALL PRODUCTS</h3>
+          <h3>Tất cả sản phẩm</h3>
           <Main.MainAdminFlex>
             <Main.MainAdmintextfunction>
-              <AiOutlineSortAscending /> <span>sort</span>
             </Main.MainAdmintextfunction>
             <Main.MainAdmintextfunction>
-              <AiFillFilter /> <span>filter</span>
             </Main.MainAdmintextfunction>
           </Main.MainAdminFlex>
         </Main.MainAdminAllUser>
            <Main.ContainerTable>
-              <ProductAllowed handle={handle} pageParent={pagePra}/>
+              <ProductAllowed handle={handle} pageParent={pagePra} showProductDetail={showProductDetail}/>
            </Main.ContainerTable>
         <Main.MainAdminPage>
         <Main.Pagination>
+        trang {pagePra +1}/ {page-2}
         <button onClick={changePagePrev}>&laquo;</button>
-          {
-            listPage.map((index)=><button onClick={()=>changePage(index)} key={index}>{index + 1}</button>)
-          }
-          <button onClick={changePageNext}>&raquo;</button>
+        <button onClick={changePageNext}>&raquo;</button>
         </Main.Pagination>
         </Main.MainAdminPage>
       </Main.MainAdminContent>
@@ -139,6 +164,47 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
             <Main.BtnCreate type="submit">update</Main.BtnCreate>
          </form>
       </Main.UpdateForm>
+            
+      <Main.ContainerProductDetail showDetail={showDetail && "flex"} onClick={()=>setShowDetail(!showDetail)}>
+      </Main.ContainerProductDetail>
+      <Main.ProductDetail  showDetail={showDetail && "flex"}>
+          <Main.ProductDetailImage>
+              <div>
+                <Main.ProductDetailImageBig>
+                    <img ref={imgRef} src={productDetail.image_sources && productDetail.image_sources[0].image_source} alt="" />
+                </Main.ProductDetailImageBig>
+                <Main.ProductDetailImageSmall>
+                  {
+                    productDetail.image_sources?.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img.image_source}
+                      alt=""
+                      onClick={() => changeImgShow(img.image_source)}
+                    />
+                  ))}
+                </Main.ProductDetailImageSmall>
+              </div>
+          </Main.ProductDetailImage>
+          <Main.ProductDetailContent>
+              <Main.ProductDetailChil>
+                <h3>{productDetail.name}</h3>
+                <p>$ {productDetail.unit_price}</p>
+                <Main.ProductDetailStar>
+                  đánh giá sản phẩm : <AiFillStar/> 
+                </Main.ProductDetailStar>
+                <p>Số lượng sản phẩm : {productDetail.product_quantity}</p>
+                <p>Số lượng sản phẩm đã bán : {productDetail.number_of_sold}</p>
+                <p>tên kho sản phẩm : {productDetail.category_name}</p>
+                <p>nhà cung cấp : {productDetail.provider_name}</p>
+                <p>mô tả sản phẩm : </p>
+                <Main.ProductDetailDescription>
+                  {productDetail.product_description}
+                </Main.ProductDetailDescription>
+              </Main.ProductDetailChil>
+          </Main.ProductDetailContent>
+          <Main.ProductDetailClose onClick={()=>setShowDetail(!showDetail)}>x</Main.ProductDetailClose>
+      </Main.ProductDetail>
     </Main.MainAdminContainer>
   );
 }
