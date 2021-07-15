@@ -32,6 +32,18 @@ const userService = {
     );
     return result;
   },
+  verifyOTP: async (data) => {
+    let result = await axios.post(
+      `${process.env.REACT_APP_API}/authenticate/verify_otp`,
+      data,
+      {
+        validateStatus: (status) => {
+          return status < 500;
+        },
+      },
+    );
+    return result;
+  },
   getOrderHistory: async (token) => {
     const response = await apiClientGet(`/user/order_history`, token);
     return response;

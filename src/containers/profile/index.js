@@ -11,7 +11,7 @@ import * as UP from "./style";
 import apiClient from "../../apiServices/axiosClient";
 import yup from "./yupGlobal";
 import { storage } from "../../firebase/config";
-import { updateAvatarRequest } from "../../actions/authenticateAction";
+import { updateAvatarRequest, updateSidebarRequest } from "../../actions/authenticateAction";
 
 const userSchema = yup.object().shape({
   full_name: yup
@@ -29,7 +29,7 @@ const userSchema = yup.object().shape({
     .zipcode("zipcode không đúng định dạng. vui lòng nhập lai"),
 });
 
-const UserProfile = ({ token, updateAvatar }) => {
+const UserProfile = ({ token, updateSidebar }) => {
   const [data, setData] = useState({});
 
   const { apiClientGet } = apiClient;
@@ -73,7 +73,7 @@ const UserProfile = ({ token, updateAvatar }) => {
       zipcode: dataSubmit.zipcode,
     };
     updateUser(user);
-    updateAvatar(user.avatar_source);
+    updateSidebar({ avatar_source:user.avatar_source, full_name: user.full_name});
   };
 
   const updateUser = async (user) => {
@@ -209,8 +209,10 @@ const mapStateToProp = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  updateAvatar: updateAvatarRequest,
+const mapDispatchToProps = dispatch=> {
+  return  {
+    updateSidebar: (data) => dispatch(updateSidebarRequest(data)),
+  }
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(UserProfile);

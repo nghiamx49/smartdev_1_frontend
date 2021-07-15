@@ -1,3 +1,4 @@
+
 import React, {  useState} from 'react'
 import axios from "axios";
 import { useForm } from 'react-hook-form'
@@ -11,17 +12,13 @@ import { useEffect } from 'react';
 import{TiTick} from "react-icons/ti"
 
 
-
-
 const schema = yup.object().shape({
-    name: yup.string().required("không được để trống"),
-    quantity: yup.string().required("không được để trống"),
-    category_id: yup.string().required("không được để trống"),
-    unit_price: yup.string().required("không được để trống"),
-    product_description: yup.string().required("không được để trống"),
-   
-  })
-
+  name: yup.string().required("không được để trống"),
+  quantity: yup.string().required("không được để trống"),
+  category_id: yup.string().required("không được để trống"),
+  unit_price: yup.string().required("không được để trống"),
+  product_description: yup.string().required("không được để trống"),
+});
   
 function Createproduct({token}) {
    const [description,setDecription] = useState('')
@@ -221,11 +218,12 @@ function Createproduct({token}) {
             </div>
         </div>
     )
+
 }
 
 const mapStateToProps = (state) => {
-  return { 
-    token:state.authenticateReducer.token
-   };
+  return {
+    token: state.authenticateReducer.token,
+  };
 };
 export default connect(mapStateToProps)(Createproduct);

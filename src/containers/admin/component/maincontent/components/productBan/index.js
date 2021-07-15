@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropsTypes from "prop-types";
+import {GrPrevious , GrNext} from "react-icons/gr"
 
 import {
     MainAdminContent,
@@ -20,6 +21,7 @@ import {
 import * as all from '../../../../../../actions/adminAction'
 import { connect } from 'react-redux';
 import { apiClientPatch } from '../../../../../../apiServices/axiosAdmin';
+import { toast } from 'react-toastify';
 
 function ProductBan({products, pagesProduct, token,getAllProduct , sort, search}) {
   
@@ -49,7 +51,8 @@ function ProductBan({products, pagesProduct, token,getAllProduct , sort, search}
   }
 
   async function handleStatusProduct (id , status) {
-    await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
+    let result = await apiClientPatch("/admin/product_requests/update_status" , token , id , status);
+    toast(<h3 color="black">{result.data.message}</h3>);
     getData(page)
   }
 
@@ -61,7 +64,7 @@ function ProductBan({products, pagesProduct, token,getAllProduct , sort, search}
     return (
         <MainAdminContent>
         <MainAdminAllUser>
-          <h3>ALL Product Rejected</h3>
+          <h3>Tất Cả Sản Phẩm Bị Từ Chối</h3>
           <MainAdminFlex>
             
             <ContainerSearch>
@@ -72,7 +75,7 @@ function ProductBan({products, pagesProduct, token,getAllProduct , sort, search}
               </form>
             </ContainerSearch>
             <MainAdmintextfunction>
-              <AiOutlineSortDescending /> <button onClick={sort}>Sort</button>
+              <AiOutlineSortDescending /> <button onClick={sort}>Sắp Xếp</button>
             </MainAdmintextfunction>
           </MainAdminFlex>
         </MainAdminAllUser>
@@ -80,11 +83,10 @@ function ProductBan({products, pagesProduct, token,getAllProduct , sort, search}
         <MainAdminTable>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>ShopName</th>
-              <th>Price</th>
-              <th>Date Create</th>
-              <th>Action</th>
+              <th>Tên Sản Phẩm</th>
+              <th>Tên Shop</th>
+              <th>Giá</th>
+              <th>Hành Động</th>
             </tr>
           </thead>
           <tbody>
@@ -108,24 +110,21 @@ function ProductBan({products, pagesProduct, token,getAllProduct , sort, search}
                 <MainAdminStrong>{product.unit_price}</MainAdminStrong>
               </td>
               <td>
-                <MainAdminStrong>03-04-2021</MainAdminStrong>
-              </td>
-              <td>
-                <ButtonApprove onClick={() => handleStatusProduct( product.id , "Allowed")}>Allowed</ButtonApprove>
+                <ButtonApprove onClick={() => handleStatusProduct( product.id , "Allowed")}>Được Phép</ButtonApprove>
               </td>
             </tr>
           ))) : (
             <tr><td>
-            <h3>No Product</h3>
+            <h3>Không Có Sản Phẩm</h3>
             </td></tr>
           )}
           </tbody>
         </MainAdminTable>
         </ContainerTable>
         <MainAdminPage>
-          <span>Page {page +1} of {pagesProduct}</span>
-          <button disabled={page === 0} onClick={() => handlePage("prev")}>Prev</button>
-          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")}>Next</button>
+          <span>Trang {page +1} / {pagesProduct}</span>
+          <button disabled={page === 0} onClick={() => handlePage("prev")}><GrPrevious/></button>
+          <button disabled={page === pagesProduct-1} onClick={() => handlePage("next")}><GrNext/></button>
         </MainAdminPage>
       </MainAdminContent>
     )

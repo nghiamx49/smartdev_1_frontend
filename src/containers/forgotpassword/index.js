@@ -28,7 +28,7 @@ const forgotpasswordSchema = yup.object().shape({
     .email("email không đúng định dạng"),
 });
 
-function Forgotpassword({ otp, sendEmail }) {
+function Forgotpassword({ sendEmail }) {
   const {
     register,
     handleSubmit,
@@ -75,15 +75,10 @@ function Forgotpassword({ otp, sendEmail }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    otp: state.userReducer.otp,
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     sendEmail: (email) => dispatch(sendEmailRequest(email)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Forgotpassword);
+export default connect(null, mapDispatchToProps)(Forgotpassword);

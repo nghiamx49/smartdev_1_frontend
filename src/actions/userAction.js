@@ -21,3 +21,16 @@ export const resetPasswordRequest = (data)=>{
     }
 }
 
+export const verifyOTPRequest = (data)=>{
+    return {
+        type: authenticateContants.VERIFY_OTP,
+        payload: data
+    }
+}
+
+export const verifyOTPSuccess = (data) =>{
+    return {
+        type: authenticateContants.VERIFY_OTP_SUCCESS,
+        payload: data
+    }
+}

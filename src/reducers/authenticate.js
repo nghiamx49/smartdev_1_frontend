@@ -9,6 +9,7 @@ const initialState = {
     phone_number: "",
     role: "",
     username: "",
+    full_name: ""
   },
   token: "",
   isLoggedIn: false,
@@ -39,9 +40,9 @@ const authenticateReducer = (state = initialState, action) => {
         message: "",
         status: null,
       };
-    case authenticateContants.UPDATEP_AVATAR:
+    case authenticateContants.UPDATEP_SIDEBAR:
       console.log(action.payload);
-      return { ...state, account: {...state.account, avatar_source: action.payload}}
+      return { ...state, account: {...state.account, avatar_source: action.payload.avatar_source, full_name: action.payload.full_name}}
     default:
       return state;
   }

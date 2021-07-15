@@ -24,43 +24,43 @@ export const listLi = [
   export const listLiAdmin = [
     {
         icons:GrOverview,
-        text:"New Providers",
+        text:"Nhà Cung Cấp Mới",
         link : "/admin"
     },
     {
         icons:FaUsers,
-        text:"Providers",
+        text:"Nhà Cung Cấp",
         link : "/admin/providers"
     },
     {
         icons:ImUsers,
-        text:"Users",
+        text:"Người Dùng",
         link : "/admin/users"
     },
    
     {
         icons:MdContacts,
-        text:"Products",
+        text:"Sản Phẩm",
         link : "/admin/products"
     },
     {
         icons:FaMagento,
-        text:"New Product",
+        text:"Sản Phẩm Mới",
         link : "/admin/new-products"
     },
     {
         icons:MdSettingsApplications,
-        text:"Products Rejected",
+        text:"Sản Phẩm Bị Từ Chối",
         link : "/admin/products-rejected"
     },
     {
       icons:MdSettingsApplications,
-      text:"Providers Rejected",
+      text:"Nhà Cung Cấp Bị Từ Chối",
       link : "/admin/providers-rejected"
     },
     {
       icons:MdSettingsApplications,
-      text:"Users Ban",
+      text:"Người Dùng Bị Ban",
       link : "/admin/users-ban"
     },
     
