@@ -1,14 +1,14 @@
-import React, {  useState,useCallback } from 'react'
+import React, {  useState} from 'react'
 import axios from "axios";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { connect } from 'react-redux';
-import {TiTick} from "react-icons/ti"
 import { storage } from '../../../firebase/config';
 import firebase from "firebase/app";
-import {InputControls,TitleProducts,BtnCreate,InputFile, ContainerInputFile} from "./style"
+import {InputControls,CreateProductSuccess,ContainerImages,TextAreaContainer,TitleProducts,BtnCreate,InputFile, ContainerInputFile} from "./style"
 import { useEffect } from 'react';
+import{TiTick} from "react-icons/ti"
 
 
 
@@ -27,13 +27,12 @@ function Createproduct({token}) {
    const [description,setDecription] = useState('')
   const [quantity,setQuantity] = useState('')
   const [name,setName] = useState('')
-  const [category_id,setCategory_id] = useState('')
+  // const [category_id,setCategory_id] = useState('')
   const [price,setPrice] = useState('')
-
-
+  const [checkCreate,setCheckCreate] = useState(false) 
+  const [category,setCategory] = useState([]) 
 
   const [images, setImages] = useState([]);
-  const [progress, setProgess] = useState(0);
   const [downloadURL, setDowloadURL] = useState([]);
     const {
         register,
@@ -65,25 +64,22 @@ function Createproduct({token}) {
           });
           setName('')
           setQuantity('')
-          setCategory_id('')
           setPrice('')
           setDecription('')
-  
-          console.log(result);
+          setDowloadURL([])
+          setImages([])
+          setCheckCreate(!checkCreate)
+          setInterval(function(){ 
+             setCheckCreate(false);}
+             , 2500);
           return result
         }catch(e){
           console.log(e)
         }
       }
-      const handleFile = (e) => {
-        console.log(e.target.files);
-        setImages([...e.target.files]);
-      };
       const handleUpload = (e) => {
         setImages([...e.target.files]);
       };
-      
-
       useEffect(() => {
         const uploadFIle = () => {
           for(let i =0; i < images.length; i++) {
@@ -104,10 +100,32 @@ function Createproduct({token}) {
             );
           }
         }
-
         uploadFIle();
-      }, [images.length])
+      }, [images])
 
+      useEffect(() => {
+        const fetchCategories = async () => {
+          try {
+            const category = await axios.get(`${process.env.REACT_APP_API}/provider/all_categories`,{
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+              validateStatus: function (status) {
+                return status < 500;
+              },
+            })
+            console.log(category.data.data);
+            setCategory(category.data.data)
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        fetchCategories();
+      },[token])
+      const handleCheckCreate = () =>{
+        setCheckCreate(!checkCreate);
+      }
       console.log(images)
 
       console.log(downloadURL)
@@ -115,6 +133,13 @@ function Createproduct({token}) {
 
     return (
         <div>
+          {checkCreate && <CreateProductSuccess>
+            <div>
+                <h3>bạn đã thêm sản phẩm thành công <TiTick/> </h3>
+                <span>vui lòng đợi admin xét duyệt</span>
+                <strong style={{cursor:"pointer"}} onClick={handleCheckCreate}>x</strong>
+            </div>
+          </CreateProductSuccess>}
           <TitleProducts>Tạo một sản phẩm mới</TitleProducts>
              <div style={{margin:"30px"}}>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -141,10 +166,15 @@ function Createproduct({token}) {
                     }
                     </InputControls>
                     <InputControls >
-                      <label>số kho sản phẩm :</label>
-                      <input {...register('category_id')} type="text" value={category_id} onChange={e => setCategory_id(e.target.value)} />
+                      <label>kho sản phẩm :</label>
+                      <select {...register('category_id')}>
+                        {
+                          category.map((item,index) =>  <option key={index} value={item.id}>{item.category_name}</option>)
+                        }
+                      
+                      </select>
                       {
-                      errors.category_id && (
+                        errors.category_id && (
                         <div style={{marginLeft:"180px"}}>
                           {errors.category_id.message}
                         </div>
@@ -162,9 +192,9 @@ function Createproduct({token}) {
                       )
                     }
                     </InputControls>
-                    <InputControls>
+                    <TextAreaContainer>
                       <label>mô tả sản phẩm :</label>
-                      <input {...register('product_description')} type="text" value={description} onChange={e => setDecription(e.target.value)} />
+                      <textarea {...register('product_description')} type="text" value={description} onChange={e => setDecription(e.target.value)} />
                       {
                       errors.product_description && (
                         <div style={{marginLeft:"180px"}}>
@@ -172,19 +202,20 @@ function Createproduct({token}) {
                         </div>
                       )
                     }
-                    </InputControls>
-                      <ContainerInputFile>
-                        <InputFile inputTitle="chọn hình ảnh sản phẩm"
-                          style={{marginLeft:"15px"}} 
-                          type="file" onChange={handleUpload}
+                    </TextAreaContainer>
+                    <ContainerInputFile>
+                        <InputFile 
+                        inputTitle="chọn hình ảnh sản phẩm"
+                          type="file" 
+                          onChange={handleUpload}
                           placeholder="dlfgjdfl"
-                          id="file"
                           multiple/>
-                        {<TiTick/>}
-                      </ContainerInputFile>
-                      {downloadURL.length && downloadURL.map((item, index) => {
-                        return <img key={index} src={item} width="100" height="100" />
-                      })}
+                          <ContainerImages>
+                          {downloadURL.length >0 && downloadURL.map((item, index) => {
+                            return <img key={index} src={item} width="100" height="100" alt="ádas" />
+                          })}
+                          </ContainerImages>
+                    </ContainerInputFile>
                     <BtnCreate type="submit">tạo sản phẩm mới</BtnCreate>
                 </form>
             </div>

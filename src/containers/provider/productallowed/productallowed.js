@@ -4,7 +4,7 @@ import { listRequest, listRequestProductPending } from "../../../actions/provide
 import { MainAdminTable, MainAdminStrong,BtnUpdate } from "../style";
 
 
-function ProductAllowed({list,getList,token,handle,getListPending,page,pageParent}) {
+function ProductAllowed({list,getList,token,handle,getListPending,page,pageParent,showProductDetail}) {
   useEffect(()=>{
     window.location.pathname === '/provider' && getList({token:token,page:pageParent})
     window.location.pathname === `/provider/products-request` && getListPending({token:token,page:pageParent})
@@ -51,6 +51,7 @@ function ProductAllowed({list,getList,token,handle,getListPending,page,pageParen
             </td>
             <td>
               <BtnUpdate onClick={()=>handle(item)}>cập nhật</BtnUpdate>
+              <BtnUpdate onClick={()=>showProductDetail(item.id)}>chi tiết</BtnUpdate>
             </td>
           </tr>
         ))}

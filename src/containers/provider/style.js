@@ -101,6 +101,18 @@ export const MainAdminTable = styled.table`
   tbody tr {
     border-top: 1.5px solid #dfe0eb;
     text-transform: capitalize;
+    font-size: 10px;
+    td:nth-child(1){
+      word-wrap: break-word;
+      overflow: hidden;
+      display: -webkit-box;
+      text-overflow: ellipsis;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      width:150px;
+      padding-top: 30px;
+      box-sizing: border-box;
+    }
     &:hover {
       background-color: ${theme.bgE5};
     }
@@ -124,7 +136,7 @@ export const MainAdminAllUser = styled.div`
 export const MainAdminStrong = styled.strong`
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 20px;
   color: ${theme.black};
 `;
@@ -168,10 +180,12 @@ export const MainAdminPage = styled.div`
 export const BtnUpdate = styled.button`
   padding: 5px 10px;
   border-radius: 3px;
+  margin-right: 5px;
   background-color: ${theme.textRed};
   color:${theme.white};
   border:none;
   text-transform: capitalize;
+  cursor: pointer;
 `;
 export const LogoutButton = styled.button`
   margin-right: 5px;
@@ -264,3 +278,136 @@ export const Pagination = styled.div`
     }
 `;
 
+export const ContainerProductDetail =  styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    height:100%;
+    width:100%;
+    background-color:rgba(0,0,0,0.4);
+    display: ${props => props.showDetail || "none"};
+`;
+export const ProductDetail = styled.div`
+    height: 500px;
+    width: 700px;
+    background-color:#fff ;
+    display:${props => props.showDetail || "none"};
+    position: fixed;
+    top: 15%;
+    left: 27%;
+    
+`;
+export const ProductDetailImage = styled.div`
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+export const ProductDetailImageBig = styled.div`
+  height:300px;
+  width:300px;
+  img{
+    height:100%;
+    width:100%;
+  }
+`;
+export const ProductDetailImageSmall = styled.div`
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    img{
+      height:70px;
+      width:70px;
+    }
+`;
+export const ProductDetailContent = styled.div`
+  flex-basis: 50%;
+  display: flex;
+  align-items: center;
+`;
+export const ProductDetailChil = styled.div`
+height:380px;
+ h3{
+  font: normal normal normal 22px/27px futura-lt-w01-light,sans-serif;
+    text-transform: capitalize;
+    color: #191919;
+    text-align: left;
+    margin: 0;
+    line-height: 1.2em !important;
+    word-wrap: break-word;
+ }
+  p{
+  text-align: left;
+  color: #575757;
+  font: normal normal normal 14px "palatino linotype",serif;
+  margin: 10px 0;
+  }
+  
+`;
+export const ProductDetailStar = styled.div`
+  display:flex;
+  align-items: center;
+  color:#575757;
+  font-size: 14px;
+  text-transform: capitalize;
+  svg{
+    margin-top: 3px;
+    color: ${theme.textRed}
+  }
+`;
+export const ProductDetailClose = styled.div`
+  font-size: 20px;background-color:red;
+  height:30px;
+  width:30px;
+  text-align: center;
+  cursor: pointer;
+`;
+export const ProductDetailDescription = styled.div`
+  width: 240px;
+  font-size: 12px;
+`;
+export const CreateProductSuccess = styled.div`
+   position: fixed;
+   top: 50px;
+   left: 70%;
+   animation: createSuccess 0.2s linear;
+   div {
+      height:150px;
+      width: 300px;
+      background-color: #fff;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content:center;
+      align-items: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+   }
+   strong{
+      position: absolute;
+      top:0;
+      right:10px;
+      font-size: 20px;
+   }
+   h3{
+      text-transform: capitalize;
+      display: flex;
+      align-items: center;
+      margin: 0;
+
+      svg{
+         font-size: 30px;
+         color: green;
+      }
+   }
+   @keyframes createSuccess {
+      0%{
+         top:-160px;
+         opacity:0;
+      }
+      100%{
+         top: 50px;
+         opacity:1;
+      }
+   }
+`;

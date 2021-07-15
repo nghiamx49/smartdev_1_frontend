@@ -7,17 +7,17 @@ import {MdContacts,  MdSettingsApplications,} from "react-icons/md";
 export const listLi = [
     {
       icons: GrOverview,
-      text: "Products",
+      text: "Sản phẩm được bán",
       link:"/provider"
     },
     {
       icons: ImUsers,
-      text: "Products create",
+      text: "thêm sản phẩm mới",
       link:"/provider/products-create"
     },
     {
       icons: FaUsers,
-      text: "Products waiting request",
+      text: "Sản phẩm đợi xét duyệt",
       link:"/provider/products-request"
     },
   ];
