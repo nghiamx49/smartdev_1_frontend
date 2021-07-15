@@ -9,8 +9,8 @@ function* handleGetUser (action) {
     try {
         let response = yield call( AdminService.getAllUser,action.status ,action.payload , action.page , );
         if (response.status === 200){
-            yield put(getUserSuccess(response));
-            return toast(<h3 color="black">{response.message}</h3>);
+           return yield put(getUserSuccess(response));
+            // return toast(<h3 color="black">{response.message}</h3>);
         }
         return toast(<h3 color="black">{response.status}</h3>);
     } catch (error) {
@@ -22,8 +22,8 @@ function* handleGetProvider (action) {
     try {
         let response = yield call( AdminService.getAllProvider,action.status ,action.payload ,  action.page);
         if (response.status === 200){
-            yield put(getProviderSuccess(response));
-            return toast(<h3 color="black">{response.message}</h3>);
+           return yield put(getProviderSuccess(response));
+            // return toast(<h3 color="black">{response.message}</h3>);
         }
         return toast(<h3 color="black">{response.status}</h3>);
     } catch (error) {
@@ -35,8 +35,8 @@ function* handleGetProduct (action) {
     try {
         let response = yield call( AdminService.getAllProduct,action.status ,action.payload ,  action.page);
         if (response.status === 200){
-            yield put(getAllProductSuccess(response));
-            return toast(<h3 color="black">{response.message}</h3>);
+           return yield put(getAllProductSuccess(response));
+            // return toast(<h3 color="black">{response.message}</h3>);
         }
         return toast(<h3 color="black">{response.status}</h3>);
     } catch (error) {
@@ -48,8 +48,8 @@ function* handleSearchProduct (action) {
     try {
         let response = yield call( AdminService.searchProduct,action.status ,action.payload ,  action.search);
         if (response.status === 200){
-            yield put(getAllProductSuccess(response));
-            return toast(<h3 color="black">{response.message}</h3>);
+          return  yield put(getAllProductSuccess(response));
+            // return toast(<h3 color="black">{response.message}</h3>);
         }
         return toast(<h3 color="black">{response.status}</h3>);
     } catch (error) {
