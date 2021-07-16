@@ -16,9 +16,13 @@ const phoneRegExp = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 const providerRegisterSchema = yup.object().shape({
   owner: yup.string().required("họ tên không được để trống"),
   username: yup.string().required("tên đăng nhập không được để trống"),
-  password: yup.string().required("mật khẩu không được để trống"),
+  password: yup
+    .string()
+    .required("mật khẩu không được để trống")
+    .min(5, "mật khẩu chứa ít nhất 5 kí tự"),
   confirmPassword: yup
     .string()
+    .min(5, "mật khẩu chứa ít nhất 5 kí tự")
     .required("mật khẩu cần được xác nhận")
     .oneOf([yup.ref("password"), null], "mật khẩu chưa trùng"),
   address: yup.string().required("địa chỉ không được để trống"),
@@ -28,7 +32,7 @@ const providerRegisterSchema = yup.object().shape({
     .required("số điện thoại không được để trống"),
   email: yup
     .string()
-    .email("email is invalid")
+    .email("email không hợp lệ")
     .required("email không được để trồng"),
   store_name: yup.string().required("tên cửa hàng không được để trống"),
 });

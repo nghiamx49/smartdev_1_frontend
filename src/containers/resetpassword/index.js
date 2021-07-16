@@ -28,7 +28,7 @@ const forgotpasswordSchema = yup.object().shape({
   new_password: yup
     .string()
     .required("mật khẩu mới không được để trống")
-    .min(5, "mật khẩu ít nhất 6 kí tự. vui lòng nhập lại"),
+    .min(5, "mật khẩu ít nhất 5 kí tự. vui lòng nhập lại"),
 });
 
 function ResetPassword({ props, resetpassword }) {
