@@ -31,13 +31,16 @@ function ProductAllowed({list,getList,token,handle,getListPending,page,pageParen
               <MainAdminStrong>{item.provider_name}</MainAdminStrong>
             </td>
             <td>
-              <MainAdminStrong>{item.unit_price}</MainAdminStrong>
+              <MainAdminStrong>{(+item.unit_price).toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}</MainAdminStrong>
             </td>
             <td>
               <MainAdminStrong>{item.number_of_sold}</MainAdminStrong>
             </td>
             <td>
-              <MainAdminStrong>{item.product_quantity}</MainAdminStrong>
+              <MainAdminStrong>{item.product_quantity - item.number_of_sold}</MainAdminStrong>
             </td>
             <td>
               <MainAdminStrong>

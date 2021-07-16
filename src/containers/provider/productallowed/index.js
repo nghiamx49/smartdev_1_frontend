@@ -96,7 +96,7 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
     }
   }
   const changePageNext = () =>{
-    if(pagePra < page - 3){
+    if(pagePra < page){
       setPagePra(pagePra + 1)
     }
   }
@@ -127,11 +127,11 @@ function ProviderProductAllowed({ authenticateReducer, logout,token ,menu,page})
               <ProductAllowed handle={handle} pageParent={pagePra} showProductDetail={showProductDetail}/>
            </Main.ContainerTable>
         <Main.MainAdminPage>
-        <Main.Pagination>
-        trang {pagePra +1}/ {page-2}
-        <button onClick={changePagePrev}>&laquo;</button>
-        <button onClick={changePageNext}>&raquo;</button>
-        </Main.Pagination>
+          <Main.Pagination>
+            trang {pagePra +1}/ {page + 1}
+            <button onClick={changePagePrev}>&laquo;</button>
+            <button onClick={changePageNext}>&raquo;</button>
+          </Main.Pagination>
         </Main.MainAdminPage>
       </Main.MainAdminContent>
       <Main.ContainerUpdateForm showUpdate={showUpdate && "flex"} onClick={()=>setShowUpdate(!showUpdate)}>

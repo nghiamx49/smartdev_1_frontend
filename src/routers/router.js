@@ -31,6 +31,7 @@ import UserBan from "../containers/admin/component/maincontent/components/UserBa
 import Error from "../containers/page404/";
 
 import ProductLanding from "../containers/product-landing";
+import Total from "../containers/provider/total";
 const routes = [
   {
     path: "/login",
@@ -149,6 +150,14 @@ const routes = [
   {
     path: "/provider/products-request",
     component: ProviderProductAllowed,
+    exact: true,
+    isAuthorize: "authorize",
+    layout: LayoutDashborad,
+    role: "provider",
+  },
+  {
+    path: "/provider/products-total",
+    component: Total,
     exact: true,
     isAuthorize: "authorize",
     layout: LayoutDashborad,

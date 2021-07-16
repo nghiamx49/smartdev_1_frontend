@@ -39,7 +39,8 @@ export const InputControls = styled.div`
    }
 `;
 export const ContainerTable = styled.div`
-  min-height:640px;
+  min-height:740px;
+  
   background-color:${theme.white}
 `;
 export const MainAdminHeaderUser = styled.div`
@@ -110,6 +111,7 @@ export const MainAdminTable = styled.table`
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       width:150px;
+      height: 70px;
       padding-top: 30px;
       box-sizing: border-box;
     }
@@ -366,6 +368,8 @@ export const ProductDetailClose = styled.div`
 export const ProductDetailDescription = styled.div`
   width: 240px;
   font-size: 12px;
+  height: 100px;
+  overflow:auto;
 `;
 export const CreateProductSuccess = styled.div`
    position: fixed;
