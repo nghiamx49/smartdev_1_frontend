@@ -20,6 +20,11 @@ export const listLi = [
       text: "Sản phẩm đợi xét duyệt",
       link:"/provider/products-request"
     },
+    {
+      icons: FaUsers,
+      text: "doanh thu",
+      link:"/provider/products-total"
+    },
   ];
   export const listLiAdmin = [
     {

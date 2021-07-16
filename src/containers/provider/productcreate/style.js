@@ -125,6 +125,8 @@ export const  ContainerImages = styled.div`
    box-sizing: border-box;
    img{
       margin: 0 5px;
+      height: 90px;
+      width:90px;
    }
 `;
 
