@@ -21,4 +21,6 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /app/build /usr/share/nginx/html
 
+VOLUME [ "/etc/letsencrypt" ]
+
 EXPOSE 80 443
