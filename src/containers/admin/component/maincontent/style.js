@@ -39,8 +39,8 @@ export const MainAdminHeaderSearch = styled.div`
   }
 `;
 export const ContainerTable = styled.div`
-  height:340px;
-  background-color:${theme.white}
+  min-height: 340px;
+  background-color: ${theme.white};
 `;
 
 export const MainAdminContent = styled.div`
@@ -53,11 +53,9 @@ export const MainAdminTable = styled.table`
   background: ${theme.white};
   box-sizing: border-box;
   border-collapse: collapse;
-  thead{
-  
+  thead {
   }
-  tbody{
-   
+  tbody {
   }
   th {
     text-align: left;
@@ -70,8 +68,8 @@ export const MainAdminTable = styled.table`
   }
   tbody tr {
     border-top: 1.5px solid #dfe0eb;
-  
-    height:50px;
+
+    height: 50px;
     &:hover {
       background-color: ${theme.bgE5};
     }
@@ -83,26 +81,26 @@ export const MainAdminTable = styled.table`
 export const ButtonBan = styled.button`
   background-color: #f3836c;
   border-radius: 2px;
-  padding: 5px ;
-  margin-left:5px;
+  padding: 5px;
+  margin-left: 5px;
   border: 0;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: white;
   }
-`
+`;
 
 export const ButtonApprove = styled.button`
   background-color: #24a5fb;
   border-radius: 2px;
   padding: 5px;
-  margin-left:5px;
+  margin-left: 5px;
   border: 0;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: white;
   }
-`
+`;
 
 export const MainAdminFlex = styled.div`
   display: flex;
@@ -127,12 +125,12 @@ export const MainAdmintextfunction = styled.p`
   align-items: center;
   margin-right: 10px;
   margin-left: 15px;
-  svg{
+  svg {
     font-size: 20px;
   }
-  button{
-    padding:0px 10px;
-    height:20px;
+  button {
+    padding: 0px 10px;
+    height: 20px;
     box-sizing: border-box;
     background: #ccc;
     outline: none;
@@ -148,7 +146,7 @@ export const MainAdminPage = styled.div`
   align-items: center;
   padding-right: 30px;
   border-top: 1.5px solid #dfe0eb;
-  button{
+  button {
     background: #ccc;
     padding: 5px 10px;
     margin: 1px;
@@ -158,13 +156,13 @@ export const MainAdminPage = styled.div`
     position: relative;
     border-radius: 3px;
     transition: 0.3s;
-    border:none;
-    &:hover{
-      background: #ADADAD;
+    border: none;
+    &:hover {
+      background: #adadad;
       transition-duration: 0.3s;
     }
   }
-  span{
+  span {
     font-size: 15px;
     font-weight: 600;
     margin-right: 10px;
@@ -181,33 +179,30 @@ export const LogoutButton = styled.button`
     color: red;
   }
 `;
-export const ButtonSort = styled.button`
-
-
-`;
+export const ButtonSort = styled.button``;
 export const ContainerSearch = styled.div`
- display:flex;
- align-items: center;
- position: relative;
- input{
+  display: flex;
+  align-items: center;
+  position: relative;
+  input {
     border-radius: 20px;
-    border:1px solid gray;
-    height:20px;
+    border: 1px solid gray;
+    height: 20px;
     width: 200px;
     padding: 14px 15px;
     box-sizing: border-box;
     position: relative;
-    font-size:12px;
-    outline:none;
- }
-button{
-  font-size: 14px;
-  position: absolute;
-  top: 12px;
-  right: 0;
-  background:transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
+    font-size: 12px;
+    outline: none;
+  }
+  button {
+    font-size: 14px;
+    position: absolute;
+    top: 12px;
+    right: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
 `;

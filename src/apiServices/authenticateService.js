@@ -1,4 +1,5 @@
 import axios from "axios";
+import requestConfig from "./requestConfig";
 
 const config = {
   validateStatus: function (status) {
@@ -8,7 +9,6 @@ const config = {
 
 const authenticateService = {
   login: async ({ username, password }) => {
-    console.log(`${process.env.REACT_APP_API}`);
     let request = await axios.post(
       `${process.env.REACT_APP_API}/authenticate/login`,
       {
@@ -16,6 +16,14 @@ const authenticateService = {
         password,
       },
       config,
+    );
+    let response = await request.data;
+    return response;
+  },
+  check: async (token) => {
+    let request = await axios.get(
+      `${process.env.REACT_APP_API}/authenticate/check`,
+      requestConfig(token),
     );
     let response = await request.data;
     return response;
