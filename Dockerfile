@@ -13,15 +13,14 @@ RUN yarn install
 
 RUN yarn build
 
-COPY --from=build /app/build /var/www
-
-
 FROM nginx:1.17.0-alpine
+
+COPY --from=build /app/build /var/www
 
 RUN rm -rf /usr/share/nginx/html/*
 RUN rm /etc/nginx/conf.d/default.conf
 
 COPY nginx.conf /etc/nginx/conf.d
-EXPOSE 80
+EXPOSE 80 443
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
