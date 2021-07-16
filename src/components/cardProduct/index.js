@@ -13,7 +13,7 @@ import {
 export default function Product(props) {
   const { item } = props;
   return (
-    <ProductContainer to={`product-detail/${item.id}`}>
+    <ProductContainer to={`/product-detail/${item.id}`}>
       <ProductStyle>
         <ProductImage>
           <img src={item.image_source} alt="" />
