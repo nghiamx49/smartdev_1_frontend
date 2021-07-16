@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 const PaypalButton = ({ productName, totalFee, handleSuccess }) => {
   const paypal = useRef();
@@ -22,6 +23,7 @@ const PaypalButton = ({ productName, totalFee, handleSuccess }) => {
         },
         onApprove: async (data, actions) => {
           handleSuccess(true);
+          return toast("Thanh toán thành công");
         },
         onError: (err) => {
           console.log(err);
